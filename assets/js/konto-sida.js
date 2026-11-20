@@ -51,7 +51,7 @@
         const provider = b.dataset.provider;
         const { error } = await sb.auth.signInWithOAuth({
           provider,
-          options: { redirectTo: location.origin + "/konto", scopes: provider === "azure" ? "email" : undefined }
+          options: { redirectTo: location.origin + "/konto/", scopes: provider === "azure" ? "email" : undefined }
         });
         if (error) K.toast("Det gick inte att logga in just nu. Försök igen om en stund.");
       });
@@ -70,7 +70,7 @@
         form.epost.focus();
         return;
       }
-      const { error } = await sb.auth.signInWithOtp({ email: epost, options: { emailRedirectTo: location.origin + "/konto" } });
+      const { error } = await sb.auth.signInWithOtp({ email: epost, options: { emailRedirectTo: location.origin + "/konto/" } });
       if (error) {
         fel.textContent = "Länken kunde inte skickas. Försök igen om en stund.";
         fel.hidden = false;
