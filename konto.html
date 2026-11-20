@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mitt konto – Palt &amp; pixel</title>
+  <meta name="theme-color" content="#0E1526">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Silkscreen&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/konfig.js"></script>
+  <script src="/assets/js/konto.js"></script>
+</head>
+<body class="kontosida">
+  <header class="enkel-topp">
+    <a class="varumarke" href="/" aria-label="Palt & pixel, till startsidan">
+      <img src="/assets/logo.svg" alt="" width="55" height="44">
+      <span>Palt <em>&amp;</em> pixel</span>
+    </a>
+  </header>
+
+  <main class="konto">
+    <p class="kicker">Mitt konto</p>
+
+    <section id="ej-aktiv" hidden>
+      <h1>Inloggningen är inte påslagen än.</h1>
+      <p class="ingress">Spelen fungerar som vanligt och sparar på den här enheten. Snart kan du logga in och spara dina framsteg på ett konto i stället.</p>
+    </section>
+
+    <section id="utloggad" hidden>
+      <h1>Logga in och spara dina framsteg.</h1>
+      <p class="ingress">Med ett konto följer dina väggar och baser med dig mellan mobilen, surfplattan och datorn.</p>
+      <div class="inloggning">
+        <button class="logga-in" type="button" data-provider="google">Fortsätt med Google</button>
+        <button class="logga-in" type="button" data-provider="azure">Fortsätt med Microsoft</button>
+        <button class="logga-in" type="button" data-provider="apple">Fortsätt med Apple</button>
+        <div class="eller" aria-hidden="true"><span>eller</span></div>
+        <form id="epost-form" class="epost" novalidate>
+          <label for="epost">E-postadress</label>
+          <input id="epost" name="epost" type="email" autocomplete="email" placeholder="namn@exempel.se" required>
+          <button type="submit">Skicka inloggningslänk</button>
+          <p class="fel" id="epost-fel" role="alert" hidden></p>
+        </form>
+        <p class="klar" id="epost-klar" role="status" hidden></p>
+      </div>
+      <p class="liten-text">Vi sparar bara din e-postadress och dina spelframsteg.</p>
+    </section>
+
+    <section id="inloggad" hidden>
+      <h1>Hej!</h1>
+      <p class="ingress">Du är inloggad som <strong id="anvandare"></strong>. Dina framsteg i spelen sparas på kontot.</p>
+      <h2>Sparade spel</h2>
+      <ul class="sparningar" id="sparningar"></ul>
+      <button class="chip" type="button" id="logga-ut">Logga ut</button>
+    </section>
+  </main>
+
+  <script src="/assets/js/konto-sida.js" defer></script>
+</body>
+</html>

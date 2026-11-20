@@ -11,7 +11,7 @@
       "farg": "alvbla",
       "bild": "assets/img/frontlinjen.webp",
       "alt": "Frontlinjen: en utbyggd bas med kraftverk, baracker, fabrik och en tropp soldater och fordon",
-      "lank": "https://skolvy.se/Frontlinje/index.html"
+      "lank": "/frontlinjen/"
     },
     {
       "id": "vaggen",
@@ -24,7 +24,7 @@
       "farg": "smor",
       "bild": "assets/img/vaggen.webp",
       "alt": "Väggen: en tegelvägg full av små hus, växthus, trappor och invånare",
-      "lank": "https://skolvy.se/vaggen"
+      "lank": "/vaggen/"
     },
     {
       "id": "kluro",

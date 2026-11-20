@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<script src="/assets/js/konfig.js"></script>
+<script src="/assets/js/konto.js" data-spel="frontlinjen" data-nycklar="^frontlinje"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Frontlinje</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--acc:#4fd8ff;--glass:rgba(10,18,32,.8);--line:rgba(120,170,255,.24);--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+html,body{margin:0;height:100%;overflow:hidden;background:#050910;font-family:'Chakra Petch',system-ui,sans-serif;color:#e6eef8;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+#c{position:fixed;inset:0;width:100%;height:100%;touch-action:none;display:block}
+.glass{background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 28px rgba(0,0,0,.45)}
+.btn{appearance:none;border:1px solid rgba(120,170,255,.28);background:rgba(34,54,84,.66);color:#e6eef8;border-radius:10px;font:600 14px 'Chakra Petch',sans-serif;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;touch-action:manipulation;padding:0 12px;transition:transform .08s,background .15s}
+.btn:hover{background:rgba(48,78,118,.8)}.btn:active{transform:scale(.95)}
+.btn.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc),0 0 16px rgba(79,216,255,.4);background:rgba(22,84,122,.75)}
+.btn.primary{background:linear-gradient(180deg,#1f8fd0,#1563a3);border-color:#5fd0ff}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.dim{opacity:.5}
+#top{position:fixed;top:calc(8px + var(--st));left:8px;right:8px;display:flex;gap:10px;align-items:center;padding:5px 6px 5px 12px;z-index:5}
+.chip{display:flex;align-items:center;gap:6px;font-weight:700;font-size:15px;white-space:nowrap}
+.chip small{font-weight:500;color:#8fa6c2;font-size:12px}
+.chip svg{width:16px;height:16px;flex:none}
+.chip.bad{color:#ff8a8a}
+#recbtn{min-height:36px;padding:0 10px;font-size:15px;font-weight:700}
+.sp{flex:1}
+#clock{color:#8fa6c2;font-weight:600;font-size:14px;min-width:44px;text-align:right}
+#spd{min-width:48px}
+#mm{position:fixed;left:8px;bottom:calc(8px + var(--sb));padding:5px;z-index:4;cursor:pointer}
+#mm canvas{display:block;width:180px;height:100px;touch-action:none}
+#zoom{position:fixed;right:8px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:7px;padding:7px;z-index:4}
+#zoom .btn{font-size:22px;padding:0}
+#groups{position:fixed;right:8px;top:calc(68px + var(--st));display:flex;flex-direction:column;gap:6px;z-index:4}
+#groups .btn{min-height:38px;font-size:12px;padding:0 10px;justify-content:flex-start}
+#build{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(8px + var(--sb));display:flex;padding:6px;max-width:calc(100vw - 220px);z-index:5}
+#buildlist{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#buildlist::-webkit-scrollbar{display:none}
+.b{width:70px;min-width:70px;height:74px;flex-direction:column;gap:0;font-size:11px;padding:2px 0;line-height:1.15}
+.b img{width:40px;height:40px;object-fit:contain;margin-bottom:1px}
+.cost{color:#8fe3ff;font-size:10px;font-weight:500}
+#ctx{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(8px + var(--sb));width:min(560px,calc(100vw - 220px));padding:10px 12px;display:none;z-index:6}
+#ctx .row{display:flex;align-items:center;gap:10px}
+#ctx .pic{width:48px;height:48px;object-fit:contain}
+#ctx .ttl{flex:1;font-size:16px;font-weight:700}
+#ctx .sub{display:block;font-size:12px;font-weight:500;color:#9fb3cc;margin-top:2px}
+#ctx .hint{font-size:12.5px;color:#a9bbd1;margin:6px 0 2px;line-height:1.4}
+#ctx .acts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+#ctx .acts .btn{flex:1;min-height:40px;font-size:13px}
+#ctx .x{min-width:40px;min-height:40px;font-size:22px;padding:0}
+.hpl{height:5px;background:rgba(255,255,255,.12);border-radius:3px;margin-top:4px;overflow:hidden;max-width:220px}
+.hpl i{display:block;height:100%;background:linear-gradient(90deg,#3ddc84,#8af0b5)}
+.trains{display:flex;gap:6px;margin-top:8px}
+.tr{flex:1;flex-direction:column;gap:0;min-height:74px;font-size:11.5px;position:relative;padding:4px 2px;line-height:1.2}
+.tr img{width:42px;height:42px;object-fit:contain}
+.tr .lvl{color:var(--acc);font-size:14px;letter-spacing:2px;margin:6px 0 4px}
+.badge{position:absolute;top:4px;right:6px;background:var(--acc);color:#04202e;border-radius:9px;font-size:11px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center}
+#toasts{position:fixed;left:50%;top:calc(66px + var(--st));transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;z-index:20;pointer-events:none;width:90vw}
+.toast{background:rgba(10,18,32,.9);border:1px solid var(--line);padding:8px 14px;border-radius:10px;font-size:13.5px;transition:opacity .6s,transform .6s;max-width:90vw;text-align:center}
+.toast.warn{border-color:#ff7b7b;color:#ffd0d0}.toast.good{border-color:#4ade80;color:#d6ffe6}
+.toast.out{opacity:0;transform:translateY(-8px)}
+#pausebadge{position:fixed;left:50%;top:45%;transform:translate(-50%,-50%);font-size:22px;font-weight:700;letter-spacing:4px;padding:12px 26px;display:none;z-index:7;pointer-events:none}
+.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:30;background:radial-gradient(circle at 50% 35%,rgba(20,40,70,.75),rgba(3,6,12,.92))}
+.panel{width:min(440px,calc(100vw - 28px));max-height:calc(100vh - 40px);overflow:auto;padding:22px 20px;text-align:center}
+.logo{font-size:40px;font-weight:700;letter-spacing:6px;margin:4px 0 0;background:linear-gradient(180deg,#e9f6ff,#5fc8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{color:#8fa6c2;font-size:13px;margin:4px 0 18px;letter-spacing:1px}
+.mbtn{width:100%;min-height:54px;font-size:17px;margin:6px 0;flex-direction:column;gap:0}
+.mbtn small{font-size:11.5px;font-weight:500;color:#9fd8ff}
+.opt{text-align:left;margin:12px 0}
+.opt label{font-size:12px;color:#8fa6c2;display:block;margin-bottom:5px;letter-spacing:.5px}
+.seg{display:flex;gap:5px}
+.seg .btn{flex:1;min-height:42px;font-size:13.5px;padding:0 4px}
+#loading{display:flex;flex-direction:column;gap:14px}
+.bar{width:220px;height:6px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .2s}
+.units{display:flex;justify-content:center;gap:2px;margin:-4px 0 6px}
+.units img{width:62px;height:62px;object-fit:contain}
+#endstats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+#endstats div{background:rgba(255,255,255,.05);border-radius:10px;padding:8px 2px}
+#endstats b{display:block;font-size:18px}#endstats span{font-size:11px;color:#8fa6c2}
+.help{text-align:left;font-size:14px;line-height:1.55;color:#cfdcec}
+.help h3{font-size:15px;margin:14px 0 4px;color:#fff}
+.help p{margin:4px 0}
+body:not(.ingame) #top,body:not(.ingame) #mm,body:not(.ingame) #groups,body:not(.ingame) #zoom,body:not(.ingame) #build,body:not(.ingame) #ctx{visibility:hidden}
+@media (max-width:760px){
+ body.ctxopen #zoom,body.ctxopen #groups{display:none}
+ #toasts{top:36vh!important}
+ #top{gap:8px;padding:4px 5px 4px 10px}.chip small,.hide-s{display:none}.chip{font-size:14px}
+ #mm{bottom:auto;top:calc(62px + var(--st));left:auto;right:8px;padding:4px}
+ #mm canvas{width:128px;height:72px}
+ #groups{top:calc(150px + var(--st))}
+ #groups .btn{min-height:36px;font-size:11.5px}
+ #zoom{top:auto;bottom:calc(98px + var(--sb));transform:none;padding:5px}
+ #build{max-width:calc(100vw - 16px);bottom:calc(6px + var(--sb));padding:5px}
+ .b{width:62px;min-width:62px;height:70px;font-size:10px}.b img{width:36px;height:36px}
+ #ctx{width:calc(100vw - 16px);bottom:calc(6px + var(--sb));padding:9px 10px}
+ .tr{min-height:70px;font-size:10.5px}.tr img{width:36px;height:36px}
+ #toasts{top:calc(62px + var(--st))}
+}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+
+<div id="top" class="glass">
+  <div class="chip" title="Malm"><svg viewBox="0 0 24 24"><path d="M12 2l7 7-7 13-7-13z" fill="#5fdcff"/><path d="M12 2l7 7H5z" fill="#b8f0ff"/></svg><span id="ore">0</span><small>malm</small></div>
+  <div class="chip" title="Energi: använd/producerad"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z" fill="#ffd34d"/></svg><span id="en">0/0</span><small>energi</small></div>
+  <button class="btn" id="recbtn" title="Placera rekryter"><svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="7" r="4" fill="#7fb2ff"/><path d="M4 21c0-5 4-8 8-8s8 3 8 8z" fill="#2f7bf6"/></svg><span id="rec">0</span></button>
+  <div class="sp"></div>
+  <div id="clock">0:00</div>
+  <button class="btn" id="spd" title="Speltempo">1×</button>
+  <button class="btn" id="menubtn" aria-label="Meny"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e6eef8" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div>
+
+<div id="mm" class="glass"><canvas id="mmc"></canvas></div>
+
+<div id="groups">
+  <button class="btn glass" data-g="army">Armé</button>
+  <button class="btn glass" data-g="workers">Arbetare</button>
+  <button class="btn glass" data-g="air">Flyg</button>
+  <button class="btn glass" id="boxbtn">Område</button>
+</div>
+
+<div id="zoom" class="glass">
+  <button class="btn" id="zin" aria-label="Zooma in">+</button>
+  <button class="btn" id="zout" aria-label="Zooma ut">−</button>
+  <button class="btn" id="home" aria-label="Till basen"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e6eef8" stroke-width="2"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2" fill="#e6eef8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></button>
+</div>
+
+<div id="build" class="glass"><div id="buildlist"></div></div>
+<div id="ctx" class="glass"></div>
+<div id="toasts"></div>
+<div id="pausebadge" class="glass">PAUS</div>
+
+<div id="loading" class="overlay"><div class="logo">FRONTLINJE</div><div class="bar"><i id="loadbar"></i></div><div id="loadtxt" style="color:#8fa6c2;font-size:13px">Laddar grafik …</div></div>
+
+<div id="menu" class="overlay">
+  <div class="panel glass" id="m-main">
+    <div class="logo">FRONTLINJE</div>
+    <div class="tag">Bygg · Expandera · Erövra</div>
+    <div class="units"><img data-icon="soldier" alt=""><img data-icon="tank" alt=""><img data-icon="heli" alt=""><img data-icon="jet" alt=""></div>
+    <button class="btn mbtn primary" id="contbtn" style="display:none">Fortsätt<small></small></button>
+    <button class="btn mbtn" id="newbtn">Nytt spel</button>
+    <button class="btn mbtn" id="helpbtn">Så spelar du</button>
+  </div>
+  <div class="panel glass" id="m-new" style="display:none">
+    <div class="logo" style="font-size:26px">NYTT SPEL</div>
+    <div class="opt"><label>KARTSTORLEK – STÖRRE KARTA GER LÄNGRE SPEL</label><div class="seg" id="o-size"><button class="btn" data-v="48">Liten</button><button class="btn on" data-v="64">Medel</button><button class="btn" data-v="80">Stor</button></div></div>
+    <div class="opt"><label>MOTSTÅNDARE</label><div class="seg" id="o-en"><button class="btn" data-v="1">1</button><button class="btn on" data-v="2">2</button><button class="btn" data-v="3">3</button></div></div>
+    <div class="opt"><label>SVÅRIGHETSGRAD</label><div class="seg" id="o-diff"><button class="btn" data-v="0">Lätt</button><button class="btn on" data-v="1">Normal</button><button class="btn" data-v="2">Svår</button></div></div>
+    <div class="opt"><label>FREDSTID I BÖRJAN (INGA ANFALL)</label><div class="seg" id="o-peace"><button class="btn" data-v="0">Ingen</button><button class="btn on" data-v="5">5 min</button><button class="btn" data-v="10">10 min</button></div></div>
+    <button class="btn mbtn primary" id="startbtn">Starta</button>
+    <button class="btn mbtn" id="backbtn">Tillbaka</button>
+  </div>
+  <div class="panel glass" id="m-ingame" style="display:none">
+    <div class="logo" style="font-size:26px">PAUS</div>
+    <div class="tag">Spelet sparas automatiskt</div>
+    <button class="btn mbtn primary" id="resumebtn">Fortsätt spela</button>
+    <button class="btn mbtn" id="savebtn">Spara nu</button>
+    <button class="btn mbtn" id="helpbtn2">Så spelar du</button>
+    <button class="btn mbtn" id="quitbtn">Spara och gå till huvudmenyn</button>
+  </div>
+</div>
+
+<div id="help" class="overlay"><div class="panel glass help">
+  <div class="logo" style="font-size:24px;text-align:center">SÅ SPELAR DU</div>
+  <h3>Målet</h3><p>Förstör motståndarnas högkvarter. Förlorar du ditt eget är spelet slut.</p>
+  <h3>Kom igång</h3><p>Tryck på rekryterna uppe till vänster och placera ut arbetare och spanare i ditt område. Arbetare bryter malm själva. Spanare springer snabbt och erövrar utposter.</p>
+  <h3>Styra</h3><p>Dra med ett finger för att flytta kartan, nyp eller scrolla för att zooma. Tryck på en enhet för att välja den, dubbeltryck för att välja alla av samma sort. Tryck sedan på marken för att flytta eller på en fiende för att anfalla. Knappen Område låter dig dra en ruta runt flera enheter. På dator kan du även högerklicka för att ge order och hålla Skift för att dra en ruta.</p>
+  <h3>Bygga och träna</h3><p>Välj en byggnad i listan längst ner och tryck två gånger där den ska stå. Det går bara att bygga i ditt eget område. Tryck på en byggnad för att träna enheter eller forska.</p>
+  <h3>Energi</h3><p>Byggnader drar energi. Om du använder mer än du producerar går allt långsammare – bygg fler kraftverk.</p>
+  <h3>Utposter</h3><p>Ställ en enhet vid en utpost tills den byter färg. Den ger malm, utökar ditt område och fungerar som lager för arbetarna.</p>
+  <h3>Tempo</h3><p>Knappen 1×/2×/3× ändrar speltempot. Spelet sparas automatiskt och fortsätter där du slutade, även på en annan enhet om du är inloggad.</p>
+  <button class="btn mbtn primary" id="helpclose" style="margin-top:14px">Uppfattat</button>
+</div></div>
+
+<div id="end" class="overlay"><div class="panel glass">
+  <div class="logo" id="endttl">Seger!</div>
+  <div class="tag" id="endtxt"></div>
+  <div id="endstats"></div>
+  <button class="btn mbtn primary" id="endbtn">Till huvudmenyn</button>
+</div></div>
+
+<script src="game.js"></script>
+</body>
+</html>

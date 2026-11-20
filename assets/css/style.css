@@ -243,3 +243,36 @@ a.ruta:hover .miniatyr img { transform: scale(1.04); }
   .ruta { animation: none; transition: none; }
   .miniatyr img { transition: none; }
 }
+
+/* ---------- Kontosidan ---------- */
+.enkel-topp { max-width: 640px; margin: 0 auto; padding: 24px 24px 0; }
+.enkel-topp .varumarke { background: none; padding-left: 0; }
+.konto { max-width: 640px; padding: 32px 24px 64px; }
+.konto h1 { font-size: clamp(32px, 6vw, 48px); }
+.konto h2 { font-family: var(--rubrik); font-size: 22px; margin: 32px 0 12px; }
+.inloggning { display: flex; flex-direction: column; gap: 12px; margin: 28px 0 16px; }
+.logga-in, .epost button {
+  font: 600 16px/1 var(--text); min-height: 52px; border-radius: 14px; cursor: pointer;
+  background: var(--sno); color: var(--natt); border: 0; padding: 0 20px;
+  transition: transform .15s, background .15s;
+}
+.logga-in:hover, .epost button:hover { background: #fff; transform: translateY(-1px); }
+.logga-in[hidden] { display: none; }
+.eller { display: flex; align-items: center; gap: 12px; color: var(--dimma); font-size: 14px; margin: 8px 0; }
+.eller::before, .eller::after { content: ""; flex: 1; height: 1px; background: var(--linje); }
+.epost { display: flex; flex-direction: column; gap: 8px; }
+.epost label { font-size: 14px; color: var(--dimma); }
+.epost input {
+  font: 400 16px var(--text); min-height: 52px; padding: 0 16px; border-radius: 14px;
+  background: var(--djuphav); color: var(--sno); border: 1px solid rgba(255,255,255,.18);
+}
+.epost input::placeholder { color: #7D87A3; }
+.epost button { background: var(--sol); }
+body.natt .epost button { background: var(--norrsken); }
+.fel { color: #FF8A99; font-size: 14px; margin: 0; }
+.klar { background: rgba(111, 242, 181, .12); border: 1px solid rgba(111, 242, 181, .4); padding: 14px 16px; border-radius: 14px; margin: 0; }
+.liten-text { font-size: 14px; color: var(--dimma); }
+.sparningar { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 8px; }
+.sparningar li { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: var(--djuphav); padding: 14px 16px; border-radius: 14px; color: var(--dimma); font-size: 15px; }
+.sparningar a { color: var(--sno); font-weight: 600; text-decoration: none; }
+.sparningar a:hover { text-decoration: underline; }
