@@ -1,0 +1,69 @@
+{
+  "projekt": [
+    {
+      "id": "frontlinjen",
+      "namn": "Frontlinjen",
+      "text": "Bygg en bas, samla malm och erövra kartan i lugn realtid.",
+      "typ": "spel",
+      "kategori": "Strategi",
+      "ikon": "flagga",
+      "storlek": "stor",
+      "farg": "alvbla",
+      "bild": "assets/img/frontlinjen.webp",
+      "alt": "Frontlinjen: en utbyggd bas med kraftverk, baracker, fabrik och en tropp soldater och fordon",
+      "lank": "https://skolvy.se/Frontlinje/index.html"
+    },
+    {
+      "id": "vaggen",
+      "namn": "Väggen",
+      "text": "Bygg hem, kaféer och repbroar på en gammal tegelvägg.",
+      "typ": "spel",
+      "kategori": "Bygga och mysa",
+      "ikon": "vagg",
+      "storlek": "bred",
+      "farg": "smor",
+      "bild": "assets/img/vaggen.webp",
+      "alt": "Väggen: en tegelvägg full av små hus, växthus, trappor och invånare",
+      "lank": "https://skolvy.se/vaggen"
+    },
+    {
+      "id": "kluro",
+      "namn": "Kluro",
+      "text": "En kort utmaning per speldag, en topplista och evig ära.",
+      "typ": "spel",
+      "kategori": "Sällskap",
+      "ikon": "personer",
+      "storlek": "hog",
+      "farg": "hjortron",
+      "bild": "assets/img/kluro.webp",
+      "alt": "Kluro: Gissa ordet med tre gissningar gjorda",
+      "lank": "https://skolvy.se/kluro"
+    },
+    {
+      "id": "plugglistan",
+      "namn": "Plugglistan",
+      "text": "Håll koll på allt som ska pluggas.",
+      "typ": "app",
+      "kategori": "Plugg",
+      "ikon": "lista",
+      "storlek": "liten",
+      "farg": "tall",
+      "bild": "",
+      "alt": "",
+      "lank": ""
+    },
+    {
+      "id": "lovely",
+      "namn": "LOVely",
+      "text": "Räknar ner till nästa skollov.",
+      "typ": "app",
+      "kategori": "Nedräkning",
+      "ikon": "timer",
+      "storlek": "bred",
+      "farg": "flask",
+      "bild": "",
+      "alt": "",
+      "lank": ""
+    }
+  ]
+}

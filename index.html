@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Palt &amp; pixel – spel, appar och små experiment</title>
+  <meta name="description" content="Palt & pixel är ett bibliotek av sidoprojekt: spel, appar och små experiment, med rötter i Piteå.">
+  <meta property="og:title" content="Palt & pixel">
+  <meta property="og:description" content="Spel, appar och små experiment, med rötter i Piteå.">
+  <meta property="og:image" content="/assets/img/frontlinjen.webp">
+  <meta name="theme-color" content="#0E1526">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Silkscreen&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+
+  <header class="hero" id="topp">
+    <canvas id="landskap" aria-hidden="true"></canvas>
+    <div class="hero-topp">
+      <a class="varumarke" href="/" aria-label="Palt & pixel, till startsidan">
+        <img src="/assets/logo.svg" alt="" width="55" height="44">
+        <span>Palt <em>&amp;</em> pixel</span>
+      </a>
+      <nav class="meny" aria-label="Huvudmeny">
+        <a href="#spel" data-filter="spel">Spel</a>
+        <a href="#spel" data-filter="app">Appar</a>
+        <a href="#om">Om</a>
+        <button class="himmel" type="button" id="himmel" aria-label="Byt mellan midnattssol och norrsken" title="Byt himmel">
+          <span class="himmel-ikon" aria-hidden="true"></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="innehall">
+    <section class="intro">
+      <p class="kicker">Med rötter i Piteå</p>
+      <h1>Spel, appar och små experiment.</h1>
+      <p class="ingress">Sidoprojekt byggda på kvällar och helger, med en tallrik palt inom räckhåll. Tryck på en ruta och börja spela.</p>
+    </section>
+
+    <section class="bibliotek" id="spel" aria-labelledby="bibliotek-rubrik">
+      <h2 id="bibliotek-rubrik" class="visuellt-dold">Alla projekt</h2>
+      <div class="filter" role="toolbar" aria-label="Filtrera projekt">
+        <div class="filter-rad" id="filter-typ"></div>
+        <div class="filter-rad filter-under" id="filter-kategori" hidden></div>
+      </div>
+      <div class="mosaik" id="mosaik" aria-live="polite"></div>
+    </section>
+
+    <section class="om" id="om" aria-labelledby="om-rubrik">
+      <h2 id="om-rubrik">Om Palt &amp; pixel</h2>
+      <p>Ett bibliotek av sidoprojekt: spel, appar och små experiment. Namnet kommer från pitepalten, och från pixlarna som allt här är byggt av.</p>
+      <p>Himlen ovanför följer klockan. På dagen lyser midnattssolen över skärgården och efter mörkrets inbrott tar norrskenet över. Knappen uppe till höger byter direkt.</p>
+    </section>
+  </main>
+
+  <footer class="sidfot">
+    <span>paltpixel.se</span>
+    <span>Gjort med smör och lingon</span>
+  </footer>
+
+  <noscript><p class="noscript">Sidan behöver JavaScript för att visa projekten.</p></noscript>
+  <script src="/assets/js/app.js" defer></script>
+</body>
+</html>
