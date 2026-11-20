@@ -40,17 +40,17 @@
       "lank": "https://skolvy.se/kluro"
     },
     {
-      "id": "plugglistan",
-      "namn": "Plugglistan",
-      "text": "Håll koll på allt som ska pluggas.",
+      "id": "veckopalten",
+      "namn": "Veckopalten",
+      "text": "Familjens skolvecka: prov, läxor och schema.",
       "typ": "app",
       "kategori": "Plugg",
       "ikon": "lista",
       "storlek": "liten",
       "farg": "tall",
-      "bild": "",
-      "alt": "",
-      "lank": ""
+      "bild": "assets/img/veckopalten.webp",
+      "alt": "Veckopaltens Idag-vy med dagens schema och prov som är på gång",
+      "lank": "/veckopalten/"
     },
     {
       "id": "lovely",
