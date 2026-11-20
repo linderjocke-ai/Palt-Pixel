@@ -316,6 +316,10 @@ grant execute on function satt_tema(text) to authenticated;
 grant execute on function familjekoder(uuid) to authenticated;
 grant execute on function barn_for_kod(text) to anon, authenticated;
 
+-- Inloggade användare får använda tabellerna; radsäkerheten avgör vilka rader.
+grant select, insert, update, delete on barn, medlemmar, handelser, material, resultat, lektioner to authenticated;
+grant update (namn) on familjer to authenticated;
+
 -- Koderna i familjer ska inte kunna läsas direkt, bara via familjekoder().
 revoke select on familjer from authenticated, anon;
 grant select (id, namn, skapad_at) on familjer to authenticated;
