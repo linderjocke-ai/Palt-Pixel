@@ -1,6 +1,6 @@
 import { data, DEMO } from './data.js';
 import {
-  isoDatum, franIso, laggTillDagar, mandag, veckodagNr, veckonummer, langtDatum, kortTid, minuter,
+  upprepText,   isoDatum, franIso, laggTillDagar, mandag, veckodagNr, veckonummer, langtDatum, kortTid, minuter,
   forekomster, arLov, VD_KORT, MANADER, VECKODAGAR, storBokstav,
 } from './datum.js';
 
@@ -114,14 +114,14 @@ function barnChips() {
 }
 
 async function route() {
-  const [vag, arg] = location.hash.replace(/^#\/?/, '').split('/');
+  const [vag, arg, arg2] = location.hash.replace(/^#\/?/, '').split('/');
   window.scrollTo(0, 0);
   try {
     if (vag === 'kalender') return await visaKalender();
-    if (vag === 'handelse') return await visaHandelse(arg);
+    if (vag === 'handelse') return await visaHandelse(arg, arg2);
     if (vag === 'ny') return await visaHandelseForm(null, new URLSearchParams(location.hash.split('?')[1] || ''));
     if (vag === 'andra') return await visaHandelseForm(arg);
-    if (vag === 'material') return await visaMaterialForm(arg);
+    if (vag === 'material') return await visaMaterialForm(arg, arg2);
     if (vag === 'lasin') return visaLasIn();
     if (vag === 'schema') return await visaSchema();
     if (vag === 'familj') return await visaFamilj();
@@ -132,6 +132,8 @@ async function route() {
 }
 
 // ---------------------------------------------------------------- händelserader
+// Länk till en händelse. Upprepade händelser länkas till just det tillfället.
+const hLank = (h) => `#/handelse/${h.id}${h.upprepa === 'vecka' && h.dag ? '/' + h.dag : ''}`;
 function postRad(h) {
   const d = franIso(h.dag);
   const prov = h.typ === 'prov';
@@ -139,9 +141,9 @@ function postRad(h) {
   if (h.tid) delar.push(kortTid(h.tid));
   if (h.amne) delar.push(e(h.amne));
   if (h.resultat && h.resultat.poang != null) delar.push(`resultat ${e(h.resultat.poang)}${h.resultat.max_poang ? '/' + e(h.resultat.max_poang) : ''}`);
-  if (h.upprepa === 'vecka') delar.push('varje vecka');
+  if (h.upprepa === 'vecka') delar.push(upprepText(h));
   if (h.slut_datum) delar.push(`till ${franIso(h.slut_datum).getDate()} ${MANADER[franIso(h.slut_datum).getMonth()].slice(0, 3)}`);
-  return `<a class="post${prov ? ' prov' : ''}" href="#/handelse/${h.id}">
+  return `<a class="post${prov ? ' prov' : ''}" href="${hLank(h)}">
     <div class="dag"><small>${VD_KORT[d.getDay()]}</small><b>${d.getDate()}</b></div>
     <div class="info"><div class="titel">${e(visTitel(h))}</div>
       <div class="under"><span class="prick liten" style="background:${barnFarg(h.barn_id)}"></span><span class="ut">${e(barnNamn(h.barn_id))}${delar.length ? ' · ' + delar.join(' · ') : ''}</span>${h.antal_material ? `<span class="gem" title="${h.antal_material} material">${I.gem}${h.antal_material}</span>` : ''}</div></div>
@@ -166,7 +168,7 @@ function lektionRad(l, iso, handelser, innehall, klass = '', efter = '') {
   const k = amneNyckel(l.amne);
   const ev = handelser.filter((h) => h.dag === iso && h.barn_id === l.barn_id && h.typ !== 'lov' && h.amne && amneNyckel(h.amne) === k);
   const inn = innehall.filter((r) => r.datum === iso && (!r.barn_id || r.barn_id === l.barn_id) && amneNyckel(r.amne) === k);
-  const extra = ev.map((h) => `<a class="lk-hand${h.typ === 'prov' ? ' prov' : ''}" href="#/handelse/${h.id}">${e(visTitel(h))}${h.antal_material ? ` <span class="gem">${I.gem}${h.antal_material}</span>` : ''}</a>`).join('')
+  const extra = ev.map((h) => `<a class="lk-hand${h.typ === 'prov' ? ' prov' : ''}" href="${hLank(h)}">${e(visTitel(h))}${h.antal_material ? ` <span class="gem">${I.gem}${h.antal_material}</span>` : ''}</a>`).join('')
     + inn.map((r) => `<span class="lk-inn">${e(r.innehall)}</span>`).join('');
   return `<div class="lektion ${klass}" style="--h:${amneHue(l.amne)}"><span class="tid">${kortTid(l.start)}</span><div class="lk"><span class="amne">${e(l.amne)} <span class="slut">– ${kortTid(l.slut)}</span></span>${extra}</div>${efter}</div>`;
 }
@@ -175,13 +177,6 @@ function lunchRad(barn, iso, mat, visaNamn = false) {
   const ratter = barn.mateo_enhet ? mat[String(barn.mateo_enhet)]?.[iso] : null;
   if (!ratter?.length) return '';
   return `<div class="lunch">${I.lunch}<span>${visaNamn ? `<span class="prick liten" style="background:${e(barn.farg)};margin-right:4px"></span>` : ''}<b>Lunch:</b> ${ratter.map(e).join(' <span class="dampad">eller</span> ')}</span></div>`;
-}
-// Lunch för flera barn: samma skola visas en gång.
-function lunchRader(barnLista, iso, mat) {
-  const sedda = new Set(); const rader = [];
-  const flera = new Set(barnLista.map((b) => b.mateo_enhet).filter(Boolean)).size > 1;
-  for (const b of barnLista) { if (!b.mateo_enhet || sedda.has(b.mateo_enhet)) continue; sedda.add(b.mateo_enhet); rader.push(lunchRad(b, iso, mat, flera)); }
-  return rader.join('');
 }
 const hamtaMat = (fran, till) => data.matsedel(S.barn.map((b) => b.mateo_enhet), fran, till).catch(() => ({}));
 const filtrera = (lista) => (S.filter ? lista.filter((h) => h.barn_id === S.filter || h.barn_id === null) : lista);
@@ -240,9 +235,8 @@ async function visaKalender() {
     const start = laggTillDagar(mandag(nu), 7 * S.kalSteg);
     const slut = laggTillDagar(start, 6);
     const fran = isoDatum(start), till = isoDatum(slut);
-    const [handelser, mat] = await Promise.all([data.listaHandelser(fran, till), hamtaMat(fran, till)]);
+    const handelser = await data.listaHandelser(fran, till);
     const alla = typFilter(filtrera(forekomster(handelser, fran, till)));
-    const lunchBarn = S.filter ? S.barn.filter((b) => b.id === S.filter) : S.barn;
     let dagar = '';
     for (let i = 0; i < 7; i++) {
       const d = laggTillDagar(start, i); const iso = isoDatum(d);
@@ -250,8 +244,7 @@ async function visaKalender() {
       const lov = arLov(iso, handelser);
       if (!dagens.length && i >= 5) continue;
       dagar += `<div class="daggrupp"><div class="rubrik">${VD_KORT[d.getDay()]} ${d.getDate()}${iso === isoDatum(nu) ? ' · idag' : ''}${lov ? ' · lov' : ''}</div>
-        ${dagens.length ? `<div class="kort utan-dag" style="gap:2px;padding:8px 16px">${dagens.map(postRad).join('')}</div>` : '<div class="tom" style="padding:0 4px 4px">Inget planerat.</div>'}
-        ${lov ? '' : `<div style="padding:0 4px">${lunchRader(lunchBarn, iso, mat)}</div>`}</div>`;
+        ${dagens.length ? `<div class="kort utan-dag" style="gap:2px;padding:8px 16px">${dagens.map(postRad).join('')}</div>` : '<div class="tom" style="padding:0 4px 4px">Inget planerat.</div>'}</div>`;
     }
     innehall = `
       ${kalHuvud(`Vecka ${veckonummer(start)}`, `${start.getDate()} ${MANADER[start.getMonth()].slice(0, 3)} – ${slut.getDate()} ${MANADER[slut.getMonth()].slice(0, 3)}`, 'veckan')}
@@ -264,7 +257,7 @@ async function visaKalender() {
     const gridStart = mandag(forsta);
     const gridSlut = laggTillDagar(mandag(sista), 6);
     const fran = isoDatum(gridStart), till = isoDatum(gridSlut);
-    const [handelser, mat] = await Promise.all([data.listaHandelser(fran, till), hamtaMat(fran, till)]);
+    const handelser = await data.listaHandelser(fran, till);
     const alla = typFilter(filtrera(forekomster(handelser.filter((h) => h.typ !== 'lov'), fran, till)));
     const lovLista = handelser.filter((h) => h.typ === 'lov');
     if (!S.valdDag || S.valdDag < fran || S.valdDag > till) S.valdDag = (isoDatum(nu) >= isoDatum(forsta) && isoDatum(nu) <= isoDatum(sista)) ? isoDatum(nu) : isoDatum(forsta);
@@ -292,7 +285,6 @@ async function visaKalender() {
       <div class="forklaring">${S.barn.map((b) => `<span><span class="prick liten" style="background:${e(b.farg)}"></span>${e(b.namn)}</span>`).join('')}<span><span class="prick liten" style="background:var(--prov);border-radius:2px"></span>Prov</span><span><span style="width:14px;height:8px;border-radius:2px;background:var(--lov-bg);display:inline-block"></span>Lov</span></div>
       <section class="kort" aria-live="polite"><h2>${storBokstav(VECKODAGAR[vd.getDay()])} ${vd.getDate()} ${MANADER[vd.getMonth()]}${lovVald ? ' · lov' : ''}</h2>
         <div class="lista">${valda.length ? valda.map(postRad).join('') : '<p class="tom">Inget planerat.</p>'}</div>
-        ${lovVald || [0, 6].includes(vd.getDay()) ? '' : lunchRader(S.filter ? S.barn.filter((b) => b.id === S.filter) : S.barn, S.valdDag, mat)}
         <a class="textknapp" style="align-self:flex-start" href="#/ny?datum=${S.valdDag}">Lägg till den här dagen</a></section>`;
     app.innerHTML = ram(`<main class="stack">${innehall}</main>`, 'kalender');
   }
@@ -331,11 +323,25 @@ function typChips() {
 }
 
 // ---------------------------------------------------------------- HÄNDELSE
-async function visaHandelse(id) {
+async function visaHandelse(id, valdDag) {
   const h = await data.hamtaHandelse(id);
-  const d = franIso(h.datum);
+  const upprepad = h.upprepa === 'vecka';
+  // För en upprepad händelse visas ett tillfälle i taget: det valda, annars nästa från idag.
+  let tillfalle = h.datum, forra = null, nasta = null;
+  if (upprepad) {
+    const steg = 7 * (h.upprepa_veckor || 1);
+    const ar = (x) => forekomster([h], x, x).length > 0;
+    const idag = isoDatum(new Date());
+    tillfalle = valdDag && ar(valdDag) ? valdDag : (forekomster([h], idag < h.datum ? h.datum : idag, isoDatum(laggTillDagar(franIso(idag < h.datum ? h.datum : idag), steg)))[0]?.dag || forekomster([h], h.datum, h.upprepa_till || h.datum).pop()?.dag || h.datum);
+    const f = isoDatum(laggTillDagar(franIso(tillfalle), -steg)), n = isoDatum(laggTillDagar(franIso(tillfalle), steg));
+    if (f >= h.datum) forra = f;
+    if (ar(n)) nasta = n;
+    h.material = (h.material || []).filter((m) => (m.forekomst || h.datum) === tillfalle);
+  }
+  const d = franIso(tillfalle);
   const r = h.resultat || {};
-  const datumText = `${langtDatum(d)}${h.slut_datum ? ` – ${langtDatum(franIso(h.slut_datum)).toLowerCase()}` : ''}${h.tid ? ' · ' + kortTid(h.tid) : ''}${h.upprepa === 'vecka' ? ' · varje vecka' : ''}`;
+  const datumText = `${langtDatum(d)}${h.slut_datum ? ` – ${langtDatum(franIso(h.slut_datum)).toLowerCase()}` : ''}${h.tid ? ' · ' + kortTid(h.tid) : ''}`;
+  const upprepRad = upprepad ? `<div class="rad dampad liten-text" style="gap:8px;flex-wrap:wrap">${forra ? `<a class="chip" style="height:30px" href="#/handelse/${h.id}/${forra}" aria-label="Förra tillfället">${I.vanster}</a>` : ''}<span>Upprepas ${upprepText(h)}${h.upprepa_till ? ` t.o.m. ${franIso(h.upprepa_till).getDate()} ${MANADER[franIso(h.upprepa_till).getMonth()].slice(0, 3)}` : ''}</span>${nasta ? `<a class="chip" style="height:30px" href="#/handelse/${h.id}/${nasta}" aria-label="Nästa tillfälle">${I.hoger}</a>` : ''}</div>` : '';
   const kanAndra = arForalder() || (h.barn_id && h.barn_id === S.medlem.barn_id);
   const bildLankar = {};
   await Promise.all((h.material || []).filter((m) => m.typ === 'bild' && m.fil_sokvag).map(async (m) => { try { bildLankar[m.id] = await data.filLank(m.fil_sokvag); } catch { /* visas utan miniatyr */ } }));
@@ -360,12 +366,13 @@ async function visaHandelse(id) {
       <div class="stack" style="gap:6px">
         <div class="rad">${h.typ === 'prov' ? '<span class="etikett">Prov</span>' : `<span class="chip" style="height:28px;font-size:12px">${TYPER[h.typ]}</span>`}<span class="dampad liten-text rad" style="gap:6px"><span class="prick liten" style="background:${barnFarg(h.barn_id)}"></span>${e(barnNamn(h.barn_id))}${h.amne ? ' · ' + e(h.amne) : ''}</span></div>
         <h1 style="font-size:27px;line-height:1.15">${e(h.titel)}</h1>
-        <div style="font-weight:700">${datumText}</div>
+        <div style="font-weight:700">${datumText}</div>${upprepRad}
         ${h.beskrivning ? `<p style="margin:0;line-height:1.5;white-space:pre-wrap" class="dampad">${e(h.beskrivning)}</p>` : ''}
       </div>
-      ${h.typ !== 'lov' ? `<section class="kort"><div class="kort-huvud"><h2>Instuderingsmaterial${h.material?.length ? ` <span class="dampad" style="font-weight:600">(${h.material.length})</span>` : ''}</h2>${kanAndra ? `<a class="chip" href="#/material/${h.id}">+ Lägg till</a>` : ''}</div>
+      ${h.typ !== 'lov' ? `<section class="kort"><div class="kort-huvud"><h2>Instuderingsmaterial${h.material?.length ? ` <span class="dampad" style="font-weight:600">(${h.material.length})</span>` : ''}</h2>${kanAndra ? `<a class="chip" href="#/material/${h.id}${upprepad ? '/' + tillfalle : ''}">+ Lägg till</a>` : ''}</div>
+        ${upprepad ? `<p class="tom" style="margin:0">Gäller bara ${VECKODAGAR[d.getDay()]} ${d.getDate()} ${MANADER[d.getMonth()]}. Varje gång får eget material.</p>` : ''}
         ${material || '<p class="tom">Inget material än.</p>'}</section>` : ''}
-      ${['prov', 'laxa'].includes(h.typ) ? `<section class="kort"><h2>Resultat</h2>
+      ${['prov', 'laxa'].includes(h.typ) && !upprepad ? `<section class="kort"><h2>Resultat</h2>
         <form class="stack" data-form="resultat" style="gap:10px">
           <div class="tva"><label class="falt">Poäng<input name="poang" inputmode="decimal" value="${e(r.poang ?? '')}" ${kanAndra ? '' : 'disabled'}></label>
           <label class="falt">Av max<input name="max_poang" inputmode="decimal" value="${e(r.max_poang ?? '')}" ${kanAndra ? '' : 'disabled'}></label></div>
@@ -392,7 +399,8 @@ async function visaHandelseForm(id, param = new URLSearchParams()) {
       <div class="tva"><label class="falt">Datum<input type="date" name="datum" required value="${e(h.datum)}"></label>
         <label class="falt">Tid<input type="time" name="tid" value="${e(kortTid(h.tid))}"></label></div>
       <label class="falt" data-visa="lov">Sista dag (lov)<input type="date" name="slut_datum" value="${e(h.slut_datum || '')}"></label>
-      <label class="falt rad" data-visa="traning" style="flex-direction:row;align-items:center;gap:10px;font-size:15px;color:var(--text)"><input type="checkbox" name="upprepa" ${h.upprepa === 'vecka' ? 'checked' : ''} style="width:22px;height:22px;accent-color:var(--accent)">Upprepa varje vecka</label>
+      <div class="tva" data-visa="upprepa"><label class="falt">Upprepas<select name="upprepa">${[[0, 'Nej'], [1, 'Varje vecka'], [2, 'Varannan vecka'], [3, 'Var tredje vecka'], [4, 'Var fjärde vecka']].map(([n, t]) => `<option value="${n}" ${(h.upprepa === 'vecka' ? (h.upprepa_veckor || 1) : 0) === n ? 'selected' : ''}>${t}</option>`).join('')}</select></label>
+        <label class="falt" data-visa="till">Till och med<input type="date" name="upprepa_till" value="${e(h.upprepa_till || '')}"></label></div>
       <label class="falt">Beskrivning<textarea name="beskrivning" maxlength="4000" placeholder="Vad ska man kunna? Sidor, kapitel, utrustning…">${e(h.beskrivning || '')}</textarea></label>
       <p class="fel dold" data-fel></p>
       <button class="knapp bred">${id ? 'Spara ändringar' : 'Spara'}</button>
@@ -401,18 +409,20 @@ async function visaHandelseForm(id, param = new URLSearchParams()) {
   const uppdatera = () => {
     const t = form.typ.value;
     form.querySelector('[data-visa="lov"]').classList.toggle('dold', t !== 'lov');
-    form.querySelector('[data-visa="traning"]').classList.toggle('dold', !['traning', 'ovrigt'].includes(t));
+    form.querySelector('[data-visa="upprepa"]').classList.toggle('dold', !['laxa', 'traning', 'ovrigt'].includes(t));
+    form.querySelector('[data-visa="till"]').style.visibility = form.upprepa.value === '0' ? 'hidden' : '';
   };
   form.addEventListener('change', uppdatera); uppdatera();
 }
 
 // ---------------------------------------------------------------- MATERIAL
-async function visaMaterialForm(handelseId) {
+async function visaMaterialForm(handelseId, dag) {
   const h = await data.hamtaHandelse(handelseId);
+  const forekomst = h.upprepa === 'vecka' && /^\d{4}-\d{2}-\d{2}$/.test(dag || '') ? dag : '';
   app.innerHTML = ram(`
     <header class="topp"><div class="topprad"><a class="rundknapp" href="javascript:history.back()" aria-label="Avbryt">${I.vanster}</a></div>
-      <div><div class="datumrad">${e(h.titel)}</div><h1>Nytt material</h1></div></header>
-    <main><form class="kort" data-form="material" data-handelse="${h.id}">
+      <div><div class="datumrad">${e(h.titel)}${forekomst ? ` · ${VD_KORT[franIso(forekomst).getDay()]} ${franIso(forekomst).getDate()}/${franIso(forekomst).getMonth() + 1}` : ''}</div><h1>Nytt material</h1></div></header>
+    <main><form class="kort" data-form="material" data-handelse="${h.id}" data-forekomst="${forekomst}">
       <div class="chips wrap" role="radiogroup" aria-label="Typ av material">
         ${[['lank', 'Länk'], ['text', 'Text'], ['bild', 'Bild'], ['fil', 'Dokument']].map(([k, v], i) => `<label class="chip" style="cursor:pointer"><input type="radio" name="typ" value="${k}" ${i === 0 ? 'checked' : ''} style="accent-color:var(--accent)">${v}</label>`).join('')}
       </div>
@@ -673,7 +683,7 @@ async function valjHandelseForMaterial(ark) {
     .filter((h) => h.typ !== 'lov' && (arForalder() || h.barn_id === S.medlem.barn_id));
   const sedda = new Set();
   ark.innerHTML = `<div class="topprad"><h2>Till vilken händelse?</h2><button class="rundknapp" data-g="stang" aria-label="Stäng">✕</button></div>
-    <div class="kort" style="gap:2px">${lista.filter((h) => !sedda.has(h.id) && sedda.add(h.id)).map((h) => postRad(h).replace(`href="#/handelse/${h.id}"`, `href="#/material/${h.id}"`)).join('') || '<p class="tom">Inga kommande händelser. Skapa en händelse först.</p>'}</div>`;
+    <div class="kort" style="gap:2px">${lista.filter((h) => !sedda.has(h.id) && sedda.add(h.id)).map((h) => postRad(h).replace(`href="${hLank(h)}"`, `href="#/material/${h.id}${h.upprepa === 'vecka' ? '/' + h.dag : ''}"`)).join('') || '<p class="tom">Inga kommande händelser. Skapa en händelse först.</p>'}</div>`;
 }
 
 // ---------------------------------------------------------------- INLOGGNING
@@ -814,9 +824,11 @@ document.addEventListener('submit', async (ev) => {
           id: f.dataset.id || undefined, typ: v.typ, barn_id: v.barn_id || null, titel: v.titel.trim(), amne: v.amne.trim(),
           beskrivning: v.beskrivning.trim(), datum: v.datum, tid: v.tid || null,
           slut_datum: v.typ === 'lov' ? (v.slut_datum || null) : null,
-          upprepa: ['traning', 'ovrigt'].includes(v.typ) && v.upprepa ? 'vecka' : 'ingen',
+          ...(() => { const n = ['laxa', 'traning', 'ovrigt'].includes(v.typ) ? Number(v.upprepa) || 0 : 0;
+            if (n && v.upprepa_till && v.upprepa_till < v.datum) throw new Error('Sista gången kan inte vara före första.');
+            return { upprepa: n ? 'vecka' : 'ingen', upprepa_veckor: n || 1, upprepa_till: n ? (v.upprepa_till || null) : null }; })(),
         });
-        toast('Sparat'); location.hash = `#/handelse/${sparad.id}`; break;
+        toast('Sparat'); location.hash = `#/handelse/${sparad.id}${sparad.upprepa === 'vecka' ? '/' + sparad.datum : ''}`; break;
       }
       case 'material': {
         const typ = v.typ;
@@ -826,8 +838,8 @@ document.addEventListener('submit', async (ev) => {
         if (typ === 'lank' && !sakerUrl(v.url)) throw new Error('Skriv en hel webblänk som börjar med https://');
         if (typ === 'text' && !v.innehall.trim()) throw new Error('Skriv eller klistra in text.');
         const titel = v.titel.trim() || (fil ? fil.name : typ === 'lank' ? new URL(v.url).hostname : 'Anteckning');
-        await data.sparaMaterial({ handelse_id: f.dataset.handelse, typ, titel, url: typ === 'lank' ? v.url : null, innehall: typ === 'text' ? v.innehall : null }, fil);
-        toast('Materialet är sparat'); location.hash = `#/handelse/${f.dataset.handelse}`; break;
+        await data.sparaMaterial({ handelse_id: f.dataset.handelse, forekomst: f.dataset.forekomst || null, typ, titel, url: typ === 'lank' ? v.url : null, innehall: typ === 'text' ? v.innehall : null }, fil);
+        toast('Materialet är sparat'); location.hash = `#/handelse/${f.dataset.handelse}${f.dataset.forekomst ? '/' + f.dataset.forekomst : ''}`; break;
       }
       case 'lasin': {
         const typ = v.typ;

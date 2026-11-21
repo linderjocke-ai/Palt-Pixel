@@ -159,12 +159,12 @@ function supabaseLager() {
     async listaHandelser(fran, till) {
       const s = await klient();
       // Upprepade händelser som startat tidigare hämtas också.
-      const { data, error } = await s.from('handelser').select('*, material(count), resultat(poang, max_poang)')
+      const { data, error } = await s.from('handelser').select('*, material(forekomst), resultat(poang, max_poang)')
         .eq('familj_id', medlem.familj_id)
         .or(`and(datum.gte.${fran},datum.lte.${till}),and(upprepa.eq.vecka,datum.lte.${till}),and(slut_datum.gte.${fran},datum.lte.${till})`)
         .order('datum');
       fel(error);
-      return data.map((h) => ({ ...h, antal_material: h.material?.[0]?.count || 0, resultat: Array.isArray(h.resultat) ? h.resultat[0] : h.resultat }));
+      return data.map(({ material, ...h }) => ({ ...h, material_datum: (material || []).map((m) => m.forekomst), antal_material: (material || []).length, resultat: Array.isArray(h.resultat) ? h.resultat[0] : h.resultat }));
     },
     async hamtaHandelse(id) {
       const s = await klient();
@@ -175,7 +175,7 @@ function supabaseLager() {
     },
     async sparaHandelse(h) {
       const s = await klient();
-      const rad = { barn_id: h.barn_id || null, typ: h.typ, titel: h.titel, amne: h.amne || null, beskrivning: h.beskrivning || null, datum: h.datum, tid: h.tid || null, slut_datum: h.slut_datum || null, upprepa: h.upprepa || 'ingen', upprepa_till: h.upprepa_till || null };
+      const rad = { barn_id: h.barn_id || null, typ: h.typ, titel: h.titel, amne: h.amne || null, beskrivning: h.beskrivning || null, datum: h.datum, tid: h.tid || null, slut_datum: h.slut_datum || null, upprepa: h.upprepa || 'ingen', upprepa_veckor: h.upprepa_veckor || 1, upprepa_till: h.upprepa_till || null };
       const { data: { user } } = await s.auth.getUser();
       const q = h.id ? s.from('handelser').update(rad).eq('id', h.id).select().single() : s.from('handelser').insert({ ...rad, familj_id: medlem.familj_id, skapad_av: user.id }).select().single();
       const { data, error } = await q; fel(error); return data;
@@ -190,7 +190,7 @@ function supabaseLager() {
         fil_sokvag = `${medlem.familj_id}/${m.handelse_id}/${Date.now()}_${rent}`;
         const up = await s.storage.from('material').upload(fil_sokvag, fil, { contentType: fil.type || undefined }); fel(up.error);
       }
-      const { error } = await s.from('material').insert({ familj_id: medlem.familj_id, handelse_id: m.handelse_id, typ: m.typ, titel: m.titel, url: m.url || null, innehall: m.innehall || null, fil_sokvag, skapad_av: user.id, skapad_av_namn: medlem.namn });
+      const { error } = await s.from('material').insert({ familj_id: medlem.familj_id, handelse_id: m.handelse_id, typ: m.typ, titel: m.titel, url: m.url || null, innehall: m.innehall || null, forekomst: m.forekomst || null, fil_sokvag, skapad_av: user.id, skapad_av_namn: medlem.namn });
       fel(error);
     },
     async taBortMaterial(m) {
@@ -332,7 +332,7 @@ function demoLager() {
     async sattPin() { kraverForalder(); },
     async listaHandelser(fran, till) {
       return db.handelser.filter((h) => synligt(h.barn_id) && ((h.datum >= fran && h.datum <= till) || (h.upprepa === 'vecka' && h.datum <= till) || (h.slut_datum && h.slut_datum >= fran && h.datum <= till)))
-        .map((h) => ({ ...h, antal_material: db.material.filter((m) => m.handelse_id === h.id).length, resultat: db.resultat.find((r) => r.handelse_id === h.id) }))
+        .map((h) => ({ ...h, material_datum: db.material.filter((m) => m.handelse_id === h.id).map((m) => m.forekomst || null), antal_material: db.material.filter((m) => m.handelse_id === h.id).length, resultat: db.resultat.find((r) => r.handelse_id === h.id) }))
         .sort((a, b) => a.datum.localeCompare(b.datum));
     },
     async hamtaHandelse(hid) {

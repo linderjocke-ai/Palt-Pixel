@@ -125,6 +125,10 @@ create table if not exists material (
   skapad_at timestamptz not null default now()
 );
 
+-- Upprepning: varje vecka (1), varannan (2) osv. Material hör till ett visst tillfälle.
+alter table handelser add column if not exists upprepa_veckor smallint not null default 1 check (upprepa_veckor between 1 and 8);
+alter table material add column if not exists forekomst date;   -- vilket tillfälle av en upprepad händelse
+
 create table if not exists resultat (
   handelse_id uuid primary key references handelser(id) on delete cascade,
   familj_id uuid not null references familjer(id) on delete cascade,

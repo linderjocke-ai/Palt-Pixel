@@ -23,15 +23,20 @@ export const langtDatum = (d) => `${storBokstav(VECKODAGAR[d.getDay()])} ${d.get
 export const kortTid = (t) => (t ? t.slice(0, 5) : '');
 export const minuter = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
 
+// Material till en upprepad händelse hör bara till ett tillfälle (äldre material utan datum hör till första gången).
+const materialFor = (h, dag) => (h.material_datum ? h.material_datum.filter((x) => (x || h.datum) === dag).length : h.antal_material || 0);
+// Text för upprepningen.
+export const upprepText = (h) => (h.upprepa !== 'vecka' ? '' : ({ 1: 'varje vecka', 2: 'varannan vecka' })[h.upprepa_veckor || 1] || `var ${h.upprepa_veckor}:e vecka`);
 // Ger alla förekomster av händelser inom [fran, till] (veckovis upprepning och flerdagars lov).
 export function forekomster(handelser, fran, till) {
   const ut = [];
   for (const h of handelser) {
     if (h.upprepa === 'vecka') {
+      const steg = 7 * (h.upprepa_veckor || 1);
       let d = franIso(h.datum);
       const slut = h.upprepa_till && h.upprepa_till < till ? h.upprepa_till : till;
-      while (d < franIso(fran)) d = laggTillDagar(d, 7);
-      for (; isoDatum(d) <= slut; d = laggTillDagar(d, 7)) ut.push({ ...h, dag: isoDatum(d) });
+      while (d < franIso(fran)) d = laggTillDagar(d, steg);
+      for (; isoDatum(d) <= slut; d = laggTillDagar(d, steg)) { const dag = isoDatum(d); ut.push({ ...h, dag, antal_material: materialFor(h, dag) }); }
     } else if (h.slut_datum && h.slut_datum > h.datum) {
       ut.push({ ...h, dag: h.datum < fran ? fran : h.datum });
     } else if (h.datum >= fran && h.datum <= till) {
