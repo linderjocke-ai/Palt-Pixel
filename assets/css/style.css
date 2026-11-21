@@ -45,7 +45,7 @@ a { color: inherit; }
   background: #1a2238;
 }
 #landskap {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; cursor: pointer;
   width: 100%; height: 100%;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
@@ -56,11 +56,12 @@ a { color: inherit; }
   pointer-events: none;
 }
 .hero-topp {
-  position: relative; z-index: 2;
+  position: relative; z-index: 2; pointer-events: none;
   max-width: var(--maxbredd); margin: 0 auto;
   padding: 20px 32px;
   display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
 }
+.hero-topp > * { pointer-events: auto; }
 .varumarke {
   display: inline-flex; align-items: center; gap: 12px;
   text-decoration: none;
