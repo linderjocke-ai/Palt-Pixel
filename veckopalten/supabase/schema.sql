@@ -10,9 +10,10 @@ create table if not exists familjer (
   id uuid primary key default gen_random_uuid(),
   namn text not null check (char_length(namn) between 1 and 60),
   familjekod text not null unique,          -- sex siffror; barnen loggar in med denna + PIN
-  vuxenkod text not null unique,            -- bjuder in fler vuxna
+  vuxenkod text not null unique,            -- sex siffror; bjuder in en vuxen, gäller en gång i 7 dagar
   skapad_at timestamptz not null default now()
 );
+alter table familjer add column if not exists vuxenkod_giltig_till timestamptz not null default now() + interval '7 days';
 
 create table if not exists barn (
   id uuid primary key default gen_random_uuid(),
@@ -102,6 +103,11 @@ create table if not exists pin_forsok (
 );
 alter table pin_forsok add column if not exists barn_id uuid;
 
+create table if not exists vuxen_forsok (
+  user_id uuid not null,
+  tid timestamptz not null default now()
+);
+
 -- ---------- Hjälpfunktioner ----------
 
 create or replace function ar_medlem(f uuid) returns boolean
@@ -143,7 +149,19 @@ declare k text;
 begin
   loop
     k := lpad(floor(random() * 1000000)::int::text, 6, '0');
-    exit when not exists (select 1 from familjer where familjekod = k);
+    exit when not exists (select 1 from familjer where familjekod = k or vuxenkod = k);
+  end loop;
+  return k;
+end $$;
+
+-- Vuxenkod: sex siffror, unik och skild från alla familjekoder.
+create or replace function ny_vuxenkod() returns text
+language plpgsql volatile set search_path = public as $$
+declare k text;
+begin
+  loop
+    k := lpad(floor(random() * 1000000)::int::text, 6, '0');
+    exit when not exists (select 1 from familjer where vuxenkod = k or familjekod = k);
   end loop;
   return k;
 end $$;
@@ -159,6 +177,7 @@ alter table material enable row level security;
 alter table resultat enable row level security;
 alter table lektioner enable row level security;
 alter table pin_forsok enable row level security;
+alter table vuxen_forsok enable row level security;
 
 drop policy if exists "se familj" on familjer;
 create policy "se familj" on familjer for select using (ar_medlem(id));
@@ -218,7 +237,7 @@ drop policy if exists "andra lektioner" on lektioner;
 create policy "andra lektioner" on lektioner for update using (ar_foralder(familj_id));
 drop policy if exists "ta bort lektioner" on lektioner;
 create policy "ta bort lektioner" on lektioner for delete using (ar_foralder(familj_id));
--- barn_pin och pin_forsok har inga policys: bara funktionerna nedan når dem.
+-- barn_pin, pin_forsok och vuxen_forsok har inga policys: bara funktionerna nedan når dem.
 
 -- ---------- Funktioner som appen anropar ----------
 
@@ -228,21 +247,33 @@ language plpgsql security definer set search_path = public as $$
 declare f uuid;
 begin
   if auth.uid() is null then raise exception 'Inte inloggad'; end if;
-  insert into familjer (namn, familjekod, vuxenkod) values (familjenamn, ny_familjekod(), ny_kod(8)) returning id into f;
+  insert into familjer (namn, familjekod, vuxenkod) values (familjenamn, ny_familjekod(), ny_vuxenkod()) returning id into f;
   insert into medlemmar (familj_id, user_id, roll, namn) values (f, auth.uid(), 'foralder', mitt_namn);
   return f;
 end $$;
 
 -- En vuxen går med i en befintlig familj med vuxenkoden.
+-- Koden gäller en gång i 7 dagar. Fel kod ger null, så att försöket räknas.
 create or replace function ga_med_som_vuxen(kod text, mitt_namn text) returns uuid
 language plpgsql security definer set search_path = public as $$
-declare f uuid;
+declare f uuid; antal int;
 begin
   if auth.uid() is null then raise exception 'Inte inloggad'; end if;
-  select id into f from familjer where vuxenkod = upper(trim(kod));
-  if f is null then raise exception 'Fel kod'; end if;
+  if coalesce((auth.jwt() ->> 'is_anonymous')::boolean, false) then
+    raise exception 'Logga in med Google, Microsoft eller e-post först.';
+  end if;
+  select count(*) into antal from vuxen_forsok where user_id = auth.uid() and tid > now() - interval '15 minutes';
+  if antal >= 5 then raise exception 'För många försök. Vänta 15 minuter.'; end if;
+  select count(*) into antal from vuxen_forsok where tid > now() - interval '1 minute';
+  if antal >= 60 then raise exception 'Försök igen om en stund.'; end if;
+  insert into vuxen_forsok (user_id) values (auth.uid());
+  select id into f from familjer where vuxenkod = trim(kod) and vuxenkod_giltig_till > now();
+  if f is null then return null; end if;
   insert into medlemmar (familj_id, user_id, roll, namn) values (f, auth.uid(), 'foralder', mitt_namn)
     on conflict (familj_id, user_id) do nothing;
+  -- Koden är förbrukad: skapa en ny direkt.
+  update familjer set vuxenkod = ny_vuxenkod(), vuxenkod_giltig_till = now() + interval '7 days' where id = f;
+  delete from vuxen_forsok where user_id = auth.uid();
   return f;
 end $$;
 
@@ -303,13 +334,22 @@ create or replace function nya_koder(f uuid) returns void
 language plpgsql security definer set search_path = public as $$
 begin
   if not ar_foralder(f) then raise exception 'Ingen behörighet'; end if;
-  update familjer set familjekod = ny_familjekod(), vuxenkod = ny_kod(8) where id = f;
+  update familjer set familjekod = ny_familjekod(), vuxenkod = ny_vuxenkod(), vuxenkod_giltig_till = now() + interval '7 days' where id = f;
+end $$;
+
+-- Förälder skapar bara en ny vuxenkod (giltig i 7 dagar).
+create or replace function ny_vuxenkod_for(f uuid) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if not ar_foralder(f) then raise exception 'Ingen behörighet'; end if;
+  update familjer set vuxenkod = ny_vuxenkod(), vuxenkod_giltig_till = now() + interval '7 days' where id = f;
 end $$;
 
 -- Koderna syns bara för föräldrar.
-create or replace function familjekoder(f uuid) returns table (familjekod text, vuxenkod text)
+drop function if exists familjekoder(uuid);
+create function familjekoder(f uuid) returns table (familjekod text, vuxenkod text, vuxenkod_giltig_till timestamptz)
 language sql stable security definer set search_path = public as $$
-  select familjekod, vuxenkod from familjer where id = f and ar_foralder(f);
+  select familjekod, vuxenkod, vuxenkod_giltig_till from familjer where id = f and ar_foralder(f);
 $$;
 
 revoke all on function skapa_familj(text, text) from public, anon;
@@ -318,6 +358,7 @@ revoke all on function satt_pin(uuid, text) from public, anon;
 revoke all on function ga_med_som_barn(text, uuid, text) from public, anon;
 revoke all on function nya_koder(uuid) from public, anon;
 revoke all on function satt_tema(text) from public, anon;
+revoke all on function ny_vuxenkod_for(uuid) from public, anon;
 revoke all on function familjekoder(uuid) from public, anon;
 grant execute on function skapa_familj(text, text) to authenticated;
 grant execute on function ga_med_som_vuxen(text, text) to authenticated;
@@ -325,6 +366,7 @@ grant execute on function satt_pin(uuid, text) to authenticated;
 grant execute on function ga_med_som_barn(text, uuid, text) to authenticated;
 grant execute on function nya_koder(uuid) to authenticated;
 grant execute on function satt_tema(text) to authenticated;
+grant execute on function ny_vuxenkod_for(uuid) to authenticated;
 grant execute on function familjekoder(uuid) to authenticated;
 grant execute on function barn_for_kod(text) to anon, authenticated;
 
@@ -356,3 +398,8 @@ begin
       using (bucket_id = 'material' and ar_foralder(((storage.foldername(name))[1])::uuid));
   end if;
 end $$;
+
+-- ---------- Uppgradering av äldre koder ----------
+-- Gamla koder med bokstäver byts mot sex siffror (rör inte koder som redan är rätt).
+update familjer set familjekod = ny_familjekod() where familjekod !~ '^[0-9]{6}$';
+update familjer set vuxenkod = ny_vuxenkod(), vuxenkod_giltig_till = now() + interval '7 days' where vuxenkod !~ '^[0-9]{6}$';

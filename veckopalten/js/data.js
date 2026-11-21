@@ -62,7 +62,8 @@ function supabaseLager() {
     },
     async gaMedSomVuxen(kod, mittNamn) {
       const s = await klient();
-      const { error } = await s.rpc('ga_med_som_vuxen', { kod, mitt_namn: mittNamn }); fel(error);
+      const { data, error } = await s.rpc('ga_med_som_vuxen', { kod, mitt_namn: mittNamn }); fel(error);
+      return !!data;
     },
     async sattTema(t) { const s = await klient(); const { error } = await s.rpc('satt_tema', { t }); fel(error); },
     async familjekoder() {
@@ -70,6 +71,7 @@ function supabaseLager() {
       const { data, error } = await s.rpc('familjekoder', { f: medlem.familj_id }); fel(error); return data[0] || null;
     },
     async nyaKoder() { const s = await klient(); const { error } = await s.rpc('nya_koder', { f: medlem.familj_id }); fel(error); },
+    async nyVuxenkod() { const s = await klient(); const { error } = await s.rpc('ny_vuxenkod_for', { f: medlem.familj_id }); fel(error); },
     async medlemmar() {
       const s = await klient();
       const { data, error } = await s.from('medlemmar').select('id, roll, namn, barn_id').eq('familj_id', medlem.familj_id).order('skapad_at'); fel(error); return data;
@@ -191,7 +193,7 @@ function demoLager() {
     };
     for (const [b, rader] of Object.entries(dagsschema)) for (let wd = 1; wd <= 5; wd++) rader.forEach(([s, e, a], i) => lek.push({ id: id(), barn_id: b, veckodag: wd, start: s, slut: e, amne: wd % 2 && i === 4 ? 'Musik' : a }));
     return {
-      familj: { id: 'f-demo', namn: 'Familjen Exempel', familjekod: '424242', vuxenkod: 'PIXEL7QX' },
+      familj: { id: 'f-demo', namn: 'Familjen Exempel', familjekod: '424242', vuxenkod: '135790' },
       jag: { id: 'm-1', roll: 'foralder', barn_id: null, namn: 'Förälder', tema: lager.getItem('vp_tema') || 'soluppgang' },
       medlemmar: [{ id: 'm-1', roll: 'foralder', namn: 'Förälder', barn_id: null }, { id: 'm-2', roll: 'barn', namn: 'Alva', barn_id: alva }],
       barn: [
@@ -231,10 +233,11 @@ function demoLager() {
       const b = db.barn.find((x) => x.id === barnId);
       db.inloggad = true; db.jag = { ...db.jag, roll: 'barn', barn_id: barnId, namn: b.namn }; spara(); return true;
     },
-    async skapaFamilj() {}, async gaMedSomVuxen() {},
+    async skapaFamilj() {}, async gaMedSomVuxen() { return true; },
     async sattTema(t) { db.jag.tema = t; spara(); },
-    async familjekoder() { kraverForalder(); return { familjekod: db.familj.familjekod, vuxenkod: db.familj.vuxenkod }; },
+    async familjekoder() { kraverForalder(); return { familjekod: db.familj.familjekod, vuxenkod: db.familj.vuxenkod, vuxenkod_giltig_till: new Date(Date.now() + 7 * 864e5).toISOString() }; },
     async nyaKoder() { kraverForalder(); },
+    async nyVuxenkod() { kraverForalder(); },
     async medlemmar() { return db.jag.roll === 'foralder' ? db.medlemmar : db.medlemmar.filter((m) => m.barn_id === db.jag.barn_id); },
     async taBortMedlem(mid) { kraverForalder(); db.medlemmar = db.medlemmar.filter((m) => m.id !== mid); spara(); },
     async listaBarn() { return db.barn.filter((b) => synligt(b.id)); },

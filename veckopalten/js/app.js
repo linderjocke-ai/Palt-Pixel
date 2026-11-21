@@ -400,8 +400,8 @@ async function visaFamilj() {
         <details class="kort" ${S.barn.length ? '' : 'open'}><summary style="cursor:pointer;font-weight:700">+ Lägg till barn</summary>${barnForm({})}</details></section>
       <section class="kort"><h2>Koder</h2>
         <div><div class="dampad liten-text">Familjekod – barnen loggar in med den och sin PIN</div><div class="kod">${e(koder?.familjekod || '–')}</div></div>
-        <div><div class="dampad liten-text">Vuxenkod – bjud in en annan vuxen</div><div class="kod">${e(koder?.vuxenkod || '–')}</div></div>
-        <button class="textknapp" style="align-self:flex-start" data-g="nyakoder">Skapa nya koder</button>
+        <div><div class="dampad liten-text">Vuxenkod – bjud in en annan vuxen. Gäller en gång${koder?.vuxenkod_giltig_till ? ', till ' + giltigTill(koder.vuxenkod_giltig_till) : ''}.</div><div class="kod">${e(koder?.vuxenkod || '–')}</div></div>
+        <div class="knapprad"><button class="textknapp" data-g="nyvuxenkod">Ny vuxenkod</button><button class="textknapp" data-g="nyakoder">Byt båda koderna</button></div>
       </section>
       <section class="kort"><h2>Medlemmar</h2>${medlemmar.map((m) => `<div class="rad" style="justify-content:space-between"><span>${e(m.namn || 'Utan namn')} <span class="dampad liten-text">${m.roll === 'foralder' ? 'vuxen' : 'barn'}</span></span>${m.id !== S.medlem.id ? `<button class="textknapp" data-g="tabortmedlem" data-id="${m.id}" style="color:var(--fara);text-decoration:none">Ta bort</button>` : '<span class="dampad liten-text">du</span>'}</div>`).join('')}</section>`;
   }
@@ -413,6 +413,11 @@ async function visaFamilj() {
     <section class="kort"><div class="rad" style="justify-content:space-between"><span>Inloggad som <b>${e(S.medlem.namn || '')}</b> <span class="dampad liten-text">${arForalder() ? 'vuxen' : 'barn'}</span></span></div>
       <button class="knapp sekundar" data-g="loggaut">Logga ut</button></section>
   </main>`, 'familj');
+}
+function giltigTill(t) {
+  const d = new Date(t);
+  if (d < new Date()) return 'har gått ut';
+  return `${d.getDate()} ${MANADER[d.getMonth()]} kl. ${String(d.getHours()).padStart(2, '0')}.${String(d.getMinutes()).padStart(2, '0')}`;
 }
 function barnForm(b) {
   return `<form class="stack" data-form="barn" data-id="${b.id || ''}" style="gap:10px">
@@ -489,9 +494,9 @@ function visaKomIgang(anonym) {
       <form class="stack" data-form="skapafamilj" style="gap:10px"><label class="falt">Ditt namn<input name="mittnamn" required maxlength="40" autocomplete="given-name"></label>
         <label class="falt">Familjens namn<input name="familjenamn" required maxlength="60" placeholder="t.ex. Familjen Linder"></label>
         <button class="knapp bred">Skapa familj</button><p class="fel dold" data-fel></p></form></section>
-    <section class="kort"><h2>Gå med i en familj</h2><p class="tom" style="margin:0">Har en annan vuxen redan skapat familjen? Skriv vuxenkoden du fått.</p>
+    <section class="kort"><h2>Gå med i en familj</h2><p class="tom" style="margin:0">Har en annan vuxen redan skapat familjen? Skriv vuxenkoden (sex siffror) du fått. Den gäller en gång.</p>
       <form class="stack" data-form="gamed" style="gap:10px"><label class="falt">Ditt namn<input name="mittnamn" required maxlength="40"></label>
-        <label class="falt">Vuxenkod<input name="kod" required maxlength="8" autocapitalize="characters" style="text-transform:uppercase;letter-spacing:.1em"></label>
+        <label class="falt">Vuxenkod<input name="kod" required inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="6 siffror" style="letter-spacing:.2em"></label>
         <button class="knapp sekundar bred">Gå med</button><p class="fel dold" data-fel></p></form></section>
     <button class="textknapp" data-g="loggaut">Logga ut</button></main>`;
 }
@@ -526,7 +531,8 @@ document.addEventListener('click', async (ev) => {
     if (g === 'tabortlektion') { await data.taBortLektion(el.dataset.id); return route(); }
     if (g === 'tabortbarn') { const b = barnMap()[el.dataset.id]; if (await fraga(`Ta bort ${b.namn} och allt som hör till ${b.namn}?`)) { await data.taBortBarn(b.id); S.barn = await data.listaBarn(); if (S.filter === b.id) S.filter = null; toast(`${b.namn} är borttagen`); route(); } return; }
     if (g === 'tabortmedlem') { if (await fraga('Ta bort personen från familjen?')) { await data.taBortMedlem(el.dataset.id); route(); } return; }
-    if (g === 'nyakoder') { if (await fraga('Skapa nya koder? De gamla slutar fungera, men de som redan är inloggade förblir det.', 'Skapa nya')) { await data.nyaKoder(); route(); } return; }
+    if (g === 'nyvuxenkod') { await data.nyVuxenkod(); toast('Ny vuxenkod skapad'); return route(); }
+    if (g === 'nyakoder') { if (await fraga('Byta både familjekod och vuxenkod? De gamla slutar fungera, men alla som redan är inloggade förblir det.', 'Byt koder')) { await data.nyaKoder(); route(); } return; }
     if (g === 'demosom') { await data.demoVisaSom(el.dataset.id || null); location.hash = '#/idag'; location.reload(); return; }
     if (g === 'demoaterstall') { await data.demoAterstall(); location.reload(); return; }
   } catch (err) { toast(err.message); }
@@ -561,7 +567,12 @@ document.addEventListener('submit', async (ev) => {
         location.hash = '#/idag'; location.reload(); break;
       }
       case 'skapafamilj': await data.skapaFamilj(v.familjenamn.trim(), v.mittnamn.trim()); location.hash = '#/familj'; location.reload(); break;
-      case 'gamed': await data.gaMedSomVuxen(v.kod, v.mittnamn.trim()); location.reload(); break;
+      case 'gamed': {
+        if (!/^\d{6}$/.test(v.kod.trim())) throw new Error('Vuxenkoden är sex siffror.');
+        const ok = await data.gaMedSomVuxen(v.kod.trim(), v.mittnamn.trim());
+        if (!ok) throw new Error('Koden stämmer inte eller har gått ut. Be den andra vuxna om en ny vuxenkod.');
+        location.reload(); break;
+      }
       case 'handelse': {
         if (!v.titel.trim()) throw new Error('Skriv en rubrik.');
         if (v.typ === 'lov' && v.slut_datum && v.slut_datum < v.datum) throw new Error('Sista dagen kan inte vara före första dagen.');
