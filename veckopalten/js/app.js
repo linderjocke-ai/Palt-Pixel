@@ -537,8 +537,9 @@ async function visaSchema() {
       const iso = isoDatum(laggTillDagar(man, vd - 1));
       const lov = alla.some((h) => h.typ === 'lov' && h.dag === iso && (!h.barn_id || h.barn_id === b.id));
       return `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd % 7])} ${franIso(iso).getDate()}/${franIso(iso).getMonth() + 1}${vd === idagVd ? ' · idag' : ''}${lov ? ' · lov' : ''}</div>
+        ${lov ? '' : lunchRad(b, iso, mat).replace('class="lunch"', 'class="lunch" style="margin:0 0 6px"')}
         ${l.length ? `<div class="lektioner">${l.map((x) => lektionRad(x, iso, alla, innehall, '', arForalder() ? `<button class="litenx" data-g="tabortlektion" data-id="${x.id}" aria-label="Ta bort ${e(x.amne)} ${kortTid(x.start)}">✕</button>` : '')).join('')}</div>` : '<div class="tom">Inga lektioner.</div>'}
-        ${lov ? '' : lunchRad(b, iso, mat)}</div>`;
+</div>`;
     }).join('');
     return `<section class="kort"><div class="namn"><span class="prick" style="width:12px;height:12px;background:${e(b.farg)}"></span><h2>${e(b.namn)}</h2></div>${dagar}</section>`;
   }).join('');
