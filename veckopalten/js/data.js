@@ -289,6 +289,8 @@ function demoLager() {
       await new Promise((ok) => setTimeout(ok, 1200));
       const d = (n) => isoDatum(laggTillDagar(new Date(), n));
       const b = u.barnId || (db.jag.roll === 'barn' ? db.jag.barn_id : 'b-alva');
+      if (u.typ === 'pdf') return { sammanfattning: 'Exempel i demoläget: ett veckoschema.', forslag: [], schema_barn_id: b,
+        lektioner: [1, 2, 3, 4, 5].flatMap((vd) => [['08:10', '09:00', 'Svenska'], ['09:15', '10:05', 'Matematik'], ['10:20', '11:10', vd % 2 ? 'Engelska' : 'NO'], ['12:30', '13:20', vd === 3 ? 'Idrott och hälsa' : 'SO']].map(([start, slut, amne]) => ({ veckodag: vd, start, slut, amne }))) };
       return {
         sammanfattning: 'Exempel i demoläget: veckobrev med ett prov, en läxa och ett lov.',
         forslag: [

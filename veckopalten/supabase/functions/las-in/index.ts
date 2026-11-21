@@ -64,9 +64,24 @@ const VERKTYG = {
           required: ["typ", "titel", "amne", "datum", "tid", "slut_datum", "barn", "beskrivning", "material", "sakerhet"],
         },
       },
+      lektioner: {
+        type: "array",
+        description: "Om underlaget är ett lektionsschema: varje lektion som återkommer varje vecka. Annars tom lista.",
+        items: {
+          type: "object",
+          properties: {
+            veckodag: { type: "integer", minimum: 1, maximum: 7, description: "1 = måndag, 5 = fredag." },
+            start: { type: "string", description: "HH:MM" },
+            slut: { type: "string", description: "HH:MM" },
+            amne: { type: "string", description: "Ämnet, kort, t.ex. 'Matematik' eller 'Idrott och hälsa'. Ta med sal i parentes om den står." },
+          },
+          required: ["veckodag", "start", "slut", "amne"],
+        },
+      },
+      schema_barn: { type: "string", description: "Namnet på barnet schemat gäller, exakt som i listan över barn, eller tom sträng." },
       sammanfattning: { type: "string", description: "En mening på svenska om vad underlaget innehöll." },
     },
-    required: ["forslag", "sammanfattning"],
+    required: ["forslag", "lektioner", "schema_barn", "sammanfattning"],
   },
 };
 
@@ -146,7 +161,9 @@ Barnen i familjen:
 ${barnLista}
 ${valtBarn ? `Underlaget gäller ${valtBarn.namn}. Sätt barn till "${valtBarn.namn}" om inget annat framgår tydligt.` : "Avgör vilket barn det gäller utifrån namn, klass eller årskurs. Är det oklart, lämna barn tomt."}
 Hitta alla prov, läxor, träningar, lov och andra händelser med datum. Ta inte med sådant som redan har varit. Hitta inte på något: saknas datum, gissa bara om det tydligt framgår av sammanhanget, och sätt då sakerhet till lag.
-Lägg länkar och glosor/faktatexter som hör till en händelse under dess material. Svara genom att anropa verktyget spara_forslag.`;
+Lägg länkar och glosor/faktatexter som hör till en händelse under dess material.
+Om underlaget är ett veckoschema med lektioner (t.ex. från Skola24): fyll i lektioner med alla lektioner måndag–fredag och lägg dem inte som händelser. Raster och lunch tas inte med. Prov eller annat som står i schemat läggs ändå som händelser.
+Svara genom att anropa verktyget spara_forslag.`;
 
     const innehall: unknown[] = [];
     if (underlag.pdf) innehall.push({ type: "document", source: { type: "base64", media_type: "application/pdf", data: underlag.pdf } });
@@ -187,7 +204,15 @@ Lägg länkar och glosor/faktatexter som hör till en händelse under dess mater
         sakerhet: f.sakerhet,
       };
     });
-    return svar(200, { forslag, sammanfattning: resultat.sammanfattning ?? "" });
+    const tidOk = (t: string) => /^\d{1,2}[:.]\d{2}$/.test(t);
+    const tid = (t: string) => t.replace(".", ":").padStart(5, "0");
+    const lektioner = (Array.isArray(resultat.lektioner) ? resultat.lektioner : [])
+      .filter((l: Record<string, unknown>) => Number(l.veckodag) >= 1 && Number(l.veckodag) <= 7 && tidOk(String(l.start)) && tidOk(String(l.slut)) && String(l.amne || "").trim())
+      .map((l: Record<string, unknown>) => ({ veckodag: Number(l.veckodag), start: tid(String(l.start)), slut: tid(String(l.slut)), amne: String(l.amne).trim().slice(0, 40) }))
+      .slice(0, 80);
+    let schemaBarn = namnTillId.get(String(resultat.schema_barn || "").toLowerCase()) ?? (valtBarn?.id ?? null);
+    if (medlem.roll === "barn") schemaBarn = medlem.barn_id;
+    return svar(200, { forslag, lektioner, schema_barn_id: schemaBarn, sammanfattning: resultat.sammanfattning ?? "" });
   } catch (e) {
     console.error(e);
     return fel(400, e instanceof Error ? e.message : "Något gick fel.");

@@ -434,6 +434,8 @@ const tillBase64 = (fil) => new Promise((ok, nej) => { const r = new FileReader(
 async function visaForslag(res) {
   const ruta = $('#lasresultat');
   const lista = res.forslag || [];
+  const lek = res.lektioner || [];
+  S.lasLektioner = lek;
   // Markera sådant som redan finns i kalendern.
   if (lista.length) {
     const datum = lista.map((f) => f.datum).sort();
@@ -444,10 +446,19 @@ async function visaForslag(res) {
   const barnOpt = (vald, i) => arForalder()
     ? `<select name="barn_${i}">${S.barn.map((b) => `<option value="${b.id}" ${vald === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}<option value="" ${!vald ? 'selected' : ''}>Hela familjen</option></select>`
     : `<input type="hidden" name="barn_${i}" value="${e(S.medlem.barn_id)}"><input disabled value="${e(barnNamn(S.medlem.barn_id))}">`;
+  const schemaDel = lek.length ? (arForalder() ? `<form class="kort" data-form="sparaschema">
+      <h2>Schema hittat: ${lek.length} lektioner</h2>
+      <label class="falt">Schemat gäller<select name="barn">${S.barn.map((b) => `<option value="${b.id}" ${res.schema_barn_id === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}</select></label>
+      ${[1, 2, 3, 4, 5].map((vd) => { const d = lek.filter((l) => l.veckodag === vd).sort((x, y) => x.start.localeCompare(y.start)); return d.length ? `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd])}</div><div class="lektioner">${d.map((l) => `<div class="lektion"><span class="tid">${e(l.start)}</span><span>${e(l.amne)} <span class="dampad">– ${e(l.slut)}</span></span></div>`).join('')}</div></div>` : ''; }).join('')}
+      <label class="falt rad" style="flex-direction:row;align-items:center;gap:10px;font-size:15px;color:var(--text)"><input type="checkbox" name="ersatt" checked style="width:22px;height:22px;accent-color:var(--accent)">Ersätt barnets nuvarande schema</label>
+      <p class="fel dold" data-fel></p>
+      <button class="knapp bred">Spara schemat</button></form>`
+    : '<div class="kort"><h2>Det här är ett schema</h2><p class="tom" style="margin:0">Be en förälder läsa in det, så hamnar lektionerna under Schema.</p></div>') : '';
   ruta.innerHTML = `<section class="stack" aria-live="polite">
-    <div class="kort"><h2>${lista.length ? `Hittade ${lista.length} ${lista.length === 1 ? 'förslag' : 'förslag'}` : 'Hittade inget'}</h2>
+    ${schemaDel}
+    ${lek.length && !lista.length ? '' : `<div class="kort"><h2>${lista.length ? `Hittade ${lista.length} förslag` : 'Hittade inga prov eller läxor'}</h2>
       ${res.sammanfattning ? `<p class="dampad" style="margin:0">${e(res.sammanfattning)}</p>` : ''}
-      ${lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>
+      ${lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>`}
     ${lista.length ? `<form class="stack" data-form="sparaforslag">
       ${lista.map((f, i) => `<fieldset class="kort" style="margin:0">
         <label class="rad" style="gap:10px;font-weight:700;cursor:pointer"><input type="checkbox" name="med_${i}" ${f.finns || f.sakerhet === 'lag' ? '' : 'checked'} style="width:22px;height:22px;accent-color:var(--accent)">
@@ -488,7 +499,7 @@ async function visaSchema() {
       <p class="fel dold" data-fel></p>
       <button class="knapp">Lägg till</button>
     </form>
-    <p class="tom" style="margin:0">Snart kan du i stället fotografera schemat eller klistra in en Skola24-länk, så läses det in automatiskt.</p></section>` : '';
+    <p class="tom" style="margin:0">Snabbare: <a href="#/lasin">läs in schemat</a> från en PDF eller ett foto, så fyller appen i lektionerna åt dig.</p></section>` : '';
   app.innerHTML = ram(`${topp('Schema', 'Veckans lektioner')}${barnChips()}<main class="stack" style="margin-top:12px">${kort || '<p class="tom">Inga barn än.</p>'}${form}</main>`, 'schema');
 }
 
@@ -727,6 +738,15 @@ document.addEventListener('submit', async (ev) => {
         const res = await data.lasIn(underlag);
         if (knapp) knapp.innerHTML = `${I.las} Läs in igen`;
         await visaForslag(res);
+        break;
+      }
+      case 'sparaschema': {
+        const barnId = v.barn;
+        if (v.ersatt) { const nu = (await data.listaLektioner()).filter((l) => l.barn_id === barnId); for (const l of nu) await data.taBortLektion(l.id); }
+        for (const l of S.lasLektioner) await data.sparaLektion({ barn_id: barnId, veckodag: l.veckodag, start: l.start, slut: l.slut, amne: l.amne });
+        toast(`Schemat för ${barnNamn(barnId)} är sparat`);
+        S.filter = arForalder() && S.barn.length > 1 ? barnId : S.filter;
+        location.hash = '#/schema';
         break;
       }
       case 'sparaforslag': {
