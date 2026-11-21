@@ -504,7 +504,7 @@ async function visaForslag(res) {
       <h2>Schema hittat: ${lek.length} lektioner</h2>
       <label class="falt">Schemat gäller<select name="barn">${S.barn.map((b) => `<option value="${b.id}" ${res.schema_barn_id === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}</select></label>
       ${[1, 2, 3, 4, 5].map((vd) => { const d = lek.filter((l) => l.veckodag === vd).sort((x, y) => x.start.localeCompare(y.start)); return d.length ? `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd])}</div><div class="lektioner">${d.map((l) => `<div class="lektion"><span class="tid">${e(l.start)}</span><span>${e(l.amne)} <span class="dampad">– ${e(l.slut)}</span></span></div>`).join('')}</div></div>` : ''; }).join('')}
-      <label class="falt rad" style="flex-direction:row;align-items:center;gap:10px;font-size:15px;color:var(--text)"><input type="checkbox" name="ersatt" checked style="width:22px;height:22px;accent-color:var(--accent)">Ersätt barnets nuvarande schema</label>
+      <p class="tom" style="margin:0">Lektionerna läggs till i schemat. Det som redan finns ligger kvar.</p>
       <p class="fel dold" data-fel></p>
       <button class="knapp bred">Spara schemat</button></form>`
     : '<div class="kort"><h2>Det här är ett schema</h2><p class="tom" style="margin:0">Be en förälder läsa in det, så hamnar lektionerna under Schema.</p></div>') : '';
@@ -512,8 +512,10 @@ async function visaForslag(res) {
     ${schemaDel}
     ${(lek.length || inn.length) && !lista.length ? '' : `<div class="kort"><h2>${lista.length ? `Hittade ${lista.length} förslag` : 'Hittade inga prov eller läxor'}</h2>
       ${res.sammanfattning ? `<p class="dampad" style="margin:0">${e(res.sammanfattning)}</p>` : ''}
-      ${lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>`}
+      ${lista.length > 3 ? '<p class="tom" style="margin:0">Allt nytt är förvalt. Öppna Granska och ändra om du vill välja bort något.</p>' : lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>`}
     ${lista.length || inn.length ? `<form class="stack" data-form="sparaforslag">
+      ${lista.length > 3 ? `<button class="knapp bred" data-antal>Lägg till ${lista.filter((f) => !f.finns && f.sakerhet !== 'lag').length} st</button>
+      <details class="kort granska" style="margin:0"><summary><b>Granska och ändra</b> <span class="dampad liten-text">${lista.length} st${lista.some((f) => f.finns) ? ` · ${lista.filter((f) => f.finns).length} finns redan` : ''}</span></summary><div class="stack" style="margin-top:12px">` : ''}
       ${lista.map((f, i) => `<fieldset class="kort" style="margin:0">
         <label class="rad" style="gap:10px;font-weight:700;cursor:pointer"><input type="checkbox" name="med_${i}" ${f.finns || f.sakerhet === 'lag' ? '' : 'checked'} style="width:22px;height:22px;accent-color:var(--accent)">
           <span>${e(TYPER[f.typ] || 'Övrigt')}</span>${f.typ === 'prov' ? '<span class="etikett">Prov</span>' : ''}
@@ -523,15 +525,19 @@ async function visaForslag(res) {
         <div class="tva"><label class="falt">Typ<select name="typ_${i}">${Object.entries(TYPER).filter(([k]) => arForalder() || k !== 'lov').map(([k, v]) => `<option value="${k}" ${f.typ === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label class="falt">Gäller${barnOpt(f.barn_id, i)}</label></div>
         ${f.beskrivning ? `<label class="falt">Beskrivning<textarea name="besk_${i}" style="min-height:70px">${e(f.beskrivning)}</textarea></label>` : ''}
         ${f.material?.length ? `<div class="liten-text dampad">Material som följer med: ${f.material.map((m) => e(m.titel)).join(', ')}</div>` : ''}
+        ${f.upprepa_veckor ? `<div class="liten-text dampad">Upprepas ${upprepText({ upprepa: 'vecka', upprepa_veckor: f.upprepa_veckor })}</div>` : ''}
       </fieldset>`).join('')}
+      ${lista.length > 3 ? '</div></details>' : ''}
       ${inn.length ? `<fieldset class="kort" style="margin:0"><h2>Vad lektionerna handlar om</h2><p class="tom" style="margin:0">Det här visas på lektionen i schemat den dagen.</p>
         ${inn.map((r, i) => `<label class="rad" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" name="inn_${i}" checked style="width:22px;height:22px;flex:none;accent-color:var(--accent)">
           <span><b>${e(r.amne)}</b> <span class="dampad liten-text">${e(storBokstav(VECKODAGAR[franIso(r.datum).getDay()]))} ${franIso(r.datum).getDate()}/${franIso(r.datum).getMonth() + 1}${r.barn_id ? ' · ' + e(barnNamn(r.barn_id)) : ''}</span><br>${e(r.innehall)}</span></label>`).join('')}</fieldset>` : ''}
       <p class="fel dold" data-fel></p>
-      <button class="knapp bred">Spara valda</button>
+      ${lista.length > 3 ? '' : '<button class="knapp bred">Spara valda</button>'}
     </form>` : ''}
   </section>`;
   ruta.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const fs_ = ruta.querySelector('form[data-form="sparaforslag"]'), antalKnapp = ruta.querySelector('[data-antal]');
+  if (fs_ && antalKnapp) fs_.addEventListener('change', () => { const n = fs_.querySelectorAll('input[name^="med_"]:checked').length; antalKnapp.textContent = n ? `Lägg till ${n} st` : 'Inget valt'; });
 }
 
 // ---------------------------------------------------------------- SCHEMA
@@ -844,7 +850,7 @@ document.addEventListener('submit', async (ev) => {
       case 'lasin': {
         const typ = v.typ;
         const underlag = { typ, barnId: v.barnId || (arForalder() ? null : S.medlem.barn_id) };
-        if (typ === 'lank') { if (!sakerUrl(v.url)) throw new Error('Skriv en hel webblänk som börjar med https://'); underlag.url = v.url; }
+        if (typ === 'lank') { const u = v.url.trim().replace(/^webcals?:\/\//i, 'https://'); if (!sakerUrl(u)) throw new Error('Skriv en hel webblänk som börjar med https://'); underlag.url = u; }
         if (typ === 'text') { if (v.text.trim().length < 5) throw new Error('Klistra in texten du vill läsa in.'); underlag.text = v.text; }
         if (typ === 'pdf') { const fil = f.pdf.files[0]; if (!fil) throw new Error('Välj en PDF-fil.'); if (fil.size > 10 * 1024 * 1024) throw new Error('PDF-filen är större än 10 MB.'); underlag.data = await tillBase64(fil); }
         if (typ === 'bild') { const fil = f.bild.files[0]; if (!fil) throw new Error('Välj en bild.'); underlag.data = await forminskaBild(fil); underlag.mediaType = 'image/jpeg'; }
@@ -856,9 +862,12 @@ document.addEventListener('submit', async (ev) => {
       }
       case 'sparaschema': {
         const barnId = v.barn;
-        if (v.ersatt) { const nu = (await data.listaLektioner()).filter((l) => l.barn_id === barnId); for (const l of nu) await data.taBortLektion(l.id); }
-        for (const l of S.lasLektioner) await data.sparaLektion({ barn_id: barnId, veckodag: l.veckodag, start: l.start, slut: l.slut, amne: l.amne });
-        toast(`Schemat för ${barnNamn(barnId)} är sparat`);
+        // Kompletterar bara: lektioner som redan finns (samma dag, tid och ämne) hoppas över.
+        const nu = (await data.listaLektioner()).filter((l) => l.barn_id === barnId);
+        const finns = (l) => nu.some((x) => x.veckodag === l.veckodag && kortTid(x.start) === l.start && x.amne.toLowerCase() === l.amne.toLowerCase());
+        const nya = S.lasLektioner.filter((l) => !finns(l));
+        for (const l of nya) await data.sparaLektion({ barn_id: barnId, veckodag: l.veckodag, start: l.start, slut: l.slut, amne: l.amne });
+        toast(nya.length ? `${nya.length} lektioner tillagda för ${barnNamn(barnId)}` : 'Lektionerna fanns redan i schemat');
         S.filter = arForalder() && S.barn.length > 1 ? barnId : S.filter;
         location.hash = '#/schema';
         break;
@@ -873,7 +882,8 @@ document.addEventListener('submit', async (ev) => {
           const h = await data.sparaHandelse({
             typ, barn_id: v[`barn_${i}`] || null, titel: (v[`titel_${i}`] || fs.titel).trim(), amne: fs.amne || '',
             beskrivning: (v[`besk_${i}`] ?? fs.beskrivning ?? '').trim(), datum: v[`datum_${i}`], tid: v[`tid_${i}`] || null,
-            slut_datum: typ === 'lov' ? fs.slut_datum : null, upprepa: 'ingen',
+            slut_datum: typ === 'lov' ? fs.slut_datum : null,
+            upprepa: fs.upprepa_veckor ? 'vecka' : 'ingen', upprepa_veckor: fs.upprepa_veckor || 1, upprepa_till: fs.upprepa_till || null,
           });
           for (const m of fs.material || []) {
             if (m.typ === 'lank' && sakerUrl(m.url)) await data.sparaMaterial({ handelse_id: h.id, typ: 'lank', titel: m.titel || 'Länk', url: m.url });

@@ -375,6 +375,10 @@ function demoLager() {
       await new Promise((ok) => setTimeout(ok, 1200));
       const d = (n) => isoDatum(laggTillDagar(new Date(), n));
       const b = u.barnId || (db.jag.roll === 'barn' ? db.jag.barn_id : 'b-alva');
+      if (u.typ === 'lank' && /\.ics|webcal|calendar/i.test(u.url || '')) {
+        const forslag = Array.from({ length: 20 }, (_, i) => ({ typ: 'traning', titel: i % 4 === 3 ? 'Match P14' : 'Handbollsträning P14', amne: '', datum: d(1 + i * 3), tid: '18:00', slut_datum: null, barn_id: b, beskrivning: 'Plats: Pitholmshallen', material: [], sakerhet: 'hog' }));
+        return { forslag, lektioner: [], lektionsinnehall: [], kalender: true, sammanfattning: `Kalendern har ${forslag.length} kommande aktiviteter.` };
+      }
       if (u.typ === 'pdf') return { sammanfattning: 'Exempel i demoläget: ett veckoschema.', forslag: [], schema_barn_id: b,
         lektioner: [1, 2, 3, 4, 5].flatMap((vd) => [['08:10', '09:00', 'Svenska'], ['09:15', '10:05', 'Matematik'], ['10:20', '11:10', vd % 2 ? 'Engelska' : 'NO'], ['12:30', '13:20', vd === 3 ? 'Idrott och hälsa' : 'SO']].map(([start, slut, amne]) => ({ veckodag: vd, start, slut, amne }))) };
       return {

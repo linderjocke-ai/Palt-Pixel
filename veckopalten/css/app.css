@@ -386,3 +386,8 @@ label.falt { display: flex; flex-direction: column; gap: 5px; font-size: 13px; f
 .matvecka { display: flex; flex-direction: column; gap: 4px; font-size: 13.5px; line-height: 1.35; padding: 8px 10px; border-radius: 10px; background: var(--chip-bg); }
 .matdag { display: flex; gap: 10px; }
 .matdag b { width: 30px; flex: none; }
+
+details.granska > summary { cursor: pointer; list-style: none; display: flex; gap: 8px; align-items: baseline; }
+details.granska > summary::-webkit-details-marker { display: none; }
+details.granska > summary::after { content: '▾'; margin-left: auto; }
+details.granska[open] > summary::after { content: '▴'; }

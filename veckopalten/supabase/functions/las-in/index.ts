@@ -115,13 +115,77 @@ function base64(bytes: Uint8Array): string {
   return btoa(s);
 }
 
+// Google Docs, Kalkylark, Presentationer och Drive-filer läses via deras export-adresser,
+// annars får man bara ett tomt skal av sidan.
+function googleExport(url: URL): URL {
+  if (!/(^|\.)google\.com$/.test(url.hostname)) return url;
+  const m = url.pathname.match(/^\/(document|spreadsheets|presentation)\/d\/([\w-]{20,})/);
+  if (m && url.hostname === "docs.google.com") {
+    if (m[1] === "document") return new URL(`https://docs.google.com/document/d/${m[2]}/export?format=txt`);
+    if (m[1] === "spreadsheets") { const gid = url.hash.match(/gid=(\d+)/)?.[1] ?? url.searchParams.get("gid"); return new URL(`https://docs.google.com/spreadsheets/d/${m[2]}/export?format=csv${gid ? "&gid=" + gid : ""}`); }
+    return new URL(`https://docs.google.com/presentation/d/${m[2]}/export/txt`);
+  }
+  const f = url.pathname.match(/^\/file\/d\/([\w-]{20,})/) ?? (url.pathname === "/open" ? [null, url.searchParams.get("id")] : null);
+  if (url.hostname === "drive.google.com" && f?.[1]) return new URL(`https://drive.google.com/uc?export=download&id=${f[1]}`);
+  return url;
+}
+
+// En kalenderhändelse från en .ics-fil eller kalenderprenumeration.
+type KalHandelse = { titel: string; datum: string; tid: string | null; plats: string; beskrivning: string; upprepa_veckor: number; upprepa_till: string | null };
+function lasIcs(text: string): KalHandelse[] {
+  const rader = text.replace(/\r\n?/g, "\n").replace(/\n[ \t]/g, "").split("\n");
+  const ut: KalHandelse[] = [];
+  const avesc = (v: string) => v.replace(/\\n/gi, "\n").replace(/\\([,;\\])/g, "$1").trim();
+  const sthlm = (d: Date) => {
+    const p = Object.fromEntries(new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Stockholm", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).formatToParts(d).map((x) => [x.type, x.value]));
+    return { datum: `${p.year}-${p.month}-${p.day}`, tid: `${p.hour}:${p.minute}` };
+  };
+  const tolka = (nyckel: string, v: string) => {
+    const m = v.match(/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})?(Z)?)?$/);
+    if (!m) return null;
+    if (!m[4]) return { datum: `${m[1]}-${m[2]}-${m[3]}`, tid: null };
+    if (m[7]) return sthlm(new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5])));
+    return { datum: `${m[1]}-${m[2]}-${m[3]}`, tid: `${m[4]}:${m[5]}` }; // lokal tid (TZID antas vara svensk)
+  };
+  let h: Record<string, string> | null = null;
+  for (const rad of rader) {
+    if (rad === "BEGIN:VEVENT") { h = {}; continue; }
+    if (rad === "END:VEVENT") {
+      if (h && h.DTSTART && h.STATUS !== "CANCELLED") {
+        const start = tolka("DTSTART", h.DTSTART);
+        if (start) {
+          const rr = h.RRULE || "";
+          const vecka = /FREQ=WEEKLY/.test(rr);
+          const intervall = Math.min(8, Math.max(1, Number(rr.match(/INTERVAL=(\d+)/)?.[1] ?? 1)));
+          const until = rr.match(/UNTIL=(\d{8}(?:T\d{6}Z?)?)/)?.[1];
+          ut.push({
+            titel: avesc(h.SUMMARY || "Aktivitet").slice(0, 120), datum: start.datum, tid: start.tid,
+            plats: avesc(h.LOCATION || ""), beskrivning: avesc(h.DESCRIPTION || "").slice(0, 1000),
+            upprepa_veckor: vecka ? intervall : 0, upprepa_till: vecka && until ? tolka("UNTIL", until)?.datum ?? null : null,
+          });
+        }
+      }
+      h = null; continue;
+    }
+    if (!h) continue;
+    const i = rad.indexOf(":"); if (i < 0) continue;
+    const nyckel = rad.slice(0, i).split(";")[0].toUpperCase();
+    if (!(nyckel in h)) h[nyckel] = rad.slice(i + 1);
+  }
+  return ut;
+}
+
 // Hämtar en länk på serversidan (bara http/https, ingen intern adress, max 10 MB).
 async function hamtaLank(adress: string) {
   let url: URL;
-  try { url = new URL(adress); } catch { throw new Error("Länken går inte att läsa."); }
+  try { url = new URL(adress.trim().replace(/^webcals?:\/\//i, "https://")); } catch { throw new Error("Länken går inte att läsa."); }
+  url = googleExport(url);
   if (!["http:", "https:"].includes(url.protocol)) throw new Error("Bara webblänkar (https://) går att läsa in.");
   if (/^(localhost|127\.|10\.|192\.168\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|\[?::1|0\.)/i.test(url.hostname)) throw new Error("Den adressen går inte att läsa.");
   const r = await fetch(url, { redirect: "follow", signal: AbortSignal.timeout(15_000), headers: { "User-Agent": "Veckopalten/1.0 (+https://paltpixel.se/veckopalten/)" } });
+  const arGoogle = /google\.com$/.test(url.hostname);
+  if (arGoogle && (/accounts\.google\.com|ServiceLogin/.test(r.url) || r.status === 401 || r.status === 403 || r.status === 404))
+    throw new Error("Google-dokumentet är inte delat. Öppna det, tryck Dela och välj Allmän åtkomst: Alla med länken. Försök sedan igen.");
   if (!r.ok) throw new Error(`Sidan svarade med fel ${r.status}. Är den inloggningsskyddad? Kopiera då texten i stället.`);
   const typ = (r.headers.get("content-type") || "").toLowerCase();
   const bytes = new Uint8Array(await r.arrayBuffer());
@@ -129,6 +193,8 @@ async function hamtaLank(adress: string) {
   if (typ.includes("pdf")) return { pdf: base64(bytes) };
   if (BILDTYPER.some((t) => typ.includes(t))) return { bild: base64(bytes), mediaType: BILDTYPER.find((t) => typ.includes(t))! };
   const text = new TextDecoder().decode(bytes);
+  if (typ.includes("calendar") || /^\s*BEGIN:VCALENDAR/.test(text)) return { kalender: lasIcs(text) };
+  if (arGoogle && typ.includes("html") && /accounts\.google\.com/.test(text.slice(0, 5000))) throw new Error("Google-dokumentet är inte delat. Öppna det, tryck Dela och välj Allmän åtkomst: Alla med länken. Försök sedan igen.");
   return { text: (typ.includes("html") ? htmlTillText(text) : text).slice(0, MAX_TEXT) };
 }
 
@@ -156,12 +222,30 @@ Deno.serve(async (req) => {
 
     // Underlaget.
     const in_ = await req.json();
-    let underlag: { text?: string; pdf?: string; bild?: string; mediaType?: string } = {};
+    let underlag: { text?: string; pdf?: string; bild?: string; mediaType?: string; kalender?: KalHandelse[] } = {};
     if (in_.typ === "lank") underlag = await hamtaLank(String(in_.url || ""));
+    else if (in_.typ === "text" && /^\s*BEGIN:VCALENDAR/.test(String(in_.text || ""))) underlag = { kalender: lasIcs(String(in_.text)) };
     else if (in_.typ === "text") underlag = { text: String(in_.text || "").slice(0, MAX_TEXT) };
     else if (in_.typ === "pdf") underlag = { pdf: String(in_.data || "") };
     else if (in_.typ === "bild") underlag = { bild: String(in_.data || ""), mediaType: BILDTYPER.includes(in_.mediaType) ? in_.mediaType : "image/jpeg" };
     else return fel(400, "Okänd typ av underlag.");
+    // Kalender (.ics / prenumeration): läses direkt, utan AI. Alla kommande aktiviteter blir förslag.
+    if (underlag.kalender) {
+      const valt = (barn ?? []).find((b) => b.id === in_.barnId);
+      const barnId = medlem.roll === "barn" ? medlem.barn_id : (valt?.id ?? null);
+      const idagIso = new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Stockholm" });
+      const gräns = new Date(Date.now() + 200 * 864e5).toLocaleDateString("sv-SE", { timeZone: "Europe/Stockholm" });
+      const kommande = underlag.kalender
+        .filter((k) => (k.upprepa_veckor ? (!k.upprepa_till || k.upprepa_till >= idagIso) : k.datum >= idagIso) && k.datum <= gräns)
+        .sort((a, b) => (a.datum + (a.tid ?? "")).localeCompare(b.datum + (b.tid ?? ""))).slice(0, 150);
+      const forslag = kommande.map((k) => ({
+        typ: "traning", titel: k.titel, amne: "", datum: k.datum, tid: k.tid, slut_datum: null, barn_id: barnId,
+        beskrivning: [k.plats && `Plats: ${k.plats}`, k.beskrivning].filter(Boolean).join("\n").slice(0, 4000),
+        material: [], sakerhet: "hog", upprepa_veckor: k.upprepa_veckor, upprepa_till: k.upprepa_till,
+      }));
+      return svar(200, { forslag, lektioner: [], lektionsinnehall: [], schema_barn_id: null, kalender: true,
+        sammanfattning: forslag.length ? `Kalendern har ${forslag.length} kommande aktiviteter.` : "Kalendern har inga kommande aktiviteter." });
+    }
     if (underlag.text !== undefined && underlag.text.trim().length < 5) return fel(400, "Det finns ingen text att läsa.");
     if ((underlag.pdf?.length ?? 0) > 14_000_000 || (underlag.bild?.length ?? 0) > 7_000_000) return fel(400, "Filen är för stor.");
 
@@ -176,7 +260,8 @@ ${barnLista}
 ${valtBarn ? `Underlaget gäller ${valtBarn.namn}. Sätt barn till "${valtBarn.namn}" om inget annat framgår tydligt.` : "Avgör vilket barn det gäller utifrån namn, klass eller årskurs. Är det oklart, lämna barn tomt."}
 Hitta alla prov, läxor, träningar, lov och andra händelser med datum. Ta inte med sådant som redan har varit. Hitta inte på något: saknas datum, gissa bara om det tydligt framgår av sammanhanget, och sätt då sakerhet till lag.
 Lägg länkar och glosor/faktatexter som hör till en händelse under dess material.
-Om underlaget är ett veckoschema med lektioner (t.ex. från Skola24): fyll i lektioner med alla lektioner måndag–fredag och lägg dem inte som händelser. Raster och lunch tas inte med. Prov eller annat som står i schemat läggs ändå som händelser.
+Fyll bara i lektioner om underlaget är ett riktigt lektionsschema (t.ex. från Skola24 eller en schemabild) med ämnen och tider för hela veckan. Ett veckobrev eller en planering är inget schema: aktiviteter där som "Tis: Mattestuga 14:30–15:00" eller "Fre: Schack" blir händelser (typ ovrigt) med datum den veckan, och det som sägs om en vanlig lektion ("Ons: Idrott – bollsport") läggs under lektionsinnehall. Lägg aldrig sådant under lektioner.
+Om underlaget är ett lektionsschema: fyll i lektioner med alla lektioner måndag–fredag och lägg dem inte som händelser. Veckodag 1 är måndag, 2 tisdag osv. Kontrollera att varje lektion hamnar på rätt dag. Raster och lunch tas inte med. Prov eller annat som står i schemat läggs ändå som händelser.
 Står det vad en lektion ska handla om en viss dag (t.ex. idrott: lekar, slöjd: ta med förkläde), lägg det under lektionsinnehall.
 Svara genom att anropa verktyget spara_forslag.`;
 
