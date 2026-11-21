@@ -92,10 +92,22 @@ const VERKTYG = {
           required: ["datum", "amne", "innehall", "barn"],
         },
       },
+      sort: { type: "string", enum: ["handelser", "schema", "material"], description: "Vad underlaget främst är: handelser = veckobrev, planering eller meddelande med prov/läxor/aktiviteter; schema = lektionsschema; material = instuderingsmaterial (glosor, faktatext, övningsuppgifter, instuderingsfrågor, länk till övning) utan egna datum." },
+      material_info: {
+        type: "object",
+        description: "Fylls i när sort är material, annars tomma strängar.",
+        properties: {
+          titel: { type: "string", description: "Kort rubrik för materialet, t.ex. 'Glosor kapitel 4' eller 'Instuderingsfrågor vikingatiden'." },
+          amne: { type: "string", description: "Skolämnet, t.ex. 'Spanska'." },
+          datum: { type: "string", description: "YYYY-MM-DD om det står när provet/läxan är, annars tom sträng." },
+          prov: { type: "boolean", description: "Sant om materialet är till ett prov, falskt om det är en läxa eller oklart." },
+        },
+        required: ["titel", "amne", "datum", "prov"],
+      },
       schema_barn: { type: "string", description: "Namnet på barnet schemat gäller, exakt som i listan över barn, eller tom sträng." },
       sammanfattning: { type: "string", description: "En mening på svenska om vad underlaget innehöll." },
     },
-    required: ["forslag", "lektioner", "lektionsinnehall", "schema_barn", "sammanfattning"],
+    required: ["sort", "forslag", "lektioner", "lektionsinnehall", "material_info", "schema_barn", "sammanfattning"],
   },
 };
 
@@ -131,7 +143,7 @@ function googleExport(url: URL): URL {
 }
 
 // En kalenderhändelse från en .ics-fil eller kalenderprenumeration.
-type KalHandelse = { titel: string; datum: string; tid: string | null; plats: string; beskrivning: string; upprepa_veckor: number; upprepa_till: string | null };
+type KalHandelse = { uid: string; titel: string; datum: string; tid: string | null; plats: string; beskrivning: string; upprepa_veckor: number; upprepa_till: string | null };
 function lasIcs(text: string): KalHandelse[] {
   const rader = text.replace(/\r\n?/g, "\n").replace(/\n[ \t]/g, "").split("\n");
   const ut: KalHandelse[] = [];
@@ -159,6 +171,7 @@ function lasIcs(text: string): KalHandelse[] {
           const intervall = Math.min(8, Math.max(1, Number(rr.match(/INTERVAL=(\d+)/)?.[1] ?? 1)));
           const until = rr.match(/UNTIL=(\d{8}(?:T\d{6}Z?)?)/)?.[1];
           ut.push({
+            uid: (h.UID || `${h.DTSTART}-${h.SUMMARY || ""}`).slice(0, 300),
             titel: avesc(h.SUMMARY || "Aktivitet").slice(0, 120), datum: start.datum, tid: start.tid,
             plats: avesc(h.LOCATION || ""), beskrivning: avesc(h.DESCRIPTION || "").slice(0, 1000),
             upprepa_veckor: vecka ? intervall : 0, upprepa_till: vecka && until ? tolka("UNTIL", until)?.datum ?? null : null,
@@ -239,11 +252,11 @@ Deno.serve(async (req) => {
         .filter((k) => (k.upprepa_veckor ? (!k.upprepa_till || k.upprepa_till >= idagIso) : k.datum >= idagIso) && k.datum <= gräns)
         .sort((a, b) => (a.datum + (a.tid ?? "")).localeCompare(b.datum + (b.tid ?? ""))).slice(0, 150);
       const forslag = kommande.map((k) => ({
-        typ: "traning", titel: k.titel, amne: "", datum: k.datum, tid: k.tid, slut_datum: null, barn_id: barnId,
+        typ: "traning", uid: k.uid, titel: k.titel, amne: "", datum: k.datum, tid: k.tid, slut_datum: null, barn_id: barnId,
         beskrivning: [k.plats && `Plats: ${k.plats}`, k.beskrivning].filter(Boolean).join("\n").slice(0, 4000),
         material: [], sakerhet: "hog", upprepa_veckor: k.upprepa_veckor, upprepa_till: k.upprepa_till,
       }));
-      return svar(200, { forslag, lektioner: [], lektionsinnehall: [], schema_barn_id: null, kalender: true,
+      return svar(200, { sort: "kalender", forslag, lektioner: [], lektionsinnehall: [], schema_barn_id: barnId, kalender: true,
         sammanfattning: forslag.length ? `Kalendern har ${forslag.length} kommande aktiviteter.` : "Kalendern har inga kommande aktiviteter." });
     }
     if (underlag.text !== undefined && underlag.text.trim().length < 5) return fel(400, "Det finns ingen text att läsa.");
@@ -263,6 +276,7 @@ Lägg länkar och glosor/faktatexter som hör till en händelse under dess mater
 Fyll bara i lektioner om underlaget är ett riktigt lektionsschema (t.ex. från Skola24 eller en schemabild) med ämnen och tider för hela veckan. Ett veckobrev eller en planering är inget schema: aktiviteter där som "Tis: Mattestuga 14:30–15:00" eller "Fre: Schack" blir händelser (typ ovrigt) med datum den veckan, och det som sägs om en vanlig lektion ("Ons: Idrott – bollsport") läggs under lektionsinnehall. Lägg aldrig sådant under lektioner.
 Om underlaget är ett lektionsschema: fyll i lektioner med alla lektioner måndag–fredag och lägg dem inte som händelser. Veckodag 1 är måndag, 2 tisdag osv. Kontrollera att varje lektion hamnar på rätt dag. Raster och lunch tas inte med. Prov eller annat som står i schemat läggs ändå som händelser.
 Står det vad en lektion ska handla om en viss dag (t.ex. idrott: lekar, slöjd: ta med förkläde), lägg det under lektionsinnehall.
+Sätt sort efter vad underlaget främst är. Är det instuderingsmaterial (glosor, en faktatext, övningsuppgifter, instuderingsfrågor, en övningssida) utan egna händelser: sort material, fyll i material_info och lämna forslag tom.
 Svara genom att anropa verktyget spara_forslag.`;
 
     const innehall: unknown[] = [];
@@ -318,7 +332,10 @@ Svara genom att anropa verktyget spara_forslag.`;
         datum: l.datum, amne: String(l.amne).trim().slice(0, 60), innehall: String(l.innehall).trim().slice(0, 500),
         barn_id: medlem.roll === "barn" ? medlem.barn_id : (namnTillId.get(String(l.barn || "").toLowerCase()) ?? valtBarn?.id ?? null),
       })).slice(0, 60);
-    return svar(200, { forslag, lektioner, lektionsinnehall: innehall_, schema_barn_id: schemaBarn, sammanfattning: resultat.sammanfattning ?? "" });
+    const mi = resultat.material_info ?? {};
+    const material_info = { titel: String(mi.titel || "").slice(0, 160), amne: String(mi.amne || "").slice(0, 60), datum: datumOk(String(mi.datum)) ? mi.datum : null, prov: !!mi.prov };
+    const sort = ["handelser", "schema", "material"].includes(resultat.sort) ? resultat.sort : (lektioner.length ? "schema" : "handelser");
+    return svar(200, { sort, forslag, lektioner, lektionsinnehall: innehall_, material_info, schema_barn_id: schemaBarn, sammanfattning: resultat.sammanfattning ?? "" });
   } catch (e) {
     console.error(e);
     return fel(400, e instanceof Error ? e.message : "Något gick fel.");

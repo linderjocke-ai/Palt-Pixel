@@ -95,6 +95,20 @@ create table if not exists material (
 alter table handelser add column if not exists upprepa_veckor smallint not null default 1 check (upprepa_veckor between 1 and 8);
 alter table material add column if not exists forekomst date;   -- vilket tillfälle av en upprepad händelse
 
+-- Kalenderprenumerationer (t.ex. lagets träningar). Appen hämtar dem igen automatiskt.
+create table if not exists prenumerationer (
+  id uuid primary key default gen_random_uuid(),
+  familj_id uuid not null references familjer(id) on delete cascade,
+  barn_id uuid references barn(id) on delete cascade,
+  namn text not null check (char_length(namn) between 1 and 80),
+  url text not null check (char_length(url) <= 2000),
+  synkad_at timestamptz,
+  skapad_at timestamptz not null default now()
+);
+alter table handelser add column if not exists prenumeration_id uuid references prenumerationer(id) on delete cascade;
+alter table handelser add column if not exists extern_uid text;
+create index if not exists handelser_prenumeration on handelser (prenumeration_id);
+
 create table if not exists resultat (
   handelse_id uuid primary key references handelser(id) on delete cascade,
   familj_id uuid not null references familjer(id) on delete cascade,
@@ -269,6 +283,15 @@ drop policy if exists "andra lektioner" on lektioner;
 create policy "andra lektioner" on lektioner for update using (ar_foralder(familj_id));
 drop policy if exists "ta bort lektioner" on lektioner;
 create policy "ta bort lektioner" on lektioner for delete using (ar_foralder(familj_id));
+alter table prenumerationer enable row level security;
+drop policy if exists "se prenumerationer" on prenumerationer;
+create policy "se prenumerationer" on prenumerationer for select using (far_se(familj_id, barn_id));
+drop policy if exists "skapa prenumerationer" on prenumerationer;
+create policy "skapa prenumerationer" on prenumerationer for insert with check (ar_foralder(familj_id));
+drop policy if exists "andra prenumerationer" on prenumerationer;
+create policy "andra prenumerationer" on prenumerationer for update using (ar_foralder(familj_id)) with check (ar_foralder(familj_id));
+drop policy if exists "ta bort prenumerationer" on prenumerationer;
+create policy "ta bort prenumerationer" on prenumerationer for delete using (ar_foralder(familj_id));
 drop policy if exists "se lektionsinnehall" on lektionsinnehall;
 create policy "se lektionsinnehall" on lektionsinnehall for select using (far_se(familj_id, barn_id));
 drop policy if exists "skapa lektionsinnehall" on lektionsinnehall;
@@ -411,7 +434,7 @@ grant execute on function familjekoder(uuid) to authenticated;
 grant execute on function barn_for_kod(text) to anon, authenticated;
 
 -- Inloggade användare får använda tabellerna; radsäkerheten avgör vilka rader.
-grant select, insert, update, delete on barn, medlemmar, handelser, material, resultat, lektioner, lektionsinnehall to authenticated;
+grant select, insert, update, delete on barn, medlemmar, handelser, material, resultat, lektioner, lektionsinnehall, prenumerationer to authenticated;
 grant update (namn) on familjer to authenticated;
 
 -- Koderna i familjer ska inte kunna läsas direkt, bara via familjekoder().

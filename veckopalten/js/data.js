@@ -175,12 +175,19 @@ function supabaseLager() {
     },
     async sparaHandelse(h) {
       const s = await klient();
-      const rad = { barn_id: h.barn_id || null, typ: h.typ, titel: h.titel, amne: h.amne || null, beskrivning: h.beskrivning || null, datum: h.datum, tid: h.tid || null, slut_datum: h.slut_datum || null, upprepa: h.upprepa || 'ingen', upprepa_veckor: h.upprepa_veckor || 1, upprepa_till: h.upprepa_till || null };
+      const rad = { barn_id: h.barn_id || null, typ: h.typ, titel: h.titel, amne: h.amne || null, beskrivning: h.beskrivning || null, datum: h.datum, tid: h.tid || null, slut_datum: h.slut_datum || null, upprepa: h.upprepa || 'ingen', upprepa_veckor: h.upprepa_veckor || 1, upprepa_till: h.upprepa_till || null,
+        ...(h.prenumeration_id !== undefined ? { prenumeration_id: h.prenumeration_id || null, extern_uid: h.extern_uid || null } : {}) };
       const { data: { user } } = await s.auth.getUser();
       const q = h.id ? s.from('handelser').update(rad).eq('id', h.id).select().single() : s.from('handelser').insert({ ...rad, familj_id: medlem.familj_id, skapad_av: user.id }).select().single();
       const { data, error } = await q; fel(error); return data;
     },
     async taBortHandelse(id) { const s = await klient(); const { error } = await s.from('handelser').delete().eq('id', id); fel(error); },
+    // Kalenderprenumerationer
+    async listaPren() { const s = await klient(); const { data, error } = await s.from('prenumerationer').select('*').order('skapad_at'); fel(error); return data; },
+    async sparaPren(p) { const s = await klient(); const { data, error } = await s.from('prenumerationer').insert({ familj_id: medlem.familj_id, barn_id: p.barn_id || null, namn: p.namn, url: p.url }).select().single(); fel(error); return data; },
+    async taBortPren(id) { const s = await klient(); const { error } = await s.from('prenumerationer').delete().eq('id', id); fel(error); },
+    async sattSynkad(id) { const s = await klient(); await s.from('prenumerationer').update({ synkad_at: new Date().toISOString() }).eq('id', id); },
+    async handelserForPren(id) { const s = await klient(); const { data, error } = await s.from('handelser').select('*').eq('prenumeration_id', id); fel(error); return data; },
     async sparaMaterial(m, fil) {
       const s = await klient();
       const { data: { user } } = await s.auth.getUser();
@@ -360,6 +367,11 @@ function demoLager() {
       db.resultat = db.resultat.filter((x) => x.handelse_id !== r.handelse_id); db.resultat.push(r); spara();
     },
     async listaLektioner() { return db.lektioner.filter((l) => synligt(l.barn_id)); },
+    async listaPren() { db.pren ||= []; return db.pren.filter((p) => synligt(p.barn_id)); },
+    async sparaPren(p) { kraverForalder(); db.pren ||= []; const ny = { ...p, id: id(), skapad_at: new Date().toISOString() }; db.pren.push(ny); spara(); return ny; },
+    async taBortPren(pid) { kraverForalder(); db.pren = (db.pren || []).filter((p) => p.id !== pid); db.handelser = db.handelser.filter((h) => h.prenumeration_id !== pid); spara(); },
+    async sattSynkad(pid) { const p = (db.pren || []).find((x) => x.id === pid); if (p) { p.synkad_at = new Date().toISOString(); spara(); } },
+    async handelserForPren(pid) { return db.handelser.filter((h) => h.prenumeration_id === pid); },
     async listaInnehall(fran, till) { db.innehall ||= []; return db.innehall.filter((r) => synligt(r.barn_id) && r.datum >= fran && r.datum <= till); },
     async sparaInnehall(rader) { db.innehall ||= []; for (const r of rader) { kanSkriva(r.barn_id); db.innehall.push({ ...r, id: id() }); } spara(); },
     async sattMatsedel(bid, m) { kraverForalder(); Object.assign(db.barn.find((x) => x.id === bid), { kommun: m.kommun || '', skola: m.skola || '', mateo_enhet: m.mateo_enhet || null }); spara(); },
@@ -376,12 +388,14 @@ function demoLager() {
       const d = (n) => isoDatum(laggTillDagar(new Date(), n));
       const b = u.barnId || (db.jag.roll === 'barn' ? db.jag.barn_id : 'b-alva');
       if (u.typ === 'lank' && /\.ics|webcal|calendar/i.test(u.url || '')) {
-        const forslag = Array.from({ length: 20 }, (_, i) => ({ typ: 'traning', titel: i % 4 === 3 ? 'Match P14' : 'Handbollsträning P14', amne: '', datum: d(1 + i * 3), tid: '18:00', slut_datum: null, barn_id: b, beskrivning: 'Plats: Pitholmshallen', material: [], sakerhet: 'hog' }));
-        return { forslag, lektioner: [], lektionsinnehall: [], kalender: true, sammanfattning: `Kalendern har ${forslag.length} kommande aktiviteter.` };
+        const forslag = Array.from({ length: 20 }, (_, i) => ({ typ: 'traning', uid: 'demo-' + i, titel: i % 4 === 3 ? 'Match P14' : 'Handbollsträning P14', amne: '', datum: d(1 + i * 3), tid: '18:00', slut_datum: null, barn_id: b, beskrivning: 'Plats: Pitholmshallen', material: [], sakerhet: 'hog' }));
+        return { sort: 'kalender', schema_barn_id: u.barnId || b, forslag, lektioner: [], lektionsinnehall: [], kalender: true, sammanfattning: `Kalendern har ${forslag.length} kommande aktiviteter.` };
       }
-      if (u.typ === 'pdf') return { sammanfattning: 'Exempel i demoläget: ett veckoschema.', forslag: [], schema_barn_id: b,
+      if (u.typ === 'bild' || (u.typ === 'lank' && /quizlet|glosor/i.test(u.url || ''))) return { sort: 'material', forslag: [], lektioner: [], lektionsinnehall: [], schema_barn_id: b,
+        material_info: { titel: 'Glosor kapitel 4', amne: 'Engelska', datum: null, prov: true }, sammanfattning: 'Exempel i demoläget: en glosövning.' };
+      if (u.typ === 'pdf') return { sort: 'schema', sammanfattning: 'Exempel i demoläget: ett veckoschema.', forslag: [], schema_barn_id: b,
         lektioner: [1, 2, 3, 4, 5].flatMap((vd) => [['08:10', '09:00', 'Svenska'], ['09:15', '10:05', 'Matematik'], ['10:20', '11:10', vd % 2 ? 'Engelska' : 'NO'], ['12:30', '13:20', vd === 3 ? 'Idrott och hälsa' : 'SO']].map(([start, slut, amne]) => ({ veckodag: vd, start, slut, amne }))) };
-      return {
+      return { sort: 'handelser',
         sammanfattning: 'Exempel i demoläget: veckobrev med ett prov, en läxa och ett lov.',
         forslag: [
           { typ: 'prov', titel: 'Engelska: oregelbundna verb', amne: 'Engelska', datum: d(6), tid: '09:20', slut_datum: null, barn_id: b, beskrivning: 'Verben på sidan 34–35 i textboken.', material: [{ typ: 'lank', titel: 'Öva verben', url: 'https://example.com/verb', innehall: '' }], sakerhet: 'hog' },

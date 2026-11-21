@@ -391,3 +391,7 @@ details.granska > summary { cursor: pointer; list-style: none; display: flex; ga
 details.granska > summary::-webkit-details-marker { display: none; }
 details.granska > summary::after { content: '▾'; margin-left: auto; }
 details.granska[open] > summary::after { content: '▴'; }
+
+.osynlig { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }
+.filval { gap: 8px; max-width: 100%; overflow: hidden; }
+.filval span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

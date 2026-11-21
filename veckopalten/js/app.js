@@ -116,13 +116,14 @@ function barnChips() {
 async function route() {
   const [vag, arg, arg2] = location.hash.replace(/^#\/?/, '').split('/');
   window.scrollTo(0, 0);
+  if (!S.synkStartad && S.medlem && arForalder()) { S.synkStartad = true; setTimeout(() => autoSynka().catch(() => {}), 1500); }
   try {
     if (vag === 'kalender') return await visaKalender();
     if (vag === 'handelse') return await visaHandelse(arg, arg2);
     if (vag === 'ny') return await visaHandelseForm(null, new URLSearchParams(location.hash.split('?')[1] || ''));
     if (vag === 'andra') return await visaHandelseForm(arg);
     if (vag === 'material') return await visaMaterialForm(arg, arg2);
-    if (vag === 'lasin') return visaLasIn();
+    if (vag === 'lasin' || vag === 'lagg') return visaLasIn();
     if (vag === 'schema') return await visaSchema();
     if (vag === 'familj') return await visaFamilj();
     return await visaIdag();
@@ -316,6 +317,7 @@ function visaKalFilter() {
     <h3>Typ</h3>${typChips().replace('class="chips"', 'class="chips wrap"')}
     <button class="knapp bred" data-g="stang">Klar</button></div>`;
   document.body.appendChild(s);
+  if (material) valjHandelseForMaterial(s.querySelector('.ark'));
   s.addEventListener('click', (ev) => { if (ev.target === s) s.remove(); });
 }
 function typChips() {
@@ -367,6 +369,7 @@ async function visaHandelse(id, valdDag) {
         <div class="rad">${h.typ === 'prov' ? '<span class="etikett">Prov</span>' : `<span class="chip" style="height:28px;font-size:12px">${TYPER[h.typ]}</span>`}<span class="dampad liten-text rad" style="gap:6px"><span class="prick liten" style="background:${barnFarg(h.barn_id)}"></span>${e(barnNamn(h.barn_id))}${h.amne ? ' · ' + e(h.amne) : ''}</span></div>
         <h1 style="font-size:27px;line-height:1.15">${e(h.titel)}</h1>
         <div style="font-weight:700">${datumText}</div>${upprepRad}
+        ${h.prenumeration_id ? '<div class="dampad liten-text">Från en kalender som uppdateras automatiskt. Ändrar du tid eller rubrik kan den skrivas över.</div>' : ''}
         ${h.beskrivning ? `<p style="margin:0;line-height:1.5;white-space:pre-wrap" class="dampad">${e(h.beskrivning)}</p>` : ''}
       </div>
       ${h.typ !== 'lov' ? `<section class="kort"><div class="kort-huvud"><h2>Instuderingsmaterial${h.material?.length ? ` <span class="dampad" style="font-weight:600">(${h.material.length})</span>` : ''}</h2>${kanAndra ? `<a class="chip" href="#/material/${h.id}${upprepad ? '/' + tillfalle : ''}">+ Lägg till</a>` : ''}</div>
@@ -438,33 +441,216 @@ async function visaMaterialForm(handelseId, dag) {
   form.addEventListener('change', () => { const t = form.typ.value; form.querySelectorAll('[data-visa]').forEach((el) => el.classList.toggle('dold', el.dataset.visa !== t)); });
 }
 
-// ---------------------------------------------------------------- LÄS IN (AI)
+// ---------------------------------------------------------------- LÄGG TILL
+// En enda väg in: klistra in en länk eller text, eller välj en fil. Appen avgör själv vad det är.
 function visaLasIn() {
-  S.lasForslag = null;
+  S.lasForslag = null; S.lasRes = null; S.lasUnderlag = null;
   const barnVal = arForalder() && S.barn.length
     ? `<label class="falt">Gäller<select name="barnId"><option value="">Låt appen avgöra</option>${S.barn.map((b) => `<option value="${b.id}" ${S.filter === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}</select></label>` : '';
   app.innerHTML = ram(`
     <header class="topp"><div class="topprad"><a class="rundknapp" href="javascript:history.back()" aria-label="Tillbaka">${I.vanster}</a></div>
-      <div><div class="datumrad">Appen letar fram prov, läxor och lov. Du granskar innan något sparas.</div><h1>Läs in</h1></div></header>
+      <div><div class="datumrad">Veckobrev, schema, läxor, material eller lagets kalender – appen ser själv vad det är.</div><h1>Lägg till</h1></div></header>
     <main class="stack">
       <form class="kort" data-form="lasin">
-        <div class="chips wrap" role="radiogroup" aria-label="Vad vill du läsa in?">
-          ${[['lank', 'Länk'], ['pdf', 'PDF'], ['bild', 'Foto eller bild'], ['text', 'Text']].map(([k, v], i) => `<label class="chip" style="cursor:pointer"><input type="radio" name="typ" value="${k}" ${i === 0 ? 'checked' : ''} style="accent-color:var(--accent)">${v}</label>`).join('')}
-        </div>
-        <label class="falt" data-visa="lank">Webblänk till veckobrev, planering eller liknande<input name="url" type="url" inputmode="url" placeholder="https://…"></label>
-        <label class="falt dold" data-visa="pdf">PDF-fil (högst 10 MB)<input name="pdf" type="file" accept="application/pdf,.pdf"></label>
-        <label class="falt dold" data-visa="bild">Foto av tavlan, ett papper eller en skärmbild<input name="bild" type="file" accept="image/*"></label>
-        <label class="falt dold" data-visa="text">Klistra in text, till exempel ett mejl eller ett meddelande från skolan<textarea name="text" maxlength="60000" style="min-height:160px"></textarea></label>
+        <label class="falt">Länk eller text<textarea name="inmatning" maxlength="60000" placeholder="Klistra in en länk (Google Docs, webbsida, kalender) eller text från skolan" style="min-height:110px"></textarea></label>
+        <div class="rad" style="gap:8px"><label class="chip filval" style="cursor:pointer;position:relative">${I.fil}<span data-filnamn>Välj fil eller foto</span><input name="fil" type="file" accept="application/pdf,.pdf,image/*" class="osynlig"></label>
+          <button type="button" class="litenx dold" data-g="rensafil" aria-label="Ta bort filen">✕</button></div>
         ${barnVal}
-        <p class="tom" style="margin:0">Word-filer går inte att läsa in än. Spara som PDF eller kopiera texten.</p>
         <p class="fel dold" data-fel></p>
         <button class="knapp bred">${I.las} Läs in</button>
       </form>
       <div id="lasresultat"></div>
+      <p class="tom" style="text-align:center;margin:0">Hellre skriva själv? <a href="#/ny">Prov eller läxa</a> · <button type="button" class="textknapp" data-g="materialark">Material till en läxa</button></p>
+      <section id="kalendrar"></section>
     </main>`, '');
   const form = $('form[data-form="lasin"]');
-  form.addEventListener('change', () => { const t = form.typ.value; form.querySelectorAll('[data-visa]').forEach((el) => el.classList.toggle('dold', el.dataset.visa !== t)); });
+  form.fil.addEventListener('change', () => {
+    const fil = form.fil.files[0];
+    form.querySelector('[data-filnamn]').textContent = fil ? fil.name : 'Välj fil eller foto';
+    form.querySelector('[data-g="rensafil"]').classList.toggle('dold', !fil);
+  });
+  visaKalendrar();
 }
+
+// Familjens kalenderprenumerationer.
+async function visaKalendrar() {
+  const ruta = $('#kalendrar'); if (!ruta) return;
+  const lista = await data.listaPren().catch(() => []);
+  if (!lista.length) { ruta.innerHTML = ''; return; }
+  ruta.innerHTML = `<div class="kort" style="gap:8px"><h2>Kalendrar som hämtas automatiskt</h2>
+    ${lista.map((p) => `<div class="rad" style="gap:10px;align-items:center"><span class="prick" style="background:${barnFarg(p.barn_id)};width:10px;height:10px;flex:none"></span>
+      <span style="flex:1;min-width:0"><b>${e(p.namn)}</b><br><span class="dampad liten-text">${p.barn_id ? e(barnNamn(p.barn_id)) : 'Hela familjen'}${p.synkad_at ? ` · uppdaterad ${new Date(p.synkad_at).toLocaleString('sv-SE', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}` : ''}</span></span>
+      ${arForalder() ? `<button class="chip" style="height:32px" data-g="synkapren" data-id="${p.id}">Uppdatera</button><button class="litenx" data-g="tabortpren" data-id="${p.id}" aria-label="Ta bort ${e(p.namn)}">✕</button>` : ''}</div>`).join('')}</div>`;
+  S.prenLista = lista;
+}
+
+// Lägger in eller uppdaterar aktiviteterna från en kalender. Ändrade tider uppdateras, inställda tas bort.
+async function synkaPren(p, forslag) {
+  const idag = isoDatum(new Date());
+  const finns = p ? await data.handelserForPren(p.id) : [];
+  const perUid = new Map(finns.map((h) => [h.extern_uid, h]));
+  const sedda = new Set(); let nya = 0, andrade = 0, borta = 0;
+  for (const f of forslag) {
+    const uid = f.uid || `${f.datum}-${f.titel}`;
+    if (sedda.has(uid)) continue; sedda.add(uid);
+    const rad = { typ: 'traning', barn_id: p ? (p.barn_id || null) : (f.barn_id || null), titel: f.titel, amne: '', beskrivning: f.beskrivning || '', datum: f.datum, tid: f.tid || null, slut_datum: null,
+      upprepa: f.upprepa_veckor ? 'vecka' : 'ingen', upprepa_veckor: f.upprepa_veckor || 1, upprepa_till: f.upprepa_till || null, prenumeration_id: p?.id || null, extern_uid: uid };
+    const g = perUid.get(uid);
+    if (!g) { await data.sparaHandelse(rad); nya++; }
+    else if (g.datum !== rad.datum || kortTid(g.tid) !== (rad.tid || '') || g.titel !== rad.titel || (g.beskrivning || '') !== rad.beskrivning || g.upprepa !== rad.upprepa || (g.barn_id || null) !== rad.barn_id) { await data.sparaHandelse({ ...rad, id: g.id }); andrade++; }
+  }
+  if (p && forslag.length) for (const h of finns) if (!sedda.has(h.extern_uid) && (h.datum >= idag || h.upprepa === 'vecka')) { await data.taBortHandelse(h.id); borta++; }
+  if (p) await data.sattSynkad(p.id);
+  return { nya, andrade, borta };
+}
+// Hämtar kalendrarna igen i bakgrunden (för föräldrar, högst var sjätte timme).
+async function autoSynka(tvinga = null) {
+  const lista = (await data.listaPren().catch(() => [])).filter((p) => tvinga ? p.id === tvinga : (!p.synkad_at || Date.now() - new Date(p.synkad_at) > 6 * 3600e3));
+  let summa = { nya: 0, andrade: 0, borta: 0 };
+  for (const p of lista) {
+    try {
+      const res = await data.lasIn({ typ: 'lank', url: p.url, barnId: p.barn_id });
+      if (!res.kalender) continue;
+      const r = await synkaPren(p, res.forslag || []);
+      summa = { nya: summa.nya + r.nya, andrade: summa.andrade + r.andrade, borta: summa.borta + r.borta };
+    } catch (err) { if (tvinga) throw err; }
+  }
+  const delar = [summa.nya && `${summa.nya} nya`, summa.andrade && `${summa.andrade} ändrade`, summa.borta && `${summa.borta} inställda`].filter(Boolean);
+  if (delar.length) { toast(`Kalendern är uppdaterad: ${delar.join(', ')}`); if (/^#\/(idag|kalender|lasin|lagg)?$/.test(location.hash) || !location.hash) route(); }
+  else if (tvinga) toast('Inget nytt i kalendern');
+}
+
+const SORTER = { handelser: 'Prov och läxor', schema: 'Schema', material: 'Instuderingsmaterial', kalender: 'Kalender' };
+async function visaForslag(res) {
+  S.lasRes = res;
+  S.lasSort = res.kalender ? 'kalender' : (SORTER[res.sort] ? res.sort : ((res.lektioner || []).length ? 'schema' : 'handelser'));
+  const sorter = res.kalender ? ['kalender', 'handelser'] : ['handelser', 'schema', 'material'];
+  $('#lasresultat').innerHTML = `<section class="stack" aria-live="polite"><div class="kort" style="gap:10px">
+      <div class="liten-text dampad" style="font-weight:700">Det här ser ut som</div>
+      <div class="chips wrap" role="radiogroup" aria-label="Vad är det?">${sorter.map((k) => `<button type="button" class="chip" data-g="lassort" data-s="${k}" aria-pressed="${S.lasSort === k}">${SORTER[k]}</button>`).join('')}</div>
+      ${res.sammanfattning ? `<p class="dampad" style="margin:0">${e(res.sammanfattning)}</p>` : ''}
+    </div><div id="lasdel" class="stack"></div></section>`;
+  await visaLasDel();
+}
+async function visaLasDel() {
+  const res = S.lasRes, ruta = $('#lasdel'); if (!ruta) return;
+  document.querySelectorAll('[data-g="lassort"]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.s === S.lasSort)));
+  if (S.lasSort === 'schema') return delSchema(res, ruta);
+  if (S.lasSort === 'material') return delMaterial(res, ruta);
+  if (S.lasSort === 'kalender') return delKalender(res, ruta);
+  return delHandelser(res, ruta);
+}
+
+function delSchema(res, ruta) {
+  const lek = res.lektioner || [];
+  S.lasLektioner = lek;
+  if (!lek.length) { ruta.innerHTML = '<div class="kort"><p class="tom" style="margin:0">Appen hittade inga lektioner med tider här. Är det ett schema kan du prova en tydligare bild eller PDF:en från Skola24.</p></div>'; return; }
+  if (!arForalder()) { ruta.innerHTML = '<div class="kort"><h2>Det här är ett schema</h2><p class="tom" style="margin:0">Be en förälder läsa in det, så hamnar lektionerna under Schema.</p></div>'; return; }
+  ruta.innerHTML = `<form class="kort" data-form="sparaschema">
+      <h2>${lek.length} lektioner</h2>
+      <label class="falt">Schemat gäller<select name="barn">${S.barn.map((b) => `<option value="${b.id}" ${res.schema_barn_id === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}</select></label>
+      ${[1, 2, 3, 4, 5].map((vd) => { const d = lek.filter((l) => l.veckodag === vd).sort((x, y) => x.start.localeCompare(y.start)); return d.length ? `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd])}</div><div class="lektioner">${d.map((l) => `<div class="lektion" style="--h:${amneHue(l.amne)}"><span class="tid">${e(l.start)}</span><div class="lk"><span class="amne">${e(l.amne)} <span class="slut">– ${e(l.slut)}</span></span></div></div>`).join('')}</div></div>` : ''; }).join('')}
+      <p class="tom" style="margin:0">Lektionerna läggs till i schemat. Det som redan finns ligger kvar.</p>
+      <p class="fel dold" data-fel></p>
+      <button class="knapp bred">Spara schemat</button></form>`;
+}
+
+async function delHandelser(res, ruta) {
+  const lista = res.forslag || [];
+  const inn = res.lektionsinnehall || [];
+  S.lasInnehall = inn;
+  if (lista.length) {
+    const datum = lista.map((f) => f.datum).sort();
+    const finns = await data.listaHandelser(datum[0], datum[datum.length - 1]);
+    for (const f of lista) f.finns = finns.some((h) => h.datum === f.datum && h.typ === f.typ && (h.titel.toLowerCase().includes(f.titel.toLowerCase().slice(0, 12)) || f.titel.toLowerCase().includes(h.titel.toLowerCase().slice(0, 12))));
+  }
+  S.lasForslag = lista;
+  if (!lista.length && !inn.length) { ruta.innerHTML = '<div class="kort"><p class="tom" style="margin:0">Appen hittade inga prov, läxor eller aktiviteter med datum. Välj en annan sort ovan om det är något annat.</p></div>'; return; }
+  const kompakt = lista.length > 3;
+  const barnOpt = (vald, i) => arForalder()
+    ? `<select name="barn_${i}">${S.barn.map((b) => `<option value="${b.id}" ${vald === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}<option value="" ${!vald ? 'selected' : ''}>Hela familjen</option></select>`
+    : `<input type="hidden" name="barn_${i}" value="${e(S.medlem.barn_id)}"><input disabled value="${e(barnNamn(S.medlem.barn_id))}">`;
+  ruta.innerHTML = `<form class="stack" data-form="sparaforslag">
+    ${kompakt ? `<button class="knapp bred" data-antal>Lägg till ${lista.filter((f) => !f.finns && f.sakerhet !== 'lag').length} st</button>
+    <details class="kort granska" style="margin:0"><summary><b>Granska och ändra</b> <span class="dampad liten-text">${lista.length} st${lista.some((f) => f.finns) ? ` · ${lista.filter((f) => f.finns).length} finns redan` : ''}</span></summary><div class="stack" style="margin-top:12px">`
+      : lista.length ? '<p class="tom" style="margin:0 4px">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : ''}
+    ${lista.map((f, i) => `<fieldset class="kort" style="margin:0">
+      <label class="rad" style="gap:10px;font-weight:700;cursor:pointer"><input type="checkbox" name="med_${i}" ${f.finns || f.sakerhet === 'lag' ? '' : 'checked'} style="width:22px;height:22px;accent-color:var(--accent)">
+        <span>${e(TYPER[f.typ] || 'Övrigt')}</span>${f.typ === 'prov' ? '<span class="etikett">Prov</span>' : ''}
+        ${f.finns ? '<span class="chip" style="height:26px;font-size:12px">Finns redan</span>' : ''}${f.sakerhet === 'lag' ? '<span class="chip" style="height:26px;font-size:12px">Osäkert – kontrollera</span>' : ''}</label>
+      <label class="falt">Rubrik<input name="titel_${i}" maxlength="120" value="${e(f.titel)}"></label>
+      <div class="tva"><label class="falt">Datum<input type="date" name="datum_${i}" value="${e(f.datum)}"></label><label class="falt">Tid<input type="time" name="tid_${i}" value="${e(f.tid || '')}"></label></div>
+      <div class="tva"><label class="falt">Typ<select name="typ_${i}">${Object.entries(TYPER).filter(([k]) => arForalder() || k !== 'lov').map(([k, v]) => `<option value="${k}" ${f.typ === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label class="falt">Gäller${barnOpt(f.barn_id, i)}</label></div>
+      ${f.beskrivning ? `<label class="falt">Beskrivning<textarea name="besk_${i}" style="min-height:70px">${e(f.beskrivning)}</textarea></label>` : ''}
+      ${f.material?.length ? `<div class="liten-text dampad">Material som följer med: ${f.material.map((m) => e(m.titel)).join(', ')}</div>` : ''}
+      ${f.upprepa_veckor ? `<div class="liten-text dampad">Upprepas ${upprepText({ upprepa: 'vecka', upprepa_veckor: f.upprepa_veckor })}</div>` : ''}
+    </fieldset>`).join('')}
+    ${kompakt ? '</div></details>' : ''}
+    ${inn.length ? `<fieldset class="kort" style="margin:0"><h2>Vad lektionerna handlar om</h2><p class="tom" style="margin:0">Det här visas på lektionen i schemat den dagen.</p>
+      ${inn.map((r, i) => `<label class="rad" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" name="inn_${i}" checked style="width:22px;height:22px;flex:none;accent-color:var(--accent)">
+        <span><b>${e(r.amne)}</b> <span class="dampad liten-text">${e(storBokstav(VECKODAGAR[franIso(r.datum).getDay()]))} ${franIso(r.datum).getDate()}/${franIso(r.datum).getMonth() + 1}${r.barn_id ? ' · ' + e(barnNamn(r.barn_id)) : ''}</span><br>${e(r.innehall)}</span></label>`).join('')}</fieldset>` : ''}
+    <p class="fel dold" data-fel></p>
+    ${kompakt ? '' : '<button class="knapp bred">Spara valda</button>'}
+  </form>`;
+  const f = ruta.querySelector('form'), antalKnapp = ruta.querySelector('[data-antal]');
+  if (antalKnapp) f.addEventListener('change', () => { const n = f.querySelectorAll('input[name^="med_"]:checked').length + f.querySelectorAll('input[name^="inn_"]:checked').length; antalKnapp.textContent = n ? `Lägg till ${n} st` : 'Inget valt'; });
+}
+
+async function delMaterial(res, ruta) {
+  const mi = res.material_info || {}, u = S.lasUnderlag || {};
+  let vad = 'Text';
+  if (u.fil) vad = u.fil.type.startsWith('image/') ? 'Bild' : `PDF: ${u.fil.name}`;
+  else if (u.typ === 'lank') { try { vad = `Länk till ${new URL(u.url).hostname.replace(/^www\./, '')}`; } catch { vad = 'Länk'; } }
+  const titel = mi.titel || (u.fil ? u.fil.name.replace(/\.[^.]+$/, '') : vad);
+  const barnId = res.schema_barn_id || (arForalder() ? S.filter : S.medlem.barn_id) || null;
+  const idag = isoDatum(new Date()), till = isoDatum(laggTillDagar(new Date(), 90));
+  const kom = forekomster(await data.listaHandelser(idag, till), idag, till)
+    .filter((h) => h.typ !== 'lov' && h.typ !== 'traning' && (arForalder() || h.barn_id === S.medlem.barn_id))
+    .sort((a, b) => a.dag.localeCompare(b.dag));
+  const k = amneNyckel(mi.amne);
+  const poang = (h) => (k && h.amne && amneNyckel(h.amne) === k ? 100 : 0) + (mi.datum && h.dag === mi.datum ? 50 : 0) + (barnId && h.barn_id === barnId ? 20 : 0) + (mi.prov && h.typ === 'prov' ? 10 : 0);
+  const bast = kom.reduce((m, h) => (!m || poang(h) > poang(m) ? h : m), null);
+  const forval = bast && poang(bast) >= 100 ? bast : null;
+  const val = (h) => `${h.id}|${h.upprepa === 'vecka' ? h.dag : ''}`;
+  const kortD = (iso) => `${VD_KORT[franIso(iso).getDay()]} ${franIso(iso).getDate()}/${franIso(iso).getMonth() + 1}`;
+  const nyVal = forval ? '' : (mi.prov ? 'ny:prov' : 'ny:laxa');
+  ruta.innerHTML = `<form class="kort" data-form="sparamaterial" style="gap:12px">
+      <div class="mat"><span class="ikon">${u.fil ? (u.fil.type.startsWith('image/') ? I.bild || I.fil : I.fil) : u.typ === 'lank' ? I.lank : I.fil}</span><span class="info"><b>${e(vad)}</b><span>${u.typ === 'text' && !u.fil ? `${u.text.length} tecken` : 'Sparas som instuderingsmaterial'}</span></span></div>
+      <label class="falt">Rubrik<input name="titel" maxlength="160" value="${e(titel)}"></label>
+      <label class="falt">Hör till<select name="koppla">
+        ${kom.length ? `<optgroup label="Kommande prov och läxor">${kom.map((h) => `<option value="${e(val(h))}" ${forval === h ? 'selected' : ''}>${e(TYPER[h.typ])}: ${e(visTitel(h))} – ${kortD(h.dag)}${S.barn.length > 1 && h.barn_id ? ' · ' + e(barnNamn(h.barn_id)) : ''}</option>`).join('')}</optgroup>` : ''}
+        <optgroup label="Skapa ny"><option value="ny:laxa" ${nyVal === 'ny:laxa' ? 'selected' : ''}>Ny läxa</option><option value="ny:prov" ${nyVal === 'ny:prov' ? 'selected' : ''}>Nytt prov</option></optgroup>
+      </select></label>
+      ${forval ? `<p class="tom" style="margin:-4px 0 0">Föreslaget eftersom ämnet stämmer.</p>` : ''}
+      <div data-ny class="stack ${forval ? 'dold' : ''}" style="gap:10px">
+        <div class="tva"><label class="falt">Ämne<input name="amne" maxlength="60" value="${e(mi.amne || '')}"></label><label class="falt">Datum<input type="date" name="datum" value="${e(mi.datum || '')}"></label></div>
+        ${arForalder() && S.barn.length ? `<label class="falt">Gäller<select name="barn_id">${S.barn.map((b) => `<option value="${b.id}" ${barnId === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}<option value="">Hela familjen</option></select></label>` : ''}
+      </div>
+      <p class="fel dold" data-fel></p>
+      <button class="knapp bred">Spara materialet</button></form>`;
+  const f = ruta.querySelector('form');
+  f.koppla.addEventListener('change', () => f.querySelector('[data-ny]').classList.toggle('dold', !f.koppla.value.startsWith('ny:')));
+}
+
+function delKalender(res, ruta) {
+  const lista = res.forslag || [], u = S.lasUnderlag || {};
+  const antal = {}; for (const f of lista) antal[f.titel] = (antal[f.titel] || 0) + 1;
+  const namn = (Object.entries(antal).sort((a, b) => b[1] - a[1])[0]?.[0] || 'Kalender').slice(0, 60);
+  const kortD = (iso) => `${VD_KORT[franIso(iso).getDay()]} ${franIso(iso).getDate()}/${franIso(iso).getMonth() + 1}`;
+  if (!lista.length) { ruta.innerHTML = '<div class="kort"><p class="tom" style="margin:0">Kalendern har inga kommande aktiviteter just nu.</p></div>'; }
+  if (!arForalder()) { ruta.innerHTML = '<div class="kort"><p class="tom" style="margin:0">Be en förälder lägga till kalendern, så kommer alla aktiviteter med automatiskt.</p></div>'; return; }
+  const prenumerera = u.typ === 'lank';
+  ruta.innerHTML = `<form class="kort" data-form="prenumerera" style="gap:12px">
+      <h2>${lista.length} kommande aktiviteter</h2>
+      <p class="tom" style="margin:0">${prenumerera ? 'Alla läggs in. Appen hämtar sedan nya och ändrade tider automatiskt.' : 'Alla läggs in i kalendern.'}</p>
+      ${prenumerera ? `<label class="falt">Namn<input name="namn" maxlength="80" value="${e(namn)}"></label>` : ''}
+      <label class="falt">Gäller<select name="barn_id">${S.barn.map((b) => `<option value="${b.id}" ${res.schema_barn_id === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}<option value="" ${!res.schema_barn_id ? 'selected' : ''}>Hela familjen</option></select></label>
+      <p class="fel dold" data-fel></p>
+      <button class="knapp bred">${prenumerera ? 'Lägg till kalendern' : `Lägg till ${lista.length} st`}</button>
+      ${lista.length ? `<details class="granska"><summary><span class="dampad">Visa aktiviteterna</span></summary><div class="stack" style="gap:4px;margin-top:10px">${lista.map((f) => `<div class="rad liten-text" style="gap:10px"><span style="width:76px;flex:none;font-weight:700">${kortD(f.datum)}</span><span style="width:42px;flex:none">${e(f.tid || '')}</span><span>${e(f.titel)}${f.upprepa_veckor ? ` <span class="dampad">(${upprepText({ upprepa: 'vecka', upprepa_veckor: f.upprepa_veckor })})</span>` : ''}</span></div>`).join('')}</div></details>` : ''}
+    </form>`;
+}
+
 // Gör bilder mindre innan de skickas (högst 1800 px, JPEG).
 function forminskaBild(fil) {
   return new Promise((ok, nej) => {
@@ -483,62 +669,6 @@ function forminskaBild(fil) {
 }
 const tillBase64 = (fil) => new Promise((ok, nej) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = () => nej(new Error('Filen gick inte att läsa.')); r.readAsDataURL(fil); });
 
-async function visaForslag(res) {
-  const ruta = $('#lasresultat');
-  const lista = res.forslag || [];
-  const lek = res.lektioner || [];
-  S.lasLektioner = lek;
-  const inn = res.lektionsinnehall || [];
-  S.lasInnehall = inn;
-  // Markera sådant som redan finns i kalendern.
-  if (lista.length) {
-    const datum = lista.map((f) => f.datum).sort();
-    const finns = await data.listaHandelser(datum[0], datum[datum.length - 1]);
-    for (const f of lista) f.finns = finns.some((h) => h.datum === f.datum && h.typ === f.typ && (h.titel.toLowerCase().includes(f.titel.toLowerCase().slice(0, 12)) || f.titel.toLowerCase().includes(h.titel.toLowerCase().slice(0, 12))));
-  }
-  S.lasForslag = lista;
-  const barnOpt = (vald, i) => arForalder()
-    ? `<select name="barn_${i}">${S.barn.map((b) => `<option value="${b.id}" ${vald === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}<option value="" ${!vald ? 'selected' : ''}>Hela familjen</option></select>`
-    : `<input type="hidden" name="barn_${i}" value="${e(S.medlem.barn_id)}"><input disabled value="${e(barnNamn(S.medlem.barn_id))}">`;
-  const schemaDel = lek.length ? (arForalder() ? `<form class="kort" data-form="sparaschema">
-      <h2>Schema hittat: ${lek.length} lektioner</h2>
-      <label class="falt">Schemat gäller<select name="barn">${S.barn.map((b) => `<option value="${b.id}" ${res.schema_barn_id === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}</select></label>
-      ${[1, 2, 3, 4, 5].map((vd) => { const d = lek.filter((l) => l.veckodag === vd).sort((x, y) => x.start.localeCompare(y.start)); return d.length ? `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd])}</div><div class="lektioner">${d.map((l) => `<div class="lektion"><span class="tid">${e(l.start)}</span><span>${e(l.amne)} <span class="dampad">– ${e(l.slut)}</span></span></div>`).join('')}</div></div>` : ''; }).join('')}
-      <p class="tom" style="margin:0">Lektionerna läggs till i schemat. Det som redan finns ligger kvar.</p>
-      <p class="fel dold" data-fel></p>
-      <button class="knapp bred">Spara schemat</button></form>`
-    : '<div class="kort"><h2>Det här är ett schema</h2><p class="tom" style="margin:0">Be en förälder läsa in det, så hamnar lektionerna under Schema.</p></div>') : '';
-  ruta.innerHTML = `<section class="stack" aria-live="polite">
-    ${schemaDel}
-    ${(lek.length || inn.length) && !lista.length ? '' : `<div class="kort"><h2>${lista.length ? `Hittade ${lista.length} förslag` : 'Hittade inga prov eller läxor'}</h2>
-      ${res.sammanfattning ? `<p class="dampad" style="margin:0">${e(res.sammanfattning)}</p>` : ''}
-      ${lista.length > 3 ? '<p class="tom" style="margin:0">Allt nytt är förvalt. Öppna Granska och ändra om du vill välja bort något.</p>' : lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>`}
-    ${lista.length || inn.length ? `<form class="stack" data-form="sparaforslag">
-      ${lista.length > 3 ? `<button class="knapp bred" data-antal>Lägg till ${lista.filter((f) => !f.finns && f.sakerhet !== 'lag').length} st</button>
-      <details class="kort granska" style="margin:0"><summary><b>Granska och ändra</b> <span class="dampad liten-text">${lista.length} st${lista.some((f) => f.finns) ? ` · ${lista.filter((f) => f.finns).length} finns redan` : ''}</span></summary><div class="stack" style="margin-top:12px">` : ''}
-      ${lista.map((f, i) => `<fieldset class="kort" style="margin:0">
-        <label class="rad" style="gap:10px;font-weight:700;cursor:pointer"><input type="checkbox" name="med_${i}" ${f.finns || f.sakerhet === 'lag' ? '' : 'checked'} style="width:22px;height:22px;accent-color:var(--accent)">
-          <span>${e(TYPER[f.typ] || 'Övrigt')}</span>${f.typ === 'prov' ? '<span class="etikett">Prov</span>' : ''}
-          ${f.finns ? '<span class="chip" style="height:26px;font-size:12px">Finns redan</span>' : ''}${f.sakerhet === 'lag' ? '<span class="chip" style="height:26px;font-size:12px">Osäkert – kontrollera</span>' : ''}</label>
-        <label class="falt">Rubrik<input name="titel_${i}" maxlength="120" value="${e(f.titel)}"></label>
-        <div class="tva"><label class="falt">Datum<input type="date" name="datum_${i}" value="${e(f.datum)}"></label><label class="falt">Tid<input type="time" name="tid_${i}" value="${e(f.tid || '')}"></label></div>
-        <div class="tva"><label class="falt">Typ<select name="typ_${i}">${Object.entries(TYPER).filter(([k]) => arForalder() || k !== 'lov').map(([k, v]) => `<option value="${k}" ${f.typ === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label class="falt">Gäller${barnOpt(f.barn_id, i)}</label></div>
-        ${f.beskrivning ? `<label class="falt">Beskrivning<textarea name="besk_${i}" style="min-height:70px">${e(f.beskrivning)}</textarea></label>` : ''}
-        ${f.material?.length ? `<div class="liten-text dampad">Material som följer med: ${f.material.map((m) => e(m.titel)).join(', ')}</div>` : ''}
-        ${f.upprepa_veckor ? `<div class="liten-text dampad">Upprepas ${upprepText({ upprepa: 'vecka', upprepa_veckor: f.upprepa_veckor })}</div>` : ''}
-      </fieldset>`).join('')}
-      ${lista.length > 3 ? '</div></details>' : ''}
-      ${inn.length ? `<fieldset class="kort" style="margin:0"><h2>Vad lektionerna handlar om</h2><p class="tom" style="margin:0">Det här visas på lektionen i schemat den dagen.</p>
-        ${inn.map((r, i) => `<label class="rad" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" name="inn_${i}" checked style="width:22px;height:22px;flex:none;accent-color:var(--accent)">
-          <span><b>${e(r.amne)}</b> <span class="dampad liten-text">${e(storBokstav(VECKODAGAR[franIso(r.datum).getDay()]))} ${franIso(r.datum).getDate()}/${franIso(r.datum).getMonth() + 1}${r.barn_id ? ' · ' + e(barnNamn(r.barn_id)) : ''}</span><br>${e(r.innehall)}</span></label>`).join('')}</fieldset>` : ''}
-      <p class="fel dold" data-fel></p>
-      ${lista.length > 3 ? '' : '<button class="knapp bred">Spara valda</button>'}
-    </form>` : ''}
-  </section>`;
-  ruta.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  const fs_ = ruta.querySelector('form[data-form="sparaforslag"]'), antalKnapp = ruta.querySelector('[data-antal]');
-  if (fs_ && antalKnapp) fs_.addEventListener('change', () => { const n = fs_.querySelectorAll('input[name^="med_"]:checked').length; antalKnapp.textContent = n ? `Lägg till ${n} st` : 'Inget valt'; });
-}
 
 // ---------------------------------------------------------------- SCHEMA
 async function visaSchema() {
@@ -670,7 +800,7 @@ function barnForm(b) {
 }
 
 // ---------------------------------------------------------------- PLUSMENY
-function visaPlusmeny() {
+function visaPlusmeny(material = false) {
   const s = document.createElement('div');
   s.className = 'slojan';
   s.innerHTML = `<div class="ark" role="dialog" aria-modal="true" aria-label="Lägg till">
@@ -760,7 +890,12 @@ document.addEventListener('click', async (ev) => {
     if (g === 'kalsteg') { S.kalSteg = el.dataset.d === '0' ? 0 : S.kalSteg + Number(el.dataset.d); S.valdDag = null; return route(); }
     if (g === 'kaltyp') { S.kalTyp = el.dataset.t; await route(); if (el.closest('.ark')) { el.closest('.slojan').remove(); visaKalFilter(); } return; }
     if (g === 'valjdag') { S.valdDag = el.dataset.dag; return route(); }
-    if (g === 'plusmeny') return visaPlusmeny();
+    if (g === 'plusmeny') { location.hash = '#/lagg'; return; }
+    if (g === 'materialark') return visaPlusmeny(true);
+    if (g === 'lassort') { S.lasSort = el.dataset.s; return visaLasDel(); }
+    if (g === 'rensafil') { const f = el.closest('form'); f.fil.value = ''; f.fil.dispatchEvent(new Event('change')); return; }
+    if (g === 'synkapren') { el.disabled = true; el.textContent = 'Hämtar…'; try { await autoSynka(el.dataset.id); } catch (err) { toast(err.message || 'Kunde inte hämta kalendern'); } return visaKalendrar(); }
+    if (g === 'tabortpren') { const p = (S.prenLista || []).find((x) => x.id === el.dataset.id); if (p && await fraga(`Ta bort kalendern "${p.namn}" och alla dess aktiviteter?`)) { await data.taBortPren(p.id); toast('Kalendern är borttagen'); visaKalendrar(); } return; }
     if (g === 'stang') return el.closest('.slojan')?.remove();
     if (g === 'gaTill') { el.closest('.slojan')?.remove(); location.hash = el.dataset.h; return; }
     if (g === 'valjForMaterial') return valjHandelseForMaterial(el.closest('.ark'));
@@ -848,17 +983,50 @@ document.addEventListener('submit', async (ev) => {
         toast('Materialet är sparat'); location.hash = `#/handelse/${f.dataset.handelse}${f.dataset.forekomst ? '/' + f.dataset.forekomst : ''}`; break;
       }
       case 'lasin': {
-        const typ = v.typ;
-        const underlag = { typ, barnId: v.barnId || (arForalder() ? null : S.medlem.barn_id) };
-        if (typ === 'lank') { const u = v.url.trim().replace(/^webcals?:\/\//i, 'https://'); if (!sakerUrl(u)) throw new Error('Skriv en hel webblänk som börjar med https://'); underlag.url = u; }
-        if (typ === 'text') { if (v.text.trim().length < 5) throw new Error('Klistra in texten du vill läsa in.'); underlag.text = v.text; }
-        if (typ === 'pdf') { const fil = f.pdf.files[0]; if (!fil) throw new Error('Välj en PDF-fil.'); if (fil.size > 10 * 1024 * 1024) throw new Error('PDF-filen är större än 10 MB.'); underlag.data = await tillBase64(fil); }
-        if (typ === 'bild') { const fil = f.bild.files[0]; if (!fil) throw new Error('Välj en bild.'); underlag.data = await forminskaBild(fil); underlag.mediaType = 'image/jpeg'; }
+        const fil = f.fil.files[0], txt = (v.inmatning || '').trim();
+        const underlag = { barnId: v.barnId || (arForalder() ? null : S.medlem.barn_id) };
+        const u = { fil: null, typ: '', url: '', text: '' };
+        if (fil) {
+          if (fil.size > 15 * 1024 * 1024) throw new Error('Filen är större än 15 MB.');
+          if (fil.type === 'application/pdf' || /\.pdf$/i.test(fil.name)) { if (fil.size > 10 * 1024 * 1024) throw new Error('PDF-filen är större än 10 MB.'); underlag.typ = 'pdf'; underlag.data = await tillBase64(fil); }
+          else if (fil.type.startsWith('image/')) { underlag.typ = 'bild'; underlag.data = await forminskaBild(fil); underlag.mediaType = 'image/jpeg'; }
+          else throw new Error('Den filtypen går inte att läsa. Välj en PDF eller en bild – eller kopiera texten.');
+          u.fil = fil; u.typ = underlag.typ;
+        } else if (/^(https?|webcals?):\/\/\S+$/i.test(txt)) {
+          const url = txt.replace(/^webcals?:\/\//i, 'https://');
+          if (!sakerUrl(url)) throw new Error('Länken går inte att läsa.');
+          underlag.typ = 'lank'; underlag.url = url; u.typ = 'lank'; u.url = url;
+        } else if (txt.length >= 5) { underlag.typ = 'text'; underlag.text = txt; u.typ = 'text'; u.text = txt; }
+        else throw new Error('Klistra in en länk eller text, eller välj en fil.');
+        S.lasUnderlag = u;
         if (knapp) knapp.innerHTML = 'Läser… det tar oftast 10–30 sekunder';
         const res = await data.lasIn(underlag);
         if (knapp) knapp.innerHTML = `${I.las} Läs in igen`;
         await visaForslag(res);
         break;
+      }
+      case 'sparamaterial': {
+        const u = S.lasUnderlag;
+        let hid, forekomst = null;
+        if (!v.koppla) throw new Error('Välj vilket prov eller vilken läxa materialet hör till.');
+        if (v.koppla.startsWith('ny:')) {
+          if (!v.datum) throw new Error(v.koppla === 'ny:prov' ? 'Välj vilken dag provet är.' : 'Välj vilken dag läxan ska vara klar.');
+          const h = await data.sparaHandelse({ typ: v.koppla.slice(3), barn_id: arForalder() ? (v.barn_id || null) : S.medlem.barn_id, titel: v.titel.trim() || 'Instudering', amne: (v.amne || '').trim(), beskrivning: '', datum: v.datum, tid: null, slut_datum: null, upprepa: 'ingen' });
+          hid = h.id;
+        } else { [hid, forekomst] = v.koppla.split('|'); forekomst = forekomst || null; }
+        const titel = v.titel.trim() || 'Material';
+        if (u.fil) await data.sparaMaterial({ handelse_id: hid, forekomst, typ: u.fil.type.startsWith('image/') ? 'bild' : 'fil', titel }, u.fil);
+        else if (u.typ === 'lank') await data.sparaMaterial({ handelse_id: hid, forekomst, typ: 'lank', titel, url: u.url });
+        else await data.sparaMaterial({ handelse_id: hid, forekomst, typ: 'text', titel, innehall: u.text.slice(0, 20000) });
+        toast('Materialet är sparat'); location.hash = `#/handelse/${hid}${forekomst ? '/' + forekomst : ''}`; break;
+      }
+      case 'prenumerera': {
+        const u = S.lasUnderlag, res = S.lasRes;
+        let p = null;
+        if (u.typ === 'lank') p = await data.sparaPren({ namn: (v.namn || '').trim() || 'Kalender', url: u.url, barn_id: v.barn_id || null });
+        const r = await synkaPren(p, (res.forslag || []).map((x) => ({ ...x, barn_id: v.barn_id || null })));
+        toast(`${r.nya} aktiviteter tillagda${p ? ' – kalendern uppdateras automatiskt' : ''}`);
+        location.hash = '#/kalender'; break;
       }
       case 'sparaschema': {
         const barnId = v.barn;
