@@ -9,6 +9,19 @@ export const DEMO = !(K.supabaseUrl && K.supabaseAnonKey);
 // Matsedel från Mateo Meny. Försöker hämta direkt, annars via serverfunktionen.
 // Svar: { enhet: { 'YYYY-MM-DD': ['Rätt 1', 'Rätt 2'] } }. Sparas en timme i webbläsaren.
 // ======================================================================
+// Mateo nås i första hand via paltpixel.se/mateo-api/ (en vidarekoppling i vercel.json,
+// så webbläsaren slipper CORS), sedan direkt och sist via Supabase-funktionen.
+const MATEO_VAGAR = ['/mateo-api/', 'https://meny-api.mateo.se/api/v1/'];
+async function mateoGet(vag) {
+  for (const bas of MATEO_VAGAR) {
+    try {
+      const r = await fetch(bas + vag, { headers: { Accept: 'application/json' } });
+      if (!r.ok || !(r.headers.get('content-type') || '').includes('json')) continue;
+      return await r.json();
+    } catch { /* prova nästa väg */ }
+  }
+  throw new Error('Mateo går inte att nå');
+}
 async function hamtaMatsedel(enheter, fran, till, viaServer) {
   const unika = [...new Set(enheter.filter(Boolean).map(String))];
   if (!unika.length) return {};
@@ -19,9 +32,7 @@ async function hamtaMatsedel(enheter, fran, till, viaServer) {
   let ratt = null;
   try {
     for (const en of unika) {
-      const r = await fetch(`https://meny-api.mateo.se/api/v1/days/${en}?from=${fran}&to=${till}`, { headers: { Accept: 'application/json' } });
-      if (!r.ok) throw new Error('mateo ' + r.status);
-      ut[en] = omvandla(await r.json());
+      ut[en] = omvandla(await mateoGet(`days/${en}?from=${fran}&to=${till}`));
     }
     ratt = ut;
   } catch {
@@ -32,14 +43,12 @@ async function hamtaMatsedel(enheter, fran, till, viaServer) {
 }
 
 // Kommuner och skolor i Mateo Meny. Hämtas direkt, annars via serverfunktionen.
-const MATEO = 'https://meny-api.mateo.se/api/v1/';
 const TYP_NAMN = { school: 'Grundskola', highschool: 'Gymnasium', preschool: 'Förskola' };
 async function mateoHamta(vag, viaServer, body) {
   const nyckel = 'vp_mateo_' + vag;
   try { const c = JSON.parse(sessionStorage.getItem(nyckel)); if (c && Date.now() - c.t < 864e5) return c.d; } catch {}
   let d;
-  try { const r = await fetch(MATEO + vag, { headers: { Accept: 'application/json' } }); if (!r.ok) throw new Error(); d = await r.json(); }
-  catch { d = await viaServer(body); }
+  try { d = await mateoGet(vag); } catch { d = await viaServer(body); }
   try { sessionStorage.setItem(nyckel, JSON.stringify({ t: Date.now(), d })); } catch {}
   return d;
 }
