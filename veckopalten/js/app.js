@@ -485,6 +485,7 @@ async function valjHandelseForMaterial(ark) {
 
 // ---------------------------------------------------------------- INLOGGNING
 function visaInloggning() {
+  doljAvstangda();
   app.innerHTML = `${DEMO ? '<div class="demoband">Demoläge – ingen riktig inloggning</div>' : ''}<main class="inlogg">
     <div class="logga">${LOGGA_STOR}<span>Veckopalten</span><p class="dampad" style="margin:0">Familjens skolvecka på ett ställe.</p></div>
     <section class="kort"><h2>Vuxen</h2>
@@ -500,6 +501,16 @@ function visaInloggning() {
     </section>
     <p class="tom" style="text-align:center;margin:0"><a href="/integritet/">Integritetspolicy</a></p>
   </main>`;
+}
+// Visa bara knappar för inloggningssätt som är påslagna i Supabase.
+async function doljAvstangda() {
+  const K = window.VP_KONFIG || {};
+  if (!K.supabaseUrl) return;
+  try {
+    const r = await fetch(`${K.supabaseUrl}/auth/v1/settings`, { headers: { apikey: K.supabaseAnonKey } });
+    const ext = (await r.json()).external || {};
+    for (const p of ['google', 'azure']) if (!ext[p]) document.querySelector(`[data-g="oauth"][data-p="${p}"]`)?.remove();
+  } catch {}
 }
 function visaBarnVal(kod, barn) {
   app.innerHTML = `<main class="inlogg"><div class="logga">${LOGGA_STOR}<span>Vem är du?</span></div>
