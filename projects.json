@@ -66,6 +66,19 @@
       "lank": "/matte/"
     },
     {
+      "id": "paltboken",
+      "namn": "Paltboken",
+      "text": "Pitepalt från grunden, flatpalt, stekt palt, redskap och paltens historia.",
+      "typ": "app",
+      "kategori": "Mat",
+      "ikon": "lista",
+      "storlek": "liten",
+      "farg": "flask",
+      "bild": "assets/img/paltboken.webp",
+      "alt": "Paltboken: receptlista med pitepalt och flatpalt",
+      "lank": "/paltboken/"
+    },
+    {
       "id": "lovely",
       "namn": "LOVely",
       "text": "Räknar ner till nästa skollov.",

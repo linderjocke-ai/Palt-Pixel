@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Paltboken – recept, redskap och paltens historia</title>
+<meta name="description" content="Pitepalt från grunden, flatpalt, stekt palt, tillbehör, redskap och paltens historia.">
+<link rel="icon" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gradde:#FFF8EC; --kort:#FFFFFF; --text:#2A2234; --dampad:#6E6478; --linje:#EADFCB;
+  --lingon:#C8203A; --lingon-ljus:#FBE3E6; --smor:#F6C64E; --smor-ljus:#FFF3CF; --palt:#EADFC6; --tall:#1F4D3A; --natt:#1A2238;
+  --radie:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--gradde);color:var(--text);font:17px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--lingon)}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.15;margin:0}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--smor);outline-offset:2px;border-radius:8px}
+.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+
+header.topp{background:var(--natt);color:#F4F6FB;padding:18px 0 26px;position:relative;overflow:hidden}
+header.topp .wrap{position:relative;z-index:1}
+.hem{display:inline-flex;align-items:center;gap:8px;color:#F4F6FB;text-decoration:none;font-weight:600;font-size:15px;background:rgba(255,255,255,.08);padding:6px 14px 6px 10px;border-radius:999px}
+.kicker{font-family:Silkscreen,monospace;font-size:13px;letter-spacing:.06em;color:var(--smor);margin:22px 0 6px}
+header h1{font-size:clamp(34px,7vw,52px)}
+header p{color:#C9D0E2;margin:8px 0 0;max-width:560px}
+.pixelpalt{position:absolute;right:16px;top:12px;width:86px;opacity:.95;image-rendering:pixelated}
+@media(min-width:700px){.pixelpalt{top:auto;bottom:-12px;right:4%;width:150px}}
+
+nav.flikar{position:sticky;top:0;z-index:5;background:rgba(255,248,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linje)}
+nav.flikar .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;scrollbar-width:none}
+nav.flikar button{flex:none;border:0;background:transparent;padding:9px 14px;border-radius:999px;font-weight:600;cursor:pointer;color:var(--dampad)}
+nav.flikar button[aria-selected="true"]{background:var(--text);color:#fff}
+
+main{padding:22px 0 60px}
+.lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.receptkort{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid var(--linje);background:var(--kort);border-radius:var(--radie);padding:16px;cursor:pointer;transition:transform .12s,box-shadow .12s}
+.receptkort:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(60,40,20,.08)}
+.receptkort .emoji{font-size:30px;line-height:1}
+.receptkort b{font-family:"Space Grotesk",sans-serif;font-size:19px}
+.receptkort span{color:var(--dampad);font-size:15px}
+.etiketter{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.etikett{font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--smor-ljus);color:#7A5A00}
+.etikett.gron{background:#E2F1E8;color:var(--tall)}
+.etikett.rod{background:var(--lingon-ljus);color:var(--lingon)}
+.grupp{margin:26px 0 10px;font-size:15px;font-family:Silkscreen,monospace;color:var(--dampad);letter-spacing:.04em}
+
+.recept{display:flex;flex-direction:column;gap:18px}
+.tillbaka{align-self:flex-start;border:1px solid var(--linje);background:var(--kort);border-radius:999px;padding:8px 16px;font-weight:600;cursor:pointer}
+.recept h2{font-size:clamp(28px,5vw,38px)}
+.ingress{color:var(--dampad);margin:6px 0 0}
+.fakta{display:flex;flex-wrap:wrap;gap:8px}
+.fakta div{background:var(--kort);border:1px solid var(--linje);border-radius:12px;padding:8px 12px;font-size:14.5px}
+.fakta b{display:block;font-size:12px;color:var(--dampad);font-weight:600}
+.del{background:var(--kort);border:1px solid var(--linje);border-radius:var(--radie);padding:18px}
+.del h3{font-size:21px;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.portioner{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:Inter,sans-serif;font-size:15px;font-weight:600}
+.portioner button{width:34px;height:34px;border-radius:50%;border:1px solid var(--linje);background:var(--gradde);cursor:pointer;font-size:18px;line-height:1}
+ul.bock{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
+ul.bock li label{display:flex;gap:12px;align-items:flex-start;padding:8px 6px;border-radius:10px;cursor:pointer}
+ul.bock li label:hover{background:var(--gradde)}
+ul.bock input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--lingon)}
+ul.bock input:checked + span{color:var(--dampad);text-decoration:line-through}
+.mangd{font-weight:700;min-width:84px;display:inline-block}
+ol.steg{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:6px}
+ol.steg li label{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:12px;cursor:pointer}
+ol.steg li label::before{counter-increment:s;content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--smor);display:grid;place-items:center;font-weight:700;font-size:15px}
+ol.steg input{position:absolute;opacity:0;pointer-events:none}
+ol.steg input:checked + span{color:var(--dampad);text-decoration:line-through}
+ol.steg li label:has(input:checked)::before{background:var(--tall);color:#fff;content:"✓"}
+.tips{background:var(--smor-ljus);border-radius:var(--radie);padding:14px 18px}
+.tips b{display:block;margin-bottom:4px}
+.redskap{display:flex;flex-wrap:wrap;gap:8px}
+.redskap span{background:var(--gradde);border:1px solid var(--linje);border-radius:999px;padding:6px 12px;font-size:15px}
+
+.text h2{font-size:30px;margin:0 0 6px}
+.text h3{font-size:21px;margin:26px 0 6px}
+.text p{margin:8px 0}
+.tidslinje{list-style:none;padding:0;margin:14px 0;display:flex;flex-direction:column;gap:12px;border-left:3px solid var(--smor);padding-left:16px}
+.tidslinje b{font-family:"Space Grotesk",sans-serif}
+.kallor{font-size:14px;color:var(--dampad)}
+table.rr{width:100%;border-collapse:collapse;background:var(--kort);border-radius:var(--radie);overflow:hidden;border:1px solid var(--linje)}
+table.rr th,table.rr td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linje);vertical-align:top;font-size:15.5px}
+table.rr th{background:var(--gradde);font-size:13px;color:var(--dampad)}
+table.rr td:not(:first-child){text-align:center}
+.ja{color:var(--tall);font-weight:700}
+footer{color:var(--dampad);font-size:14px;text-align:center;padding:30px 18px}
+@media print{nav.flikar,header.topp,.tillbaka,.portioner button{display:none}body{background:#fff}.del{border:0;padding:0}}
+</style>
+</head>
+<body>
+<header class="topp">
+  <div class="wrap">
+    <a class="hem" href="/">← Palt &amp; pixel</a>
+    <p class="kicker">Paltboken</p>
+    <h1>Palt, från grunden</h1>
+    <p>Recept på pitepalt, flatpalt och stekt palt, tillbehören, redskapen du behöver och paltens historia.</p>
+  </div>
+  <svg class="pixelpalt" viewBox="0 0 30 22" aria-hidden="true" shape-rendering="crispEdges">
+    <rect x="3" y="18" width="24" height="2" fill="#2F3A5C"/>
+    <path fill="#EADFC6" d="M8 8h14v1h2v2h1v3h1v3H4v-3h1v-3h1V9h2z"/>
+    <path fill="#CDBB98" d="M18 14h7v3H14v-1h4z"/>
+    <rect x="13" y="9" width="5" height="3" fill="#F6C64E"/>
+    <rect x="12" y="5" width="2" height="2" fill="#C8203A"/><rect x="15" y="4" width="2" height="2" fill="#C8203A"/><rect x="16" y="6" width="2" height="2" fill="#C8203A"/>
+  </svg>
+</header>
+<nav class="flikar" aria-label="Paltboken">
+  <div class="wrap" role="tablist">
+    <button role="tab" data-flik="recept" aria-selected="true">Recept</button>
+    <button role="tab" data-flik="redskap" aria-selected="false">Redskap</button>
+    <button role="tab" data-flik="historia" aria-selected="false">Paltens historia</button>
+  </div>
+</nav>
+<main class="wrap" id="sida" tabindex="-1"></main>
+<footer>Paltboken på <a href="/">paltpixel.se</a>. Smaklig måltid – och glöm inte mjölken.</footer>
+
+<script>
+"use strict";
+/* ---------- Recepten ----------
+   Mängder anges för grundportionerna och räknas om när man ändrar antal. */
+const RECEPT = [
+  {
+    id: "pitepalt", emoji: "🥔", namn: "Pitepalt från grunden", grupp: "Palt",
+    kort: "Klassisk palt av råriven potatis, mjöl och saltat fläsk.",
+    etiketter: [["Klassiker", ""], ["Ca 1 ½ timme", ""]],
+    tid: "Ca 1 ½ timme", portioner: 4, enhet: "portioner", ger: "ca 12–14 paltar",
+    ingress: "Grundreceptet: råriven potatis och mjöl till en fast deg, en matsked fläsk i mitten och lång, lugn kokning. Mängderna följer Paltakademins grundrecept.",
+    ingredienser: [
+      [1, "kg", "potatis, mjölig (10–12 st)"],
+      [7, "dl", "vetemjöl – eller 5 dl vetemjöl och 2 dl kornmjöl"],
+      [1, "msk", "salt till degen"],
+      [300, "g", "rimmat eller saltat sidfläsk"],
+      [1, "msk", "salt per liter kokvatten"]
+    ],
+    redskap: ["Stor gryta, minst 5 liter", "Rivjärn (fint) eller matberedare med rivskiva", "Kökshandduk eller silduk att krama ur potatisen i", "Stor bunke", "Skärbräda och vass kniv", "Hålslev", "Måttsatser"],
+    steg: [
+      "Skär fläsket i små tärningar, ungefär ½ cm.",
+      "Fyll grytan med vatten, 1 msk salt per liter, och sätt på plattan. Det ska koka när paltarna är klara.",
+      "Skala potatisen och riv den fint.",
+      "Lägg potatisen i en kökshandduk och krama ur så mycket vätska som möjligt. Ju torrare potatis, desto mindre mjöl behövs.",
+      "Blanda potatis, salt och mjöl i bunken till en fast deg som håller formen. Är den kladdig: tillsätt lite mjöl i taget.",
+      "Ta en klump deg stor som en tennisboll. Gör en grop i mitten med tummen.",
+      "Lägg i ungefär en matsked fläsk och tryck ihop degen runt om. Rulla till en jämn boll med blöta händer.",
+      "Sänk ner paltarna i det kokande vattnet med hålsleven. Rör försiktigt så att de inte fastnar i botten.",
+      "Sänk värmen och låt paltarna sjuda under lock i 45–60 minuter. De flyter upp när de närmar sig klart.",
+      "Ta upp paltarna med hålsleven och servera direkt med smör, lingon och ett glas kall mjölk."
+    ],
+    tips: [
+      ["Spara över", "Kalla paltar blir den bästa stekta palten dagen efter."],
+      ["Frys", "Kokta paltar går bra att frysa. Värm i kokande vatten eller stek i skivor."]
+    ]
+  },
+  {
+    id: "flatpalt", emoji: "🌱", namn: "Flatpalt", grupp: "Palt",
+    kort: "Palt utan fläsk, tillplattad. Vegansk om du väljer veganskt smör.",
+    etiketter: [["Utan kött", "gron"], ["Kan bli vegansk", "gron"], ["Ca 1 timme", ""]],
+    tid: "Ca 1 timme", portioner: 4, enhet: "portioner", ger: "ca 14 flatpaltar",
+    ingress: "Samma deg som pitepalten, men utan fyllning och tillplattad. Platta paltar kokar fortare och blir jämnt genomkokta. Allt i degen är vegetabiliskt.",
+    ingredienser: [
+      [1, "kg", "potatis, mjölig"],
+      [7, "dl", "vetemjöl – eller 5 dl vetemjöl och 2 dl kornmjöl"],
+      [1, "msk", "salt till degen"],
+      [1, "msk", "salt per liter kokvatten"],
+      [50, "g", "smör eller veganskt smör till servering"]
+    ],
+    redskap: ["Stor gryta", "Rivjärn eller matberedare", "Kökshandduk", "Stor bunke", "Hålslev"],
+    steg: [
+      "Sätt på saltat vatten, 1 msk salt per liter.",
+      "Skala, riv och krama ur potatisen ordentligt i en kökshandduk.",
+      "Blanda potatis, salt och mjöl till en fast deg.",
+      "Forma bollar stora som en liten apelsin och platta till dem till runda kakor, ungefär 2 cm tjocka.",
+      "Lägg ner flatpaltarna i det kokande vattnet och rör försiktigt.",
+      "Låt sjuda under lock i ca 30–35 minuter, tills de flyter upp och är genomkokta.",
+      "Servera med smör eller veganskt smör, lingon och mjölk eller havredryck."
+    ],
+    tips: [
+      ["Vegansk hela vägen", "Degen är redan vegansk. Välj veganskt smör och havredryck till, så är hela måltiden vegansk."],
+      ["Stekt flatpalt", "Flatpalt blir extra god stekt dagen efter, eftersom den redan har rätt form."]
+    ]
+  },
+  {
+    id: "stekt", emoji: "🍳", namn: "Stekt palt", grupp: "Palt",
+    kort: "Gårdagens palt i skivor, stekt gyllene i smör.",
+    etiketter: [["Rester", ""], ["15 minuter", ""]],
+    tid: "15 minuter", portioner: 2, enhet: "portioner", ger: "",
+    ingress: "Många tycker att palten är som allra bäst dagen efter: skivad och stekt i smör tills den får en krispig yta.",
+    ingredienser: [
+      [4, "st", "kalla, kokta paltar eller flatpaltar"],
+      [2, "msk", "smör att steka i"],
+      [1, "dl", "lingonsylt eller rårörda lingon"]
+    ],
+    redskap: ["Stekpanna, gärna gjutjärn", "Stekspade", "Skärbräda och kniv"],
+    steg: [
+      "Skär de kalla paltarna i ca 1 cm tjocka skivor.",
+      "Hetta upp stekpannan på medelvärme och smält smöret.",
+      "Stek skivorna 3–4 minuter per sida, tills de är gyllenbruna och krispiga.",
+      "Servera med lingon och gärna lite extra smör på toppen."
+    ],
+    tips: [["Lagom värme", "För hög värme bränner ytan innan skivan är varm i mitten."]]
+  },
+  {
+    id: "kokt", emoji: "♨️", namn: "Kokt färdig palt", grupp: "Palt",
+    kort: "Köpt eller fryst palt, uppvärmd i kokande vatten.",
+    etiketter: [["Snabbt", ""], ["20–30 minuter", ""]],
+    tid: "20–30 minuter", portioner: 4, enhet: "portioner", ger: "",
+    ingress: "När det ska gå fort. Fryst eller köpt palt värms bäst i saltat vatten.",
+    ingredienser: [
+      [8, "st", "färdiga paltar, frysta eller kylda"],
+      [1, "msk", "salt per liter vatten"]
+    ],
+    redskap: ["Stor gryta", "Hålslev"],
+    steg: [
+      "Koka upp rikligt med vatten, 1 msk salt per liter.",
+      "Lägg i paltarna. Frysta kan läggas i direkt.",
+      "Sänk värmen och låt sjuda: kylda ca 20 minuter, frysta ca 30 minuter. Följ förpackningen om den säger annat.",
+      "Ta upp med hålslev och servera med smör, lingon och mjölk."
+    ],
+    tips: [["Kolla mitten", "Skär itu en palt. Är den varm hela vägen in är den klar."]]
+  },
+  {
+    id: "lingon", emoji: "🍒", namn: "Rårörda lingon", grupp: "Tillbehör",
+    kort: "Friska lingon rörda med socker. Det klassiska tillbehöret.",
+    etiketter: [["Tillbehör", "rod"], ["10 minuter", ""]],
+    tid: "10 minuter", portioner: 1, enhet: "liter", ger: "",
+    ingress: "Rårörda lingon är friskare och syrligare än sylt, och passar perfekt mot det salta fläsket och smöret.",
+    ingredienser: [
+      [1, "l", "lingon, färska eller tinade"],
+      [1.5, "dl", "strösocker (1–2 dl efter smak)"]
+    ],
+    redskap: ["Bunke", "Träslev", "Rena burkar med lock"],
+    steg: [
+      "Rensa bort blad och omogna bär.",
+      "Häll lingon och socker i bunken.",
+      "Rör med träsleven tills sockret har löst sig, ca 10 minuter. Låt gärna stå en stund och rör igen.",
+      "Häll upp på rena burkar och ställ i kylen. Håller ett par veckor i kylskåp, länge i frysen."
+    ],
+    tips: [["Mindre socker", "Börja med 1 dl och smaka. Lingon står sig ändå bra tack vare sin naturliga syra."]]
+  },
+  {
+    id: "flask", emoji: "🥓", namn: "Stekt fläsk vid sidan", grupp: "Tillbehör",
+    kort: "Till flatpalt eller till den som vill ha extra.",
+    etiketter: [["Tillbehör", "rod"], ["15 minuter", ""]],
+    tid: "15 minuter", portioner: 4, enhet: "portioner", ger: "",
+    ingress: "När palten saknar fyllning serveras fläsket ofta vid sidan i stället.",
+    ingredienser: [[400, "g", "rimmat sidfläsk i skivor"]],
+    redskap: ["Stekpanna", "Stekspade", "Hushållspapper"],
+    steg: [
+      "Lägg skivorna i en kall stekpanna.",
+      "Stek på medelvärme så att fettet smälter ut, 4–5 minuter per sida, tills de är krispiga.",
+      "Låt rinna av på hushållspapper och servera direkt."
+    ],
+    tips: []
+  },
+  {
+    id: "servering", emoji: "🥛", namn: "Så serveras palt", grupp: "Tillbehör",
+    kort: "Smör i hålet, lingon och ett stort glas kall mjölk.",
+    etiketter: [["Tradition", ""]],
+    tid: "", portioner: 1, enhet: "portion", ger: "",
+    ingress: "Det klassiska paltfatet: palten delas på tallriken, smöret smälter ner i den varma mitten och lingonen läggs vid sidan.",
+    ingredienser: [
+      [3, "st", "varma paltar"],
+      [1, "msk", "smör, en klick per palt"],
+      [0.5, "dl", "lingon"],
+      [3, "dl", "kall mjölk – ett stort glas"]
+    ],
+    redskap: ["Djup tallrik", "Kniv och gaffel", "Ett stort glas"],
+    steg: [
+      "Dela palten på mitten så att fläsket syns.",
+      "Lägg en klick smör i mitten och låt den smälta.",
+      "Lägg lingon vid sidan, inte ovanpå.",
+      "Häll upp ett stort glas kall mjölk. Mjölken hör till!"
+    ],
+    tips: [["Varför mjölk?", "Den kalla mjölken svalkar och balanserar det salta fläsket och smöret. I Norrbotten är det självklart."]]
+  }
+];
+
+const HISTORIA = `
+  <h2>Paltens historia</h2>
+  <p class="ingress">Palt är en kokt deg av potatis och mjöl, ofta med fläsk i mitten. Pitepalten har fått sitt namn efter Piteå.</p>
+  <ul class="tidslinje">
+    <li><b>Långt bak i tiden.</b> Varifrån palten kommer är svårt att säga. En teori är att kokt deg av mjöl är en föregångare till brödet. Liknande fyllda degknyten finns runt Östersjön, på de brittiska öarna och på många andra håll.</li>
+    <li><b>Kornet först.</b> I norr var kornmjöl länge den viktigaste ingrediensen. Korn var härdigt, växte fort och gav stora skördar även i ett kort norrländskt sommarhalvår. Vetemjöl var ovanligt i norr tills det odlades i stor skala i södra Sverige och kunde fraktas norrut.</li>
+    <li><b>Blodpalten.</b> En äldre variant där blod blandas i mjölet. Den kommer från en tid då hushållen tog vara på allt från djuren. Blodpalten var mättande mat under den mörka delen av året och äts fortfarande i norra Sverige och Finland.</li>
+    <li><b>1700-talet: potatisen kommer.</b> Potatisen blev en basvara i Sverige och en vanlig ingrediens i palten – men den ersatte aldrig mjölet helt.</li>
+    <li><b>Pitepalten.</b> Råriven potatis, vete- och kornmjöl och fläsk i mitten. Det som skiljer den från kroppkakan längre söderut är den råa potatisen, som ger pitepalten en mörkare färg. Kroppkakan görs av kokt potatis och blir ljusare.</li>
+    <li><b>1995: Paltakademin.</b> I Piteå bildades Paltakademin, som arbetar för att sprida och bevara paltkulturen.</li>
+    <li><b>I dag.</b> Piteå räknas som paltens huvudstad i Sverige. Palt serveras i skolor, på restauranger och sjukhus i Norrbotten, och i Piteå hålls en årlig paltätartävling där vinnaren får palt för ett helt år. Pitepalten finns också med i Institutet för språk och folkminnens inventering av levande kulturarv.</li>
+  </ul>
+  <h3>Palt, kroppkaka, blodpalt – vad är skillnaden?</h3>
+  <table class="rr">
+    <tr><th>Sort</th><th>Rå potatis</th><th>Kokt potatis</th><th>Blod</th><th>Fyllning</th></tr>
+    <tr><td><b>Pitepalt</b></td><td class="ja">✓</td><td></td><td></td><td>Fläsk</td></tr>
+    <tr><td><b>Flatpalt</b></td><td class="ja">✓</td><td></td><td></td><td>Ingen</td></tr>
+    <tr><td><b>Kroppkaka</b></td><td></td><td class="ja">✓</td><td></td><td>Fläsk och lök</td></tr>
+    <tr><td><b>Blodpalt</b></td><td>Ibland</td><td></td><td class="ja">✓</td><td>Fläsk vid sidan</td></tr>
+  </table>
+  <h3>Hur palten äts</h3>
+  <p>Klassiskt serveras palt med smör och lingon och ett glas kall mjölk. Fläsket ligger i mitten av palten. Gör man palt utan fyllning, som flatpalt, serveras fläsket ofta vid sidan. Resterna steks i skivor dagen efter.</p>
+  <h3>Ord att kunna</h3>
+  <p><b>Paltschwimen</b> – den tunga, mätta tröttheten efter för många paltar. <b>Paltkoma</b> – samma sak, fast värre.</p>
+  <p class="kallor">Källor: Levande kulturarv (Institutet för språk och folkminnen), pitepalt; Wikipedia, Palt och Blodpalt.</p>`;
+
+/* ---------- Visning ---------- */
+const sida = document.getElementById("sida");
+const e = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const portionerFor = {};
+
+function format(tal) {
+  if (tal >= 100) return String(Math.round(tal / 10) * 10);
+  const r = Math.round(tal * 4) / 4;
+  const hel = Math.floor(r), rest = r - hel;
+  const br = { 0.25: "¼", 0.5: "½", 0.75: "¾" }[rest] || "";
+  return (hel ? String(hel) : "") + (br ? (hel ? " " : "") + br : (hel ? "" : "0"));
+}
+
+function visaLista() {
+  const grupper = [...new Set(RECEPT.map((r) => r.grupp))];
+  sida.innerHTML = grupper.map((g) => `<h2 class="grupp">${e(g)}</h2><div class="lista">${RECEPT.filter((r) => r.grupp === g).map((r) => `
+    <button class="receptkort" data-recept="${r.id}"><span class="emoji" aria-hidden="true">${r.emoji}</span><b>${e(r.namn)}</b><span>${e(r.kort)}</span>
+      <span class="etiketter">${r.etiketter.map(([t, k]) => `<span class="etikett ${k}">${e(t)}</span>`).join("")}</span></button>`).join("")}</div>`).join("");
+}
+
+function visaRecept(id) {
+  const r = RECEPT.find((x) => x.id === id); if (!r) return visaLista();
+  const n = portionerFor[id] || r.portioner, k = n / r.portioner;
+  const steg1 = r.enhet === "liter" ? 0.5 : 1;
+  sida.innerHTML = `<article class="recept">
+    <button class="tillbaka" data-tillbaka>← Alla recept</button>
+    <div><h2>${r.emoji} ${e(r.namn)}</h2><p class="ingress">${e(r.ingress)}</p></div>
+    <div class="fakta">${r.tid ? `<div><b>Tid</b>${e(r.tid)}</div>` : ""}${r.ger && n === r.portioner ? `<div><b>Ger</b>${e(r.ger)}</div>` : ""}<div><b>Redskap</b>${r.redskap.length} st</div></div>
+    <section class="del"><h3>Ingredienser
+      <span class="portioner"><button data-port="-${steg1}" aria-label="Färre">−</button><span>${format(n)} ${e(r.enhet)}</span><button data-port="${steg1}" aria-label="Fler">+</button></span></h3>
+      <ul class="bock">${r.ingredienser.map(([m, enh, namn], i) => `<li><label><input type="checkbox" data-bock="i${i}"><span><span class="mangd">${format(m * k)} ${e(enh)}</span> ${e(namn)}</span></label></li>`).join("")}</ul>
+    </section>
+    <section class="del"><h3>Redskap</h3><div class="redskap">${r.redskap.map((x) => `<span>${e(x)}</span>`).join("")}</div></section>
+    <section class="del"><h3>Gör så här</h3>
+      <ol class="steg">${r.steg.map((s, i) => `<li><label><input type="checkbox" data-bock="s${i}"><span>${e(s)}</span></label></li>`).join("")}</ol>
+    </section>
+    ${r.tips.map(([t, s]) => `<div class="tips"><b>${e(t)}</b>${e(s)}</div>`).join("")}
+  </article>`;
+  // Bockar sparas medan man lagar
+  const nyckel = "paltboken_" + id;
+  let sparat = {};
+  try { sparat = JSON.parse(sessionStorage.getItem(nyckel) || "{}"); } catch (_) {}
+  sida.querySelectorAll("[data-bock]").forEach((b) => {
+    b.checked = !!sparat[b.dataset.bock];
+    b.addEventListener("change", () => { sparat[b.dataset.bock] = b.checked; try { sessionStorage.setItem(nyckel, JSON.stringify(sparat)); } catch (_) {} });
+  });
+}
+
+function visaRedskap() {
+  const alla = {};
+  for (const r of RECEPT) for (const x of r.redskap) (alla[x] = alla[x] || []).push(r);
+  sida.innerHTML = `<div class="text"><h2>Redskap</h2><p class="ingress">Vad du behöver till respektive recept. Tryck på ett recept för att öppna det.</p></div>
+    ${RECEPT.map((r) => `<section class="del" style="margin-top:12px"><h3>${r.emoji} ${e(r.namn)} <button class="tillbaka" style="margin-left:auto;padding:5px 12px;font-size:14px" data-recept="${r.id}">Öppna</button></h3>
+      <div class="redskap">${r.redskap.map((x) => `<span>${e(x)}</span>`).join("")}</div></section>`).join("")}`;
+}
+
+function visa(flik, recept) {
+  document.querySelectorAll("[data-flik]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.flik === flik)));
+  if (flik === "historia") sida.innerHTML = `<div class="text">${HISTORIA}</div>`;
+  else if (flik === "redskap") visaRedskap();
+  else if (recept) visaRecept(recept);
+  else visaLista();
+}
+function fran() { const [flik, recept] = location.hash.replace(/^#\/?/, "").split("/"); visa(flik || "recept", recept); }
+window.addEventListener("hashchange", () => { fran(); window.scrollTo({ top: document.querySelector("nav.flikar").offsetTop, behavior: "smooth" }); });
+
+document.addEventListener("click", (ev) => {
+  const t = ev.target.closest("[data-flik],[data-recept],[data-tillbaka],[data-port]");
+  if (!t) return;
+  if (t.dataset.flik) location.hash = "#/" + t.dataset.flik;
+  else if (t.dataset.recept) location.hash = "#/recept/" + t.dataset.recept;
+  else if (t.hasAttribute("data-tillbaka")) location.hash = "#/recept";
+  else if (t.dataset.port) {
+    const id = location.hash.split("/")[2], r = RECEPT.find((x) => x.id === id);
+    const n = Math.max(r.enhet === "liter" ? 0.5 : 1, Math.min(20, (portionerFor[id] || r.portioner) + Number(t.dataset.port)));
+    portionerFor[id] = n; visaRecept(id);
+  }
+});
+fran();
+</script>
+</body>
+</html>
