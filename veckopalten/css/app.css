@@ -223,10 +223,21 @@ h3 { margin: 0; font-size: 15px; font-weight: 700; }
 
 /* ---------- Schema i Idag ---------- */
 .lektioner { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
-.lektion { display: flex; gap: 10px; padding: 3px 0; }
-.lektion .tid { width: 46px; font-variant-numeric: tabular-nums; flex: none; }
-.lektion.forbi { color: var(--svag); text-decoration: line-through; }
-.lektion.nu { font-weight: 700; background: var(--nu-bg); margin: 0 -8px; padding: 5px 8px; border-radius: 10px; }
+.lektion { --h: 210; display: flex; gap: 10px; align-items: flex-start; padding: 6px 10px; border-radius: 10px;
+  background: hsl(var(--h) 75% 55% / .14); border-left: 4px solid hsl(var(--h) 65% 48%); }
+[data-tema="kickflip"] .lektion { background: hsl(var(--h) 70% 55% / .2); border-left-color: hsl(var(--h) 80% 62%); }
+.lektion .tid { width: 42px; font-variant-numeric: tabular-nums; flex: none; padding-top: 1px; }
+.lektion .lk { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.lektion .amne { font-weight: 600; }
+.lektion .slut { color: var(--svag); font-weight: 500; }
+.lektion .litenx { flex: none; }
+.lk-hand { align-self: flex-start; font-size: 12.5px; font-weight: 700; color: inherit; text-decoration: none; background: var(--kort-bg, rgba(255,255,255,.55)); border-radius: 8px; padding: 2px 8px; display: inline-flex; gap: 6px; align-items: center; }
+.lk-hand.prov { background: var(--prov); color: #fff; }
+.lk-hand.prov .gem { color: #fff; }
+.lk-inn { font-size: 12.5px; color: var(--text); opacity: .85; font-style: italic; }
+.lektion.forbi { color: var(--svag); opacity: .6; }
+.lektion.forbi .amne { text-decoration: line-through; }
+.lektion.nu { font-weight: 700; box-shadow: 0 0 0 2px hsl(var(--h) 65% 48%) inset; }
 .lektion.nu .pagar { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--nu-text); }
 
 /* ---------- Händelserader ---------- */
@@ -364,3 +375,10 @@ label.falt { display: flex; flex-direction: column; gap: 5px; font-size: 13px; f
 #toast.syns { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* Material och lunch */
+.gem { display: inline-flex; align-items: center; gap: 2px; margin-left: 6px; font-size: 12px; font-weight: 700; color: var(--accent); }
+.matbild { display: block; width: 100%; margin-top: 4px; }
+.matbild img { width: 100%; max-height: 260px; object-fit: cover; border-radius: 12px; display: block; }
+.lunch { display: flex; gap: 8px; align-items: flex-start; font-size: 13.5px; line-height: 1.4; margin-top: 8px; padding: 8px 10px; border-radius: 10px; background: var(--chip-bg); }
+.lunch svg { flex: none; margin-top: 1px; }

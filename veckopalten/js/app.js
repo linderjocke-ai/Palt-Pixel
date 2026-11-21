@@ -47,6 +47,7 @@ const I = {
   las: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>',
   ny: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M12 13v5M9.5 15.5h5"/></svg>',
   filter: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>',
+  gem: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M20 11.5l-8.1 8.1a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.4 8.4a1.7 1.7 0 0 1-2.4-2.4l7.7-7.7"/></svg>',
   lunch: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 3c-2 0-3 3-3 6s1 4 3 4v8"/></svg>',
   google: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.7 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1-3.7 1-2.8 0-5.3-1.9-6.1-4.5H2.3v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.9 14.1a6.6 6.6 0 0 1 0-4.2V7.1H2.3a11 11 0 0 0 0 9.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .5 4.1 1.6l3.1-3.1A11 11 0 0 0 2.3 7.1l3.6 2.8C6.7 7.3 9.2 5.4 12 5.4z"/></svg>',
   microsoft: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.5v9.5H2z"/><path fill="#7FBA00" d="M12.5 2H22v9.5h-9.5z"/><path fill="#00A4EF" d="M2 12.5h9.5V22H2z"/><path fill="#FFB900" d="M12.5 12.5H22V22h-9.5z"/></svg>',
@@ -137,14 +138,13 @@ function postRad(h) {
   const delar = [];
   if (h.tid) delar.push(kortTid(h.tid));
   if (h.amne) delar.push(e(h.amne));
-  if (h.antal_material) delar.push(`${h.antal_material} material`);
   if (h.resultat && h.resultat.poang != null) delar.push(`resultat ${e(h.resultat.poang)}${h.resultat.max_poang ? '/' + e(h.resultat.max_poang) : ''}`);
   if (h.upprepa === 'vecka') delar.push('varje vecka');
   if (h.slut_datum) delar.push(`till ${franIso(h.slut_datum).getDate()} ${MANADER[franIso(h.slut_datum).getMonth()].slice(0, 3)}`);
   return `<a class="post${prov ? ' prov' : ''}" href="#/handelse/${h.id}">
     <div class="dag"><small>${VD_KORT[d.getDay()]}</small><b>${d.getDate()}</b></div>
     <div class="info"><div class="titel">${e(visTitel(h))}</div>
-      <div class="under"><span class="prick liten" style="background:${barnFarg(h.barn_id)}"></span><span class="ut">${e(barnNamn(h.barn_id))}${delar.length ? ' · ' + delar.join(' · ') : ''}</span></div></div>
+      <div class="under"><span class="prick liten" style="background:${barnFarg(h.barn_id)}"></span><span class="ut">${e(barnNamn(h.barn_id))}${delar.length ? ' · ' + delar.join(' · ') : ''}</span>${h.antal_material ? `<span class="gem" title="${h.antal_material} material">${I.gem}${h.antal_material}</span>` : ''}</div></div>
     ${prov ? '<span class="etikett">Prov</span>' : `<span class="pil">${I.hoger}</span>`}
   </a>`;
 }
@@ -152,6 +152,38 @@ function visTitel(h) {
   const t = h.titel.trim();
   return new RegExp('^' + TYPER[h.typ], 'i').test(t) ? t : `${TYPER[h.typ]}: ${t}`;
 }
+// Varje ämne får en egen färg (samma ämne har alltid samma färg).
+const AMNEN = [[/matem|matte/, 215], [/svensk|^sva/, 28], [/engelsk/, 262], [/spansk|tysk|fransk|modersm|språk/, 320], [/^so\b|samhäll|histor|geograf|religion/, 178], [/^no\b|biolog|fysik|kemi|teknik/, 128], [/idrott/, 4], [/^bild/, 48], [/musik/, 290], [/slöjd/, 22], [/hem|hkk/, 95], [/val|mentor|klassråd|rast/, 200]];
+function amneHue(amne) {
+  const a = (amne || '').toLowerCase().trim();
+  for (const [re, h] of AMNEN) if (re.test(a)) return h;
+  let x = 7; for (const c of a) x = (x * 31 + c.charCodeAt(0)) % 360;
+  return x;
+}
+const amneNyckel = (a) => (a || '').toLowerCase().replace(/[^a-zåäö]/g, '').slice(0, 4);
+// En lektionsrad med färg, och det som hör till just den lektionen just den dagen.
+function lektionRad(l, iso, handelser, innehall, klass = '', efter = '') {
+  const k = amneNyckel(l.amne);
+  const ev = handelser.filter((h) => h.dag === iso && h.barn_id === l.barn_id && h.typ !== 'lov' && h.amne && amneNyckel(h.amne) === k);
+  const inn = innehall.filter((r) => r.datum === iso && (!r.barn_id || r.barn_id === l.barn_id) && amneNyckel(r.amne) === k);
+  const extra = ev.map((h) => `<a class="lk-hand${h.typ === 'prov' ? ' prov' : ''}" href="#/handelse/${h.id}">${e(visTitel(h))}${h.antal_material ? ` <span class="gem">${I.gem}${h.antal_material}</span>` : ''}</a>`).join('')
+    + inn.map((r) => `<span class="lk-inn">${e(r.innehall)}</span>`).join('');
+  return `<div class="lektion ${klass}" style="--h:${amneHue(l.amne)}"><span class="tid">${kortTid(l.start)}</span><div class="lk"><span class="amne">${e(l.amne)} <span class="slut">– ${kortTid(l.slut)}</span></span>${extra}</div>${efter}</div>`;
+}
+// Lunchrad för ett barn en viss dag.
+function lunchRad(barn, iso, mat, visaNamn = false) {
+  const ratter = barn.mateo_enhet ? mat[String(barn.mateo_enhet)]?.[iso] : null;
+  if (!ratter?.length) return '';
+  return `<div class="lunch">${I.lunch}<span>${visaNamn ? `<span class="prick liten" style="background:${e(barn.farg)};margin-right:4px"></span>` : ''}<b>Lunch:</b> ${ratter.map(e).join(' <span class="dampad">eller</span> ')}</span></div>`;
+}
+// Lunch för flera barn: samma skola visas en gång.
+function lunchRader(barnLista, iso, mat) {
+  const sedda = new Set(); const rader = [];
+  const flera = new Set(barnLista.map((b) => b.mateo_enhet).filter(Boolean)).size > 1;
+  for (const b of barnLista) { if (!b.mateo_enhet || sedda.has(b.mateo_enhet)) continue; sedda.add(b.mateo_enhet); rader.push(lunchRad(b, iso, mat, flera)); }
+  return rader.join('');
+}
+const hamtaMat = (fran, till) => data.matsedel(S.barn.map((b) => b.mateo_enhet), fran, till).catch(() => ({}));
 const filtrera = (lista) => (S.filter ? lista.filter((h) => h.barn_id === S.filter || h.barn_id === null) : lista);
 
 // ---------------------------------------------------------------- IDAG
@@ -159,7 +191,7 @@ async function visaIdag() {
   const nu = new Date();
   const idag = isoDatum(nu);
   const till = isoDatum(laggTillDagar(nu, 14));
-  const [handelser, lektioner] = await Promise.all([data.listaHandelser(idag, till), data.listaLektioner()]);
+  const [handelser, lektioner, innehall, mat] = await Promise.all([data.listaHandelser(idag, till), data.listaLektioner(), data.listaInnehall(idag, idag), hamtaMat(idag, idag)]);
   const alla = forekomster(handelser, idag, till);
   const vd = veckodagNr(nu);
   const nuMin = nu.getHours() * 60 + nu.getMinutes();
@@ -172,13 +204,14 @@ async function visaIdag() {
     const lek = lovIdag ? '<p class="tom">Lov idag. Ingen skola.</p>'
       : dagens.length ? `<div class="lektioner">${dagens.map((l) => {
         const forbi = minuter(l.slut) <= nuMin; const pagar = !forbi && minuter(l.start) <= nuMin;
-        return `<div class="lektion${forbi ? ' forbi' : ''}${pagar ? ' nu' : ''}"><span class="tid">${kortTid(l.start)}</span><span>${e(l.amne)}</span>${pagar ? '<span class="pagar">pågår</span>' : ''}</div>`;
+        return lektionRad(l, idag, alla, innehall, `${forbi ? 'forbi' : ''}${pagar ? ' nu' : ''}`, pagar ? '<span class="pagar">pågår</span>' : '');
       }).join('')}</div>`
         : `<p class="tom">${vd > 5 ? 'Helg. Ingen skola idag.' : `Inget schema för ${VECKODAGAR[nu.getDay()]}. ${arForalder() ? '<a href="#/schema">Lägg in schemat</a>' : ''}`}</p>`;
     return `<section class="kort" aria-label="${e(b.namn)}">
       <div class="kort-huvud"><div class="namn"><span class="prick" style="width:12px;height:12px;background:${e(b.farg)}"></span><h2>${e(b.namn)}</h2>${b.arskurs ? `<span class="dampad liten-text">${e(b.arskurs)}</span>` : ''}</div>
         ${provSnart ? `<span class="etikett">Prov ${VD_KORT[franIso(provSnart.dag).getDay()]}</span>` : ''}</div>
       ${lek}
+      ${lovIdag ? '' : lunchRad(b, idag, mat)}
     </section>`;
   }).join('');
 
@@ -207,8 +240,9 @@ async function visaKalender() {
     const start = laggTillDagar(mandag(nu), 7 * S.kalSteg);
     const slut = laggTillDagar(start, 6);
     const fran = isoDatum(start), till = isoDatum(slut);
-    const handelser = await data.listaHandelser(fran, till);
+    const [handelser, mat] = await Promise.all([data.listaHandelser(fran, till), hamtaMat(fran, till)]);
     const alla = typFilter(filtrera(forekomster(handelser, fran, till)));
+    const lunchBarn = S.filter ? S.barn.filter((b) => b.id === S.filter) : S.barn;
     let dagar = '';
     for (let i = 0; i < 7; i++) {
       const d = laggTillDagar(start, i); const iso = isoDatum(d);
@@ -216,7 +250,8 @@ async function visaKalender() {
       const lov = arLov(iso, handelser);
       if (!dagens.length && i >= 5) continue;
       dagar += `<div class="daggrupp"><div class="rubrik">${VD_KORT[d.getDay()]} ${d.getDate()}${iso === isoDatum(nu) ? ' · idag' : ''}${lov ? ' · lov' : ''}</div>
-        ${dagens.length ? `<div class="kort utan-dag" style="gap:2px;padding:8px 16px">${dagens.map(postRad).join('')}</div>` : '<div class="tom" style="padding:0 4px 4px">Inget planerat.</div>'}</div>`;
+        ${dagens.length ? `<div class="kort utan-dag" style="gap:2px;padding:8px 16px">${dagens.map(postRad).join('')}</div>` : '<div class="tom" style="padding:0 4px 4px">Inget planerat.</div>'}
+        ${lov ? '' : `<div style="padding:0 4px">${lunchRader(lunchBarn, iso, mat)}</div>`}</div>`;
     }
     innehall = `
       ${kalHuvud(`Vecka ${veckonummer(start)}`, `${start.getDate()} ${MANADER[start.getMonth()].slice(0, 3)} – ${slut.getDate()} ${MANADER[slut.getMonth()].slice(0, 3)}`, 'veckan')}
@@ -229,7 +264,7 @@ async function visaKalender() {
     const gridStart = mandag(forsta);
     const gridSlut = laggTillDagar(mandag(sista), 6);
     const fran = isoDatum(gridStart), till = isoDatum(gridSlut);
-    const handelser = await data.listaHandelser(fran, till);
+    const [handelser, mat] = await Promise.all([data.listaHandelser(fran, till), hamtaMat(fran, till)]);
     const alla = typFilter(filtrera(forekomster(handelser.filter((h) => h.typ !== 'lov'), fran, till)));
     const lovLista = handelser.filter((h) => h.typ === 'lov');
     if (!S.valdDag || S.valdDag < fran || S.valdDag > till) S.valdDag = (isoDatum(nu) >= isoDatum(forsta) && isoDatum(nu) <= isoDatum(sista)) ? isoDatum(nu) : isoDatum(forsta);
@@ -257,6 +292,7 @@ async function visaKalender() {
       <div class="forklaring">${S.barn.map((b) => `<span><span class="prick liten" style="background:${e(b.farg)}"></span>${e(b.namn)}</span>`).join('')}<span><span class="prick liten" style="background:var(--prov);border-radius:2px"></span>Prov</span><span><span style="width:14px;height:8px;border-radius:2px;background:var(--lov-bg);display:inline-block"></span>Lov</span></div>
       <section class="kort" aria-live="polite"><h2>${storBokstav(VECKODAGAR[vd.getDay()])} ${vd.getDate()} ${MANADER[vd.getMonth()]}${lovVald ? ' · lov' : ''}</h2>
         <div class="lista">${valda.length ? valda.map(postRad).join('') : '<p class="tom">Inget planerat.</p>'}</div>
+        ${lovVald || [0, 6].includes(vd.getDay()) ? '' : lunchRader(S.filter ? S.barn.filter((b) => b.id === S.filter) : S.barn, S.valdDag, mat)}
         <a class="textknapp" style="align-self:flex-start" href="#/ny?datum=${S.valdDag}">Lägg till den här dagen</a></section>`;
     app.innerHTML = ram(`<main class="stack">${innehall}</main>`, 'kalender');
   }
@@ -301,9 +337,15 @@ async function visaHandelse(id) {
   const r = h.resultat || {};
   const datumText = `${langtDatum(d)}${h.slut_datum ? ` – ${langtDatum(franIso(h.slut_datum)).toLowerCase()}` : ''}${h.tid ? ' · ' + kortTid(h.tid) : ''}${h.upprepa === 'vecka' ? ' · varje vecka' : ''}`;
   const kanAndra = arForalder() || (h.barn_id && h.barn_id === S.medlem.barn_id);
+  const bildLankar = {};
+  await Promise.all((h.material || []).filter((m) => m.typ === 'bild' && m.fil_sokvag).map(async (m) => { try { bildLankar[m.id] = await data.filLank(m.fil_sokvag); } catch { /* visas utan miniatyr */ } }));
+  const filSort = (m) => { const x = (m.fil_sokvag || m.titel || '').split('.').pop().toLowerCase(); return ({ pdf: 'PDF', doc: 'Word', docx: 'Word', ppt: 'PowerPoint', pptx: 'PowerPoint', xls: 'Excel', xlsx: 'Excel', odt: 'Dokument', txt: 'Textfil' })[x] || 'Dokument'; };
+  const doman = (u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return ''; } };
   const material = (h.material || []).map((m) => {
     const ikon = I[m.typ === 'lank' ? 'lank' : m.typ] || I.fil;
-    const under = `${{ lank: 'Länk', text: 'Text', bild: 'Bild', fil: 'Dokument' }[m.typ]}${m.skapad_av_namn ? ' · tillagd av ' + e(m.skapad_av_namn) : ''}`;
+    const slag = { lank: `Länk${doman(m.url) ? ' till ' + e(doman(m.url)) : ''}`, text: 'Text att läsa', bild: 'Bild', fil: filSort(m) }[m.typ] || 'Material';
+    const under = `${slag}${m.skapad_av_namn ? ' · tillagd av ' + e(m.skapad_av_namn) : ''}`;
+    if (m.typ === 'bild' && bildLankar[m.id]) { const ta2 = arForalder() ? `<button class="textknapp" data-g="tabortmaterial" data-id="${m.id}" style="color:var(--fara);text-decoration:none" aria-label="Ta bort ${e(m.titel)}">Ta bort</button>` : ''; return `<div class="mat" style="flex-wrap:wrap"><span class="ikon">${ikon}</span><span class="info"><b>${e(m.titel)}</b><span>${under}</span></span>${ta2}<a class="matbild" href="${e(bildLankar[m.id])}" target="_blank" rel="noopener noreferrer"><img src="${e(bildLankar[m.id])}" alt="${e(m.titel)}" loading="lazy"></a></div>`; }
     const ta = arForalder() ? `<button class="textknapp" data-g="tabortmaterial" data-id="${m.id}" style="color:var(--fara);text-decoration:none" aria-label="Ta bort ${e(m.titel)}">Ta bort</button>` : '';
     if (m.typ === 'text') return `<div class="mat" style="flex-wrap:wrap"><span class="ikon">${ikon}</span><span class="info"><b>${e(m.titel)}</b><span>${under}</span></span>${ta}<div class="textmaterial" style="width:100%">${e(m.innehall)}</div></div>`;
     if (m.typ === 'lank') { const u = sakerUrl(m.url); return `<div class="mat"><span class="ikon">${ikon}</span><a class="info" href="${u ? e(u) : '#'}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none"><b>${e(m.titel)}</b><span>${under}</span></a>${ta}</div>`; }
@@ -321,7 +363,7 @@ async function visaHandelse(id) {
         <div style="font-weight:700">${datumText}</div>
         ${h.beskrivning ? `<p style="margin:0;line-height:1.5;white-space:pre-wrap" class="dampad">${e(h.beskrivning)}</p>` : ''}
       </div>
-      ${h.typ !== 'lov' ? `<section class="kort"><div class="kort-huvud"><h2>Instuderingsmaterial</h2>${kanAndra ? `<a class="chip" href="#/material/${h.id}">+ Lägg till</a>` : ''}</div>
+      ${h.typ !== 'lov' ? `<section class="kort"><div class="kort-huvud"><h2>Instuderingsmaterial${h.material?.length ? ` <span class="dampad" style="font-weight:600">(${h.material.length})</span>` : ''}</h2>${kanAndra ? `<a class="chip" href="#/material/${h.id}">+ Lägg till</a>` : ''}</div>
         ${material || '<p class="tom">Inget material än.</p>'}</section>` : ''}
       ${['prov', 'laxa'].includes(h.typ) ? `<section class="kort"><h2>Resultat</h2>
         <form class="stack" data-form="resultat" style="gap:10px">
@@ -436,6 +478,8 @@ async function visaForslag(res) {
   const lista = res.forslag || [];
   const lek = res.lektioner || [];
   S.lasLektioner = lek;
+  const inn = res.lektionsinnehall || [];
+  S.lasInnehall = inn;
   // Markera sådant som redan finns i kalendern.
   if (lista.length) {
     const datum = lista.map((f) => f.datum).sort();
@@ -456,10 +500,10 @@ async function visaForslag(res) {
     : '<div class="kort"><h2>Det här är ett schema</h2><p class="tom" style="margin:0">Be en förälder läsa in det, så hamnar lektionerna under Schema.</p></div>') : '';
   ruta.innerHTML = `<section class="stack" aria-live="polite">
     ${schemaDel}
-    ${lek.length && !lista.length ? '' : `<div class="kort"><h2>${lista.length ? `Hittade ${lista.length} förslag` : 'Hittade inga prov eller läxor'}</h2>
+    ${(lek.length || inn.length) && !lista.length ? '' : `<div class="kort"><h2>${lista.length ? `Hittade ${lista.length} förslag` : 'Hittade inga prov eller läxor'}</h2>
       ${res.sammanfattning ? `<p class="dampad" style="margin:0">${e(res.sammanfattning)}</p>` : ''}
       ${lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>`}
-    ${lista.length ? `<form class="stack" data-form="sparaforslag">
+    ${lista.length || inn.length ? `<form class="stack" data-form="sparaforslag">
       ${lista.map((f, i) => `<fieldset class="kort" style="margin:0">
         <label class="rad" style="gap:10px;font-weight:700;cursor:pointer"><input type="checkbox" name="med_${i}" ${f.finns || f.sakerhet === 'lag' ? '' : 'checked'} style="width:22px;height:22px;accent-color:var(--accent)">
           <span>${e(TYPER[f.typ] || 'Övrigt')}</span>${f.typ === 'prov' ? '<span class="etikett">Prov</span>' : ''}
@@ -470,6 +514,9 @@ async function visaForslag(res) {
         ${f.beskrivning ? `<label class="falt">Beskrivning<textarea name="besk_${i}" style="min-height:70px">${e(f.beskrivning)}</textarea></label>` : ''}
         ${f.material?.length ? `<div class="liten-text dampad">Material som följer med: ${f.material.map((m) => e(m.titel)).join(', ')}</div>` : ''}
       </fieldset>`).join('')}
+      ${inn.length ? `<fieldset class="kort" style="margin:0"><h2>Vad lektionerna handlar om</h2><p class="tom" style="margin:0">Det här visas på lektionen i schemat den dagen.</p>
+        ${inn.map((r, i) => `<label class="rad" style="gap:10px;align-items:flex-start;cursor:pointer"><input type="checkbox" name="inn_${i}" checked style="width:22px;height:22px;flex:none;accent-color:var(--accent)">
+          <span><b>${e(r.amne)}</b> <span class="dampad liten-text">${e(storBokstav(VECKODAGAR[franIso(r.datum).getDay()]))} ${franIso(r.datum).getDate()}/${franIso(r.datum).getMonth() + 1}${r.barn_id ? ' · ' + e(barnNamn(r.barn_id)) : ''}</span><br>${e(r.innehall)}</span></label>`).join('')}</fieldset>` : ''}
       <p class="fel dold" data-fel></p>
       <button class="knapp bred">Spara valda</button>
     </form>` : ''}
@@ -479,14 +526,19 @@ async function visaForslag(res) {
 
 // ---------------------------------------------------------------- SCHEMA
 async function visaSchema() {
-  const lektioner = await data.listaLektioner();
+  const man = mandag(laggTillDagar(new Date(), [0, 6].includes(new Date().getDay()) ? 2 : 0)); const fran = isoDatum(man), till = isoDatum(laggTillDagar(man, 4));
+  const [lektioner, handelser, innehall, mat] = await Promise.all([data.listaLektioner(), data.listaHandelser(fran, till), data.listaInnehall(fran, till), hamtaMat(fran, till)]);
+  const alla = forekomster(handelser, fran, till);
   const visadeBarn = S.filter ? S.barn.filter((b) => b.id === S.filter) : S.barn;
   const idagVd = veckodagNr(new Date());
   const kort = visadeBarn.map((b) => {
     const dagar = [1, 2, 3, 4, 5].map((vd) => {
       const l = lektioner.filter((x) => x.barn_id === b.id && x.veckodag === vd).sort((x, y) => x.start.localeCompare(y.start));
-      return `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd % 7])}${vd === idagVd ? ' · idag' : ''}</div>
-        ${l.length ? `<div class="lektioner">${l.map((x) => `<div class="lektion"><span class="tid">${kortTid(x.start)}</span><span style="flex:1">${e(x.amne)} <span class="dampad">– ${kortTid(x.slut)}</span></span>${arForalder() ? `<button class="litenx" data-g="tabortlektion" data-id="${x.id}" aria-label="Ta bort ${e(x.amne)} ${kortTid(x.start)}">✕</button>` : ''}</div>`).join('')}</div>` : '<div class="tom">Inga lektioner.</div>'}</div>`;
+      const iso = isoDatum(laggTillDagar(man, vd - 1));
+      const lov = alla.some((h) => h.typ === 'lov' && h.dag === iso && (!h.barn_id || h.barn_id === b.id));
+      return `<div class="daggrupp"><div class="rubrik">${storBokstav(VECKODAGAR[vd % 7])} ${franIso(iso).getDate()}/${franIso(iso).getMonth() + 1}${vd === idagVd ? ' · idag' : ''}${lov ? ' · lov' : ''}</div>
+        ${l.length ? `<div class="lektioner">${l.map((x) => lektionRad(x, iso, alla, innehall, '', arForalder() ? `<button class="litenx" data-g="tabortlektion" data-id="${x.id}" aria-label="Ta bort ${e(x.amne)} ${kortTid(x.start)}">✕</button>` : '')).join('')}</div>` : '<div class="tom">Inga lektioner.</div>'}
+        ${lov ? '' : lunchRad(b, iso, mat)}</div>`;
     }).join('');
     return `<section class="kort"><div class="namn"><span class="prick" style="width:12px;height:12px;background:${e(b.farg)}"></span><h2>${e(b.namn)}</h2></div>${dagar}</section>`;
   }).join('');
@@ -500,7 +552,7 @@ async function visaSchema() {
       <button class="knapp">Lägg till</button>
     </form>
     <p class="tom" style="margin:0">Snabbare: <a href="#/lasin">läs in schemat</a> från en PDF eller ett foto, så fyller appen i lektionerna åt dig.</p></section>` : '';
-  app.innerHTML = ram(`${topp('Schema', 'Veckans lektioner')}${barnChips()}<main class="stack" style="margin-top:12px">${kort || '<p class="tom">Inga barn än.</p>'}${form}</main>`, 'schema');
+  app.innerHTML = ram(`${topp('Schema', `Vecka ${veckonummer(man)}`)}${barnChips()}<main class="stack" style="margin-top:12px">${kort || '<p class="tom">Inga barn än.</p>'}${form}</main>`, 'schema');
 }
 
 // ---------------------------------------------------------------- FAMILJ
@@ -547,6 +599,8 @@ function barnForm(b) {
     </div></fieldset>
     <div class="tva"><label class="falt">Kommun<input name="kommun" maxlength="40" value="${e(b.kommun || '')}" placeholder="för lunchmenyn"></label>
       <label class="falt">Skola<input name="skola" maxlength="80" value="${e(b.skola || '')}"></label></div>
+    <label class="falt">Matsedel – länk från meny.mateo.se<input name="mateo" inputmode="url" maxlength="200" value="${b.mateo_enhet ? e(String(b.mateo_enhet)) : ''}" placeholder="https://meny.mateo.se/pitea/12"></label>
+    <p class="tom" style="margin:-4px 0 0">Öppna meny.mateo.se, välj kommun och skola och klistra in adressen här. Då syns lunchen under Idag, Schema och Kalender.</p>
     <label class="falt">${b.id ? 'Ny PIN (lämna tomt för att behålla)' : 'PIN för inloggning (4–6 siffror)'}<input name="pin" inputmode="numeric" pattern="[0-9]{4,6}" maxlength="6" autocomplete="off" ${b.id ? '' : 'required'}></label>
     <p class="fel dold" data-fel></p>
     <div class="knapprad"><button class="knapp">${b.id ? 'Spara' : 'Lägg till barn'}</button>${b.id ? `<button type="button" class="knapp fara" data-g="tabortbarn" data-id="${b.id}">Ta bort</button>` : ''}</div>
@@ -751,7 +805,9 @@ document.addEventListener('submit', async (ev) => {
       }
       case 'sparaforslag': {
         const valda = S.lasForslag.map((fs, i) => ({ fs, i })).filter(({ i }) => v[`med_${i}`]);
-        if (!valda.length) throw new Error('Bocka i minst ett förslag.');
+        const valdaInn = (S.lasInnehall || []).filter((_, i) => v[`inn_${i}`]);
+        if (!valda.length && !valdaInn.length) throw new Error('Bocka i minst ett förslag.');
+        if (valdaInn.length) await data.sparaInnehall(valdaInn.map((r) => ({ barn_id: r.barn_id || null, datum: r.datum, amne: r.amne, innehall: r.innehall })));
         for (const { fs, i } of valda) {
           const typ = v[`typ_${i}`];
           const h = await data.sparaHandelse({
@@ -764,8 +820,8 @@ document.addEventListener('submit', async (ev) => {
             else if (m.typ === 'text' && (m.innehall || '').trim()) await data.sparaMaterial({ handelse_id: h.id, typ: 'text', titel: m.titel || 'Text', innehall: m.innehall });
           }
         }
-        toast(`${valda.length} ${valda.length === 1 ? 'händelse' : 'händelser'} sparade`);
-        location.hash = '#/idag';
+        toast(valda.length ? `${valda.length} ${valda.length === 1 ? 'händelse' : 'händelser'} sparade` : 'Lektionsinnehållet är sparat');
+        location.hash = valda.length ? '#/idag' : '#/schema';
         break;
       }
       case 'resultat':
@@ -777,7 +833,10 @@ document.addEventListener('submit', async (ev) => {
         toast('Lektionen är tillagd'); await route(); break;
       case 'barn': {
         if (v.pin && !/^\d{4,6}$/.test(v.pin)) throw new Error('PIN ska vara 4–6 siffror.');
-        const b = await data.sparaBarn({ id: f.dataset.id || undefined, namn: v.namn.trim(), farg: v.farg, arskurs: v.arskurs.trim(), kommun: v.kommun.trim(), skola: v.skola.trim() });
+        const mateoTxt = (v.mateo || '').trim();
+        const mateoNr = mateoTxt ? (mateoTxt.match(/(\d+)\s*\/?\s*(?:[?#].*)?$/) || [])[1] : null;
+        if (mateoTxt && !mateoNr) throw new Error('Hittar ingen skola i Mateo-länken. Den ska sluta med ett nummer, t.ex. meny.mateo.se/pitea/12.');
+        const b = await data.sparaBarn({ id: f.dataset.id || undefined, namn: v.namn.trim(), farg: v.farg, arskurs: v.arskurs.trim(), kommun: v.kommun.trim(), skola: v.skola.trim(), mateo_enhet: mateoNr ? Number(mateoNr) : null });
         const bid = f.dataset.id || b?.id;
         if (v.pin && bid) await data.sattPin(bid, v.pin);
         S.barn = await data.listaBarn(); toast('Sparat'); await route(); break;

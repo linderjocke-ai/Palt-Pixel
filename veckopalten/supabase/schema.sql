@@ -27,6 +27,20 @@ create table if not exists barn (
 );
 
 -- PIN-koder ligger i en egen tabell som ingen kan läsa direkt.
+alter table barn add column if not exists mateo_enhet int;   -- skolans id på meny.mateo.se (matsedel)
+
+-- Vad en viss lektion handlar om en viss dag, t.ex. "Lekar" på idrotten.
+create table if not exists lektionsinnehall (
+  id uuid primary key default gen_random_uuid(),
+  familj_id uuid not null references familjer(id) on delete cascade,
+  barn_id uuid not null references barn(id) on delete cascade,
+  datum date not null,
+  amne text not null check (char_length(amne) between 1 and 60),
+  innehall text not null check (char_length(innehall) between 1 and 500),
+  skapad_at timestamptz not null default now()
+);
+create index if not exists lektionsinnehall_barn_datum on lektionsinnehall (barn_id, datum);
+
 create table if not exists barn_pin (
   barn_id uuid primary key references barn(id) on delete cascade,
   pin_hash text not null
@@ -188,6 +202,7 @@ alter table handelser enable row level security;
 alter table material enable row level security;
 alter table resultat enable row level security;
 alter table lektioner enable row level security;
+alter table lektionsinnehall enable row level security;
 alter table pin_forsok enable row level security;
 alter table vuxen_forsok enable row level security;
 alter table ai_anvandning enable row level security;
@@ -250,6 +265,14 @@ drop policy if exists "andra lektioner" on lektioner;
 create policy "andra lektioner" on lektioner for update using (ar_foralder(familj_id));
 drop policy if exists "ta bort lektioner" on lektioner;
 create policy "ta bort lektioner" on lektioner for delete using (ar_foralder(familj_id));
+drop policy if exists "se lektionsinnehall" on lektionsinnehall;
+create policy "se lektionsinnehall" on lektionsinnehall for select using (far_se(familj_id, barn_id));
+drop policy if exists "skapa lektionsinnehall" on lektionsinnehall;
+create policy "skapa lektionsinnehall" on lektionsinnehall for insert with check (far_skriva(familj_id, barn_id));
+drop policy if exists "andra lektionsinnehall" on lektionsinnehall;
+create policy "andra lektionsinnehall" on lektionsinnehall for update using (far_skriva(familj_id, barn_id)) with check (far_skriva(familj_id, barn_id));
+drop policy if exists "ta bort lektionsinnehall" on lektionsinnehall;
+create policy "ta bort lektionsinnehall" on lektionsinnehall for delete using (ar_foralder(familj_id));
 -- barn_pin, pin_forsok och vuxen_forsok har inga policys: bara funktionerna nedan når dem.
 
 -- ---------- Funktioner som appen anropar ----------
@@ -384,7 +407,7 @@ grant execute on function familjekoder(uuid) to authenticated;
 grant execute on function barn_for_kod(text) to anon, authenticated;
 
 -- Inloggade användare får använda tabellerna; radsäkerheten avgör vilka rader.
-grant select, insert, update, delete on barn, medlemmar, handelser, material, resultat, lektioner to authenticated;
+grant select, insert, update, delete on barn, medlemmar, handelser, material, resultat, lektioner, lektionsinnehall to authenticated;
 grant update (namn) on familjer to authenticated;
 
 -- Koderna i familjer ska inte kunna läsas direkt, bara via familjekoder().

@@ -78,10 +78,24 @@ const VERKTYG = {
           required: ["veckodag", "start", "slut", "amne"],
         },
       },
+      lektionsinnehall: {
+        type: "array",
+        description: "Vad enskilda lektioner handlar om vissa dagar, t.ex. 'Lekar' på idrotten tisdag eller 'Bråktal' på matten. Bara när underlaget säger det. Prov och läxor läggs inte här.",
+        items: {
+          type: "object",
+          properties: {
+            datum: { type: "string", description: "YYYY-MM-DD" },
+            amne: { type: "string", description: "Ämnet, med samma namn som i schemat om det finns." },
+            innehall: { type: "string", description: "Kort, t.ex. 'Lekar' eller 'Vi börjar med bråktal, ta med miniräknare'." },
+            barn: { type: "string", description: "Barnets namn som i listan, eller tom sträng." },
+          },
+          required: ["datum", "amne", "innehall", "barn"],
+        },
+      },
       schema_barn: { type: "string", description: "Namnet på barnet schemat gäller, exakt som i listan över barn, eller tom sträng." },
       sammanfattning: { type: "string", description: "En mening på svenska om vad underlaget innehöll." },
     },
-    required: ["forslag", "lektioner", "schema_barn", "sammanfattning"],
+    required: ["forslag", "lektioner", "lektionsinnehall", "schema_barn", "sammanfattning"],
   },
 };
 
@@ -163,6 +177,7 @@ ${valtBarn ? `Underlaget gäller ${valtBarn.namn}. Sätt barn till "${valtBarn.n
 Hitta alla prov, läxor, träningar, lov och andra händelser med datum. Ta inte med sådant som redan har varit. Hitta inte på något: saknas datum, gissa bara om det tydligt framgår av sammanhanget, och sätt då sakerhet till lag.
 Lägg länkar och glosor/faktatexter som hör till en händelse under dess material.
 Om underlaget är ett veckoschema med lektioner (t.ex. från Skola24): fyll i lektioner med alla lektioner måndag–fredag och lägg dem inte som händelser. Raster och lunch tas inte med. Prov eller annat som står i schemat läggs ändå som händelser.
+Står det vad en lektion ska handla om en viss dag (t.ex. idrott: lekar, slöjd: ta med förkläde), lägg det under lektionsinnehall.
 Svara genom att anropa verktyget spara_forslag.`;
 
     const innehall: unknown[] = [];
@@ -212,7 +227,13 @@ Svara genom att anropa verktyget spara_forslag.`;
       .slice(0, 80);
     let schemaBarn = namnTillId.get(String(resultat.schema_barn || "").toLowerCase()) ?? (valtBarn?.id ?? null);
     if (medlem.roll === "barn") schemaBarn = medlem.barn_id;
-    return svar(200, { forslag, lektioner, schema_barn_id: schemaBarn, sammanfattning: resultat.sammanfattning ?? "" });
+    const innehall_ = (Array.isArray(resultat.lektionsinnehall) ? resultat.lektionsinnehall : [])
+      .filter((l: Record<string, unknown>) => datumOk(String(l.datum)) && String(l.amne || "").trim() && String(l.innehall || "").trim())
+      .map((l: Record<string, unknown>) => ({
+        datum: l.datum, amne: String(l.amne).trim().slice(0, 60), innehall: String(l.innehall).trim().slice(0, 500),
+        barn_id: medlem.roll === "barn" ? medlem.barn_id : (namnTillId.get(String(l.barn || "").toLowerCase()) ?? valtBarn?.id ?? null),
+      })).slice(0, 60);
+    return svar(200, { forslag, lektioner, lektionsinnehall: innehall_, schema_barn_id: schemaBarn, sammanfattning: resultat.sammanfattning ?? "" });
   } catch (e) {
     console.error(e);
     return fel(400, e instanceof Error ? e.message : "Något gick fel.");

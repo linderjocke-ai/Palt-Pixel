@@ -1,9 +1,35 @@
 // Datalager: samma funktioner oavsett om appen kör mot Supabase eller i demoläge.
-import { isoDatum, laggTillDagar } from './datum.js';
+import { isoDatum, laggTillDagar, franIso } from './datum.js';
 
 const K = window.VP_KONFIG || {};
 const BAS = new URL('.', location.href.split('#')[0]).href; // t.ex. https://paltpixel.se/veckopalten/
 export const DEMO = !(K.supabaseUrl && K.supabaseAnonKey);
+
+// ======================================================================
+// Matsedel från Mateo Meny. Försöker hämta direkt, annars via serverfunktionen.
+// Svar: { enhet: { 'YYYY-MM-DD': ['Rätt 1', 'Rätt 2'] } }. Sparas en timme i webbläsaren.
+// ======================================================================
+async function hamtaMatsedel(enheter, fran, till, viaServer) {
+  const unika = [...new Set(enheter.filter(Boolean).map(String))];
+  if (!unika.length) return {};
+  const nyckel = `vp_mat_${unika.join('_')}_${fran}_${till}`;
+  try { const c = JSON.parse(sessionStorage.getItem(nyckel)); if (c && Date.now() - c.t < 36e5) return c.d; } catch {}
+  const omvandla = (dagar) => Object.fromEntries((dagar || []).map((d) => [String(d.date).slice(0, 10), (d.meals || []).map((m) => String(m.name).trim()).filter(Boolean)]));
+  const ut = {};
+  let ratt = null;
+  try {
+    for (const en of unika) {
+      const r = await fetch(`https://meny-api.mateo.se/api/v1/days/${en}?from=${fran}&to=${till}`, { headers: { Accept: 'application/json' } });
+      if (!r.ok) throw new Error('mateo ' + r.status);
+      ut[en] = omvandla(await r.json());
+    }
+    ratt = ut;
+  } catch {
+    try { const svar = await viaServer({ enheter: unika, fran, till }); ratt = Object.fromEntries(Object.entries(svar || {}).map(([k, v]) => [k, omvandla(v)])); } catch { return {}; }
+  }
+  try { sessionStorage.setItem(nyckel, JSON.stringify({ t: Date.now(), d: ratt })); } catch {}
+  return ratt;
+}
 
 // ======================================================================
 // Supabase
@@ -84,7 +110,7 @@ function supabaseLager() {
     },
     async sparaBarn(b) {
       const s = await klient();
-      const rad = { namn: b.namn, farg: b.farg, arskurs: b.arskurs || null, kommun: b.kommun || null, skola: b.skola || null };
+      const rad = { namn: b.namn, farg: b.farg, arskurs: b.arskurs || null, kommun: b.kommun || null, skola: b.skola || null, mateo_enhet: b.mateo_enhet || null };
       const q = b.id ? s.from('barn').update(rad).eq('id', b.id).select().single() : s.from('barn').insert({ ...rad, familj_id: medlem.familj_id }).select().single();
       const { data, error } = await q; fel(error); return data;
     },
@@ -152,6 +178,15 @@ function supabaseLager() {
       }
       return data;
     },
+    async listaInnehall(fran, till) {
+      const s = await klient();
+      const { data, error } = await s.from('lektionsinnehall').select('*').eq('familj_id', medlem.familj_id).gte('datum', fran).lte('datum', till); fel(error); return data;
+    },
+    async sparaInnehall(rader) {
+      const s = await klient();
+      const { error } = await s.from('lektionsinnehall').insert(rader.map((r) => ({ ...r, familj_id: medlem.familj_id }))); fel(error);
+    },
+    async matsedel(enheter, fran, till) { return hamtaMatsedel(enheter, fran, till, async (body) => { const s = await klient(); const { data, error } = await s.functions.invoke('matsedel', { body }); if (error) throw error; return data; }); },
     async listaLektioner() {
       const s = await klient();
       const { data, error } = await s.from('lektioner').select('*').eq('familj_id', medlem.familj_id).order('veckodag').order('start'); fel(error); return data;
@@ -208,8 +243,8 @@ function demoLager() {
       jag: { id: 'm-1', roll: 'foralder', barn_id: null, namn: 'Förälder', tema: lager.getItem('vp_tema') || 'soluppgang' },
       medlemmar: [{ id: 'm-1', roll: 'foralder', namn: 'Förälder', barn_id: null }, { id: 'm-2', roll: 'barn', namn: 'Alva', barn_id: alva }],
       barn: [
-        { id: alva, namn: 'Alva', farg: '#2F6FD0', arskurs: 'åk 7', kommun: '', skola: '' },
-        { id: theo, namn: 'Theo', farg: '#D9781A', arskurs: 'åk 4', kommun: '', skola: '' },
+        { id: alva, namn: 'Alva', farg: '#2F6FD0', arskurs: 'åk 7', kommun: '', skola: '', mateo_enhet: 1 },
+        { id: theo, namn: 'Theo', farg: '#D9781A', arskurs: 'åk 4', kommun: '', skola: '', mateo_enhet: 2 },
       ],
       handelser,
       material: [
@@ -218,6 +253,7 @@ function demoLager() {
       ],
       resultat: [],
       lektioner: lek,
+      innehall: [{ id: id(), barn_id: theo, datum: d(0), amne: 'NO', innehall: 'Vi undersöker magneter' }, { id: id(), barn_id: alva, datum: veckodag(2), amne: 'Idrott', innehall: 'Lekar' }],
       inloggad: true,
     };
   }
@@ -285,6 +321,14 @@ function demoLager() {
       db.resultat = db.resultat.filter((x) => x.handelse_id !== r.handelse_id); db.resultat.push(r); spara();
     },
     async listaLektioner() { return db.lektioner.filter((l) => synligt(l.barn_id)); },
+    async listaInnehall(fran, till) { db.innehall ||= []; return db.innehall.filter((r) => synligt(r.barn_id) && r.datum >= fran && r.datum <= till); },
+    async sparaInnehall(rader) { db.innehall ||= []; for (const r of rader) { kanSkriva(r.barn_id); db.innehall.push({ ...r, id: id() }); } spara(); },
+    async matsedel(enheter, fran, till) {
+      const ratter = [['Köttbullar med potatismos och lingon', 'Vegobullar med potatismos'], ['Fiskgratäng med kokt potatis', 'Grönsaksgratäng'], ['Pasta med köttfärssås', 'Pasta med linsbolognese'], ['Kycklinggryta med ris', 'Kikärtsgryta med ris'], ['Pannkakor med sylt', 'Ärtsoppa']];
+      const ut = {};
+      for (const en of enheter) { ut[en] = {}; for (let d = franIso(fran); isoDatum(d) <= till; d = laggTillDagar(d, 1)) { const vd = d.getDay(); if (vd >= 1 && vd <= 5) ut[en][isoDatum(d)] = ratter[(vd - 1 + Number(en)) % 5]; } }
+      return ut;
+    },
     async lasIn(u) {
       await new Promise((ok) => setTimeout(ok, 1200));
       const d = (n) => isoDatum(laggTillDagar(new Date(), n));
@@ -298,6 +342,7 @@ function demoLager() {
           { typ: 'laxa', titel: 'Läsläxa kapitel 5', amne: 'Svenska', datum: d(3), tid: null, slut_datum: null, barn_id: b, beskrivning: 'Läs kapitel 5 och svara på frågorna.', material: [], sakerhet: 'medel' },
           { typ: 'lov', titel: 'Studiedag', amne: '', datum: d(11), tid: null, slut_datum: null, barn_id: null, beskrivning: 'Skolan är stängd.', material: [], sakerhet: 'lag' },
         ],
+        lektionsinnehall: [{ datum: d(2), amne: 'Idrott och hälsa', innehall: 'Orientering – ta med ombyte för utomhus', barn_id: b }],
       };
     },
     async sparaLektion(l) { kraverForalder(); db.lektioner.push({ ...l, id: id() }); spara(); },
