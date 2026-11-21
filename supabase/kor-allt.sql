@@ -270,7 +270,7 @@ end $$;
 
 -- Förälder sätter ett barns PIN (4–6 siffror).
 create or replace function satt_pin(b uuid, pin text) returns void
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public, extensions as $$
 declare f uuid;
 begin
   select familj_id into f from barn where id = b;
@@ -289,7 +289,7 @@ $$;
 
 -- Ett barn loggar in: anonym session + familjekod + PIN.
 create or replace function ga_med_som_barn(kod text, b uuid, pin text) returns uuid
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public, extensions as $$
 declare f uuid; h text; antal int;
 begin
   if auth.uid() is null then raise exception 'Inte inloggad'; end if;
