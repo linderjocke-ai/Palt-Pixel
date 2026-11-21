@@ -53,6 +53,19 @@
       "lank": "/veckopalten/"
     },
     {
+      "id": "matte",
+      "namn": "Matteträning",
+      "text": "Genomgångar, övning och träningsprov för åk 4 och åk 7.",
+      "typ": "app",
+      "kategori": "Plugg",
+      "ikon": "plus",
+      "storlek": "liten",
+      "farg": "hjortron",
+      "bild": "assets/img/matte.webp",
+      "alt": "Matteträning: välj Årskurs 4 eller Årskurs 7",
+      "lank": "/matte/"
+    },
+    {
       "id": "lovely",
       "namn": "LOVely",
       "text": "Räknar ner till nästa skollov.",
