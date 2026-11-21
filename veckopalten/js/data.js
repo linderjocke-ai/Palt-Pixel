@@ -31,6 +31,30 @@ async function hamtaMatsedel(enheter, fran, till, viaServer) {
   return ratt;
 }
 
+// Kommuner och skolor i Mateo Meny. Hämtas direkt, annars via serverfunktionen.
+const MATEO = 'https://meny-api.mateo.se/api/v1/';
+const TYP_NAMN = { school: 'Grundskola', highschool: 'Gymnasium', preschool: 'Förskola' };
+async function mateoHamta(vag, viaServer, body) {
+  const nyckel = 'vp_mateo_' + vag;
+  try { const c = JSON.parse(sessionStorage.getItem(nyckel)); if (c && Date.now() - c.t < 864e5) return c.d; } catch {}
+  let d;
+  try { const r = await fetch(MATEO + vag, { headers: { Accept: 'application/json' } }); if (!r.ok) throw new Error(); d = await r.json(); }
+  catch { d = await viaServer(body); }
+  try { sessionStorage.setItem(nyckel, JSON.stringify({ t: Date.now(), d })); } catch {}
+  return d;
+}
+// [{ lan, kommuner: [{ slug, namn }] }]
+export async function mateoKommuner(viaServer) {
+  const lan = await mateoHamta('counties', viaServer, { lista: 'kommuner' });
+  return (lan || []).map((l) => ({ lan: l.name, kommuner: (l.organizations || []).filter((o) => o.slug !== 'mateo').map((o) => ({ slug: o.slug, namn: o.name })).sort((a, b) => a.namn.localeCompare(b.namn, 'sv')) }))
+    .filter((l) => l.kommuner.length).sort((a, b) => a.lan.localeCompare(b.lan, 'sv'));
+}
+// [{ id, namn, typ }]
+export async function mateoSkolor(slug, viaServer) {
+  const k = await mateoHamta('organizations/' + encodeURIComponent(slug), viaServer, { kommun: slug });
+  return (k?.units || []).filter((u) => TYP_NAMN[u.type]).map((u) => ({ id: u.id, namn: String(u.name).trim(), typ: TYP_NAMN[u.type] })).sort((a, b) => a.namn.localeCompare(b.namn, 'sv'));
+}
+
 // ======================================================================
 // Supabase
 // ======================================================================
@@ -114,6 +138,12 @@ function supabaseLager() {
       const q = b.id ? s.from('barn').update(rad).eq('id', b.id).select().single() : s.from('barn').insert({ ...rad, familj_id: medlem.familj_id }).select().single();
       const { data, error } = await q; fel(error); return data;
     },
+    async sattMatsedel(id, m) {
+      const s = await klient();
+      const { error } = await s.from('barn').update({ kommun: m.kommun || null, skola: m.skola || null, mateo_enhet: m.mateo_enhet || null }).eq('id', id); fel(error);
+    },
+    async mateoKommuner() { return mateoKommuner(async (body) => { const s = await klient(); const { data, error } = await s.functions.invoke('matsedel', { body }); if (error) throw error; return data; }); },
+    async mateoSkolor(slug) { return mateoSkolor(slug, async (body) => { const s = await klient(); const { data, error } = await s.functions.invoke('matsedel', { body }); if (error) throw error; return data; }); },
     async taBortBarn(id) { const s = await klient(); const { error } = await s.from('barn').delete().eq('id', id); fel(error); },
     async sattPin(id, pin) { const s = await klient(); const { error } = await s.rpc('satt_pin', { b: id, pin }); fel(error); },
 
@@ -243,8 +273,8 @@ function demoLager() {
       jag: { id: 'm-1', roll: 'foralder', barn_id: null, namn: 'Förälder', tema: lager.getItem('vp_tema') || 'soluppgang' },
       medlemmar: [{ id: 'm-1', roll: 'foralder', namn: 'Förälder', barn_id: null }, { id: 'm-2', roll: 'barn', namn: 'Alva', barn_id: alva }],
       barn: [
-        { id: alva, namn: 'Alva', farg: '#2F6FD0', arskurs: 'åk 7', kommun: '', skola: '', mateo_enhet: 1 },
-        { id: theo, namn: 'Theo', farg: '#D9781A', arskurs: 'åk 4', kommun: '', skola: '', mateo_enhet: 2 },
+        { id: alva, namn: 'Alva', farg: '#2F6FD0', arskurs: 'åk 7', kommun: 'umea', skola: 'Exempelskolan', mateo_enhet: 1 },
+        { id: theo, namn: 'Theo', farg: '#D9781A', arskurs: 'åk 4', kommun: 'umea', skola: 'Lillskolan', mateo_enhet: 2 },
       ],
       handelser,
       material: [
@@ -323,6 +353,9 @@ function demoLager() {
     async listaLektioner() { return db.lektioner.filter((l) => synligt(l.barn_id)); },
     async listaInnehall(fran, till) { db.innehall ||= []; return db.innehall.filter((r) => synligt(r.barn_id) && r.datum >= fran && r.datum <= till); },
     async sparaInnehall(rader) { db.innehall ||= []; for (const r of rader) { kanSkriva(r.barn_id); db.innehall.push({ ...r, id: id() }); } spara(); },
+    async sattMatsedel(bid, m) { kraverForalder(); Object.assign(db.barn.find((x) => x.id === bid), { kommun: m.kommun || '', skola: m.skola || '', mateo_enhet: m.mateo_enhet || null }); spara(); },
+    async mateoKommuner() { return mateoKommuner(async () => [{ name: 'Norrbottens län', organizations: [{ slug: 'pitea', name: 'Piteå' }] }, { name: 'Västerbottens län', organizations: [{ slug: 'umea', name: 'Umeå' }] }]); },
+    async mateoSkolor(slug) { return mateoSkolor(slug, async () => ({ units: [{ id: 1, name: 'Exempelskolan', type: 'school' }, { id: 2, name: 'Lillskolan', type: 'school' }, { id: 3, name: 'Gymnasiet', type: 'highschool' }] })); },
     async matsedel(enheter, fran, till) {
       const ratter = [['Köttbullar med potatismos och lingon', 'Vegobullar med potatismos'], ['Fiskgratäng med kokt potatis', 'Grönsaksgratäng'], ['Pasta med köttfärssås', 'Pasta med linsbolognese'], ['Kycklinggryta med ris', 'Kikärtsgryta med ris'], ['Pannkakor med sylt', 'Ärtsoppa']];
       const ut = {};

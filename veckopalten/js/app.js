@@ -57,7 +57,7 @@ const LOGGA = loggaSvg(32, 'lg');
 const LOGGA_STOR = loggaSvg(72, 'ls');
 
 // ---------------------------------------------------------------- tillstånd
-const S = { medlem: null, familj: null, barn: [], filter: null, kalVy: 'vecka', kalSteg: 0, valdDag: null, kalTyp: '' };
+const S = { medlem: null, familj: null, barn: [], filter: null, kalVy: 'vecka', kalSteg: 0, valdDag: null, kalTyp: '', familjFlik: 'familj' };
 const arForalder = () => S.medlem?.roll === 'foralder';
 const barnMap = () => Object.fromEntries(S.barn.map((b) => [b.id, b]));
 const barnNamn = (id) => (id ? barnMap()[id]?.namn || 'Okänt barn' : 'Hela familjen');
@@ -556,7 +556,9 @@ async function visaSchema() {
 }
 
 // ---------------------------------------------------------------- FAMILJ
+const famFlikar = () => `<div class="segment" role="tablist" aria-label="Familj" style="margin-bottom:12px"><button role="tab" data-g="famflik" data-f="familj" aria-pressed="${S.familjFlik !== 'matsedel'}">Familj</button><button role="tab" data-g="famflik" data-f="matsedel" aria-pressed="${S.familjFlik === 'matsedel'}">Matsedel</button></div>`;
 async function visaFamilj() {
+  if (S.familjFlik === 'matsedel') return visaMatsedelFlik();
   const tema = document.documentElement.dataset.tema;
   const temaDel = `<section class="kort"><h2>Utseende</h2><div class="temaval" role="group" aria-label="Utseende">
     ${TEMAN.map(([k, v]) => `<button data-g="tema" data-t="${k}" aria-pressed="${tema === k}"><span class="prov-bild tp-${k}"></span>${v}${k === 'soluppgang' ? ' <span class="dampad" style="font-weight:500">(standard)</span>' : ''}</button>`).join('')}
@@ -579,11 +581,57 @@ async function visaFamilj() {
   const demoDel = DEMO ? `<section class="kort"><h2>Demoläge</h2><p class="tom" style="margin:0">Prova hur appen ser ut för ett barn. Barnens PIN i demoläget är 1234.</p>
     <div class="chips"><button class="chip" data-g="demosom" data-id="" aria-pressed="${arForalder()}">Förälder</button>${S.barn.map((b) => `<button class="chip" data-g="demosom" data-id="${b.id}" aria-pressed="${S.medlem.barn_id === b.id}">${e(b.namn)}</button>`).join('')}</div>
     <button class="textknapp" style="align-self:flex-start" data-g="demoaterstall">Börja om med exempeldata</button></section>` : '';
-  app.innerHTML = ram(`${topp('Familj', e(S.familj?.namn || ''), '')}<main class="stack">
+  app.innerHTML = ram(`${topp('Familj', e(S.familj?.namn || ''), '')}${famFlikar()}<main class="stack">
     ${temaDel}${foralderDel}${demoDel}
     <section class="kort"><div class="rad" style="justify-content:space-between"><span>Inloggad som <b>${e(S.medlem.namn || '')}</b> <span class="dampad liten-text">${arForalder() ? 'vuxen' : 'barn'}</span></span></div>
       <button class="knapp sekundar" data-g="loggaut">Logga ut</button></section>
   </main>`, 'familj');
+}
+// Matsedel: välj kommun och skola för varje barn. Listorna kommer från Mateo Meny.
+async function visaMatsedelFlik() {
+  const barnLista = arForalder() ? S.barn : S.barn.filter((b) => b.id === S.medlem.barn_id);
+  app.innerHTML = ram(`${topp('Familj', e(S.familj?.namn || ''), '')}${famFlikar()}<main class="stack"><p class="tom">Hämtar kommuner …</p></main>`, 'familj');
+  const man = mandag(laggTillDagar(new Date(), [0, 6].includes(new Date().getDay()) ? 2 : 0));
+  const fran = isoDatum(man), till = isoDatum(laggTillDagar(man, 4));
+  const [lan, mat] = await Promise.all([data.mateoKommuner().catch(() => null), hamtaMat(fran, till)]);
+  if (S.familjFlik !== 'matsedel' || !location.hash.startsWith('#/familj')) return;
+  const kommunNamn = Object.fromEntries((lan || []).flatMap((l) => l.kommuner.map((k) => [k.slug, k.namn])));
+  const kort = barnLista.map((b) => {
+    const vecka = b.mateo_enhet ? [0, 1, 2, 3, 4].map((i) => { const iso = isoDatum(laggTillDagar(man, i)); const r = mat[String(b.mateo_enhet)]?.[iso]; return `<div class="matdag"><b>${storBokstav(VD_KORT[(i + 1) % 7])}</b><span>${r?.length ? r.map(e).join(' <span class="dampad">eller</span> ') : '<span class="dampad">–</span>'}</span></div>`; }).join('') : '';
+    const vald = b.mateo_enhet ? `<div class="liten-text"><b>${e(b.skola || 'Vald skola')}</b>${b.kommun ? ', ' + e(kommunNamn[b.kommun] || b.kommun) : ''}</div>` : '<p class="tom" style="margin:0">Ingen skola vald än.</p>';
+    const form = arForalder() ? `<form class="stack" data-form="matsedel" data-id="${b.id}" style="gap:10px">
+        <label class="falt">Kommun<select name="kommun" data-mateo-kommun required><option value="">Välj kommun</option>${(lan || []).map((l) => `<optgroup label="${e(l.lan)}">${l.kommuner.map((k) => `<option value="${e(k.slug)}" ${b.kommun === k.slug ? 'selected' : ''}>${e(k.namn)}</option>`).join('')}</optgroup>`).join('')}</select></label>
+        <label class="falt">Skola<select name="skola" data-mateo-skola required disabled><option value="">Välj kommun först</option></select></label>
+        <p class="fel dold" data-fel></p>
+        <div class="knapprad"><button class="knapp">Spara</button>${b.mateo_enhet ? `<button type="button" class="textknapp" data-g="tabortmatsedel" data-id="${b.id}">Ingen matsedel</button>` : ''}</div>
+      </form>` : '';
+    return `<section class="kort"><div class="namn"><span class="prick" style="width:12px;height:12px;background:${e(b.farg)}"></span><h2>${e(b.namn)}</h2></div>
+      ${vald}${vecka ? `<div class="matvecka">${vecka}</div>` : ''}${form}</section>`;
+  }).join('');
+  const felLista = lan ? '' : '<p class="fel">Kunde inte hämta kommunerna från Mateo just nu. Försök igen om en stund.</p>';
+  app.innerHTML = ram(`${topp('Familj', e(S.familj?.namn || ''), '')}${famFlikar()}<main class="stack">
+    <p class="tom" style="margin:0 2px">Välj kommun och skola för varje barn. Lunchen visas sedan under Idag, Schema och Kalender.</p>
+    ${felLista}${kort || '<p class="tom">Inga barn än.</p>'}
+    <p class="dampad liten-text" style="margin:0 2px">Matsedlarna kommer från Mateo Meny. Finns inte kommunen eller skolan med använder den inte Mateo.</p></main>`, 'familj');
+  for (const f of app.querySelectorAll('form[data-form="matsedel"]')) {
+    const b = S.barn.find((x) => x.id === f.dataset.id);
+    const kSel = f.querySelector('[data-mateo-kommun]'), sSel = f.querySelector('[data-mateo-skola]');
+    const fyll = async (forval) => {
+      const slug = kSel.value;
+      sSel.disabled = true;
+      if (!slug) { sSel.innerHTML = '<option value="">Välj kommun först</option>'; return; }
+      sSel.innerHTML = '<option value="">Hämtar skolor …</option>';
+      let skolor = [];
+      try { skolor = await data.mateoSkolor(slug); } catch { sSel.innerHTML = '<option value="">Kunde inte hämta skolorna</option>'; return; }
+      if (kSel.value !== slug) return;
+      if (!skolor.length) { sSel.innerHTML = '<option value="">Kommunen har inga matsedlar i Mateo</option>'; return; }
+      const grupper = [...new Set(skolor.map((x) => x.typ))];
+      sSel.innerHTML = '<option value="">Välj skola</option>' + grupper.map((g) => `<optgroup label="${e(g)}">${skolor.filter((x) => x.typ === g).map((x) => `<option value="${x.id}" data-namn="${e(x.namn)}" ${String(forval) === String(x.id) ? 'selected' : ''}>${e(x.namn)}</option>`).join('')}</optgroup>`).join('');
+      sSel.disabled = false;
+    };
+    kSel.addEventListener('change', () => fyll(null));
+    if (kSel.value) fyll(b?.mateo_enhet);
+  }
 }
 function giltigTill(t) {
   const d = new Date(t);
@@ -597,10 +645,7 @@ function barnForm(b) {
     <fieldset style="border:0;padding:0;margin:0"><legend class="dampad liten-text" style="font-weight:700;margin-bottom:6px">Färg</legend><div class="chips wrap">
       ${BARNFARGER.map(([f, n], i) => `<label class="chip" style="cursor:pointer"><input type="radio" name="farg" value="${f}" ${(b.farg || BARNFARGER[S.barn.length % BARNFARGER.length][0]) === f ? 'checked' : ''} style="accent-color:${f}"><span class="prick" style="background:${f}"></span>${n}</label>`).join('')}
     </div></fieldset>
-    <div class="tva"><label class="falt">Kommun<input name="kommun" maxlength="40" value="${e(b.kommun || '')}" placeholder="för lunchmenyn"></label>
-      <label class="falt">Skola<input name="skola" maxlength="80" value="${e(b.skola || '')}"></label></div>
-    <label class="falt">Matsedel – länk från meny.mateo.se<input name="mateo" inputmode="url" maxlength="200" value="${b.mateo_enhet ? e(String(b.mateo_enhet)) : ''}" placeholder="https://meny.mateo.se/pitea/12"></label>
-    <p class="tom" style="margin:-4px 0 0">Öppna meny.mateo.se, välj kommun och skola och klistra in adressen här. Då syns lunchen under Idag, Schema och Kalender.</p>
+
     <label class="falt">${b.id ? 'Ny PIN (lämna tomt för att behålla)' : 'PIN för inloggning (4–6 siffror)'}<input name="pin" inputmode="numeric" pattern="[0-9]{4,6}" maxlength="6" autocomplete="off" ${b.id ? '' : 'required'}></label>
     <p class="fel dold" data-fel></p>
     <div class="knapprad"><button class="knapp">${b.id ? 'Spara' : 'Lägg till barn'}</button>${b.id ? `<button type="button" class="knapp fara" data-g="tabortbarn" data-id="${b.id}">Ta bort</button>` : ''}</div>
@@ -706,6 +751,8 @@ document.addEventListener('click', async (ev) => {
     if (g === 'oauth') return await data.loggaInMed(el.dataset.p);
     if (g === 'loggaut') { await data.loggaUt(); location.hash = ''; location.reload(); return; }
     if (g === 'valjbarn') return visaPin(el.dataset.kod, el.dataset.id, el.dataset.namn);
+    if (g === 'famflik') { S.familjFlik = el.dataset.f; await route(); return; }
+    if (g === 'tabortmatsedel') { if (await fraga(`Sluta visa lunch för ${barnNamn(el.dataset.id)}?`)) { await data.sattMatsedel(el.dataset.id, {}); S.barn = await data.listaBarn(); toast('Matsedeln är borttagen'); await route(); } return; }
     if (g === 'tabort') { if (await fraga('Ta bort händelsen och allt material som hör till den?')) { await data.taBortHandelse(el.dataset.id); toast('Händelsen är borttagen'); location.hash = '#/idag'; } return; }
     if (g === 'tabortmaterial') { const m = S.aktuellHandelse.material.find((x) => x.id === el.dataset.id); if (await fraga(`Ta bort "${m.titel}"?`)) { await data.taBortMaterial(m); toast('Materialet är borttaget'); route(); } return; }
     if (g === 'oppnafil') {
@@ -831,12 +878,16 @@ document.addEventListener('submit', async (ev) => {
         if (v.slut <= v.start) throw new Error('Lektionen måste sluta efter att den börjar.');
         await data.sparaLektion({ barn_id: v.barn_id, veckodag: Number(v.veckodag), start: v.start, slut: v.slut, amne: v.amne.trim() });
         toast('Lektionen är tillagd'); await route(); break;
+      case 'matsedel': {
+        const opt = f.skola.selectedOptions[0];
+        if (!v.kommun || !v.skola) throw new Error('Välj både kommun och skola.');
+        await data.sattMatsedel(f.dataset.id, { kommun: v.kommun, skola: opt?.dataset.namn || '', mateo_enhet: Number(v.skola) });
+        S.barn = await data.listaBarn(); toast(`Matsedeln för ${barnNamn(f.dataset.id)} är sparad`); await route(); break;
+      }
       case 'barn': {
         if (v.pin && !/^\d{4,6}$/.test(v.pin)) throw new Error('PIN ska vara 4–6 siffror.');
-        const mateoTxt = (v.mateo || '').trim();
-        const mateoNr = mateoTxt ? (mateoTxt.match(/(\d+)\s*\/?\s*(?:[?#].*)?$/) || [])[1] : null;
-        if (mateoTxt && !mateoNr) throw new Error('Hittar ingen skola i Mateo-länken. Den ska sluta med ett nummer, t.ex. meny.mateo.se/pitea/12.');
-        const b = await data.sparaBarn({ id: f.dataset.id || undefined, namn: v.namn.trim(), farg: v.farg, arskurs: v.arskurs.trim(), kommun: v.kommun.trim(), skola: v.skola.trim(), mateo_enhet: mateoNr ? Number(mateoNr) : null });
+        const gammal = S.barn.find((x) => x.id === f.dataset.id) || {};
+        const b = await data.sparaBarn({ id: f.dataset.id || undefined, namn: v.namn.trim(), farg: v.farg, arskurs: v.arskurs.trim(), kommun: gammal.kommun, skola: gammal.skola, mateo_enhet: gammal.mateo_enhet });
         const bid = f.dataset.id || b?.id;
         if (v.pin && bid) await data.sattPin(bid, v.pin);
         S.barn = await data.listaBarn(); toast('Sparat'); await route(); break;
