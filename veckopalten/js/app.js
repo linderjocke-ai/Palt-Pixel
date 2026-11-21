@@ -46,6 +46,7 @@ const I = {
   fil: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4"/></svg>',
   las: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg>',
   ny: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M12 13v5M9.5 15.5h5"/></svg>',
+  filter: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>',
   lunch: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 3c-2 0-3 3-3 6s1 4 3 4v8"/></svg>',
   google: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.5 12.3c0-.8-.1-1.5-.2-2.2H12v4.2h5.9a5 5 0 0 1-2.2 3.3v2.7h3.5c2.1-1.9 3.3-4.7 3.3-8z"/><path fill="#34A853" d="M12 23c3 0 5.5-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1-3.7 1-2.8 0-5.3-1.9-6.1-4.5H2.3v2.8A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.9 14.1a6.6 6.6 0 0 1 0-4.2V7.1H2.3a11 11 0 0 0 0 9.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .5 4.1 1.6l3.1-3.1A11 11 0 0 0 2.3 7.1l3.6 2.8C6.7 7.3 9.2 5.4 12 5.4z"/></svg>',
   microsoft: '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F25022" d="M2 2h9.5v9.5H2z"/><path fill="#7FBA00" d="M12.5 2H22v9.5h-9.5z"/><path fill="#00A4EF" d="M2 12.5h9.5V22H2z"/><path fill="#FFB900" d="M12.5 12.5H22V22h-9.5z"/></svg>',
@@ -216,12 +217,10 @@ async function visaKalender() {
         ${dagens.length ? `<div class="kort utan-dag" style="gap:2px;padding:8px 16px">${dagens.map(postRad).join('')}</div>` : '<div class="tom" style="padding:0 4px 4px">Inget planerat.</div>'}</div>`;
     }
     innehall = `
-      <div class="topprad"><div class="segment" role="group" aria-label="Vy"><button data-g="kalvy" data-v="vecka" aria-pressed="true">Vecka</button><button data-g="kalvy" data-v="manad" aria-pressed="false">Månad</button></div>
-        <div class="rad"><button class="rundknapp" data-g="kalsteg" data-d="-1" aria-label="Förra veckan">${I.vanster}</button><button class="rundknapp" data-g="kalsteg" data-d="1" aria-label="Nästa vecka">${I.hoger}</button></div></div>
-      ${barnChips()}${typChips()}
+      ${kalHuvud(`Vecka ${veckonummer(start)}`, `${start.getDate()} ${MANADER[start.getMonth()].slice(0, 3)} – ${slut.getDate()} ${MANADER[slut.getMonth()].slice(0, 3)}`, 'veckan')}
       <div class="stack">${dagar}</div>
       ${S.kalSteg ? '<button class="textknapp" data-g="kalsteg" data-d="0">Tillbaka till denna vecka</button>' : ''}`;
-    app.innerHTML = ram(`${topp(`Vecka ${veckonummer(start)}`, `${start.getDate()} ${MANADER[start.getMonth()].slice(0, 3)} – ${slut.getDate()} ${MANADER[slut.getMonth()].slice(0, 3)} ${slut.getFullYear()}`)}<main class="stack">${innehall}</main>`, 'kalender');
+    app.innerHTML = ram(`<main class="stack">${innehall}</main>`, 'kalender');
   } else {
     const forsta = new Date(nu.getFullYear(), nu.getMonth() + S.kalSteg, 1);
     const sista = new Date(forsta.getFullYear(), forsta.getMonth() + 1, 0);
@@ -248,9 +247,7 @@ async function visaKalender() {
     const vd = franIso(S.valdDag);
     const lovVald = arLov(S.valdDag, lovLista);
     innehall = `
-      <div class="topprad"><div class="segment" role="group" aria-label="Vy"><button data-g="kalvy" data-v="vecka" aria-pressed="false">Vecka</button><button data-g="kalvy" data-v="manad" aria-pressed="true">Månad</button></div>
-        <div class="rad"><button class="rundknapp" data-g="kalsteg" data-d="-1" aria-label="Förra månaden">${I.vanster}</button><button class="rundknapp" data-g="kalsteg" data-d="1" aria-label="Nästa månad">${I.hoger}</button></div></div>
-      ${barnChips()}${typChips()}
+      ${kalHuvud(`${storBokstav(MANADER[forsta.getMonth()])} ${forsta.getFullYear()}`, '', 'månaden')}
       <section class="kort manad" aria-label="Månadskalender">
         <div class="vrad huvud"><div>v.</div><div>MÅ</div><div>TI</div><div>ON</div><div>TO</div><div>FR</div><div>LÖ</div><div>SÖ</div></div>
         ${rader}
@@ -259,8 +256,37 @@ async function visaKalender() {
       <section class="kort" aria-live="polite"><h2>${storBokstav(VECKODAGAR[vd.getDay()])} ${vd.getDate()} ${MANADER[vd.getMonth()]}${lovVald ? ' · lov' : ''}</h2>
         <div class="lista">${valda.length ? valda.map(postRad).join('') : '<p class="tom">Inget planerat.</p>'}</div>
         <a class="textknapp" style="align-self:flex-start" href="#/ny?datum=${S.valdDag}">Lägg till den här dagen</a></section>`;
-    app.innerHTML = ram(`${topp(`${storBokstav(MANADER[forsta.getMonth()])} ${forsta.getFullYear()}`, '')}<main class="stack">${innehall}</main>`, 'kalender');
+    app.innerHTML = ram(`<main class="stack">${innehall}</main>`, 'kalender');
   }
+}
+// Kompakt huvud för kalendern: rubrik med pilar, sedan vy-val och ett filter.
+function kalHuvud(titel, under, enhet) {
+  const aktiva = [S.filter && barnNamn(S.filter), S.kalTyp && TYPER[S.kalTyp]].filter(Boolean);
+  const filterKnapp = `<button class="chip" data-g="kalfilter" aria-pressed="${aktiva.length > 0}" aria-haspopup="dialog">${I.filter}${aktiva.length ? e(aktiva.join(' · ')) : 'Filter'}</button>`;
+  return `<header class="kalhuvud">
+    <div class="topprad">
+      <div><h1>${e(titel)}</h1>${under ? `<div class="datumrad">${e(under)}</div>` : ''}</div>
+      <div class="rad"><button class="rundknapp" data-g="kalsteg" data-d="-1" aria-label="${enhet === 'veckan' ? 'Förra veckan' : 'Förra månaden'}">${I.vanster}</button><button class="rundknapp" data-g="kalsteg" data-d="1" aria-label="${enhet === 'veckan' ? 'Nästa vecka' : 'Nästa månad'}">${I.hoger}</button></div>
+    </div>
+    <div class="topprad">
+      <div class="segment" role="group" aria-label="Vy"><button data-g="kalvy" data-v="vecka" aria-pressed="${S.kalVy === 'vecka'}">Vecka</button><button data-g="kalvy" data-v="manad" aria-pressed="${S.kalVy === 'manad'}">Månad</button></div>
+      ${filterKnapp}
+    </div>
+  </header>`;
+}
+function visaKalFilter() {
+  const s = document.createElement('div');
+  s.className = 'slojan';
+  const barnDel = arForalder() && S.barn.length > 1 ? `<h3>Barn</h3><div class="chips wrap" role="group" aria-label="Barn">
+      <button class="chip" data-g="filter" data-id="" aria-pressed="${!S.filter}">Alla</button>
+      ${S.barn.map((b) => `<button class="chip" data-g="filter" data-id="${b.id}" aria-pressed="${S.filter === b.id}"><span class="prick" style="background:${e(b.farg)}"></span>${e(b.namn)}</button>`).join('')}</div>` : '';
+  s.innerHTML = `<div class="ark" role="dialog" aria-modal="true" aria-label="Filter">
+    <div class="topprad"><h2>Visa</h2><button class="rundknapp" data-g="stang" aria-label="Stäng">✕</button></div>
+    ${barnDel}
+    <h3>Typ</h3>${typChips().replace('class="chips"', 'class="chips wrap"')}
+    <button class="knapp bred" data-g="stang">Klar</button></div>`;
+  document.body.appendChild(s);
+  s.addEventListener('click', (ev) => { if (ev.target === s) s.remove(); });
 }
 function typChips() {
   return `<div class="chips" role="group" aria-label="Visa typ"><button class="chip" data-g="kaltyp" data-t="" aria-pressed="${!S.kalTyp}">Allt</button>${Object.entries(TYPER).map(([k, v]) => `<button class="chip" data-g="kaltyp" data-t="${k}" aria-pressed="${S.kalTyp === k}">${v}</button>`).join('')}</div>`;
@@ -507,10 +533,11 @@ document.addEventListener('click', async (ev) => {
   if (!el) return;
   const g = el.dataset.g;
   try {
-    if (g === 'filter') { S.filter = el.dataset.id || null; return route(); }
+    if (g === 'kalfilter') return visaKalFilter();
+    if (g === 'filter') { S.filter = el.dataset.id || null; await route(); if (el.closest('.ark')) { el.closest('.slojan').remove(); visaKalFilter(); } return; }
     if (g === 'kalvy') { S.kalVy = el.dataset.v; S.kalSteg = 0; return route(); }
     if (g === 'kalsteg') { S.kalSteg = el.dataset.d === '0' ? 0 : S.kalSteg + Number(el.dataset.d); S.valdDag = null; return route(); }
-    if (g === 'kaltyp') { S.kalTyp = el.dataset.t; return route(); }
+    if (g === 'kaltyp') { S.kalTyp = el.dataset.t; await route(); if (el.closest('.ark')) { el.closest('.slojan').remove(); visaKalFilter(); } return; }
     if (g === 'valjdag') { S.valdDag = el.dataset.dag; return route(); }
     if (g === 'plusmeny') return visaPlusmeny();
     if (g === 'stang') return el.closest('.slojan')?.remove();
