@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tre om dagen – Ett kort quiz till paltkoman</title>
+<meta name="description" content="Dagens ord, Tidslinjen och Emoji-gåtan. Tre nya rundor varje dag.">
+<link rel="icon" href="/assets/favicon.svg">
+<script src="/assets/js/konfig.js"></script>
+<script src="/assets/js/konto.js" data-spel="treomdagen" data-nycklar="^tod_"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF8EC; --kort:#FFFFFF; --text:#22202E; --dampad:#6E6878; --linje:#E9DFCC;
+  --natt:#1A2238; --gron:#3E9A5A; --gul:#E3A92B; --gra:#8C909C; --lingon:#C8203A; --smor:#F6C64E;
+  --radie:16px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--smor);outline-offset:2px;border-radius:8px}
+.wrap{max-width:520px;margin:0 auto;padding:0 14px 40px}
+header{text-align:center;padding:14px 0 6px;position:relative}
+.hem{position:absolute;left:0;top:14px;text-decoration:none;color:var(--dampad);font-size:14px;font-weight:600;padding:6px 10px;border-radius:999px;background:rgba(0,0,0,.04)}
+h1{font-family:"Space Grotesk",sans-serif;font-size:30px;line-height:1.1;margin:22px 0 0}
+.under{font-family:Silkscreen,monospace;font-size:12.5px;color:var(--lingon);letter-spacing:.03em;margin-top:4px}
+.datum{color:var(--dampad);font-size:14px;margin-top:2px}
+.steg{display:flex;gap:6px;justify-content:center;margin:14px 0 12px}
+.steg button{white-space:nowrap;border:1px solid var(--linje);background:var(--kort);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600;color:var(--dampad);display:flex;gap:6px;align-items:center}
+.steg button[aria-current="true"]{background:var(--natt);color:#fff;border-color:var(--natt)}
+.steg button[disabled]{opacity:.45;cursor:default}
+.steg .bock{color:var(--gron);font-weight:800}
+.steg button[aria-current="true"] .bock{color:#8FE3A8}
+.kort{background:var(--kort);border:1px solid var(--linje);border-radius:var(--radie);padding:16px}
+.rubrik{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px}
+.rubrik h2{font-family:"Space Grotesk",sans-serif;font-size:22px;margin:0}
+.rubrik span{color:var(--dampad);font-size:13.5px}
+.knapp{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;background:var(--natt);color:#fff;font-weight:700;padding:13px 20px;width:100%;margin-top:12px;font-size:16px}
+.knapp.ljus{background:var(--kort);color:var(--text);border:1px solid var(--linje)}
+.knapp[disabled]{opacity:.5;cursor:default}
+#toast{position:fixed;left:50%;top:150px;max-width:90vw;text-align:center;transform:translateX(-50%);background:var(--natt);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;font-size:14.5px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:10}
+#toast.syns{opacity:1}
+
+/* Dagens ord */
+.rutnat{display:grid;grid-template-rows:repeat(6,1fr);gap:6px;width:min(100%,330px);margin:4px auto 14px}
+.rad{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.rad.skaka{animation:skaka .4s}
+@keyframes skaka{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.ruta{aspect-ratio:1;border:2px solid var(--linje);border-radius:10px;display:grid;place-items:center;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:clamp(22px,7vw,30px);text-transform:uppercase;background:var(--kort)}
+.ruta.fylld{border-color:#B9AE98;animation:pop .1s}
+@keyframes pop{50%{transform:scale(1.06)}}
+.ruta.r{background:var(--gron);border-color:var(--gron);color:#fff}
+.ruta.n{background:var(--gul);border-color:var(--gul);color:#fff}
+.ruta.f{background:var(--gra);border-color:var(--gra);color:#fff}
+.ruta.vand{animation:vand .45s ease both}
+@keyframes vand{0%{transform:rotateX(0)}50%{transform:rotateX(90deg)}100%{transform:rotateX(0)}}
+.tangenter{display:flex;flex-direction:column;gap:6px;user-select:none}
+.tangenter .trad{display:flex;gap:4px;justify-content:center}
+.tangent{flex:1;max-width:44px;height:52px;border:0;border-radius:8px;background:#E7E0D2;font-weight:700;font-size:15px;text-transform:uppercase;padding:0}
+.tangent.bred{max-width:66px;flex:1.5;font-size:12.5px}
+.tangent.r{background:var(--gron);color:#fff}.tangent.n{background:var(--gul);color:#fff}.tangent.f{background:var(--gra);color:#fff}
+
+/* Tidslinjen */
+.tema{display:inline-block;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:#E8EEF9;color:#2F4F8F}
+.handelser{list-style:none;padding:0;margin:10px 0 0;display:flex;flex-direction:column;gap:8px}
+.handelse{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--linje);border-radius:12px;padding:10px 8px 10px 12px;touch-action:none;transition:transform .15s}
+.handelse.dras{box-shadow:0 10px 24px rgba(0,0,0,.15);transform:scale(1.02);z-index:2;position:relative;background:#fff}
+.handelse .grepp{color:#B9AE98;font-size:18px;cursor:grab;padding:0 2px}
+.handelse .txt{flex:1;font-size:15px;line-height:1.35}
+.handelse .ar{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:15px;min-width:62px;text-align:right}
+.pilar{display:flex;flex-direction:column;gap:2px}
+.pilar button{border:1px solid var(--linje);background:var(--kort);border-radius:8px;width:32px;height:26px;font-size:12px;line-height:1;padding:0}
+.pilar button[disabled]{opacity:.3}
+.handelse.ratt{border-color:var(--gron);background:#EAF6EE}
+.handelse.fel{border-color:#E7A1A9;background:#FCEDEF}
+.axel{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dampad);margin-top:6px;font-weight:600}
+
+/* Emoji-gåtan */
+.emojier{font-size:clamp(44px,14vw,64px);text-align:center;letter-spacing:.06em;margin:8px 0 4px;line-height:1.2}
+.kategori{text-align:center;color:var(--dampad);font-size:14px;margin-bottom:10px}
+.alternativ{display:grid;gap:8px}
+.alternativ button{border:1px solid var(--linje);background:var(--bg);border-radius:12px;padding:13px 14px;text-align:left;font-weight:600;font-size:15.5px}
+.alternativ button.ratt{background:var(--gron);border-color:var(--gron);color:#fff}
+.alternativ button.fel{background:var(--lingon);border-color:var(--lingon);color:#fff}
+.alternativ button[disabled]{cursor:default}
+.forklaring{margin-top:10px;background:#FFF3CF;border-radius:12px;padding:10px 14px;font-size:15px}
+
+.svar{margin-top:12px;text-align:center;font-weight:700}
+.svar .stor{font-family:"Space Grotesk",sans-serif;font-size:24px;letter-spacing:.08em;text-transform:uppercase}
+
+/* Resultat */
+.resultat{display:flex;flex-direction:column;gap:10px}
+.resrad{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--linje)}
+.resrad:last-child{border-bottom:0}
+.resrad .ik{font-size:24px;width:32px;text-align:center}
+.resrad b{display:block}
+.resrad span{color:var(--dampad);font-size:14px}
+.resrad .poang{margin-left:auto;font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:18px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-top:6px}
+.stat div{background:var(--bg);border-radius:12px;padding:10px 4px}
+.stat b{font-family:"Space Grotesk",sans-serif;font-size:22px;display:block}
+.stat span{font-size:12.5px;color:var(--dampad)}
+.nedrakning{text-align:center;color:var(--dampad);font-size:14px;margin-top:12px}
+.nedrakning b{color:var(--text);font-variant-numeric:tabular-nums}
+.palt{display:block;margin:4px auto 0;width:70px;image-rendering:pixelated}
+footer{text-align:center;color:var(--dampad);font-size:12.5px;margin-top:22px}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="hem" href="/">← Palt &amp; pixel</a>
+    <h1>Tre om dagen</h1>
+    <div class="under">Ett kort quiz till paltkoman</div>
+    <div class="datum" id="datum"></div>
+  </header>
+  <nav class="steg" id="steg" aria-label="Dagens rundor"></nav>
+  <main id="vy"></main>
+  <footer>Nya rundor varje dag vid midnatt. Godkända ord från den svenska Hunspell-ordlistan av Göran Andersson (LGPL).<br><a href="/">paltpixel.se</a></footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="ord.js"></script>
+<script src="tidslinje.js"></script>
+<script src="emoji.js"></script>
+<script>
+"use strict";
+/* ---------- Dagen ---------- */
+const START = Date.UTC(2026, 10, 21); // första dagen
+function idagIso() { return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Stockholm" }); }
+const IDAG = idagIso();
+const DAG = Math.round((Date.parse(IDAG + "T00:00:00Z") - START) / 864e5);
+const VECKODAGAR = ["söndag", "måndag", "tisdag", "onsdag", "torsdag", "fredag", "lördag"];
+const MANADER = ["januari", "februari", "mars", "april", "maj", "juni", "juli", "augusti", "september", "oktober", "november", "december"];
+{ const d = new Date(IDAG + "T12:00:00Z"); const s = `${VECKODAGAR[d.getUTCDay()]} ${d.getUTCDate()} ${MANADER[d.getUTCMonth()]}`; document.getElementById("datum").textContent = s[0].toUpperCase() + s.slice(1); }
+
+// Förutsägbar slump: samma för alla som spelar samma dag
+function slump(fro) { let s = fro >>> 0; return () => { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function blandad(n, fro) { const a = [...Array(n).keys()], r = slump(fro); for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+// Varje lista går igenom alla sina poster innan något upprepas
+function dagensIndex(n, namn) { const varv = Math.floor(Math.max(0, DAG) / n), plats = ((DAG % n) + n) % n; return blandad(n, namn * 1000 + varv)[plats]; }
+
+const SVAR = window.TOD_SVAR, GILTIGA = new Set(window.TOD_GILTIGA);
+const DAGENS_ORD = SVAR[dagensIndex(SVAR.length, 11)];
+
+const TEMAN = ["varld", "sverige", "lokal", "varld", "sverige"];
+const TEMANAMN = { varld: "Världen", sverige: "Sverige", lokal: "Norrbotten och Norrland" };
+const TEMA = TEMAN[((DAG % 5) + 5) % 5];
+const DAGENS_TID = (() => {
+  const pool = window.TOD_TID[TEMA], ordning = blandad(pool.length, 7000 + DAG), valda = [], ar = new Set();
+  for (const i of ordning) { const h = pool[i]; if (ar.has(h[0])) continue; ar.add(h[0]); valda.push(h); if (valda.length === 5) break; }
+  return valda; // i slumpad ordning
+})();
+
+const E = window.TOD_EMOJI;
+const DAGENS_EMOJI = E[dagensIndex(E.length, 23)];
+const ALTERNATIV = (() => {
+  const r = slump(9000 + DAG), andra = E.filter((x) => x[2] === DAGENS_EMOJI[2] && x[1] !== DAGENS_EMOJI[1]);
+  const val = [];
+  while (val.length < 3 && andra.length) val.push(andra.splice(Math.floor(r() * andra.length), 1)[0][1]);
+  const alla = [DAGENS_EMOJI[1], ...val];
+  return blandad(alla.length, 9100 + DAG).map((i) => alla[i]);
+})();
+const KATEGORI = { ord: "Ett sammansatt ord", film: "En film, bok eller saga", uttryck: "Ett uttryck eller ordspråk", plats: "En plats", mat: "Mat eller tradition" };
+
+/* ---------- Sparat ---------- */
+const NYCKEL = "tod_dag_" + IDAG;
+let L = (() => { try { return JSON.parse(localStorage.getItem(NYCKEL)) || null; } catch (_) { return null; } })() || { ord: { gissningar: [], klar: false, vann: false }, tid: { ordning: null, klar: false, poang: 0 }, emoji: { val: null, klar: false } };
+function spara() { try { localStorage.setItem(NYCKEL, JSON.stringify(L)); } catch (_) { } }
+function statistik() { try { return JSON.parse(localStorage.getItem("tod_statistik")) || {}; } catch (_) { return {}; } }
+function sparaStatistik() {
+  const s = statistik();
+  if (s.senast === IDAG) return;
+  const igar = new Date(Date.parse(IDAG + "T12:00:00Z") - 864e5).toISOString().slice(0, 10);
+  s.spelade = (s.spelade || 0) + 1;
+  s.svit = s.senast === igar ? (s.svit || 0) + 1 : 1;
+  s.basta = Math.max(s.basta || 0, s.svit);
+  s.senast = IDAG;
+  const p = poangTotalt(); s.summa = (s.summa || 0) + p;
+  try { localStorage.setItem("tod_statistik", JSON.stringify(s)); } catch (_) { }
+}
+function poangTotalt() { return (L.ord.vann ? 7 - L.ord.gissningar.length : 0) + L.tid.poang + (L.emoji.val === DAGENS_EMOJI[1] ? 3 : 0); }
+
+/* ---------- Ramen ---------- */
+const vy = document.getElementById("vy");
+const e = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+let toastTid;
+function toast(t) { const el = document.getElementById("toast"); el.textContent = t; el.classList.add("syns"); clearTimeout(toastTid); toastTid = setTimeout(() => el.classList.remove("syns"), 1800); }
+const STEG = [["ord", "Ordet"], ["tid", "Tidslinjen"], ["emoji", "Emojin"]];
+let aktuell = !L.ord.klar ? "ord" : !L.tid.klar ? "tid" : !L.emoji.klar ? "emoji" : "resultat";
+function kanOppna(id) { return id === "ord" || (id === "tid" && L.ord.klar) || (id === "emoji" && L.tid.klar) || (id === "resultat" && L.emoji.klar); }
+function ritaSteg() {
+  document.getElementById("steg").innerHTML = STEG.map(([id, namn], i) => `<button data-steg="${id}" aria-current="${aktuell === id}" ${kanOppna(id) ? "" : "disabled"}>${L[id].klar ? '<span class="bock">✓</span>' : i + 1 + "."} ${namn}</button>`).join("")
+    + (L.emoji.klar ? `<button data-steg="resultat" aria-current="${aktuell === "resultat"}">★</button>` : "");
+}
+function ga(id) { aktuell = id; ritaSteg(); ({ ord: visaOrd, tid: visaTid, emoji: visaEmoji, resultat: visaResultat })[id](); window.scrollTo({ top: 0, behavior: "smooth" }); }
+document.getElementById("steg").addEventListener("click", (ev) => { const b = ev.target.closest("[data-steg]"); if (b && !b.disabled) ga(b.dataset.steg); });
+
+/* ---------- 1. Dagens ord ---------- */
+let skrivet = "";
+function bedom(gissning) {
+  const res = Array(5).fill("f"), kvar = {};
+  for (let i = 0; i < 5; i++) { if (gissning[i] === DAGENS_ORD[i]) res[i] = "r"; else kvar[DAGENS_ORD[i]] = (kvar[DAGENS_ORD[i]] || 0) + 1; }
+  for (let i = 0; i < 5; i++) if (res[i] !== "r" && kvar[gissning[i]]) { res[i] = "n"; kvar[gissning[i]]--; }
+  return res;
+}
+function tangentStatus() {
+  const st = {}, rang = { r: 3, n: 2, f: 1 };
+  for (const g of L.ord.gissningar) bedom(g).forEach((b, i) => { const t = g[i]; if (!st[t] || rang[b] > rang[st[t]]) st[t] = b; });
+  return st;
+}
+function visaOrd(vand = -1) {
+  const rader = [];
+  for (let r = 0; r < 6; r++) {
+    const g = L.ord.gissningar[r], aktiv = r === L.ord.gissningar.length && !L.ord.klar;
+    const b = g ? bedom(g) : null;
+    rader.push(`<div class="rad" data-rad="${r}">${[0, 1, 2, 3, 4].map((i) => {
+      const t = g ? g[i] : aktiv ? (skrivet[i] || "") : "";
+      return `<div class="ruta ${b ? b[i] : ""} ${aktiv && t ? "fylld" : ""} ${r === vand ? "vand" : ""}" style="${r === vand ? `animation-delay:${i * 0.12}s` : ""}">${e(t)}</div>`;
+    }).join("")}</div>`);
+  }
+  const st = tangentStatus();
+  const tangent = (k) => k === "enter" ? `<button class="tangent bred" data-t="enter">Gissa</button>` : k === "bak" ? `<button class="tangent bred" data-t="bak" aria-label="Sudda">⌫</button>` : `<button class="tangent ${st[k] || ""}" data-t="${k}">${k}</button>`;
+  const tangentbord = [["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "å"], ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ö", "ä"], ["enter", "z", "x", "c", "v", "b", "n", "m", "bak"]];
+  vy.innerHTML = `<section class="kort">
+    <div class="rubrik"><h2>Dagens ord</h2><span>Fem bokstäver, sex försök</span></div>
+    <div class="rutnat" aria-label="Gissningar">${rader.join("")}</div>
+    ${L.ord.klar ? `<div class="svar">${L.ord.vann ? `Snyggt! Du klarade det på ${L.ord.gissningar.length} försök.` : "Det var svårt i dag. Ordet var"}<div class="stor">${e(DAGENS_ORD)}</div></div>
+      <button class="knapp" data-ga="tid">Nästa: Tidslinjen →</button>`
+    : `<div class="tangenter">${tangentbord.map((rad) => `<div class="trad">${rad.map(tangent).join("")}</div>`).join("")}</div>`}
+  </section>`;
+}
+function skriv(k) {
+  if (L.ord.klar || aktuell !== "ord") return;
+  if (k === "bak") skrivet = skrivet.slice(0, -1);
+  else if (k === "enter") return gissa();
+  else if (/^[a-zåäö]$/.test(k) && skrivet.length < 5) skrivet += k;
+  visaOrd();
+}
+function gissa() {
+  const rad = vy.querySelector(`[data-rad="${L.ord.gissningar.length}"]`);
+  const skaka = (t) => { toast(t); rad.classList.remove("skaka"); void rad.offsetWidth; rad.classList.add("skaka"); };
+  if (skrivet.length < 5) return skaka("Ordet ska ha fem bokstäver");
+  if (!GILTIGA.has(skrivet)) return skaka("Det ordet finns inte i ordlistan");
+  L.ord.gissningar.push(skrivet);
+  const r = L.ord.gissningar.length - 1;
+  if (skrivet === DAGENS_ORD) { L.ord.klar = true; L.ord.vann = true; }
+  else if (L.ord.gissningar.length === 6) L.ord.klar = true;
+  skrivet = ""; spara(); visaOrd(r);
+  if (L.ord.klar) { ritaSteg(); toast(L.ord.vann ? ["Paltastiskt!", "Smör i hålet!", "Klockrent!", "Snyggt!", "Puh, där satt den!", "Nära ögat!"][r] : "Bättre lycka i morgon"); }
+}
+document.addEventListener("click", (ev) => { const t = ev.target.closest("[data-t]"); if (t) skriv(t.dataset.t); });
+document.addEventListener("keydown", (ev) => {
+  if (ev.ctrlKey || ev.metaKey || ev.altKey) return;
+  if (ev.key === "Enter") skriv("enter");
+  else if (ev.key === "Backspace") skriv("bak");
+  else if (ev.key && ev.key.length === 1) skriv(ev.key.toLowerCase());
+});
+
+/* ---------- 2. Tidslinjen ---------- */
+const arText = (h) => (h[2] ? "ca " : "") + (h[0] < 0 ? `${-h[0]} f.Kr.` : h[0]);
+function visaTid() {
+  if (!L.tid.ordning) { L.tid.ordning = DAGENS_TID.map((_, i) => i); spara(); }
+  const ord = L.tid.ordning.map((i) => DAGENS_TID[i]);
+  const ratt = [...DAGENS_TID].sort((a, b) => a[0] - b[0]);
+  vy.innerHTML = `<section class="kort">
+    <div class="rubrik"><h2>Tidslinjen</h2><span class="tema">${TEMANAMN[TEMA]}</span></div>
+    <p style="margin:0;color:var(--dampad);font-size:14.5px">${L.tid.klar ? `Du fick ${L.tid.poang} av 5 på rätt plats.` : "Lägg händelserna i rätt ordning. Dra dem, eller använd pilarna."}</p>
+    <div class="axel"><span>↑ Äldst</span></div>
+    <ol class="handelser" id="lista">${(L.tid.klar ? ord : ord).map((h, pos) => {
+      const r = L.tid.klar ? (ratt[pos] === h ? "ratt" : "fel") : "";
+      return `<li class="handelse ${r}" data-pos="${pos}">${L.tid.klar ? "" : '<span class="grepp" aria-hidden="true">⠿</span>'}<span class="txt">${e(h[1])}</span>
+        ${L.tid.klar ? `<span class="ar">${arText(h)}</span>` : `<span class="pilar"><button data-upp="${pos}" ${pos === 0 ? "disabled" : ""} aria-label="Flytta upp">▲</button><button data-ner="${pos}" ${pos === ord.length - 1 ? "disabled" : ""} aria-label="Flytta ner">▼</button></span>`}</li>`;
+    }).join("")}</ol>
+    <div class="axel"><span>↓ Nyast</span></div>
+    ${L.tid.klar ? `${L.tid.poang < 5 ? `<p style="font-size:14px;color:var(--dampad);margin:12px 0 0"><b style="color:var(--text)">Rätt ordning:</b> ${ratt.map((h) => `${arText(h)} – ${e(h[1])}`).join(" · ")}</p>` : ""}
+      <button class="knapp" data-ga="emoji">Nästa: Emoji-gåtan →</button>`
+    : `<button class="knapp" data-las>Lås ordningen</button>`}
+  </section>`;
+  if (!L.tid.klar) aktiveraDrag();
+}
+function flytta(fran, till) { const o = L.tid.ordning; const [x] = o.splice(fran, 1); o.splice(till, 0, x); spara(); visaTid(); }
+document.addEventListener("click", (ev) => {
+  const u = ev.target.closest("[data-upp]"), n = ev.target.closest("[data-ner]");
+  if (u) flytta(+u.dataset.upp, +u.dataset.upp - 1);
+  if (n) flytta(+n.dataset.ner, +n.dataset.ner + 1);
+  if (ev.target.closest("[data-las]")) {
+    const ratt = [...DAGENS_TID].sort((a, b) => a[0] - b[0]);
+    L.tid.poang = L.tid.ordning.filter((i, pos) => DAGENS_TID[i] === ratt[pos]).length;
+    L.tid.klar = true; spara(); ritaSteg(); visaTid();
+    toast(L.tid.poang === 5 ? "Alla rätt – historiskt bra!" : L.tid.poang >= 3 ? "Bra jobbat!" : "Historia är svårt. Palt är lätt.");
+  }
+  const g = ev.target.closest("[data-ga]"); if (g) ga(g.dataset.ga);
+});
+function aktiveraDrag() {
+  const lista = document.getElementById("lista");
+  lista.querySelectorAll(".handelse").forEach((li) => {
+    li.addEventListener("pointerdown", (ev) => {
+      if (ev.target.closest("button")) return;
+      const start = +li.dataset.pos, hojd = li.getBoundingClientRect().height + 8, y0 = ev.clientY;
+      let mal = start;
+      li.setPointerCapture(ev.pointerId); li.classList.add("dras");
+      const syskon = [...lista.children];
+      const flyt = (e2) => {
+        const dy = e2.clientY - y0; li.style.transform = `translateY(${dy}px) scale(1.02)`;
+        mal = Math.max(0, Math.min(syskon.length - 1, start + Math.round(dy / hojd)));
+        syskon.forEach((s, i) => { if (s === li) return; let f = 0; if (start < mal && i > start && i <= mal) f = -hojd; if (start > mal && i < start && i >= mal) f = hojd; s.style.transform = f ? `translateY(${f}px)` : ""; });
+      };
+      const slapp = () => { li.removeEventListener("pointermove", flyt); li.removeEventListener("pointerup", slapp); li.removeEventListener("pointercancel", slapp); if (mal !== start) flytta(start, mal); else visaTid(); };
+      li.addEventListener("pointermove", flyt); li.addEventListener("pointerup", slapp); li.addEventListener("pointercancel", slapp);
+    });
+  });
+}
+
+/* ---------- 3. Emoji-gåtan ---------- */
+function visaEmoji() {
+  const [emojier, svar, kat, forkl] = DAGENS_EMOJI;
+  vy.innerHTML = `<section class="kort">
+    <div class="rubrik"><h2>Emoji-gåtan</h2><span>Ett försök</span></div>
+    <div class="emojier" aria-label="Emojier">${emojier}</div>
+    <div class="kategori">${KATEGORI[kat]}</div>
+    <div class="alternativ">${ALTERNATIV.map((a) => {
+      const k = L.emoji.klar ? (a === svar ? "ratt" : a === L.emoji.val ? "fel" : "") : "";
+      return `<button data-val="${e(a)}" class="${k}" ${L.emoji.klar ? "disabled" : ""}>${e(a)}</button>`;
+    }).join("")}</div>
+    ${L.emoji.klar ? `<div class="forklaring"><b>${L.emoji.val === svar ? "Rätt!" : "Det var " + e(svar) + "."}</b> ${e(forkl)}.</div>
+      <button class="knapp" data-ga="resultat">Se dagens resultat ★</button>` : ""}
+  </section>`;
+}
+document.addEventListener("click", (ev) => {
+  const b = ev.target.closest("[data-val]");
+  if (!b || L.emoji.klar) return;
+  L.emoji.val = b.dataset.val; L.emoji.klar = true; spara(); sparaStatistik(); ritaSteg(); visaEmoji();
+  toast(L.emoji.val === DAGENS_EMOJI[1] ? "Rätt!" : "Inte riktigt");
+});
+
+/* ---------- Resultat ---------- */
+let nedTimer;
+function visaResultat() {
+  sparaStatistik();
+  const s = statistik(), p = poangTotalt();
+  const ordP = L.ord.vann ? 7 - L.ord.gissningar.length : 0, emojiR = L.emoji.val === DAGENS_EMOJI[1];
+  const omdome = p >= 13 ? "Paltmästare!" : p >= 9 ? "Riktigt bra!" : p >= 6 ? "Godkänt med smör." : p >= 3 ? "Paltkoman tog visst över." : "Det var en tung dag. Ta en palt till.";
+  vy.innerHTML = `<section class="kort resultat">
+    <svg class="palt" viewBox="0 0 30 22" aria-hidden="true" shape-rendering="crispEdges"><rect x="3" y="18" width="24" height="2" fill="#C9BFA8"/><path fill="#EADFC6" d="M8 8h14v1h2v2h1v3h1v3H4v-3h1v-3h1V9h2z"/><path fill="#CDBB98" d="M18 14h7v3H14v-1h4z"/><rect x="13" y="9" width="5" height="3" fill="#F6C64E"/><rect x="12" y="5" width="2" height="2" fill="#C8203A"/><rect x="15" y="4" width="2" height="2" fill="#C8203A"/><rect x="16" y="6" width="2" height="2" fill="#C8203A"/></svg>
+    <div style="text-align:center"><div style="font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700">${p} av 14</div><div style="color:var(--dampad)">${omdome}</div></div>
+    <div>
+      <div class="resrad"><span class="ik">🔤</span><div><b>Dagens ord</b><span>${L.ord.vann ? `${L.ord.gissningar.length} av 6 försök` : "Inte i dag"} · ${e(DAGENS_ORD.toUpperCase())}</span></div><span class="poang">${ordP}/6</span></div>
+      <div class="resrad"><span class="ik">📜</span><div><b>Tidslinjen</b><span>${TEMANAMN[TEMA]}</span></div><span class="poang">${L.tid.poang}/5</span></div>
+      <div class="resrad"><span class="ik">🧩</span><div><b>Emoji-gåtan</b><span>${e(DAGENS_EMOJI[1])}</span></div><span class="poang">${emojiR ? 3 : 0}/3</span></div>
+    </div>
+    <div class="stat"><div><b>${s.spelade || 1}</b><span>Spelade dagar</span></div><div><b>${s.svit || 1}</b><span>Dagar i rad</span></div><div><b>${s.basta || 1}</b><span>Längsta svit</span></div></div>
+    <button class="knapp" data-dela>Dela resultatet</button>
+    <div class="nedrakning">Nya rundor om <b id="ned"></b></div>
+  </section>`;
+  const ned = () => {
+    const el = document.getElementById("ned"); if (!el) return clearInterval(nedTimer);
+    if (idagIso() !== IDAG) { location.reload(); return; }
+    const p = Object.fromEntries(new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Stockholm", hour: "2-digit", minute: "2-digit", second: "2-digit", hourCycle: "h23" }).formatToParts(new Date()).map((x) => [x.type, +x.value || 0]));
+    const kvar = 86400 - (p.hour * 3600 + p.minute * 60 + p.second);
+    el.textContent = `${Math.floor(kvar / 3600)} h ${String(Math.floor(kvar / 60) % 60).padStart(2, "0")} min ${String(kvar % 60).padStart(2, "0")} s`;
+  };
+  clearInterval(nedTimer); ned(); nedTimer = setInterval(ned, 1000);
+}
+function delningstext() {
+  const rutor = L.ord.gissningar.map((g) => bedom(g).map((b) => ({ r: "🟩", n: "🟨", f: "⬜" })[b]).join("")).join("\n");
+  const ratt = [...DAGENS_TID].sort((a, b) => a[0] - b[0]);
+  const tid = L.tid.ordning.map((i, pos) => (DAGENS_TID[i] === ratt[pos] ? "🟩" : "🟥")).join("");
+  return `Tre om dagen ${IDAG}\n🔤 ${L.ord.vann ? L.ord.gissningar.length : "X"}/6\n${rutor}\n📜 ${tid}\n🧩 ${L.emoji.val === DAGENS_EMOJI[1] ? "✅" : "❌"}\n${poangTotalt()} av 14 – paltpixel.se/treomdagen`;
+}
+document.addEventListener("click", async (ev) => {
+  if (!ev.target.closest("[data-dela]")) return;
+  const text = delningstext();
+  try { if (navigator.share) { await navigator.share({ text }); return; } } catch (_) { return; }
+  try { await navigator.clipboard.writeText(text); toast("Kopierat – klistra in var du vill"); } catch (_) { toast("Kunde inte kopiera"); }
+});
+
+ga(aktuell);
+</script>
+</body>
+</html>

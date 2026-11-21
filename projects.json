@@ -40,6 +40,19 @@
       "lank": "https://skolvy.se/kluro"
     },
     {
+      "id": "treomdagen",
+      "namn": "Tre om dagen",
+      "text": "Ett kort quiz till paltkoman: Dagens ord, Tidslinjen och Emoji-gåtan.",
+      "typ": "spel",
+      "kategori": "Quiz",
+      "ikon": "spel",
+      "storlek": "liten",
+      "farg": "smor",
+      "bild": "assets/img/treomdagen.webp",
+      "alt": "Tre om dagen: Dagens ord med gissningar i gult, grönt och grått",
+      "lank": "/treomdagen/"
+    },
+    {
       "id": "veckopalten",
       "namn": "Veckopalten",
       "text": "Familjens skolvecka: prov, läxor och schema.",
