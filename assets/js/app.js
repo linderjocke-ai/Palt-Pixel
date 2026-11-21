@@ -2,63 +2,13 @@
 (() => {
   "use strict";
 
-  /* ---------- Ikoner (enkla linjeikoner) ---------- */
-  const IKON = {
-    spel: '<path d="M7 8h10a5 5 0 0 1 0 10H7A5 5 0 0 1 7 8Z"/><path d="M8 11v4M6 13h4"/><circle cx="15.5" cy="12" r=".8" fill="currentColor"/><circle cx="17.5" cy="14.5" r=".8" fill="currentColor"/>',
-    app: '<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
-    flagga: '<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>',
-    vagg: '<rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.5h18M3 15h18M9 4v5.5M15 9.5V15M9 15v5"/>',
-    personer: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15.5 14.4c2.9.1 5.5 2.2 5.5 5.6"/>',
-    timer: '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/>',
-    lista: '<path d="m4 6 2 2 3-3M4 13l2 2 3-3"/><path d="M12 7h8M12 14h8M5 20h.01M12 20h6"/>',
-    plus: '<path d="M12 5v14M5 12h14"/>',
-    bild: '<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10.5" r="1.8"/><path d="m21 16-5-5-8 8"/>'
-  };
-  const svg = (namn) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IKON[namn] || IKON.bild}</svg>`;
-  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-
-  /* ---------- Projekt och filter ---------- */
-  const mosaik = document.getElementById("mosaik");
-  const radTyp = document.getElementById("filter-typ");
-  const TYPNAMN = { spel: "Spel", app: "App" };
-  let projekt = [];
-
-  function ruta(p) {
-    const etikett = `<span class="etikett">${svg(p.ikon)}${esc(TYPNAMN[p.typ] || p.typ)} · ${esc(p.kategori)}</span>`;
-    const bild = p.bild && p.storlek !== "bred"
-      ? `<img src="${esc(p.bild)}" alt="${esc(p.alt || p.namn)}" loading="lazy" decoding="async">`
-      : `<img src="${esc(p.poster)}" alt="" loading="lazy" decoding="async">`;
-    const klipp = p.klipp ? `<video muted loop playsinline preload="none" data-klipp="${esc(p.klipp)}" aria-hidden="true"></video>` : "";
-    const inre = `<div class="ruta-topp"><div><h3>${esc(p.namn)}</h3><p>${esc(p.text)}</p></div>${etikett}</div><div class="miniatyr">${bild}${klipp}</div>`;
-    const klass = `ruta ${p.storlek || "liten"} f-${esc(p.farg)}`;
-    return `<a class="${klass}" href="${esc(p.sida)}">${inre}</a>`;
-  }
-
-  function nastaRuta() {
-    return `<article class="ruta liten nasta"><div class="ruta-topp"><div><h3>Nästa projekt</h3><p>Något nytt är på gång.</p></div></div><div class="miniatyr platshallare">${svg("plus")}<span>Snart</span></div></article>`;
-  }
-
-  function ritaVal() {
-    const antal = (t) => projekt.filter((p) => t === "alla" || p.typ === t).length;
-    radTyp.innerHTML = [["Allt", "alla", "/alla/"], ["Spel", "spel", "/spel/"], ["Appar", "app", "/appar/"]]
-      .map(([namn, t, href]) => `<a class="chip" href="${href}">${namn} <span class="antal">${antal(t)}</span></a>`).join("");
-  }
-
-  fetch("/projects.json")
-    .then((r) => r.json())
-    .then((data) => {
-      projekt = data.projekt || [];
-      mosaik.innerHTML = projekt.map(ruta).join("") + nastaRuta();
-      ritaVal();
-    })
-    .catch(() => {
-      mosaik.innerHTML = '<p class="ingress">Projekten kunde inte laddas just nu. Ladda om sidan.</p>';
-    });
-
   /* ---------- Pixellandskap: Piteå skärgård ---------- */
   // Följer klockan (dag/natt) och årstiden. Tryck i bilden: det finns små påskägg.
   const canvas = document.getElementById("landskap");
-  const ctx = canvas.getContext("2d");
+  const bakduk = document.getElementById("himmelduk");
+  const ctxFram = canvas.getContext("2d");
+  const ctxBak = bakduk ? bakduk.getContext("2d") : ctxFram;
+  let ctx = ctxFram;
   const H = 120;
   let W = 320;
   const lugn = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -587,9 +537,13 @@
     if (skrivet === "palt") { effekter.push({ typ: "paltregn", start: performance.now(), fro: Math.floor(Math.random() * 1e6) }); vack(); }
   });
 
+  // Himlen ritas på en egen duk bakom det stora ordet; resten av landskapet ligger framför.
   function rita(t) {
+    ctx = ctxBak;
     himmel();
     if (natt) { stjarnor(t); norrsken(t); } else { sol(t); }
+    ctx = ctxFram;
+    if (ctxBak !== ctxFram) ctx.clearRect(0, 0, W, H);
     fabrik(t);
     oar();
     hav(t);
@@ -605,6 +559,7 @@
     W = Math.max(160, Math.round(H * (r.width / Math.max(1, r.height))));
     canvas.width = W;
     canvas.height = H;
+    if (bakduk) { bakduk.width = W; bakduk.height = H; }
     rita(performance.now());
   }
   window.addEventListener("resize", storlek);

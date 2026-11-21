@@ -2,25 +2,29 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Palt &amp; pixel – spel, appar och små experiment</title>
-  <meta name="description" content="Palt & pixel är ett bibliotek av sidoprojekt: spel, appar och små experiment, med rötter i Piteå.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Palt &amp; pixel – spel, appar och små experiment från Piteå</title>
+  <meta name="description" content="Palt & pixel är ett bibliotek av spel, appar och små experiment med rötter i Piteå. Allt körs direkt i webbläsaren.">
   <meta property="og:title" content="Palt & pixel">
-  <meta property="og:description" content="Spel, appar och små experiment, med rötter i Piteå.">
-  <meta property="og:image" content="/assets/img/frontlinjen.webp">
-  <meta name="theme-color" content="#0E1526">
+  <meta property="og:description" content="Spel, appar och små experiment från Piteå. Allt körs direkt i webbläsaren.">
+  <meta property="og:image" content="/assets/video/vaggen-poster.jpg">
+  <meta name="theme-color" content="#2E5A44">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Silkscreen&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/style.css?v=4">
-  <link rel="stylesheet" href="/assets/css/sidor.css?v=4">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,500..900&family=Inter:wght@400;500;600;700&family=Silkscreen&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/style.css?v=5">
+  <link rel="stylesheet" href="/assets/css/pop.css?v=5">
+  <link rel="stylesheet" href="/assets/css/start.css?v=5">
+  <link rel="preload" as="image" href="/assets/img/palt-hero.webp">
 </head>
-<body>
+<body class="pop start">
   <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
 
   <header class="hero" id="topp">
-    <canvas id="landskap" aria-hidden="true"></canvas>
+    <canvas id="himmelduk" aria-hidden="true"></canvas>
+    <div class="hero-ord" aria-hidden="true">PALT</div>
+    <canvas id="landskap" aria-label="Pixelbild av Piteå skärgård. Tryck i bilden – det finns små överraskningar." role="img"></canvas>
     <div class="hero-topp">
       <a class="varumarke" href="/" aria-label="Palt & pixel, till startsidan">
         <img src="/assets/logo.svg" alt="" width="55" height="44">
@@ -30,46 +34,145 @@
         <a href="/spel/">Spel</a>
         <a href="/appar/">Appar</a>
         <a href="/alla/">Allt</a>
-        <a href="#om">Om</a>
         <a href="/konto/" id="konto-lank">Logga in</a>
-        <button class="himmel" type="button" id="himmel" aria-label="Byt mellan midnattssol och norrsken" title="Byt himmel">
+        <button class="himmel" type="button" id="himmel" aria-label="Byt mellan dag och natt" title="Byt himmel">
           <span class="himmel-ikon" aria-hidden="true"></span>
         </button>
       </nav>
     </div>
+    <p class="hero-meta"><span>PITEÅ · 65°19′N 21°29′Ö</span><span>SKOG · ÄLV · SKÄRGÅRD</span></p>
+    <img class="hero-palt" src="/assets/img/palt-hero.webp" alt="" width="1191" height="532">
   </header>
 
   <main id="innehall">
-    <section class="intro">
-      <p class="kicker">Med rötter i Piteå</p>
-      <h1>Spel, appar och små experiment.</h1>
-      <p class="ingress">Sidoprojekt byggda på kvällar och helger, med en tallrik palt inom räckhåll. Tryck på en ruta för att läsa mer och börja spela – allt körs direkt i webbläsaren, inget behöver installeras.</p>
+    <section class="start-val">
+      <div class="start-rad">
+        <div>
+          <span class="etikett">Biblioteket</span>
+          <span class="varde">8 projekt</span>
+        </div>
+        <nav class="prickar" aria-label="Bläddra">
+          <a href="/spel/"><span class="prick" style="background:#1E4E9C"></span><span>SPEL</span></a>
+          <a href="/appar/"><span class="prick" style="background:#2E7D5B"></span><span>APPAR</span></a>
+          <a href="/alla/"><span class="prick" style="background:#B4553A"></span><span>ALLT</span></a>
+        </nav>
+      </div>
+      <a class="spela" href="/alla/"><span class="spela-v">Utforska allt</span><span class="spela-h">Ingen installation</span></a>
     </section>
 
-    <section class="bibliotek" id="spel" aria-labelledby="bibliotek-rubrik">
-      <h2 id="bibliotek-rubrik" class="visuellt-dold">Alla projekt</h2>
-      <nav class="filter" aria-label="Bläddra bland projekten">
-        <div class="filter-rad" id="filter-typ"></div>
-      </nav>
-      <div class="mosaik" id="mosaik" aria-live="polite"></div>
+    <section class="start-intro">
+      <h1>Spel, appar och små experiment – med rötter i Piteå.</h1>
+      <p class="ingress">Byggda på kvällar och helger, någonstans mellan skogen, älven och skärgården, med en tallrik palt inom räckhåll. Allt körs direkt i webbläsaren – inget att installera.</p>
     </section>
 
-    <section class="om" id="om" aria-labelledby="om-rubrik">
-      <h2 id="om-rubrik">Om Palt &amp; pixel</h2>
-      <p>Ett bibliotek av sidoprojekt: spel, appar och små experiment. Namnet kommer från pitepalten, och från pixlarna som allt här är byggt av.</p>
-      <p>Bilden ovanför följer klockan och årstiden: ljust på dagen, norrsken på kvällen, is och snö på vintern. Knappen uppe till höger byter mellan dag och natt. Tryck gärna lite här och där i bilden.</p>
+    <section class="start-del" aria-labelledby="rubrik-spel">
+      <div class="del-huvud"><h2 id="rubrik-spel">Spel</h2><a href="/spel/">Alla spel →</a></div>
+      <div class="pk-rutnat"><!--SPEL-->
+        <a class="pk pk-bred" href="/projekt/frontlinjen/" style="--topp:#1E4E9C;--botten:#E8EEF8;--ord:#D3E2FF;--ljus:#EEF3FF;--ink:#0C1B33;--knapp:#0F2A57;--knapptext:#EEF3FF">
+        <span class="pk-skarm"><img src="/assets/video/frontlinjen-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/frontlinjen-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Realtidsstrategi</span>
+          <span class="pk-namn">Frontlinjen</span>
+          <span class="pk-ingress">Bygg en bas, samla malm och ta över kartan – i lugn realtid.</span>
+          <span class="pk-cta">Spela →</span>
+        </span>
+      </a>
+        <a class="pk pk-bred" href="/projekt/vaggen/" style="--topp:#B4553A;--botten:#F3E6D8;--ord:#FFD8C6;--ljus:#FFF1EA;--ink:#3A160B;--knapp:#5A2414;--knapptext:#FFF1EA">
+        <span class="pk-skarm"><img src="/assets/video/vaggen-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/vaggen-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Bygga och mysa</span>
+          <span class="pk-namn">Väggen</span>
+          <span class="pk-ingress">Ett lugnt spel om att bygga ett hem tillsammans på en gammal vägg.</span>
+          <span class="pk-cta">Spela →</span>
+        </span>
+      </a>
+        <a class="pk pk-stod" href="/projekt/kluro/" style="--topp:#17414A;--botten:#E7F0EE;--ord:#9FDCE3;--ljus:#E9F6F5;--ink:#0E2A30;--knapp:#0E2A30;--knapptext:#FFE7A0">
+        <span class="pk-skarm"><img src="/assets/video/kluro-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/kluro-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Sällskapsspel</span>
+          <span class="pk-namn">Kluro</span>
+          <span class="pk-ingress">Dagens kluringar och en topplista – perfekt för fikarummet.</span>
+          <span class="pk-cta">Spela →</span>
+        </span>
+      </a>
+        <a class="pk pk-stod" href="/projekt/treomdagen/" style="--topp:#E7B321;--botten:#FBF3DC;--ord:#FFF0BF;--ljus:#3A2A00;--ink:#3A2A00;--knapp:#3A2A00;--knapptext:#FFF3CC">
+        <span class="pk-skarm"><img src="/assets/video/treomdagen-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/treomdagen-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Dagligt quiz</span>
+          <span class="pk-namn">Tre om dagen</span>
+          <span class="pk-ingress">Ett kort quiz till paltkoman.</span>
+          <span class="pk-cta">Spela →</span>
+        </span>
+      </a>
+        <!--/SPEL--></div>
+    </section>
+
+    <section class="start-del" aria-labelledby="rubrik-appar">
+      <div class="del-huvud"><h2 id="rubrik-appar">Appar</h2><a href="/appar/">Alla appar →</a></div>
+      <div class="pk-rutnat"><!--APPAR-->
+        <a class="pk pk-stod" href="/projekt/veckopalten/" style="--topp:#2E7D5B;--botten:#E6F2EA;--ord:#C9EEDB;--ljus:#EFFFF6;--ink:#0F3B28;--knapp:#0F3B28;--knapptext:#EFFFF6">
+        <span class="pk-skarm"><img src="/assets/video/veckopalten-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/veckopalten-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Familjeplanering</span>
+          <span class="pk-namn">Veckopalten</span>
+          <span class="pk-ingress">Familjens skolvecka på ett ställe: prov, läxor, schema och lunch.</span>
+          <span class="pk-cta">Öppna →</span>
+        </span>
+      </a>
+        <a class="pk pk-stod" href="/projekt/matte/" style="--topp:#EE8A2B;--botten:#FCEEDC;--ord:#FFD9A8;--ljus:#3B1E00;--ink:#3B1E00;--knapp:#3B1E00;--knapptext:#FFE7C7">
+        <span class="pk-skarm"><img src="/assets/video/matte-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/matte-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Lärande</span>
+          <span class="pk-namn">Matteträning</span>
+          <span class="pk-ingress">Genomgångar, övning och träningsprov – steg för steg.</span>
+          <span class="pk-cta">Öppna →</span>
+        </span>
+      </a>
+        <a class="pk pk-stod" href="/projekt/paltboken/" style="--topp:#B8283A;--botten:#F6E7E4;--ord:#FFC9CF;--ljus:#FFF0F1;--ink:#4A1018;--knapp:#5C1520;--knapptext:#FFF0F1">
+        <span class="pk-skarm"><img src="/assets/video/paltboken-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/paltboken-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Mat och recept</span>
+          <span class="pk-namn">Paltboken</span>
+          <span class="pk-ingress">Pitepalt från grunden – och allt runt omkring.</span>
+          <span class="pk-cta">Öppna →</span>
+        </span>
+      </a>
+        <a class="pk pk-stod" href="/projekt/lovely/" style="--topp:#3D5A80;--botten:#ECEFF5;--ord:#CFDCF0;--ljus:#F1F5FB;--ink:#16243A;--knapp:#16243A;--knapptext:#F1F5FB">
+        <span class="pk-skarm"><img src="/assets/video/lovely-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/lovely-stod.mp4" aria-hidden="true"></video></span>
+        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
+        <span class="pk-text">
+          <span class="pk-meta">Nedräkning</span>
+          <span class="pk-namn">LOVely</span>
+          <span class="pk-ingress">Ha stenkoll på dina lov.</span>
+          <span class="pk-cta">Kommer snart →</span>
+        </span>
+      </a>
+        <!--/APPAR--></div>
+    </section>
+
+    <section class="start-om" id="om" aria-labelledby="om-rubrik">
+      <p class="meta-liten">OM PALT &amp; PIXEL</p>
+      <h2 id="om-rubrik">Från kusten, för alla</h2>
+      <p>Namnet kommer från pitepalten – och från pixlarna som allt här är byggt av. Bilden högst upp är Piteå skärgård: skogsklädda öar, båthus vid stranden, fabriken i Munksund i diset och havet som fryser till is på vintern.</p>
+      <p>Bilden följer klockan och årstiden, och knappen uppe till höger byter mellan dag och natt. Tryck gärna lite här och där i bilden – och på palten.</p>
     </section>
   </main>
 
-  <footer class="sidfot">
-    <span>paltpixel.se</span>
-    <span>Gjort med smör och lingon · <a href="/integritet/">Integritetspolicy</a></span>
+  <footer class="pop-fot">
+    <a href="/">paltpixel.se</a>
+    <span>Gjort i Piteå-anda med smör och lingon · <a href="/integritet/">Integritetspolicy</a></span>
   </footer>
 
-  <noscript><p class="noscript">Sidan behöver JavaScript för att visa projekten.</p></noscript>
   <script src="/assets/js/konfig.js"></script>
-  <script src="/assets/js/konto.js?v=4"></script>
-  <script src="/assets/js/app.js?v=4" defer></script>
-  <script src="/assets/js/sidor.js?v=4" defer></script>
+  <script src="/assets/js/konto.js?v=5"></script>
+  <script src="/assets/js/app.js?v=5" defer></script>
+  <script src="/assets/js/sidor.js?v=5" defer></script>
 </body>
 </html>

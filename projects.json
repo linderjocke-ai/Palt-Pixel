@@ -30,7 +30,19 @@
       "video": "/assets/video/frontlinjen-promo.mp4",
       "klipp": "/assets/video/frontlinjen-kort.mp4",
       "poster": "/assets/video/frontlinjen-poster.jpg",
-      "sida": "/projekt/frontlinjen/"
+      "sida": "/projekt/frontlinjen/",
+      "tema": {
+        "topp": "#1E4E9C",
+        "botten": "#E8EEF8",
+        "ord": "#D3E2FF",
+        "ljus": "#EEF3FF",
+        "ink": "#0C1B33",
+        "knapp": "#0F2A57",
+        "knappText": "#EEF3FF"
+      },
+      "format": "bred",
+      "skarm": "/assets/video/frontlinjen-stod.mp4",
+      "skarmbild": "/assets/video/frontlinjen-stod.jpg"
     },
     {
       "id": "vaggen",
@@ -62,7 +74,19 @@
       "video": "/assets/video/vaggen-promo.mp4",
       "klipp": "/assets/video/vaggen-kort.mp4",
       "poster": "/assets/video/vaggen-poster.jpg",
-      "sida": "/projekt/vaggen/"
+      "sida": "/projekt/vaggen/",
+      "tema": {
+        "topp": "#B4553A",
+        "botten": "#F3E6D8",
+        "ord": "#FFD8C6",
+        "ljus": "#FFF1EA",
+        "ink": "#3A160B",
+        "knapp": "#5A2414",
+        "knappText": "#FFF1EA"
+      },
+      "format": "bred",
+      "skarm": "/assets/video/vaggen-stod.mp4",
+      "skarmbild": "/assets/video/vaggen-stod.jpg"
     },
     {
       "id": "kluro",
@@ -94,7 +118,19 @@
       "video": "/assets/video/kluro-promo.mp4",
       "klipp": "/assets/video/kluro-kort.mp4",
       "poster": "/assets/video/kluro-poster.jpg",
-      "sida": "/projekt/kluro/"
+      "sida": "/projekt/kluro/",
+      "tema": {
+        "topp": "#17414A",
+        "botten": "#E7F0EE",
+        "ord": "#9FDCE3",
+        "ljus": "#E9F6F5",
+        "ink": "#0E2A30",
+        "knapp": "#0E2A30",
+        "knappText": "#FFE7A0"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/kluro-stod.mp4",
+      "skarmbild": "/assets/video/kluro-stod.jpg"
     },
     {
       "id": "treomdagen",
@@ -126,7 +162,19 @@
       "video": "/assets/video/treomdagen-promo.mp4",
       "klipp": "/assets/video/treomdagen-kort.mp4",
       "poster": "/assets/video/treomdagen-poster.jpg",
-      "sida": "/projekt/treomdagen/"
+      "sida": "/projekt/treomdagen/",
+      "tema": {
+        "topp": "#E7B321",
+        "botten": "#FBF3DC",
+        "ord": "#FFF0BF",
+        "ljus": "#3A2A00",
+        "ink": "#3A2A00",
+        "knapp": "#3A2A00",
+        "knappText": "#FFF3CC"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/treomdagen-stod.mp4",
+      "skarmbild": "/assets/video/treomdagen-stod.jpg"
     },
     {
       "id": "veckopalten",
@@ -158,7 +206,19 @@
       "video": "/assets/video/veckopalten-promo.mp4",
       "klipp": "/assets/video/veckopalten-kort.mp4",
       "poster": "/assets/video/veckopalten-poster.jpg",
-      "sida": "/projekt/veckopalten/"
+      "sida": "/projekt/veckopalten/",
+      "tema": {
+        "topp": "#2E7D5B",
+        "botten": "#E6F2EA",
+        "ord": "#C9EEDB",
+        "ljus": "#EFFFF6",
+        "ink": "#0F3B28",
+        "knapp": "#0F3B28",
+        "knappText": "#EFFFF6"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/veckopalten-stod.mp4",
+      "skarmbild": "/assets/video/veckopalten-stod.jpg"
     },
     {
       "id": "matte",
@@ -190,7 +250,19 @@
       "video": "/assets/video/matte-promo.mp4",
       "klipp": "/assets/video/matte-kort.mp4",
       "poster": "/assets/video/matte-poster.jpg",
-      "sida": "/projekt/matte/"
+      "sida": "/projekt/matte/",
+      "tema": {
+        "topp": "#EE8A2B",
+        "botten": "#FCEEDC",
+        "ord": "#FFD9A8",
+        "ljus": "#3B1E00",
+        "ink": "#3B1E00",
+        "knapp": "#3B1E00",
+        "knappText": "#FFE7C7"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/matte-stod.mp4",
+      "skarmbild": "/assets/video/matte-stod.jpg"
     },
     {
       "id": "paltboken",
@@ -222,7 +294,19 @@
       "video": "/assets/video/paltboken-promo.mp4",
       "klipp": "/assets/video/paltboken-kort.mp4",
       "poster": "/assets/video/paltboken-poster.jpg",
-      "sida": "/projekt/paltboken/"
+      "sida": "/projekt/paltboken/",
+      "tema": {
+        "topp": "#B8283A",
+        "botten": "#F6E7E4",
+        "ord": "#FFC9CF",
+        "ljus": "#FFF0F1",
+        "ink": "#4A1018",
+        "knapp": "#5C1520",
+        "knappText": "#FFF0F1"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/paltboken-stod.mp4",
+      "skarmbild": "/assets/video/paltboken-stod.jpg"
     },
     {
       "id": "lovely",
@@ -252,7 +336,19 @@
       "video": "/assets/video/lovely-promo.mp4",
       "klipp": "/assets/video/lovely-kort.mp4",
       "poster": "/assets/video/lovely-poster.jpg",
-      "sida": "/projekt/lovely/"
+      "sida": "/projekt/lovely/",
+      "tema": {
+        "topp": "#3D5A80",
+        "botten": "#ECEFF5",
+        "ord": "#CFDCF0",
+        "ljus": "#F1F5FB",
+        "ink": "#16243A",
+        "knapp": "#16243A",
+        "knappText": "#F1F5FB"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/lovely-stod.mp4",
+      "skarmbild": "/assets/video/lovely-stod.jpg"
     }
   ]
 }

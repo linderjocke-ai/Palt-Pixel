@@ -1,0 +1,197 @@
+/* Palt & pixel – projektsidor och listor i "poppande" stil */
+:root {
+  --rubrik: "Archivo", "Space Grotesk", system-ui, sans-serif;
+  --text: "Inter", system-ui, sans-serif;
+  --pixel: "Silkscreen", ui-monospace, monospace;
+  --bredd: 1200px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body.pop {
+  --topp: #2E5A44; --botten: #EFE7D6; --ord: #DCEADF; --ljus: #EAF2EC; --ink: #13241B; --knapp: #173426; --knapptext: #F4EFE3;
+  margin: 0; background: var(--botten); color: var(--ink);
+  font-family: var(--text); font-size: 17px; line-height: 1.55; -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+body.pop-lista { --ord: #2E5A44; --huvud: var(--botten); --huvudtext: var(--ink); }
+body.pop-projekt { --huvud: var(--topp); --huvudtext: var(--ljus); }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #6FF2B5; outline-offset: 3px; border-radius: 8px; }
+.hoppa { position: absolute; left: 16px; top: -60px; z-index: 30; background: #fff; color: #111; padding: 10px 16px; border-radius: 10px; font-weight: 600; }
+.hoppa:focus { top: 12px; }
+
+/* Sidhuvud */
+.pop-huvud {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px max(16px, calc((100vw - var(--bredd)) / 2 + 16px));
+  background: var(--huvud); color: var(--huvudtext);
+}
+.rund {
+  display: inline-flex; align-items: center; gap: 8px; min-width: 44px; height: 44px; padding: 0 14px 0 11px;
+  border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 15px;
+  background: color-mix(in srgb, var(--huvudtext) 12%, transparent);
+}
+.rund svg { width: 21px; height: 21px; flex-shrink: 0; }
+.rund:hover { background: color-mix(in srgb, var(--huvudtext) 20%, transparent); }
+.marke { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-family: var(--rubrik); font-stretch: 115%; font-weight: 800; font-size: 18px; letter-spacing: -0.02em; padding: 6px; }
+.marke .logga { width: 26px; height: 21px; }
+.segment { margin-left: auto; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: color-mix(in srgb, var(--huvudtext) 10%, transparent); }
+.segment a { padding: 9px 16px; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 600; }
+.segment a[aria-current="page"] { background: var(--huvudtext); color: var(--huvud); }
+.segment a:not([aria-current]):hover { background: color-mix(in srgb, var(--huvudtext) 14%, transparent); }
+.bara-mobil { display: none; }
+
+/* Gemensamt */
+.meta {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  max-width: var(--bredd); margin: 0 auto; padding: 0 24px;
+  font-family: var(--pixel); font-size: 10px; letter-spacing: .14em; opacity: .85;
+}
+.jatte {
+  --storlek: min(calc((100vw - 28px) / (var(--n) * 0.93)), 250px);
+  margin: 0; font-family: var(--rubrik); font-stretch: 125%; font-weight: 900;
+  font-size: var(--storlek); line-height: .8; letter-spacing: -0.05em; white-space: nowrap;
+  color: var(--ord); text-align: center;
+  animation: stiga .8s cubic-bezier(.2, 1.35, .4, 1) both;
+}
+@keyframes stiga { from { transform: translateY(40px) scale(.92); opacity: 0; } }
+
+/* Projektsida: scenen */
+.scen {
+  --n: 6;
+  position: relative; padding: 18px 0 64px; color: var(--ljus);
+  background: linear-gradient(var(--topp) 0 74%, var(--botten) 74%);
+}
+.scen .jatte { margin-top: 18px; }
+.svav {
+  position: relative; margin: calc(var(--storlek, 120px) * -0.32) auto 0; z-index: 2;
+  width: min(86vw, 760px); aspect-ratio: 16 / 9;
+  animation: poppa 1s .15s cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.scen-stod .svav { width: min(50vw, 260px); aspect-ratio: 1 / 2; margin-top: calc(var(--storlek, 120px) * -0.5); }
+.scen { --storlek: min(calc((100vw - 28px) / (var(--n) * 0.93)), 250px); overflow-x: clip; }
+@keyframes poppa { from { transform: translateY(-80px) scale(.8) rotate(-6deg); opacity: 0; } 60% { opacity: 1; } }
+.skarm {
+  position: absolute; inset: 0; display: block; overflow: hidden; border-radius: 22px; background: #0D0F14;
+  box-shadow: 0 0 0 6px #0D0F14, 0 2px 0 6px rgba(255,255,255,.12), 0 50px 70px -22px rgba(0,0,0,.6);
+  transform: perspective(1100px) rotateY(-13deg) rotateX(8deg) rotateZ(-4deg);
+  animation: svava 7s ease-in-out infinite;
+}
+.scen-stod .skarm { border-radius: 30px; transform: perspective(1000px) rotateY(-16deg) rotateX(7deg) rotateZ(5deg); animation-name: svava2; }
+@keyframes svava { 50% { transform: perspective(1100px) rotateY(-9deg) rotateX(10deg) rotateZ(-3deg) translateY(-8px); } }
+@keyframes svava2 { 50% { transform: perspective(1000px) rotateY(-11deg) rotateX(9deg) rotateZ(4deg) translateY(-8px); } }
+.skarm video { width: 100%; height: 100%; object-fit: cover; }
+.skugga { position: absolute; left: 12%; right: 12%; bottom: -48px; height: 46px; border-radius: 50%; background: rgba(0,0,0,.38); filter: blur(20px); }
+.vox { position: absolute; display: block; width: 20px; height: 20px; box-shadow: 0 12px 18px rgba(0,0,0,.28); animation: vox 5s ease-in-out infinite; }
+.svav .v1 { right: -18px; top: 10%; background: var(--ord); transform: rotate(16deg); }
+.svav .v2 { right: -46px; top: 36%; width: 13px; height: 13px; background: #FFD75E; animation-delay: -1.5s; }
+.svav .v3 { left: -30px; bottom: 14%; width: 16px; height: 16px; background: #C4122F; animation-delay: -3s; }
+@keyframes vox { 50% { translate: 0 -10px; rotate: 25deg; } }
+.paus {
+  position: absolute; right: -6px; bottom: -14px; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 0; cursor: pointer;
+  display: grid; place-items: center; background: rgba(13,15,20,.78); color: #fff;
+}
+.paus svg { width: 18px; height: 18px; }
+
+/* Projektsida: info */
+.info { max-width: var(--bredd); margin: 0 auto; padding: 14px 24px 0; }
+.info-rad { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.etikett { display: block; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .62; }
+.varde { display: block; font-family: var(--rubrik); font-stretch: 112%; font-weight: 800; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; line-height: 1.1; margin-top: 2px; }
+.info-ar { text-align: right; }
+.info > .ingress { font-size: 19px; margin: 14px 0 0; max-width: 60ch; }
+.spela-rad { margin: 22px 0 0; }
+.spela {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  max-width: 520px; height: 66px; padding: 0 26px; border-radius: 22px;
+  background: var(--knapp); color: var(--knapptext); text-decoration: none;
+  box-shadow: 0 20px 34px -16px rgba(0,0,0,.6); transition: transform .2s cubic-bezier(.2,1.4,.4,1);
+}
+.spela:hover { transform: translateY(-2px) scale(1.015); }
+.spela-v { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+.spela-v svg { width: 19px; height: 19px; }
+.spela-h { font-size: 14px; opacity: .72; }
+.spela.av { opacity: .55; box-shadow: none; }
+.webblasare { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; font-size: 15px; opacity: .85; }
+.webblasare svg { width: 20px; height: 20px; flex-shrink: 0; }
+.kropp { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; margin-top: 44px; }
+.beskrivning p { margin: 0 0 16px; max-width: 62ch; text-wrap: pretty; }
+.pop h2 { font-family: var(--rubrik); font-stretch: 112%; font-weight: 800; font-size: 24px; letter-spacing: -0.02em; margin: 30px 0 14px; }
+.hojdpunkter { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.hojdpunkter li { display: flex; gap: 12px; align-items: flex-start; }
+.hojdpunkter svg { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; color: var(--knapp); }
+.fakta { align-self: start; background: color-mix(in srgb, #fff 55%, var(--botten)); border-radius: 22px; padding: 22px 24px; box-shadow: 0 1px 0 rgba(0,0,0,.04); }
+.fakta h2 { margin-top: 0; }
+.fakta dl { margin: 0; }
+.fakta dl div { display: grid; grid-template-columns: 118px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid rgba(0,0,0,.08); font-size: 15px; }
+.fakta dl div:first-child { border-top: 0; }
+.fakta dt { opacity: .65; }
+.fakta dd { margin: 0; font-weight: 500; }
+.trailer { margin-top: 30px; }
+.trailer video { width: 100%; max-width: 860px; aspect-ratio: 16 / 9; border-radius: 22px; background: #0D0F14; }
+.fler { max-width: var(--bredd); margin: 56px auto 0; padding: 0 24px; }
+
+/* Listor */
+.lista-topp { max-width: var(--bredd); margin: 0 auto; padding: 22px 0 0; }
+.lista-topp .meta { color: var(--topp); }
+.lista-topp .jatte { --storlek: min(calc((100vw - 48px) / (var(--n) * 0.93)), 190px); font-size: var(--storlek); text-align: left; padding: 0 24px; margin-top: 12px; }
+.lista-topp .ingress { padding: 0 24px; margin: 14px 0 0; max-width: 60ch; }
+.pop-lista main > .pk-rutnat { max-width: var(--bredd); margin: 0 auto; padding: 70px 24px 0; }
+
+/* Poppande kort */
+.pk-rutnat { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 76px 22px; padding-top: 54px; }
+.pk {
+  position: relative; display: block; border-radius: 26px; background: var(--topp); color: var(--ljus); text-decoration: none;
+  box-shadow: 0 24px 36px -24px color-mix(in srgb, var(--topp) 70%, #000);
+  transition: transform .35s cubic-bezier(.2,1.4,.4,1);
+}
+.pk:hover, .pk:focus-visible { transform: translateY(-6px); }
+.pk-skarm { display: block; position: relative; overflow: hidden; background: #0D0F14; box-shadow: 0 0 0 5px #0D0F14, 0 26px 34px -12px rgba(0,0,0,.5); transition: transform .45s cubic-bezier(.2,1.4,.4,1); }
+.pk-skarm img, .pk-skarm video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pk-skarm video { opacity: 0; transition: opacity .3s; }
+.spelar-klipp .pk-skarm video { opacity: 1; }
+.pk-bred { padding: 0 18px 20px; }
+.pk-bred .pk-skarm { margin: -46px 0 16px; aspect-ratio: 16 / 9; border-radius: 16px; transform: perspective(800px) rotateX(10deg) rotateZ(-3deg); }
+.pk-bred:nth-child(even) .pk-skarm { transform: perspective(800px) rotateX(10deg) rotateZ(3deg); }
+.pk-bred:hover .pk-skarm { transform: perspective(800px) rotateX(4deg) rotateZ(-1deg) translateY(-6px) scale(1.03); }
+.pk-stod { min-height: 262px; padding: 22px 22px 20px; display: flex; align-items: flex-end; }
+.pk-stod .pk-skarm { position: absolute; right: 22px; top: -58px; width: 96px; aspect-ratio: 1 / 2; border-radius: 18px; transform: perspective(700px) rotateY(-14deg) rotateZ(6deg); }
+.pk-stod:hover .pk-skarm { transform: perspective(700px) rotateY(-6deg) rotateZ(2deg) translateY(-8px) scale(1.05); }
+.pk .vox { width: 12px; height: 12px; box-shadow: 0 8px 12px rgba(0,0,0,.25); }
+.pk .v1 { background: var(--ord); left: 20px; top: 16px; }
+.pk-bred .v1 { left: auto; right: 10px; top: -54px; }
+.pk .v2 { background: #FFD75E; width: 9px; height: 9px; left: 40px; top: 30px; animation-delay: -2s; }
+.pk-bred .v2 { left: -5px; top: auto; bottom: 120px; }
+.pk-text { display: flex; flex-direction: column; gap: 3px; }
+.pk-meta { font-family: var(--pixel); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.pk-namn { font-family: var(--rubrik); font-stretch: 115%; font-weight: 800; font-size: 26px; letter-spacing: -0.03em; line-height: 1.05; }
+.pk-ingress { font-size: 14px; line-height: 1.4; opacity: .88; }
+.pk-cta { font-size: 13px; font-weight: 700; margin-top: 6px; }
+
+/* Sidfot */
+.pop-fot {
+  max-width: var(--bredd); margin: 72px auto 0; padding: 22px 24px 40px;
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  border-top: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  font-family: var(--pixel); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .75;
+}
+
+@media (max-width: 760px) {
+  .pop-huvud { padding: 8px 12px; }
+  .rund span { display: none; }
+  .rund { padding: 0; justify-content: center; }
+  .marke { margin-right: auto; }
+  .segment { display: none; }
+  .bara-mobil { display: inline-flex; }
+  .kropp { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .info { padding: 10px 20px 0; }
+  .spela { max-width: none; }
+  .spela-rad { position: sticky; bottom: 12px; z-index: 10; }
+  .fakta dl div { grid-template-columns: 104px 1fr; }
+  .pk-rutnat { gap: 70px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jatte, .svav, .skarm, .vox, .pk, .pk-skarm { animation: none !important; transition: none !important; }
+}
