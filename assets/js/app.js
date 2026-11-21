@@ -35,7 +35,7 @@
     const klass = `ruta ${p.storlek || "liten"} f-${esc(p.farg)}`;
     const data = `data-typ="${esc(p.typ)}" data-kategori="${esc(p.kategori)}"`;
     return p.lank
-      ? `<a class="${klass}" href="${esc(p.lank)}" ${data}>${inre}</a>`
+      ? `<a class="${klass}" href="${esc(p.lank)}" target="_blank" rel="noopener" ${data}>${inre}</a>`
       : `<article class="${klass}" ${data}>${inre}</article>`;
   }
 
