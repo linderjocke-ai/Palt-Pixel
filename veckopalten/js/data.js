@@ -141,6 +141,17 @@ function supabaseLager() {
       const s = await klient();
       const { error } = await s.from('resultat').upsert({ handelse_id: r.handelse_id, familj_id: medlem.familj_id, poang: r.poang, max_poang: r.max_poang, kommentar: r.kommentar || null, uppdaterad_at: new Date().toISOString() }); fel(error);
     },
+    async lasIn(underlag) {
+      const s = await klient();
+      const { data, error } = await s.functions.invoke('las-in', { body: underlag });
+      if (error) {
+        let t = 'AI-inläsningen svarade inte. Försök igen om en stund.';
+        try { const j = await error.context.json(); if (j?.fel) t = j.fel; } catch {}
+        if (error.name === 'FunctionsFetchError' || /not found/i.test(error.message)) t = 'AI-inläsningen är inte påslagen ännu.';
+        throw new Error(t);
+      }
+      return data;
+    },
     async listaLektioner() {
       const s = await klient();
       const { data, error } = await s.from('lektioner').select('*').eq('familj_id', medlem.familj_id).order('veckodag').order('start'); fel(error); return data;
@@ -274,6 +285,19 @@ function demoLager() {
       db.resultat = db.resultat.filter((x) => x.handelse_id !== r.handelse_id); db.resultat.push(r); spara();
     },
     async listaLektioner() { return db.lektioner.filter((l) => synligt(l.barn_id)); },
+    async lasIn(u) {
+      await new Promise((ok) => setTimeout(ok, 1200));
+      const d = (n) => isoDatum(laggTillDagar(new Date(), n));
+      const b = u.barnId || (db.jag.roll === 'barn' ? db.jag.barn_id : 'b-alva');
+      return {
+        sammanfattning: 'Exempel i demoläget: veckobrev med ett prov, en läxa och ett lov.',
+        forslag: [
+          { typ: 'prov', titel: 'Engelska: oregelbundna verb', amne: 'Engelska', datum: d(6), tid: '09:20', slut_datum: null, barn_id: b, beskrivning: 'Verben på sidan 34–35 i textboken.', material: [{ typ: 'lank', titel: 'Öva verben', url: 'https://example.com/verb', innehall: '' }], sakerhet: 'hog' },
+          { typ: 'laxa', titel: 'Läsläxa kapitel 5', amne: 'Svenska', datum: d(3), tid: null, slut_datum: null, barn_id: b, beskrivning: 'Läs kapitel 5 och svara på frågorna.', material: [], sakerhet: 'medel' },
+          { typ: 'lov', titel: 'Studiedag', amne: '', datum: d(11), tid: null, slut_datum: null, barn_id: null, beskrivning: 'Skolan är stängd.', material: [], sakerhet: 'lag' },
+        ],
+      };
+    },
     async sparaLektion(l) { kraverForalder(); db.lektioner.push({ ...l, id: id() }); spara(); },
     async taBortLektion(lid) { kraverForalder(); db.lektioner = db.lektioner.filter((l) => l.id !== lid); spara(); },
     // Bara i demoläget: visa appen som förälder eller som ett barn.

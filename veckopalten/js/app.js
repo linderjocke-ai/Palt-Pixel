@@ -120,6 +120,7 @@ async function route() {
     if (vag === 'ny') return await visaHandelseForm(null, new URLSearchParams(location.hash.split('?')[1] || ''));
     if (vag === 'andra') return await visaHandelseForm(arg);
     if (vag === 'material') return await visaMaterialForm(arg);
+    if (vag === 'lasin') return visaLasIn();
     if (vag === 'schema') return await visaSchema();
     if (vag === 'familj') return await visaFamilj();
     return await visaIdag();
@@ -384,6 +385,86 @@ async function visaMaterialForm(handelseId) {
   form.addEventListener('change', () => { const t = form.typ.value; form.querySelectorAll('[data-visa]').forEach((el) => el.classList.toggle('dold', el.dataset.visa !== t)); });
 }
 
+// ---------------------------------------------------------------- LÄS IN (AI)
+function visaLasIn() {
+  S.lasForslag = null;
+  const barnVal = arForalder() && S.barn.length
+    ? `<label class="falt">Gäller<select name="barnId"><option value="">Låt appen avgöra</option>${S.barn.map((b) => `<option value="${b.id}" ${S.filter === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}</select></label>` : '';
+  app.innerHTML = ram(`
+    <header class="topp"><div class="topprad"><a class="rundknapp" href="javascript:history.back()" aria-label="Tillbaka">${I.vanster}</a></div>
+      <div><div class="datumrad">Appen letar fram prov, läxor och lov. Du granskar innan något sparas.</div><h1>Läs in</h1></div></header>
+    <main class="stack">
+      <form class="kort" data-form="lasin">
+        <div class="chips wrap" role="radiogroup" aria-label="Vad vill du läsa in?">
+          ${[['lank', 'Länk'], ['pdf', 'PDF'], ['bild', 'Foto eller bild'], ['text', 'Text']].map(([k, v], i) => `<label class="chip" style="cursor:pointer"><input type="radio" name="typ" value="${k}" ${i === 0 ? 'checked' : ''} style="accent-color:var(--accent)">${v}</label>`).join('')}
+        </div>
+        <label class="falt" data-visa="lank">Webblänk till veckobrev, planering eller liknande<input name="url" type="url" inputmode="url" placeholder="https://…"></label>
+        <label class="falt dold" data-visa="pdf">PDF-fil (högst 10 MB)<input name="pdf" type="file" accept="application/pdf,.pdf"></label>
+        <label class="falt dold" data-visa="bild">Foto av tavlan, ett papper eller en skärmbild<input name="bild" type="file" accept="image/*"></label>
+        <label class="falt dold" data-visa="text">Klistra in text, till exempel ett mejl eller ett meddelande från skolan<textarea name="text" maxlength="60000" style="min-height:160px"></textarea></label>
+        ${barnVal}
+        <p class="tom" style="margin:0">Word-filer går inte att läsa in än. Spara som PDF eller kopiera texten.</p>
+        <p class="fel dold" data-fel></p>
+        <button class="knapp bred">${I.las} Läs in</button>
+      </form>
+      <div id="lasresultat"></div>
+    </main>`, '');
+  const form = $('form[data-form="lasin"]');
+  form.addEventListener('change', () => { const t = form.typ.value; form.querySelectorAll('[data-visa]').forEach((el) => el.classList.toggle('dold', el.dataset.visa !== t)); });
+}
+// Gör bilder mindre innan de skickas (högst 1800 px, JPEG).
+function forminskaBild(fil) {
+  return new Promise((ok, nej) => {
+    const img = new Image();
+    img.onload = () => {
+      const skala = Math.min(1, 1800 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas');
+      c.width = Math.round(img.width * skala); c.height = Math.round(img.height * skala);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(img.src);
+      ok(c.toDataURL('image/jpeg', 0.85).split(',')[1]);
+    };
+    img.onerror = () => nej(new Error('Bilden gick inte att öppna. Prova en JPEG- eller PNG-bild.'));
+    img.src = URL.createObjectURL(fil);
+  });
+}
+const tillBase64 = (fil) => new Promise((ok, nej) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = () => nej(new Error('Filen gick inte att läsa.')); r.readAsDataURL(fil); });
+
+async function visaForslag(res) {
+  const ruta = $('#lasresultat');
+  const lista = res.forslag || [];
+  // Markera sådant som redan finns i kalendern.
+  if (lista.length) {
+    const datum = lista.map((f) => f.datum).sort();
+    const finns = await data.listaHandelser(datum[0], datum[datum.length - 1]);
+    for (const f of lista) f.finns = finns.some((h) => h.datum === f.datum && h.typ === f.typ && (h.titel.toLowerCase().includes(f.titel.toLowerCase().slice(0, 12)) || f.titel.toLowerCase().includes(h.titel.toLowerCase().slice(0, 12))));
+  }
+  S.lasForslag = lista;
+  const barnOpt = (vald, i) => arForalder()
+    ? `<select name="barn_${i}">${S.barn.map((b) => `<option value="${b.id}" ${vald === b.id ? 'selected' : ''}>${e(b.namn)}</option>`).join('')}<option value="" ${!vald ? 'selected' : ''}>Hela familjen</option></select>`
+    : `<input type="hidden" name="barn_${i}" value="${e(S.medlem.barn_id)}"><input disabled value="${e(barnNamn(S.medlem.barn_id))}">`;
+  ruta.innerHTML = `<section class="stack" aria-live="polite">
+    <div class="kort"><h2>${lista.length ? `Hittade ${lista.length} ${lista.length === 1 ? 'förslag' : 'förslag'}` : 'Hittade inget'}</h2>
+      ${res.sammanfattning ? `<p class="dampad" style="margin:0">${e(res.sammanfattning)}</p>` : ''}
+      ${lista.length ? '<p class="tom" style="margin:0">Bocka i det som ska sparas. Du kan ändra datum, barn och rubrik först.</p>' : '<p class="tom" style="margin:0">Prova med en annan bild eller klistra in texten i stället.</p>'}</div>
+    ${lista.length ? `<form class="stack" data-form="sparaforslag">
+      ${lista.map((f, i) => `<fieldset class="kort" style="margin:0">
+        <label class="rad" style="gap:10px;font-weight:700;cursor:pointer"><input type="checkbox" name="med_${i}" ${f.finns || f.sakerhet === 'lag' ? '' : 'checked'} style="width:22px;height:22px;accent-color:var(--accent)">
+          <span>${e(TYPER[f.typ] || 'Övrigt')}</span>${f.typ === 'prov' ? '<span class="etikett">Prov</span>' : ''}
+          ${f.finns ? '<span class="chip" style="height:26px;font-size:12px">Finns redan</span>' : ''}${f.sakerhet === 'lag' ? '<span class="chip" style="height:26px;font-size:12px">Osäkert – kontrollera</span>' : ''}</label>
+        <label class="falt">Rubrik<input name="titel_${i}" maxlength="120" value="${e(f.titel)}"></label>
+        <div class="tva"><label class="falt">Datum<input type="date" name="datum_${i}" value="${e(f.datum)}"></label><label class="falt">Tid<input type="time" name="tid_${i}" value="${e(f.tid || '')}"></label></div>
+        <div class="tva"><label class="falt">Typ<select name="typ_${i}">${Object.entries(TYPER).filter(([k]) => arForalder() || k !== 'lov').map(([k, v]) => `<option value="${k}" ${f.typ === k ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label class="falt">Gäller${barnOpt(f.barn_id, i)}</label></div>
+        ${f.beskrivning ? `<label class="falt">Beskrivning<textarea name="besk_${i}" style="min-height:70px">${e(f.beskrivning)}</textarea></label>` : ''}
+        ${f.material?.length ? `<div class="liten-text dampad">Material som följer med: ${f.material.map((m) => e(m.titel)).join(', ')}</div>` : ''}
+      </fieldset>`).join('')}
+      <p class="fel dold" data-fel></p>
+      <button class="knapp bred">Spara valda</button>
+    </form>` : ''}
+  </section>`;
+  ruta.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 // ---------------------------------------------------------------- SCHEMA
 async function visaSchema() {
   const lektioner = await data.listaLektioner();
@@ -468,7 +549,7 @@ function visaPlusmeny() {
     <div class="topprad"><h2>Lägg till</h2><button class="rundknapp" data-g="stang" aria-label="Stäng">✕</button></div>
     <button class="kort menyval" data-g="gaTill" data-h="#/ny"><span class="ikon">${I.ny}</span><span><b>Ny händelse</b><span>Prov, läxa, träning${arForalder() ? ', lov' : ''} eller annat</span></span></button>
     <button class="kort menyval" data-g="valjForMaterial"><span class="ikon">${I.fil}</span><span><b>Nytt material</b><span>Länk, text, bild eller dokument till en läxa eller ett prov</span></span></button>
-    <button class="kort menyval" disabled><span class="ikon">${I.las}</span><span><b>Läs in</b><span>Veckobrev, länk, fil eller foto – appen hittar prov och läxor. Kommer snart.</span></span></button>
+    <button class="kort menyval" data-g="gaTill" data-h="#/lasin"><span class="ikon">${I.las}</span><span><b>Läs in</b><span>Veckobrev, länk, PDF, foto eller text – appen hittar prov och läxor åt dig</span></span></button>
   </div>`;
   document.body.appendChild(s);
   s.addEventListener('click', (ev) => { if (ev.target === s) s.remove(); });
@@ -633,6 +714,38 @@ document.addEventListener('submit', async (ev) => {
         const titel = v.titel.trim() || (fil ? fil.name : typ === 'lank' ? new URL(v.url).hostname : 'Anteckning');
         await data.sparaMaterial({ handelse_id: f.dataset.handelse, typ, titel, url: typ === 'lank' ? v.url : null, innehall: typ === 'text' ? v.innehall : null }, fil);
         toast('Materialet är sparat'); location.hash = `#/handelse/${f.dataset.handelse}`; break;
+      }
+      case 'lasin': {
+        const typ = v.typ;
+        const underlag = { typ, barnId: v.barnId || (arForalder() ? null : S.medlem.barn_id) };
+        if (typ === 'lank') { if (!sakerUrl(v.url)) throw new Error('Skriv en hel webblänk som börjar med https://'); underlag.url = v.url; }
+        if (typ === 'text') { if (v.text.trim().length < 5) throw new Error('Klistra in texten du vill läsa in.'); underlag.text = v.text; }
+        if (typ === 'pdf') { const fil = f.pdf.files[0]; if (!fil) throw new Error('Välj en PDF-fil.'); if (fil.size > 10 * 1024 * 1024) throw new Error('PDF-filen är större än 10 MB.'); underlag.data = await tillBase64(fil); }
+        if (typ === 'bild') { const fil = f.bild.files[0]; if (!fil) throw new Error('Välj en bild.'); underlag.data = await forminskaBild(fil); underlag.mediaType = 'image/jpeg'; }
+        if (knapp) knapp.innerHTML = 'Läser… det tar oftast 10–30 sekunder';
+        const res = await data.lasIn(underlag);
+        if (knapp) knapp.innerHTML = `${I.las} Läs in igen`;
+        await visaForslag(res);
+        break;
+      }
+      case 'sparaforslag': {
+        const valda = S.lasForslag.map((fs, i) => ({ fs, i })).filter(({ i }) => v[`med_${i}`]);
+        if (!valda.length) throw new Error('Bocka i minst ett förslag.');
+        for (const { fs, i } of valda) {
+          const typ = v[`typ_${i}`];
+          const h = await data.sparaHandelse({
+            typ, barn_id: v[`barn_${i}`] || null, titel: (v[`titel_${i}`] || fs.titel).trim(), amne: fs.amne || '',
+            beskrivning: (v[`besk_${i}`] ?? fs.beskrivning ?? '').trim(), datum: v[`datum_${i}`], tid: v[`tid_${i}`] || null,
+            slut_datum: typ === 'lov' ? fs.slut_datum : null, upprepa: 'ingen',
+          });
+          for (const m of fs.material || []) {
+            if (m.typ === 'lank' && sakerUrl(m.url)) await data.sparaMaterial({ handelse_id: h.id, typ: 'lank', titel: m.titel || 'Länk', url: m.url });
+            else if (m.typ === 'text' && (m.innehall || '').trim()) await data.sparaMaterial({ handelse_id: h.id, typ: 'text', titel: m.titel || 'Text', innehall: m.innehall });
+          }
+        }
+        toast(`${valda.length} ${valda.length === 1 ? 'händelse' : 'händelser'} sparade`);
+        location.hash = '#/idag';
+        break;
       }
       case 'resultat':
         await data.sparaResultat({ handelse_id: S.aktuellHandelse.id, poang: nr(v.poang), max_poang: nr(v.max_poang), kommentar: v.kommentar.trim() });

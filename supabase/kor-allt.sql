@@ -142,6 +142,18 @@ create table if not exists vuxen_forsok (
   tid timestamptz not null default now()
 );
 
+-- Logg över AI-inläsningar (för månadstaket). Bara serverfunktionen skriver hit.
+create table if not exists ai_anvandning (
+  id bigint generated always as identity primary key,
+  familj_id uuid not null references familjer(id) on delete cascade,
+  user_id uuid,
+  typ text,
+  in_tokens int,
+  ut_tokens int,
+  tid timestamptz not null default now()
+);
+create index if not exists ai_anvandning_familj_tid on ai_anvandning (familj_id, tid);
+
 -- ---------- Hjälpfunktioner ----------
 
 create or replace function ar_medlem(f uuid) returns boolean
@@ -212,6 +224,7 @@ alter table resultat enable row level security;
 alter table lektioner enable row level security;
 alter table pin_forsok enable row level security;
 alter table vuxen_forsok enable row level security;
+alter table ai_anvandning enable row level security;
 
 drop policy if exists "se familj" on familjer;
 create policy "se familj" on familjer for select using (ar_medlem(id));
