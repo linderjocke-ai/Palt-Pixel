@@ -43,7 +43,7 @@ create extension if not exists pgcrypto;
 create table if not exists familjer (
   id uuid primary key default gen_random_uuid(),
   namn text not null check (char_length(namn) between 1 and 60),
-  familjekod text not null unique,          -- barnen loggar in med denna + PIN
+  familjekod text not null unique,          -- sex siffror; barnen loggar in med denna + PIN
   vuxenkod text not null unique,            -- bjuder in fler vuxna
   skapad_at timestamptz not null default now()
 );
@@ -170,6 +170,18 @@ language sql volatile as $$
   from generate_series(1, langd);
 $$;
 
+-- Familjekod: sex siffror, unik.
+create or replace function ny_familjekod() returns text
+language plpgsql volatile set search_path = public as $$
+declare k text;
+begin
+  loop
+    k := lpad(floor(random() * 1000000)::int::text, 6, '0');
+    exit when not exists (select 1 from familjer where familjekod = k);
+  end loop;
+  return k;
+end $$;
+
 -- ---------- Radsäkerhet (RLS) ----------
 
 alter table familjer enable row level security;
@@ -250,7 +262,7 @@ language plpgsql security definer set search_path = public as $$
 declare f uuid;
 begin
   if auth.uid() is null then raise exception 'Inte inloggad'; end if;
-  insert into familjer (namn, familjekod, vuxenkod) values (familjenamn, ny_kod(6), ny_kod(8)) returning id into f;
+  insert into familjer (namn, familjekod, vuxenkod) values (familjenamn, ny_familjekod(), ny_kod(8)) returning id into f;
   insert into medlemmar (familj_id, user_id, roll, namn) values (f, auth.uid(), 'foralder', mitt_namn);
   return f;
 end $$;
@@ -325,7 +337,7 @@ create or replace function nya_koder(f uuid) returns void
 language plpgsql security definer set search_path = public as $$
 begin
   if not ar_foralder(f) then raise exception 'Ingen behörighet'; end if;
-  update familjer set familjekod = ny_kod(6), vuxenkod = ny_kod(8) where id = f;
+  update familjer set familjekod = ny_familjekod(), vuxenkod = ny_kod(8) where id = f;
 end $$;
 
 -- Koderna syns bara för föräldrar.

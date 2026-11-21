@@ -464,7 +464,7 @@ function visaInloggning() {
         <button class="knapp bred">Skicka inloggningslänk</button><p class="fel dold" data-fel></p></form>
     </section>
     <section class="kort"><h2>Barn</h2><p class="tom" style="margin:0">Logga in med familjekoden och din PIN.</p>
-      <form class="stack" data-form="familjekod" style="gap:10px"><label class="falt">Familjekod<input name="kod" required autocapitalize="characters" autocomplete="off" maxlength="8" placeholder="t.ex. PALT42" style="text-transform:uppercase;letter-spacing:.1em"></label>
+      <form class="stack" data-form="familjekod" style="gap:10px"><label class="falt">Familjekod<input name="kod" required inputmode="numeric" pattern="[0-9]{6}" autocomplete="off" maxlength="6" placeholder="6 siffror" style="letter-spacing:.2em"></label>
         <button class="knapp bred">Fortsätt</button><p class="fel dold" data-fel></p></form>
     </section>
   </main>`;
@@ -551,6 +551,7 @@ document.addEventListener('submit', async (ev) => {
         break;
       case 'familjekod': {
         const barn = await data.barnForKod(v.kod);
+        if (!/^\d{6}$/.test(v.kod.trim())) throw new Error('Familjekoden är sex siffror.');
         if (!barn.length) throw new Error('Hittade ingen familj med den koden.');
         visaBarnVal(v.kod.trim().toUpperCase(), barn); break;
       }

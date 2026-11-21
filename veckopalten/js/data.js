@@ -191,7 +191,7 @@ function demoLager() {
     };
     for (const [b, rader] of Object.entries(dagsschema)) for (let wd = 1; wd <= 5; wd++) rader.forEach(([s, e, a], i) => lek.push({ id: id(), barn_id: b, veckodag: wd, start: s, slut: e, amne: wd % 2 && i === 4 ? 'Musik' : a }));
     return {
-      familj: { id: 'f-demo', namn: 'Familjen Exempel', familjekod: 'PALT42', vuxenkod: 'PIXEL7QX' },
+      familj: { id: 'f-demo', namn: 'Familjen Exempel', familjekod: '424242', vuxenkod: 'PIXEL7QX' },
       jag: { id: 'm-1', roll: 'foralder', barn_id: null, namn: 'Förälder', tema: lager.getItem('vp_tema') || 'soluppgang' },
       medlemmar: [{ id: 'm-1', roll: 'foralder', namn: 'Förälder', barn_id: null }, { id: 'm-2', roll: 'barn', namn: 'Alva', barn_id: alva }],
       barn: [
