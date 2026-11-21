@@ -789,6 +789,8 @@ function barnForm(b) {
   return `<form class="stack" data-form="barn" data-id="${b.id || ''}" style="gap:10px">
     <div class="tva"><label class="falt">Namn<input name="namn" required maxlength="40" value="${e(b.namn || '')}"></label>
       <label class="falt">Årskurs<input name="arskurs" maxlength="20" value="${e(b.arskurs || '')}" placeholder="t.ex. åk 4"></label></div>
+    <label class="falt">Barnets Google-konto (valfritt)<input name="epost" type="email" inputmode="email" autocomplete="off" maxlength="200" value="${e(b.epost || '')}" placeholder="namn@gmail.com"></label>
+    <p class="tom" style="margin:-4px 0 0">När barnet loggar in med det kontot i Matteträning ser du resultaten där.</p>
     <fieldset style="border:0;padding:0;margin:0"><legend class="dampad liten-text" style="font-weight:700;margin-bottom:6px">Färg</legend><div class="chips wrap">
       ${BARNFARGER.map(([f, n], i) => `<label class="chip" style="cursor:pointer"><input type="radio" name="farg" value="${f}" ${(b.farg || BARNFARGER[S.barn.length % BARNFARGER.length][0]) === f ? 'checked' : ''} style="accent-color:${f}"><span class="prick" style="background:${f}"></span>${n}</label>`).join('')}
     </div></fieldset>
@@ -1078,7 +1080,9 @@ document.addEventListener('submit', async (ev) => {
       case 'barn': {
         if (v.pin && !/^\d{4,6}$/.test(v.pin)) throw new Error('PIN ska vara 4–6 siffror.');
         const gammal = S.barn.find((x) => x.id === f.dataset.id) || {};
-        const b = await data.sparaBarn({ id: f.dataset.id || undefined, namn: v.namn.trim(), farg: v.farg, arskurs: v.arskurs.trim(), kommun: gammal.kommun, skola: gammal.skola, mateo_enhet: gammal.mateo_enhet });
+        const epost = (v.epost || '').trim().toLowerCase();
+        if (epost && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(epost)) throw new Error('Skriv hela e-postadressen, till exempel love@gmail.com.');
+        const b = await data.sparaBarn({ id: f.dataset.id || undefined, namn: v.namn.trim(), farg: v.farg, arskurs: v.arskurs.trim(), epost: epost || null, kommun: gammal.kommun, skola: gammal.skola, mateo_enhet: gammal.mateo_enhet });
         const bid = f.dataset.id || b?.id;
         if (v.pin && bid) await data.sattPin(bid, v.pin);
         S.barn = await data.listaBarn(); toast('Sparat'); await route(); break;

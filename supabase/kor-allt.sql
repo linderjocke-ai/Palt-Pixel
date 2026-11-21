@@ -500,3 +500,38 @@ end $$;
 -- Gamla koder med bokstäver byts mot sex siffror (rör inte koder som redan är rätt).
 update familjer set familjekod = ny_familjekod() where familjekod !~ '^[0-9]{6}$';
 update familjer set vuxenkod = ny_vuxenkod(), vuxenkod_giltig_till = now() + interval '7 days' where vuxenkod !~ '^[0-9]{6}$';
+
+-- ---------- Matteträning (paltpixel.se/matte): resultat på barnens egna konton ----------
+-- Barnets Google-konto skrivs in av en förälder under Familj. Då ser föräldern barnets resultat.
+alter table barn add column if not exists epost text check (epost is null or char_length(epost) <= 200);
+create table if not exists matte_loggar (
+  user_id uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  id text not null check (char_length(id) <= 100),
+  epost text,
+  profil text not null check (char_length(profil) <= 20),
+  dev text check (char_length(dev) <= 20),
+  dag text check (char_length(dag) <= 10),
+  ev jsonb not null default '[]'::jsonb,
+  sparad_at timestamptz not null default now(),
+  primary key (user_id, id)
+);
+create index if not exists matte_loggar_epost on matte_loggar (lower(epost));
+alter table matte_loggar enable row level security;
+drop policy if exists "se matte" on matte_loggar;
+create policy "se matte" on matte_loggar for select using (
+  user_id = auth.uid()
+  or exists (select 1 from barn b where b.epost is not null and lower(b.epost) = lower(matte_loggar.epost) and ar_foralder(b.familj_id))
+);
+drop policy if exists "spara matte" on matte_loggar;
+create policy "spara matte" on matte_loggar for insert with check (user_id = auth.uid() and epost is not distinct from (auth.jwt() ->> 'email'));
+drop policy if exists "andra matte" on matte_loggar;
+create policy "andra matte" on matte_loggar for update using (user_id = auth.uid()) with check (user_id = auth.uid() and epost is not distinct from (auth.jwt() ->> 'email'));
+grant select, insert, update on matte_loggar to authenticated;
+create or replace function matte_jag() returns table (namn text, arskurs text)
+language sql stable security definer set search_path = public as $$
+  select b.namn, b.arskurs from barn b
+  where b.epost is not null and lower(b.epost) = lower(auth.jwt() ->> 'email')
+  limit 1;
+$$;
+revoke execute on function matte_jag() from public, anon;
+grant execute on function matte_jag() to authenticated;

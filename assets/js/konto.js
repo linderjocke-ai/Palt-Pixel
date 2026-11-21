@@ -234,9 +234,15 @@
   /* ---------- Startsidan: visa inloggningsstatus i menyn ---------- */
   function uppdateraMeny() {
     var lank = document.getElementById("konto-lank");
-    if (!lank) return;
     session().then(function (x) {
-      if (x) {
+      // Kom man hit efter inloggning från en annan sida (t.ex. Matteträning)? Gå tillbaka dit.
+      var tillbaka = null;
+      try { tillbaka = sessionStorage.getItem("pp_tillbaka"); } catch (e) { }
+      if (x && tillbaka && tillbaka !== location.pathname && /^\/[\w\-\/]*$/.test(tillbaka)) {
+        try { sessionStorage.removeItem("pp_tillbaka"); } catch (e) { }
+        location.replace(tillbaka); return;
+      }
+      if (x && lank) {
         lank.textContent = "Mitt konto";
         lank.setAttribute("aria-label", "Mitt konto, inloggad som " + (x.s.user.email || ""));
       }

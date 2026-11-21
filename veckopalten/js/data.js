@@ -143,7 +143,7 @@ function supabaseLager() {
     },
     async sparaBarn(b) {
       const s = await klient();
-      const rad = { namn: b.namn, farg: b.farg, arskurs: b.arskurs || null, kommun: b.kommun || null, skola: b.skola || null, mateo_enhet: b.mateo_enhet || null };
+      const rad = { namn: b.namn, farg: b.farg, arskurs: b.arskurs || null, epost: b.epost || null, kommun: b.kommun || null, skola: b.skola || null, mateo_enhet: b.mateo_enhet || null };
       const q = b.id ? s.from('barn').update(rad).eq('id', b.id).select().single() : s.from('barn').insert({ ...rad, familj_id: medlem.familj_id }).select().single();
       const { data, error } = await q; fel(error); return data;
     },
