@@ -14,8 +14,8 @@
   ],
   "rewrites": [
     {
-      "source": "/mateo-api/:path*",
-      "destination": "https://meny-api.mateo.se/api/v1/:path*"
+      "source": "/mateo-api/(.*)",
+      "destination": "https://meny-api.mateo.se/api/v1/$1"
     }
   ]
 }
