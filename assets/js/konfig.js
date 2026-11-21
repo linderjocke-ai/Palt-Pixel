@@ -5,8 +5,8 @@
  * Så länge fälten är tomma fungerar sidan och spelen som vanligt, men utan inloggning.
  */
 window.PP_KONFIG = {
-  supabaseUrl: "",
-  supabaseAnonKey: "",
+  supabaseUrl: "https://yxvecdddlgbrguywhqkk.supabase.co",
+  supabaseAnonKey: "sb_publishable_G8KrodzJwfO2lWvkoz0kug_ik-cLthj",
   // Inloggningssätt som är påslagna i Supabase (Authentication → Providers)
-  inloggning: ["google", "azure", "apple", "epost"]
+  inloggning: ["google", "azure", "epost"]
 };
