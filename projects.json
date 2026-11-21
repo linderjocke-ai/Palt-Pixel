@@ -11,7 +11,26 @@
       "farg": "alvbla",
       "bild": "assets/img/frontlinjen.webp",
       "alt": "Frontlinjen: en utbyggd bas med kraftverk, baracker, fabrik och en tropp soldater och fordon",
-      "lank": "/frontlinjen/"
+      "lank": "/frontlinjen/",
+      "ar": 2026,
+      "genre": "Realtidsstrategi",
+      "knapp": "Spela",
+      "spelare": "1 spelare mot datorn",
+      "ingress": "Bygg en bas, samla malm och ta över kartan – i lugn realtid.",
+      "beskrivning": [
+        "Du börjar med ett högkvarter, en handfull arbetare och en karta full av glittrande malm. Bygg kraftverk och baracker, skicka ut arbetare och sträck ut ditt område bit för bit. Motståndarna gör samma sak – och förr eller senare möts ni vid frontlinjen.",
+        "Välj kartstorlek, antal motståndare och hur lång fredstid du vill ha innan första anfallet. Snabba upp tiden när du vill att det ska hända saker, eller ta det lugnt och planera."
+      ],
+      "hojdpunkter": [
+        "Bygg och styr i en levande isometrisk värld",
+        "Arméer, arbetare och flyg",
+        "Liten, medel eller stor karta",
+        "Fredstid i början om du vill komma igång lugnt"
+      ],
+      "video": "/assets/video/frontlinjen-promo.mp4",
+      "klipp": "/assets/video/frontlinjen-kort.mp4",
+      "poster": "/assets/video/frontlinjen-poster.jpg",
+      "sida": "/projekt/frontlinjen/"
     },
     {
       "id": "vaggen",
@@ -24,7 +43,26 @@
       "farg": "smor",
       "bild": "assets/img/vaggen.webp",
       "alt": "Väggen: en tegelvägg full av små hus, växthus, trappor och invånare",
-      "lank": "/vaggen/"
+      "lank": "/vaggen/",
+      "ar": 2026,
+      "genre": "Bygga och mysa",
+      "knapp": "Spela",
+      "spelare": "1 spelare",
+      "ingress": "Ett lugnt spel om att bygga ett hem tillsammans på en gammal vägg.",
+      "beskrivning": [
+        "Någonstans står en gammal tegelvägg. Ingen minns vem som byggde den – men en dag flyttar någon in. Bygg hem, kaféer, hängträdgårdar, ateljéer och små hörn för musik, och se väggen fyllas av liv.",
+        "Alla som flyttar in är någon: en grubblare, en drömmare, en som alltid sjunger. De har egna önskningar, blir vänner med varandra och påverkas av vad som står bredvid. Det finns ingen brådska. Bara du, väggen och årstiderna."
+      ],
+      "hojdpunkter": [
+        "Över 25 sorters byggen",
+        "Invånare med egna personligheter och önskningar",
+        "Dag, natt och årstider",
+        "Ta polaroider och följ väggens dagbok"
+      ],
+      "video": "/assets/video/vaggen-promo.mp4",
+      "klipp": "/assets/video/vaggen-kort.mp4",
+      "poster": "/assets/video/vaggen-poster.jpg",
+      "sida": "/projekt/vaggen/"
     },
     {
       "id": "kluro",
@@ -37,7 +75,26 @@
       "farg": "hjortron",
       "bild": "assets/img/kluro.webp",
       "alt": "Kluro: Gissa ordet med tre gissningar gjorda",
-      "lank": "https://skolvy.se/kluro"
+      "lank": "https://skolvy.se/kluro",
+      "ar": 2026,
+      "genre": "Sällskapsspel",
+      "knapp": "Spela",
+      "spelare": "Tävla med kollegor eller vänner",
+      "ingress": "Dagens kluringar och en topplista – perfekt för fikarummet.",
+      "beskrivning": [
+        "Kluro bjuder på nya småspel varje speldag. Gissa ordet, lös dagens utmaning och se hur du står dig mot de andra på topplistan.",
+        "Det tar bara några minuter, och diskussionerna vid fikabordet efteråt kan ta betydligt längre."
+      ],
+      "hojdpunkter": [
+        "Nya utmaningar varje speldag",
+        "Gemensam topplista",
+        "Snabbt att spela – några minuter om dagen",
+        "Funkar lika bra i mobilen som på datorn"
+      ],
+      "video": "/assets/video/kluro-promo.mp4",
+      "klipp": "/assets/video/kluro-kort.mp4",
+      "poster": "/assets/video/kluro-poster.jpg",
+      "sida": "/projekt/kluro/"
     },
     {
       "id": "treomdagen",
@@ -50,7 +107,26 @@
       "farg": "smor",
       "bild": "assets/img/treomdagen.webp",
       "alt": "Tre om dagen: Dagens ord med gissningar i gult, grönt och grått",
-      "lank": "/treomdagen/"
+      "lank": "/treomdagen/",
+      "ar": 2026,
+      "genre": "Dagligt quiz",
+      "knapp": "Spela",
+      "spelare": "1 spelare",
+      "ingress": "Ett kort quiz till paltkoman.",
+      "beskrivning": [
+        "Tre små utmaningar, nya varje dag. Gissa Dagens ord på sex försök, sortera fem händelser i rätt ordning på Tidslinjen och lös Emoji-gåtan.",
+        "Tidslinjen växlar mellan Norrbotten, Sverige och världen. När du är klar kan du dela ditt resultat – utan att avslöja svaren – och sedan är det bara att vänta till i morgon."
+      ],
+      "hojdpunkter": [
+        "Dagens ord, Tidslinjen och Emoji-gåtan",
+        "Nytt varje dag – samma för alla",
+        "Statistik och svit om du loggar in",
+        "Dela resultatet utan att avslöja svaren"
+      ],
+      "video": "/assets/video/treomdagen-promo.mp4",
+      "klipp": "/assets/video/treomdagen-kort.mp4",
+      "poster": "/assets/video/treomdagen-poster.jpg",
+      "sida": "/projekt/treomdagen/"
     },
     {
       "id": "veckopalten",
@@ -63,7 +139,26 @@
       "farg": "tall",
       "bild": "assets/img/veckopalten.webp",
       "alt": "Veckopaltens Idag-vy med dagens schema och prov som är på gång",
-      "lank": "/veckopalten/"
+      "lank": "/veckopalten/",
+      "ar": 2026,
+      "genre": "Familjeplanering",
+      "knapp": "Öppna",
+      "spelare": "För hela familjen",
+      "ingress": "Familjens skolvecka på ett ställe: prov, läxor, schema och lunch.",
+      "beskrivning": [
+        "Veckopalten samlar allt som skolveckan består av. Klistra in ett veckobrev, en länk eller en bild, så sorterar appen ut prov, läxor och instuderingsmaterial och lägger dem på rätt dag.",
+        "Se dagens schema och lunch, prenumerera på träningskalendern och håll koll på flera barn samtidigt. Det du lägger till kompletterar alltid det som redan finns."
+      ],
+      "hojdpunkter": [
+        "Läs in veckobrev, länkar och bilder",
+        "Schema, prov och läxor per barn",
+        "Skollunchen direkt i dagsvyn",
+        "Kalenderprenumerationer som uppdateras av sig själva"
+      ],
+      "video": "/assets/video/veckopalten-promo.mp4",
+      "klipp": "/assets/video/veckopalten-kort.mp4",
+      "poster": "/assets/video/veckopalten-poster.jpg",
+      "sida": "/projekt/veckopalten/"
     },
     {
       "id": "matte",
@@ -76,7 +171,26 @@
       "farg": "hjortron",
       "bild": "assets/img/matte.webp",
       "alt": "Matteträning: välj Årskurs 4 eller Årskurs 7",
-      "lank": "/matte/"
+      "lank": "/matte/",
+      "ar": 2026,
+      "genre": "Lärande",
+      "knapp": "Öppna",
+      "spelare": "För åk 4 och åk 7",
+      "ingress": "Genomgångar, övning och träningsprov – steg för steg.",
+      "beskrivning": [
+        "Matteträning går igenom matten steg för steg, med uppställningar som byggs upp framför dig och en röst som förklarar. Sedan är det din tur att öva, i egen takt.",
+        "Logga in med ditt Google-konto så sparas resultaten, och en förälder kan följa hur det går."
+      ],
+      "hojdpunkter": [
+        "Genomgångar med uppläst förklaring",
+        "Övning och träningsprov",
+        "Anpassat för åk 4 och åk 7",
+        "Resultaten sparas när du loggar in"
+      ],
+      "video": "/assets/video/matte-promo.mp4",
+      "klipp": "/assets/video/matte-kort.mp4",
+      "poster": "/assets/video/matte-poster.jpg",
+      "sida": "/projekt/matte/"
     },
     {
       "id": "paltboken",
@@ -89,7 +203,26 @@
       "farg": "flask",
       "bild": "assets/img/paltboken.webp",
       "alt": "Paltboken: receptlista med pitepalt och flatpalt",
-      "lank": "/paltboken/"
+      "lank": "/paltboken/",
+      "ar": 2026,
+      "genre": "Mat och recept",
+      "knapp": "Öppna",
+      "spelare": "För alla som gillar palt",
+      "ingress": "Pitepalt från grunden – och allt runt omkring.",
+      "beskrivning": [
+        "Paltboken lär dig koka riktig pitepalt, steg för steg. Välj hur många ni är så räknar receptet om mängderna åt dig, och bocka av ingredienser och moment medan du lagar.",
+        "Här finns också flatpalt, stekt palt dagen efter, lingon och fläsk – och en varm och lagom allvarlig berättelse om paltens historia."
+      ],
+      "hojdpunkter": [
+        "Pitepalt, flatpalt och stekt palt",
+        "Mängder som räknas om efter antal portioner",
+        "Lista över redskap du behöver",
+        "Paltens historia"
+      ],
+      "video": "/assets/video/paltboken-promo.mp4",
+      "klipp": "/assets/video/paltboken-kort.mp4",
+      "poster": "/assets/video/paltboken-poster.jpg",
+      "sida": "/projekt/paltboken/"
     },
     {
       "id": "lovely",
@@ -102,7 +235,24 @@
       "farg": "flask",
       "bild": "",
       "alt": "",
-      "lank": ""
+      "lank": "",
+      "ar": 2026,
+      "genre": "Nedräkning",
+      "knapp": "Kommer snart",
+      "spelare": "För elever och lärare",
+      "ingress": "Ha stenkoll på dina lov.",
+      "beskrivning": [
+        "LOVely räknar ner till nästa skollov. Planera vad du ska göra själv eller med kompisar, och spara lovets bästa stunder – allt på ett ställe."
+      ],
+      "hojdpunkter": [
+        "Nedräkning till nästa lov",
+        "Planera lovet själv eller med kompisar",
+        "Spara lovets bästa stunder"
+      ],
+      "video": "/assets/video/lovely-promo.mp4",
+      "klipp": "/assets/video/lovely-kort.mp4",
+      "poster": "/assets/video/lovely-poster.jpg",
+      "sida": "/projekt/lovely/"
     }
   ]
 }

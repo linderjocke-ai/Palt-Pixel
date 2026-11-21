@@ -118,6 +118,7 @@ h1 {
   display: inline-flex; align-items: center; gap: 8px;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
+a.chip { text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .chip:hover { background: rgba(255, 255, 255, 0.08); }
 .chip[aria-pressed="true"] { background: var(--sno); color: var(--natt); border-color: var(--sno); }
 .chip .antal { font-family: var(--pixel); font-size: 12px; opacity: 0.7; }
@@ -127,7 +128,7 @@ h1 {
 .mosaik {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-auto-rows: 240px;
+  grid-auto-rows: 190px;
   grid-auto-flow: dense;
   gap: 14px;
 }
@@ -222,7 +223,7 @@ a.ruta:hover .miniatyr img { transform: scale(1.04); }
 
 /* ---------- Responsivt ---------- */
 @media (max-width: 1000px) {
-  .mosaik { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 210px; }
+  .mosaik { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 180px; }
 }
 @media (max-width: 640px) {
   body { font-size: 16px; }
@@ -231,7 +232,7 @@ a.ruta:hover .miniatyr img { transform: scale(1.04); }
   .varumarke span { font-size: 20px; }
   .varumarke img { width: 44px; height: 35px; }
   .meny a { padding: 12px 12px; }
-  .mosaik { grid-template-columns: minmax(0, 1fr); grid-auto-rows: 260px; gap: 12px; }
+  .mosaik { grid-template-columns: minmax(0, 1fr); grid-auto-rows: 220px; gap: 12px; }
   .stor, .bred { grid-column: auto; }
   .stor { grid-row: span 2; }
   .hog { grid-row: span 2; }

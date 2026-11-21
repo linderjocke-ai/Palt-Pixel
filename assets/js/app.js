@@ -20,80 +20,36 @@
   /* ---------- Projekt och filter ---------- */
   const mosaik = document.getElementById("mosaik");
   const radTyp = document.getElementById("filter-typ");
-  const radKat = document.getElementById("filter-kategori");
   const TYPNAMN = { spel: "Spel", app: "App" };
   let projekt = [];
-  let valtTyp = "alla";
-  let valdKat = "alla";
 
   function ruta(p) {
     const etikett = `<span class="etikett">${svg(p.ikon)}${esc(TYPNAMN[p.typ] || p.typ)} · ${esc(p.kategori)}</span>`;
-    const bild = p.bild
+    const bild = p.bild && p.storlek !== "bred"
       ? `<img src="${esc(p.bild)}" alt="${esc(p.alt || p.namn)}" loading="lazy" decoding="async">`
-      : `<div class="platshallare">${svg("bild")}<span>Bild kommer</span></div>`;
-    const inre = `<div class="ruta-topp"><div><h3>${esc(p.namn)}</h3><p>${esc(p.text)}</p></div>${etikett}</div><div class="miniatyr">${bild}</div>`;
+      : `<img src="${esc(p.poster)}" alt="" loading="lazy" decoding="async">`;
+    const klipp = p.klipp ? `<video muted loop playsinline preload="none" data-klipp="${esc(p.klipp)}" aria-hidden="true"></video>` : "";
+    const inre = `<div class="ruta-topp"><div><h3>${esc(p.namn)}</h3><p>${esc(p.text)}</p></div>${etikett}</div><div class="miniatyr">${bild}${klipp}</div>`;
     const klass = `ruta ${p.storlek || "liten"} f-${esc(p.farg)}`;
-    const data = `data-typ="${esc(p.typ)}" data-kategori="${esc(p.kategori)}"`;
-    return p.lank
-      ? `<a class="${klass}" href="${esc(p.lank)}" target="_blank" rel="noopener" ${data}>${inre}</a>`
-      : `<article class="${klass}" ${data}>${inre}</article>`;
+    return `<a class="${klass}" href="${esc(p.sida)}">${inre}</a>`;
   }
 
   function nastaRuta() {
-    return `<article class="ruta liten nasta" data-typ="nasta" data-kategori=""><div class="ruta-topp"><div><h3>Nästa projekt</h3><p>Något nytt är på gång.</p></div></div><div class="miniatyr platshallare">${svg("plus")}<span>Snart här</span></div></article>`;
+    return `<article class="ruta liten nasta"><div class="ruta-topp"><div><h3>Nästa projekt</h3><p>Något nytt är på gång.</p></div></div><div class="miniatyr platshallare">${svg("plus")}<span>Snart</span></div></article>`;
   }
 
-  function chip(text, valt, antal, onClick) {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "chip";
-    b.setAttribute("aria-pressed", String(valt));
-    b.innerHTML = `${esc(text)}${antal != null ? ` <span class="antal">${antal}</span>` : ""}`;
-    b.addEventListener("click", onClick);
-    return b;
+  function ritaVal() {
+    const antal = (t) => projekt.filter((p) => t === "alla" || p.typ === t).length;
+    radTyp.innerHTML = [["Allt", "alla", "/alla/"], ["Spel", "spel", "/spel/"], ["Appar", "app", "/appar/"]]
+      .map(([namn, t, href]) => `<a class="chip" href="${href}">${namn} <span class="antal">${antal(t)}</span></a>`).join("");
   }
-
-  function ritaFilter() {
-    radTyp.replaceChildren(
-      chip("Allt", valtTyp === "alla", projekt.length, () => valj("alla")),
-      chip("Spel", valtTyp === "spel", projekt.filter((p) => p.typ === "spel").length, () => valj("spel")),
-      chip("Appar", valtTyp === "app", projekt.filter((p) => p.typ === "app").length, () => valj("app"))
-    );
-    const kategorier = [...new Set(projekt.filter((p) => p.typ === "spel").map((p) => p.kategori))];
-    radKat.hidden = valtTyp !== "spel";
-    radKat.replaceChildren(
-      chip("Alla spel", valdKat === "alla", null, () => { valdKat = "alla"; uppdatera(); }),
-      ...kategorier.map((k) => chip(k, valdKat === k, null, () => { valdKat = k; uppdatera(); }))
-    );
-  }
-
-  function valj(typ) {
-    valtTyp = typ;
-    valdKat = "alla";
-    uppdatera();
-  }
-
-  function uppdatera() {
-    ritaFilter();
-    mosaik.querySelectorAll(".ruta").forEach((el) => {
-      const typ = el.dataset.typ;
-      const passar = typ === "nasta" ? valtTyp === "alla"
-        : (valtTyp === "alla" || typ === valtTyp) && (valdKat === "alla" || el.dataset.kategori === valdKat);
-      el.classList.toggle("dimmad", !passar);
-      if (el.tagName === "A") el.tabIndex = passar ? 0 : -1;
-    });
-  }
-
-  document.querySelectorAll(".meny a[data-filter]").forEach((a) => {
-    a.addEventListener("click", () => valj(a.dataset.filter));
-  });
 
   fetch("/projects.json")
     .then((r) => r.json())
     .then((data) => {
       projekt = data.projekt || [];
       mosaik.innerHTML = projekt.map(ruta).join("") + nastaRuta();
-      uppdatera();
+      ritaVal();
     })
     .catch(() => {
       mosaik.innerHTML = '<p class="ingress">Projekten kunde inte laddas just nu. Ladda om sidan.</p>';
