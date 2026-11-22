@@ -1,0 +1,449 @@
+{
+ "arskurs": "F",
+ "titel": "Pim och den lilla stjärnan",
+ "kapitel": [
+  {
+   "rubrik": "Något faller från himlen",
+   "text": [
+    "Under en stor gran bodde en liten mus. Han hette Pim.",
+    "Pim hade en varm säng av mossa och en kopp av en ekollonhatt.",
+    "En kväll i december tittade Pim ut mellan granens grenar och barr. Himlen var full av stjärnor.",
+    "Plötsligt såg han något blänka. Ett litet ljus föll ner från himlen. Det landade i snön, alldeles nära granen.",
+    "– Vad var det? viskade Pim."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Pim är en mus.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Pim bor i ett stort hus.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Ett litet ljus föll ner från himlen.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Pim som tittar ut mellan granens grenar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Pim är modig",
+   "text": [
+    "Det var mörkt ute. Pim var rädd för mörkret.",
+    "Men han ville så gärna veta vad som hade fallit ner.",
+    "Pim tog på sig sin röda mössa och gick ut i snön. Tass, tass, tass.",
+    "Där, i en liten grop, låg något som lyste svagt. Det var en liten stjärna! Hon grät tyst.",
+    "– Hej, sa Pim försiktigt. Jag heter Pim. Har du gjort dig illa?"
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Pim är rädd för mörkret.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Pim har en blå mössa.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Pim hittar en liten stjärna i snön.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita den lilla stjärnan i snön."
+    }
+   ]
+  },
+  {
+   "rubrik": "Stjärnan som heter Glimt",
+   "text": [
+    "– Jag heter Glimt, snyftade stjärnan. Jag dansade för vilt och ramlade ner från himlen.",
+    "– Vill du komma hem till mig? frågade Pim. Där är det varmt.",
+    "Glimt nickade. Pim bar henne försiktigt till sitt hem under granen.",
+    "Han bäddade ner henne i mossan och gav henne lite varmt vatten i ekollonkoppen.",
+    "– Jag vill hem till himlen, sa Glimt. Men den är så långt bort."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Stjärnan heter Glimt.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Glimt ramlade ner för att hon dansade för vilt.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Glimt vill stanna hos Pim för alltid.",
+     "svar": false
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Glimt som ligger i Pims säng."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ester har en idé",
+   "text": [
+    "På morgonen lyste Glimt lite svagare än förut.",
+    "Pim blev orolig. Han sprang till sin vän, ekorren Ester.",
+    "– Ester! Vi måste hjälpa en liten stjärna hem till himlen!",
+    "Ester rufsade sin yviga svans och tänkte.",
+    "– Vi klättrar upp i den högsta granen i hela skogen, sa hon. Därifrån kan hon nog nå himlen!",
+    "– Ja! sa Pim. Det gör vi!"
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Glimt lyser starkare på morgonen.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Ester är en ekorre.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Ester vill klättra upp i en hög gran.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Ester med sin yviga svans."
+    }
+   ]
+  },
+  {
+   "rubrik": "Den högsta granen",
+   "text": [
+    "Pim, Ester och Glimt klättrade upp i den högsta granen. Högre och högre.",
+    "Grenarna gungade i vinden. Pim höll hårt i Glimt.",
+    "Till slut var de i toppen. Men himlen var fortfarande långt, långt bort.",
+    "Glimt blev ledsen och lyste ännu svagare.",
+    "Pim kramade henne. – Vi ger inte upp, sa han. Vi hittar ett annat sätt."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "De klättrar upp i den högsta granen.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Glimt når himlen från granens topp.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Pim tröstar Glimt.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita vännerna i toppen av granen."
+    }
+   ]
+  },
+  {
+   "rubrik": "Hoppe hoppar",
+   "text": [
+    "Nere på marken mötte de haren Hoppe.",
+    "– Jag kan hoppa jättehögt! sa Hoppe. Jag hoppar upp med Glimt!",
+    "Hoppe hoppade. Boing! Han hoppade högt, men inte ända till himlen.",
+    "Han landade på rumpan i en snödriva. Alla började skratta. Hoppe skrattade mest av alla.",
+    "Då hände något. Glimt skrattade också, och hennes ljus blev starkare!"
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Hoppe är en hare.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Hoppe hoppar ända upp till himlen.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Glimt lyser starkare när hon skrattar.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Hoppe som landar i snödrivan."
+    }
+   ]
+  },
+  {
+   "rubrik": "Glädje gör ljus",
+   "text": [
+    "– Såg ni? sa Pim. Glimt lyser mer när hon är glad!",
+    "Glimt nickade. – Stjärnor lyser av glädje, sa hon. Det hade jag glömt.",
+    "Så vännerna bestämde sig. Varje dag skulle de göra Glimt glad.",
+    "De byggde en snögubbe med en kotte till näsa. De sjöng sånger och åkte kana på ett löv.",
+    "Glimt lyste och lyste."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Stjärnor lyser av glädje.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Vännerna bygger en snögubbe.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Snögubben har en morot till näsa.",
+     "svar": false
+    },
+    {
+     "typ": "rita",
+     "text": "Rita något som gör dig glad."
+    }
+   ]
+  },
+  {
+   "rubrik": "Snöstormen",
+   "text": [
+    "En natt kom en stor snöstorm. Vinden ven och snön yrde.",
+    "När Pim och Glimt vaknade på morgonen var det så mycket snö runt granen att de inte kunde ta sig ut.",
+    "– Hjälp! ropade Pim.",
+    "Då hörde de något. Skrap, skrap. Det var Ester och Hoppe som grävde.",
+    "Snart hade de grävt sig fram till Pim och Glimt. – Tack, sa Pim. Det är bra att ha vänner.",
+    "– Det är klart att vi hjälper er, sa Hoppe.",
+    "Glimt kände sig varm och lyste fint. Men plötsligt lyste hon lite svagare igen.",
+    "– Ni är så snälla, sa hon. Men jag längtar fortfarande hem till stjärnhimlen."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Det kommer en snöstorm.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Pim gräver ut sig själv.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Ester och Hoppe hjälper Pim och Glimt.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita vännerna som gräver i snön."
+    }
+   ]
+  },
+  {
+   "rubrik": "Den kloka ugglan",
+   "text": [
+    "– Vi måste fråga ugglan Ulla, sa Ester. Hon vet allt.",
+    "Ulla satt högt upp i en gammal tall.",
+    "– Hur kommer Glimt hem till himlen? frågade Pim.",
+    "Ulla blinkade med sina stora ögon.",
+    "– När hela skogen samlas och är glad tillsammans, sa hon, då blir ljuset så starkt att det når himlen.",
+    "– Hela skogen? sa Pim. Alla djur?"
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Ulla är en uggla.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Ulla bor i en gammal tall.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Bara Pim behöver vara glad för att Glimt ska komma hem.",
+     "svar": false
+    },
+    {
+     "typ": "rita",
+     "text": "Rita ugglan Ulla i tallen."
+    }
+   ]
+  },
+  {
+   "rubrik": "Den sura grävlingen",
+   "text": [
+    "Alla djur skulle bjudas in. Även grävlingen Bruno.",
+    "Bruno var stor och brummig. Alla var lite rädda för honom.",
+    "Pim darrade. Men han knackade på ändå. Knack, knack.",
+    "– Vad vill du? brummade Bruno.",
+    "– Vill du komma på fest? frågade Pim. Vi ska hjälpa en stjärna hem.",
+    "Bruno tittade länge på Pim. – Ingen har bjudit mig på fest förut, sa han tyst. Jag kommer gärna."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Bruno är en grävling.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Pim är inte alls rädd för Bruno.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Bruno vill komma på festen.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita när Pim knackar på hos Bruno."
+    }
+   ]
+  },
+  {
+   "rubrik": "Lyktor av is",
+   "text": [
+    "Nu skulle festen förberedas.",
+    "Bruno visade hur man gör lyktor av is. Man fyller en hink med vatten och låter den frysa.",
+    "Ester hängde upp kottar i granarna. Hoppe trampade en stor rund plats i snön.",
+    "Fler och fler djur kom för att hjälpa till. Rådjur, rävar och små fåglar.",
+    "Glimt tittade på alla och log. Hennes ljus blev lite starkare."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Bruno visar hur man gör lyktor av is.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Hoppe hänger upp kottar.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Många djur hjälper till.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita en lykta av is."
+    }
+   ]
+  },
+  {
+   "rubrik": "Glimt är trött",
+   "text": [
+    "Kvällen innan festen var Glimt väldigt trött. Hon lyste bara lite, lite.",
+    "– Tänk om jag inte orkar, viskade hon.",
+    "Pim satte sig bredvid henne. Han höll hennes lilla hand.",
+    "Ester kom med en varm filt av mossa. Hoppe berättade roliga sagor.",
+    "– Vi är här, sa Pim. Du är inte ensam.",
+    "Glimt somnade med ett litet leende."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Glimt är pigg kvällen innan festen.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Pim sitter bredvid Glimt.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Hoppe berättar sagor.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita hur vännerna tar hand om Glimt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Festen i gläntan",
+   "text": [
+    "Äntligen var det dags för festen!",
+    "Alla djur samlades i gläntan. Islyktorna glittrade.",
+    "De sjöng och dansade. Bruno dansade med en liten fågel på huvudet. Alla skrattade.",
+    "Glimt lyste starkare och starkare. Hela gläntan blev ljus.",
+    "– Det fungerar! ropade Pim.",
+    "Glimt började sakta sväva upp i luften."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Alla djur samlas i gläntan.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Bruno vill inte dansa.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Glimt börjar sväva upp i luften.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita festen i gläntan."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ljuset på himlen",
+   "text": [
+    "Glimt svävade högre och högre. Hon lyste som en liten sol.",
+    "– Tack, Pim! ropade hon. Tack, alla mina vänner!",
+    "Sedan var hon uppe bland de andra stjärnorna. Hon var hemma.",
+    "Varje kväll blinkar Glimt till Pim från himlen. Blink, blink.",
+    "Och Pim? Han är inte rädd för mörkret längre. För i mörkret syns stjärnorna allra bäst.",
+    "Slut."
+   ],
+   "fragor": [
+    {
+     "typ": "janej",
+     "text": "Glimt kommer hem till himlen.",
+     "svar": true
+    },
+    {
+     "typ": "janej",
+     "text": "Glimt säger aldrig tack.",
+     "svar": false
+    },
+    {
+     "typ": "janej",
+     "text": "Pim är inte rädd för mörkret längre.",
+     "svar": true
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Glimt som blinkar till Pim från himlen."
+    }
+   ]
+  }
+ ]
+}
