@@ -1,0 +1,894 @@
+{
+ "arskurs": "6",
+ "titel": "Kassaskrinet",
+ "kapitel": [
+  {
+   "rubrik": "Tjugotusen kronor",
+   "text": [
+    "– Tjugotusen kronor, sa Mattias och skrev siffran på tavlan med stora röda siffror. Det är vad vi behöver för att åka till fjällen i vår.",
+    "Det gick ett stön genom klassrummet. Klass 6b hade pratat om fjällresan sedan fyran, men ingen hade riktigt tänkt på vad den kostade.",
+    "– Vi har redan elvatusen i klasskassan, fortsatte Mattias. Resten måste vi samla in. Och jag har ett förslag: skolans julmarknad den nionde december. Vi gör ett eget stånd.",
+    "Amanda satt längst fram och kände hur pulsen steg. Hon älskade sådant här. Planer, listor, mål.",
+    "– Vi behöver en kassör, sa Mattias. Någon som håller koll på pengarna och kassaskrinet. Det är ett stort ansvar.",
+    "Amandas hand åkte upp innan hon ens hade bestämt sig. Mattias log. – Amanda. Bra.",
+    "Hon kände sig stolt resten av lektionen.",
+    "På rasten stod hon vid fönstret med sin bästa kompis Love… och Mika från parallellklassen. Ute på skolgården gick den nya killen, Victor, ensam längs staketet med huvan uppdragen. Han hade börjat i klassen efter höstlovet och knappt sagt tio ord sedan dess.",
+    "– Vet ni varför han flyttade hit från Göteborg? sa Mika och sänkte rösten. Min kusin säger att han blev tvungen. Att han hade gjort något.",
+    "– Vad då? frågade Love.",
+    "Mika ryckte på axlarna, som om hon visste mer än hon tänkte säga.",
+    "Amanda tittade på Victor. Han hade alltid samma gråa huvtröja. Hon visste inte vad hon skulle tro, så hon sa ingenting."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad ska klassen samla pengar till?",
+     "alt": [
+      "En ny dator till klassrummet",
+      "En julfest",
+      "En resa till fjällen"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vilket uppdrag får Amanda?",
+     "alt": [
+      "Bagare",
+      "Kassör",
+      "Affischmakare"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur mycket pengar behöver klassen samla in? Visa hur du räknar.",
+     "rader": 2,
+     "facit": "20 000 − 11 000 = 9 000 kronor."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad betyder det att Mika \"ryckte på axlarna, som om hon visste mer än hon tänkte säga\"? Vad vill Mika att de andra ska tro?",
+     "rader": 2,
+     "facit": "Hon låtsas veta något hemligt och vill att de ska tro att Victor har gjort något dåligt, fast hon egentligen inte vet."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vilken information om Victor kommer från ett rykte och vilken är fakta?",
+     "rader": 3,
+     "facit": "Fakta: han är ny, kom efter höstlovet, flyttade från Göteborg, är tyst, har samma huvtröja. Rykte: att han blev tvungen att flytta för att han gjort något."
+    },
+    {
+     "typ": "skriv",
+     "text": "Amanda säger ingenting. Vad tror du att hon borde ha sagt eller gjort? Motivera.",
+     "rader": 3,
+     "facit": "Eget svar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Affischen",
+   "text": [
+    "På onsdagens lektion planerade de ståndet. Love stod vid whiteboardtavlan och skrev upp förslag så snabbt att tuschpennan gnisslade.",
+    "– Varm choklad! ropade någon. – Knäck! – Pepparkakor med namn på! – Ljusstakar av björkved!",
+    "Till slut hade de en lista på tolv saker och ett namn: Sexans Vinterstuga.",
+    "– Vi behöver en affisch också, sa Mattias. Något som syns på långt håll i korridoren.",
+    "Ingen anmälde sig. Mika sa att hon kunde göra en på datorn. Mattias nickade, och lektionen gick vidare.",
+    "Men när Amanda gick förbi Victors bänk på väg ut, såg hon att han hade ritat på baksidan av sitt mattehäfte. Det var en liten stuga omgiven av snö, med rök som ringlade ur skorstenen och fönster som lyste gult. Runt stugan stod barn med muggar i händerna, och ovanför, i snirkliga bokstäver: Sexans Vinterstuga.",
+    "Den var fantastisk. Inte bara bra, utan på riktigt fantastisk, som en bild i en bok.",
+    "– Har du ritat den? sa Amanda innan hon hann tänka.",
+    "Victor vände snabbt på häftet. – Det är inget, mumlade han.",
+    "– Det är jättefint. Du borde visa Mattias.",
+    "Victor tittade på henne en kort sekund. Hans ögon var mörka och vaksamma, som om han letade efter ett skämt som inte fanns där.",
+    "– Kanske, sa han och gick.",
+    "Dagen efter hängde en stor affisch på dörren till klassrummet. En stuga omgiven av snö, med rök ur skorstenen och fönster som lyste. Mikas datorbild låg kvar i skrivaren, och ingen frågade efter den."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad heter klassens stånd?",
+     "alt": [
+      "Sexans Vinterstuga",
+      "Julmarknaden",
+      "Fjällstugan"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Var har Victor ritat sin bild?",
+     "alt": [
+      "På tavlan",
+      "På datorn",
+      "På baksidan av sitt mattehäfte"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Victors ögon beskrivs som \"vaksamma, som om han letade efter ett skämt som inte fanns där\". Vad säger det om hur Victor har blivit behandlad tidigare?",
+     "rader": 3,
+     "facit": "Han är van vid att folk skämtar om honom eller är elaka, så han litar inte på att Amanda menar allvar."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad betyder ordet \"vaksam\"? Skriv en egen mening med ordet.",
+     "rader": 2,
+     "facit": "Uppmärksam och på sin vakt, beredd på fara. Egen mening."
+    },
+    {
+     "typ": "skriv",
+     "text": "\"Mikas datorbild låg kvar i skrivaren, och ingen frågade efter den.\" Vad vill författaren visa med den meningen?",
+     "rader": 2,
+     "facit": "Att Victors affisch var så mycket bättre att alla glömde Mikas. Det kan också bli en orsak till konflikt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur tror du att Mika känner sig när Victors affisch hänger på dörren?",
+     "rader": 2,
+     "facit": "Eget svar, till exempel avundsjuk eller förbigången."
+    }
+   ]
+  },
+  {
+   "rubrik": "Bakdagen",
+   "text": [
+    "På torsdagen förvandlades hemkunskapssalen till ett bageri. Alla skulle ta med en ingrediens hemifrån: mjöl, smör, socker, sirap, mandel.",
+    "Det luktade kanel och smält socker. Love hade mjöl i håret och sjöng falskt på en julsång. Mika och hennes kompisar sprättade glasyr på pepparkakor och skrev namn på dem.",
+    "Victor stod ensam vid den bortersta spisen och rörde i knäcksmeten. Han hade inte tagit med något hemifrån.",
+    "– Victor glömde sin grej, sa Mika högt. Typiskt.",
+    "Victor svarade inte. Han rörde bara, lugnt och jämnt, och tittade på smeten som om den var det enda i rummet.",
+    "Amanda ställde sig bredvid honom med en påse mandel.",
+    "– Hur vet du när den är klar? frågade hon.",
+    "– Man droppar lite i kallt vatten, sa Victor. Om den blir hård som glas är den klar. Min mormor lärde mig.",
+    "Han droppade. Smeten stelnade direkt till en liten blank pärla.",
+    "Victors knäck blev den bästa av alla. Den var hård och krispig och smakade både karamell och smör. Mattias åt tre bitar och sa att han skulle ta patent på receptet.",
+    "Men när alla gick ut såg Amanda att Victor försiktigt slog in de trasiga knäckbitarna, som ingen annan ville ha, i en servett och stoppade ner dem i väskan. Hon undrade varför, men vågade inte fråga."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad skulle alla ta med hemifrån?",
+     "alt": [
+      "Pengar",
+      "En ingrediens",
+      "En bakform"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur kan man testa om knäcken är klar?",
+     "alt": [
+      "Droppa lite i kallt vatten",
+      "Titta på klockan",
+      "Smaka på den"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Mika säger \"Typiskt\" om Victor. Vad menar hon, och varför är det orättvist?",
+     "rader": 2,
+     "facit": "Hon antyder att han alltid gör fel. Det är orättvist för hon vet inte varför han inte tog med något."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hitta ledtrådar i kapitlet som kan tyda på att Victors familj har det ont om pengar. Varför skriver författaren inte det rakt ut?",
+     "rader": 3,
+     "facit": "Han tar inte med någon ingrediens, tar hem de trasiga knäckbitarna, har alltid samma tröja. Författaren vill att läsaren ska dra egna slutsatser."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur reagerar Victor på Mikas kommentar? Vad säger det om honom?",
+     "rader": 2,
+     "facit": "Han svarar inte och fortsätter röra lugnt. Han är van, vill undvika bråk eller har lärt sig att stänga ute det."
+    },
+    {
+     "typ": "skriv",
+     "text": "Amanda vågar inte fråga Victor om knäckbitarna. Hade det varit bra att fråga? Hur skulle man kunna göra det på ett respektfullt sätt?",
+     "rader": 3,
+     "facit": "Eget svar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Slöjdsalen",
+   "text": [
+    "På fredagen efter skolan hade Amanda glömt sin mössa i slöjdsalen. När hon öppnade dörren hörde hon ett surrande ljud.",
+    "Victor stod vid svarven. Framför honom låg en rad ljusstakar av björk, slipade så släta att de nästan glänste.",
+    "– Jag trodde att alla hade gått hem, sa Amanda.",
+    "Victor stängde av svarven. – Slöjdläraren sa att jag fick stanna. Jag gör klart ljusstakarna till ståndet.",
+    "– Alla de där? Själv?",
+    "Victor ryckte på axlarna. – Jag har ändå inget annat att göra. Mamma jobbar till sju på fredagar, och mina småsyskon är hos dagmamman tills dess.",
+    "Amanda satte sig på en arbetsbänk och dinglade med benen. Hon visste inte varför, men hon ville inte gå än.",
+    "– Hur många syskon har du?",
+    "– Två systrar. De är fyra och sex. Jag hämtar dem varje dag.",
+    "Han berättade att de hade flyttat i somras. Att mamma hade fått ett jobb på sjukhuset. Att lägenheten var liten och att systrarna delade säng. Han sa det inte som om han klagade. Han sa det som det var.",
+    "Amanda tänkte på det som Mika hade sagt om Victor. Att han hade gjort något i Göteborg som tvingade honom att flytta hit. Det passade inte ihop med killen som stod här och svarvade ljusstakar till en klassresa han kanske inte ens hade råd att följa med på.",
+    "När hon gick hem den kvällen bestämde hon sig för att aldrig mer lyssna på Mikas skvaller.",
+    "Det skulle visa sig vara svårare än hon trodde."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför stannar Victor kvar i skolan?",
+     "alt": [
+      "Han gör klart ljusstakar och har inget annat att göra",
+      "Han väntar på Amanda",
+      "Han har kvarsittning"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur gamla är Victors systrar?",
+     "alt": [
+      "Två och fem",
+      "Fyra och sex",
+      "Sju och nio"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad får Amanda veta om Victors liv? Nämn minst tre saker.",
+     "rader": 3,
+     "facit": "Mamma jobbar på sjukhuset till sju, han har två småsystrar som han hämtar, de flyttade i somras, lägenheten är liten, systrarna delar säng."
+    },
+    {
+     "typ": "skriv",
+     "text": "\"Han sa det inte som om han klagade. Han sa det som det var.\" Vad säger det om Victor som person?",
+     "rader": 2,
+     "facit": "Han tycker inte synd om sig själv, han är ärlig och tar ansvar."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför \"passar det inte ihop\" för Amanda längre? Förklara med egna ord.",
+     "rader": 2,
+     "facit": "Ryktet säger att han är en som gjort något dåligt, men det hon ser är en ansvarsfull och snäll kille."
+    },
+    {
+     "typ": "skriv",
+     "text": "Kapitlet slutar med \"Det skulle visa sig vara svårare än hon trodde.\" Vad kallas en sådan mening och varför använder författare den?",
+     "rader": 2,
+     "facit": "En cliffhanger/förvarning (föregripande). För att skapa spänning och få läsaren att vilja läsa vidare."
+    }
+   ]
+  },
+  {
+   "rubrik": "Nyckeln",
+   "text": [
+    "På måndagen tog Mattias fram kassaskrinet. Det var en gammal grön plåtlåda med ett litet lås, och den hade använts av skolan i alla år som någon kunde minnas.",
+    "– Det här är ditt ansvar nu, Amanda, sa han och räckte henne en liten nyckel på ett rött snöre. Nyckeln ska du ha runt halsen. Skrinet ska alltid vara hos dig eller inlåst i mitt skåp. Alltid. Förstått?",
+    "– Förstått, sa Amanda och trädde snöret över huvudet. Nyckeln låg kall mot huden.",
+    "Under veckan räknade hon växelpengar, gjorde prislappar och skrev en lista över allt som skulle säljas. Hon gjorde ett kalkylark på datorn med en kolumn för varje vara. Hon hade aldrig varit så noggrann med något i hela sitt liv.",
+    "Love retades. – Du sover säkert med kassaskrinet under kudden.",
+    "– Nej, sa Amanda. Det sover i Mattias skåp. Det är reglerna.",
+    "Victor var tyst som vanligt på lektionerna, men en gång när Amanda inte fick ihop summorna i kalkylarket lutade han sig fram.",
+    "– Du har räknat knäcken två gånger, sa han och pekade. Där.",
+    "Han hade rätt. Amanda log. – Tack.",
+    "Victor nästan log tillbaka. Nästan.",
+    "Mika såg det från andra sidan rummet. Hon sa ingenting, men hon himlade med ögonen åt sina kompisar."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Var ska kassaskrinet vara när det inte är hos Amanda?",
+     "alt": [
+      "I expeditionen",
+      "I hennes skolväska",
+      "Inlåst i Mattias skåp"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vilket fel hittar Victor i kalkylarket?",
+     "alt": [
+      "Ett pris saknas",
+      "Summan är för låg",
+      "Knäcken är räknad två gånger"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Mattias är så tydlig med reglerna för kassaskrinet?",
+     "rader": 2,
+     "facit": "Det handlar om mycket pengar som tillhör hela klassen, och han vill att inget ska hända."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad betyder \"noggrann\"? Ge ett exempel från texten på hur Amanda är noggrann.",
+     "rader": 2,
+     "facit": "Att göra saker ordentligt och exakt. Hon räknar växel, gör prislappar och ett kalkylark."
+    },
+    {
+     "typ": "skriv",
+     "text": "\"Victor nästan log tillbaka. Nästan.\" Varför tror du att författaren upprepar ordet nästan?",
+     "rader": 2,
+     "facit": "För att betona att Victor är på väg att öppna sig men fortfarande är försiktig."
+    },
+    {
+     "typ": "skriv",
+     "text": "Lägg märke till vad Mika gör i slutet. Vad tror du att det kan leda till senare i berättelsen?",
+     "rader": 3,
+     "facit": "Eget svar, till exempel att Mika blir avundsjuk och sprider fler rykten."
+    }
+   ]
+  },
+  {
+   "rubrik": "Vem ska stå i ståndet?",
+   "text": [
+    "Dagen före marknaden skulle Mattias göra ett schema för vem som skulle stå i ståndet och när. Han lät klassen dela upp sig själva i grupper.",
+    "Mika tog snabbt kommandot. – Jag och Thea och Isak tar första passet. Sedan Amanda och Love.",
+    "– Och Victor? frågade Love.",
+    "Mika tittade på sina naglar. – Jag tycker inte att Victor ska stå vid kassan. Man vet ju aldrig.",
+    "Det blev tyst. Några fnissade nervöst. Victor satt alldeles stilla och tittade på sin bänk.",
+    "Amanda kände hur det hettade i ansiktet. Hon visste att hon borde säga något. Hon tänkte på slöjdsalen, på ljusstakarna, på systrarna som delade säng. Hon öppnade munnen.",
+    "Men Mika var populär. Mika bestämde vem som fick vara med på rasterna och vem som inte fick det. Och Amanda hade alltid varit på rätt sida om den gränsen.",
+    "Hon stängde munnen igen.",
+    "– Victor kan väl ta hand om ljusstakarna, sa Mattias, som inte hade hört hela samtalet. Han har ju gjort dem.",
+    "Victor nickade utan att titta upp.",
+    "Den kvällen kunde Amanda inte somna. Hon låg och stirrade i taket och spelade upp scenen om och om igen. I varje version sa hon något modigt. I verkligheten hade hon inte sagt någonting alls.",
+    "Nyckeln med det röda snöret låg på nattduksbordet bredvid henne. Den verkade tyngre än förut."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad säger Mika om Victor?",
+     "alt": [
+      "Att han ska stå först",
+      "Att han inte ska stå vid kassan",
+      "Att han ska göra affischer"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör Amanda när Mika säger det?",
+     "alt": [
+      "Hon säger ingenting",
+      "Hon säger emot Mika",
+      "Hon går ut ur rummet"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Mika säger \"Man vet ju aldrig\". Vad antyder hon, och varför är det ett sätt att sprida rykten utan att säga något rakt ut?",
+     "rader": 3,
+     "facit": "Hon antyder att Victor kan stjäla. Genom att inte säga det direkt kan hon inte anklagas för att ljuga, men alla förstår vad hon menar."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför säger inte Amanda något? Förklara hennes inre konflikt.",
+     "rader": 3,
+     "facit": "Hon vet att det är fel och vill försvara Victor, men hon är rädd att hamna utanför Mikas gäng."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad menar författaren med att Amanda \"alltid hade varit på rätt sida om den gränsen\"?",
+     "rader": 2,
+     "facit": "Hon har alltid fått vara med i den populära gruppen."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför känns nyckeln tyngre än förut? Koppla till ett tidigare kapitel.",
+     "rader": 2,
+     "facit": "Hon har dåligt samvete. Det är samma bild som när något känns tungt fast det är lätt: det är känslan som är tung."
+    }
+   ]
+  },
+  {
+   "rubrik": "Sexans Vinterstuga",
+   "text": [
+    "Den nionde december var skolans matsal förvandlad till en julmarknad. Det hängde ljusslingor i taket, och från högtalarna strömmade julmusik. Föräldrar, syskon, mor- och farföräldrar trängdes mellan borden.",
+    "Sexans Vinterstuga låg närmast ingången. Victors affisch syntes redan från korridoren, och flera vuxna stannade bara för att titta på den.",
+    "Det gick fantastiskt. Den varma chokladen tog slut på en timme. Pepparkakorna med namn sålde slut ännu snabbare. Men det som sålde allra mest var Victors ljusstakar och Victors knäck.",
+    "– Vem har gjort de här? frågade en äldre kvinna och vände på en ljusstake. Det här är ju riktigt hantverk.",
+    "Love pekade stolt på Victor. – Han där!",
+    "Victor blev röd ända upp till hårfästet. Men han log. Ett riktigt leende, för första gången den här terminen.",
+    "Amanda satt vid kassan och räknade. Hon räknade och räknade. Det knastrade av sedlar och klirrade av mynt i det gröna skrinet. När marknaden stängde klockan sju räknade hon en sista gång, och sedan en gång till för säkerhets skull.",
+    "– Fyratusen trehundratolv kronor! ropade hon.",
+    "Klassen jublade. Mattias gav Amanda en high five och Love lyfte upp henne i luften.",
+    "När marknaden var slut bar klassen tillbaka allt till klassrummet: borden, de tomma termosarna och det gröna skrinet. – Ställ skrinet på din bänk så länge, sa Mattias till Amanda. Jag ska bara hämta nyckeln till mitt skåp. Men i korridoren blev han stående och pratade med en förälder.",
+    "Amanda ställde skrinet på bänken. Just då plingade hennes telefon. Det var pappa. Han stod utanför skolan och hade bråttom. Amanda drog på sig jackan och sprang. Hon tänkte inte på nyckeln som hängde i det röda snöret runt halsen. Och hon tänkte inte på det gröna skrinet som stod kvar på bänken i klassrummet."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad sålde allra mest?",
+     "alt": [
+      "Pepparkakor med namn",
+      "Victors ljusstakar och knäck",
+      "Varm choklad"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur mycket pengar fick klassen in?",
+     "alt": [
+      "20 000 kronor",
+      "4 312 kronor",
+      "3 412 kronor"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur mycket saknas nu till fjällresan? Utgå från siffrorna i kapitel 1 och visa hur du räknar.",
+     "rader": 2,
+     "facit": "9 000 − 4 312 = 4 688 kronor."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför är Victors leende viktigt i berättelsen?",
+     "rader": 2,
+     "facit": "Det är första gången han ler på riktigt. Han blir sedd och uppskattad för det han kan."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad är det Amanda glömmer? Vilken regel bryter hon?",
+     "rader": 2,
+     "facit": "Hon glömmer kassaskrinet i klassrummet. Regeln var att det alltid skulle vara hos henne eller inlåst i Mattias skåp."
+    },
+    {
+     "typ": "skriv",
+     "text": "Författaren berättar om misstaget i sista meningen, mitt i den glada stämningen. Vilken effekt får det på läsaren?",
+     "rader": 3,
+     "facit": "Det skapar spänning och oro. Läsaren vet något som karaktärerna inte vet och anar att något kommer att gå fel."
+    }
+   ]
+  },
+  {
+   "rubrik": "Tomt på bänken",
+   "text": [
+    "Amanda vaknade med ett ryck klockan sex på morgonen. Hon visste inte varför. Sedan kände hon efter nyckeln runt halsen och mindes.",
+    "Skrinet. Hon hade lämnat skrinet i klassrummet.",
+    "Hon cyklade till skolan i mörkret, så fort att hon nästan ramlade i en snödriva. Hon var först där, före till och med vaktmästaren. Hon väntade utanför den låsta dörren med hjärtat i halsen.",
+    "När Mattias kom och låste upp sprang hon förbi honom in i klassrummet.",
+    "Bänken var tom.",
+    "Hon letade i alla bänkar. Under katedern. I skåpen. I papperskorgen. Skrinet var borta.",
+    "– Amanda? sa Mattias. Vad letar du efter?",
+    "Amanda vände sig om. Hon skulle berätta. Hon skulle säga att det var hennes fel, att hon hade glömt det. Men orden fastnade.",
+    "– Kassaskrinet, sa hon bara. Det är borta.",
+    "Mattias blev blek. – Var det inte inlåst i mitt skåp?",
+    "Amanda svarade inte. Hon bara tittade ner.",
+    "Under förmiddagen spreds nyheten genom hela skolan. Fyratusen kronor hade försvunnit från 6b. Och i korridoren började folk viska."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad upptäcker Amanda när hon kommer till klassrummet?",
+     "alt": [
+      "Att skrinet är inlåst",
+      "Att pengarna ligger på bänken",
+      "Att skrinet är borta"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad svarar Amanda när Mattias frågar om skrinet var inlåst?",
+     "alt": [
+      "Hon svarar inte",
+      "Hon säger att Victor tog det",
+      "Hon säger ja"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur visar författaren Amandas panik? Hitta minst två exempel i texten.",
+     "rader": 3,
+     "facit": "Hon vaknar med ett ryck, cyklar så fort att hon nästan voltar, hjärtat i halsen, springer förbi Mattias, letar överallt."
+    },
+    {
+     "typ": "skriv",
+     "text": "\"Men orden fastnade.\" Varför tror du att Amanda inte berättar sanningen?",
+     "rader": 2,
+     "facit": "Hon skäms, är rädd för konsekvenserna och vill inte vara den som gjort fel."
+    },
+    {
+     "typ": "skriv",
+     "text": "Är det att ljuga när Amanda inte svarar på Mattias fråga? Resonera.",
+     "rader": 3,
+     "facit": "Eget svar. Hon säger inget osant men döljer sanningen och låter Mattias tro något felaktigt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att folk viskar om i korridoren?",
+     "rader": 2,
+     "facit": "Eget svar, till exempel att de misstänker Victor."
+    }
+   ]
+  },
+  {
+   "rubrik": "Viskningarna",
+   "text": [
+    "Det tog inte lång tid innan viskningarna hade ett namn.",
+    "– Victor var sist kvar i klassrummet i går, sa Mika till alla som ville lyssna. Jag såg honom. Han städade borden när alla andra hade gått.",
+    "Det var sant. Victor hade stannat kvar och torkat borden. Han hade gjort det för att ingen annan ville.",
+    "– Och han har ju inga pengar, viskade någon annan. Han har alltid samma tröja.",
+    "Under lunchen satt Victor ensam vid ett bord längst bort i matsalen. Det fanns tomma platser runt honom, i en cirkel, som om han hade en sjukdom som smittade.",
+    "Mattias pratade med rektorn. Rektorn pratade med Victor. Ingen visste vad de sa, men när Victor kom ut från rektorns rum var han vit i ansiktet.",
+    "Amanda satt i klassrummet och kände sig illamående. Varje gång någon sa Victors namn kändes det som en spik i magen. Hon visste att det inte var han. Hon visste exakt vad som hade hänt, eller i alla fall vems fel det var.",
+    "Hon sa ingenting.",
+    "Hon intalade sig att skrinet säkert skulle dyka upp. Att det inte spelade någon roll om hon berättade. Att det bara skulle göra allt värre.",
+    "Dagen efter var Victors bänk tom. Han var inte i skolan. Mattias sa att han var sjuk.",
+    "Amanda visste att han inte var sjuk."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför var Victor sist kvar i klassrummet?",
+     "alt": [
+      "Han letade efter sin mössa",
+      "Han torkade borden för att ingen annan ville",
+      "Han väntade på sin mamma"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad händer dagen efter?",
+     "alt": [
+      "Victor är inte i skolan",
+      "Skrinet dyker upp",
+      "Mika blir sjuk"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Mika säger något som är sant, men använder det på ett orättvist sätt. Förklara hur.",
+     "rader": 3,
+     "facit": "Det är sant att Victor var kvar sist, men hon utelämnar att han städade för att hjälpa till, och använder det som bevis för att han stal."
+    },
+    {
+     "typ": "skriv",
+     "text": "Beskrivningen av de tomma platserna \"som om han hade en sjukdom som smittade\" är en liknelse. Vad vill författaren få oss att känna?",
+     "rader": 2,
+     "facit": "Hur utfryst och ensam Victor är, och hur orättvist och grymt det är."
+    },
+    {
+     "typ": "skriv",
+     "text": "Amanda \"intalade sig\" att det inte spelade någon roll. Vad betyder det att intala sig något?",
+     "rader": 2,
+     "facit": "Att försöka övertyga sig själv om något man innerst inne vet inte är sant."
+    },
+    {
+     "typ": "skriv",
+     "text": "\"Amanda visste att han inte var sjuk.\" Vad menar hon? Hur tror du att Victor mår?",
+     "rader": 3,
+     "facit": "Han stannar hemma för att han är ledsen, sårad och skäms över anklagelserna."
+    }
+   ]
+  },
+  {
+   "rubrik": "Love vet",
+   "text": [
+    "På måndagen var Victor fortfarande borta. Efter skolan väntade Love på Amanda vid cykelstället.",
+    "– Vi går hem samma väg i dag, sa han. Det var inte en fråga.",
+    "De gick tysta en lång bit. Snön föll i stora, tunga flingor. Till slut stannade Love.",
+    "– Du vet att det inte var Victor, sa han.",
+    "Amanda stannade också. – Hur vet du det?",
+    "– För att jag känner dig. Du har sett ut som om du ska spy i fyra dagar. Och för att jag såg dig springa till din pappas bil efter marknaden. Med jackan i ena handen och ingenting i den andra.",
+    "Amanda kände hur benen vek sig. Hon satte sig på en snötäckt bänk och lade ansiktet i händerna.",
+    "– Jag glömde skrinet, viskade hon. På bänken. Det är mitt fel alltihop. Och nu tror alla att Victor har stulit det, och han vågar inte ens komma till skolan, och jag har inte sagt något, för jag var så rädd att alla skulle bli arga på mig.",
+    "Love satte sig bredvid henne. Han sa ingenting på en stund.",
+    "– Det var ett misstag att glömma skrinet, sa han till slut. Alla gör misstag. Men att låta Victor ta skulden är inget misstag. Det är ett val. Och du kan välja om.",
+    "– Hur då?",
+    "– Du vet hur, sa Love.",
+    "Amanda tittade upp på snön som föll. Hon visste."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför förstod Love att något var fel med Amanda?",
+     "alt": [
+      "Han kände henne och såg henne springa utan skrinet",
+      "Mattias sa det",
+      "Mika berättade det"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör Amanda när hon berättar?",
+     "alt": [
+      "Hon sätter sig på en bänk och gömmer ansiktet",
+      "Hon springer därifrån",
+      "Hon skrattar"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Förklara skillnaden mellan ett misstag och ett val enligt Love.",
+     "rader": 3,
+     "facit": "Ett misstag är något man gör utan att mena det, som att glömma skrinet. Ett val är något man bestämmer, som att tiga och låta Victor ta skulden."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad betyder \"Du kan välja om\"?",
+     "rader": 2,
+     "facit": "Hon kan ändra sitt beslut och göra rätt nu, även om hon valt fel tidigare."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur visar Love att han är en bra vän? Tänk på både vad han säger och vad han inte säger.",
+     "rader": 3,
+     "facit": "Han dömer henne inte, han lyssnar och är tyst när det behövs, men han är ärlig och hjälper henne att göra rätt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att Amanda kommer att göra?",
+     "rader": 2,
+     "facit": "Eget svar, till exempel berätta sanningen för klassen och Mattias."
+    }
+   ]
+  },
+  {
+   "rubrik": "Sanningen",
+   "text": [
+    "På tisdagsmorgonen knackade Amanda på dörren till Mattias arbetsrum innan första lektionen. Hennes händer var kalla och svettiga på samma gång.",
+    "Hon berättade allt. Om bråttommet. Om pappa i bilen. Om skrinet på bänken. Om att hon hade tigit i fem dagar.",
+    "Mattias lyssnade utan att avbryta. När hon var klar satt han tyst en lång stund.",
+    "– Du gjorde fel två gånger, sa han till slut. Men du gör rätt nu. Och det är det svåraste av allt.",
+    "– Jag vill säga det till klassen också, sa Amanda. Alla måste veta att det inte var Victor.",
+    "Mattias nickade långsamt. – Jag ringer Victors mamma.",
+    "Under första lektionen ställde sig Amanda framför klassen. Hennes röst darrade, men hon sa allt, precis som det var. Det blev knäpptyst i rummet.",
+    "– Så det var aldrig Victor, avslutade hon. Det var jag. Jag var den som slarvade, och jag var den som var feg. Förlåt.",
+    "Ingen sa något. Mika tittade ner i bänken. Love nickade åt henne, nästan omärkligt.",
+    "Strax före lunch öppnades dörren. Victor kom in, med huvan uppdragen och sin mamma bakom sig i korridoren. Amanda gick fram till honom inför hela klassen.",
+    "– Förlåt, sa hon. Jag borde ha sagt något mycket tidigare. Både nu och när Mika sa att du inte fick stå i kassan.",
+    "Victor tittade på henne länge. Sedan drog han långsamt ner huvan.",
+    "– Tack för att du sa det, sa han.",
+    "Men skrinet var fortfarande borta."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem berättar Amanda sanningen för först?",
+     "alt": [
+      "Victor",
+      "Mattias",
+      "Klassen"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör Victor efter Amandas ursäkt?",
+     "alt": [
+      "Han blir arg",
+      "Han går därifrån",
+      "Han drar ner huvan och tackar"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Mattias säger att Amanda gjorde fel två gånger. Vilka två fel menar han?",
+     "rader": 2,
+     "facit": "1. Hon glömde skrinet. 2. Hon teg och lät Victor bli misstänkt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför säger Mattias att det svåraste av allt är att göra rätt nu?",
+     "rader": 2,
+     "facit": "Det kräver mod att erkänna ett misstag och ta konsekvenserna, särskilt när man har väntat länge."
+    },
+    {
+     "typ": "skriv",
+     "text": "Amanda ber om förlåtelse för två saker. Vilken av dem tror du betyder mest för Victor? Motivera.",
+     "rader": 3,
+     "facit": "Eget svar, till exempel att hon också ber om förlåtelse för att hon teg när Mika uteslöt honom."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad symboliserar det att Victor drar ner huvan?",
+     "rader": 2,
+     "facit": "Att han slutar gömma sig och börjar lita på klassen/Amanda."
+    }
+   ]
+  },
+  {
+   "rubrik": "Victors ögon",
+   "text": [
+    "– Vi måste hitta skrinet, sa Amanda på rasten. Love, Victor och hon satt på trappan utanför idrottshallen.",
+    "– Vi har letat överallt, sa Love. Det är borta.",
+    "Victor hade varit tyst. Nu sa han: – Inte överallt.",
+    "De tittade på honom.",
+    "– Jag har tänkt på det, sa Victor. Jag var sist kvar i klassrummet efter marknaden. När jag gick stod skrinet fortfarande på bänken. Jag tänkte att du skulle komma tillbaka och hämta det. Men på morgonen var det borta. Vem är i klassrummet mellan sju på kvällen och sju på morgonen?",
+    "– Ingen, sa Love. Det är låst.",
+    "– Städarna, sa Amanda långsamt. Städarna är där på kvällen.",
+    "Victor nickade. – Och vad gör städarna med saker som ligger kvar?",
+    "De tre tittade på varandra. Sedan sprang de, alla tre samtidigt, genom korridoren till vaktmästeriet.",
+    "– Hittegodslådan? sa vaktmästaren förvånat och pekade mot ett hörn. Där borta. Den har inte tömts på ett tag. Birgitta som städar har varit sjuk sedan förra helgen, så ingen har sorterat den.",
+    "Lådan var full av vantar, mössor, gympapåsar och en ensam sko. Victor stack ner armen ända till botten.",
+    "När han drog upp den höll han i ett grönt plåtskrin.",
+    "Amanda tog fram nyckeln från det röda snöret. Hennes händer skakade så mycket att hon missade låset två gånger. Klick."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Var hittar de skrinet?",
+     "alt": [
+      "I Mattias skåp",
+      "I hittegodslådan hos vaktmästaren",
+      "I slöjdsalen"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför har ingen hittat skrinet tidigare?",
+     "alt": [
+      "Någon gömde det med flit",
+      "Det låg i en annan skola",
+      "Städerskan Birgitta har varit sjuk och lådan har inte sorterats"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Förklara hur Victor löser mysteriet. Beskriv hans tankekedja steg för steg.",
+     "rader": 3,
+     "facit": "Skrinet fanns kvar när han gick. Klassrummet är låst på natten. Bara städarna är där. Städarna lägger kvarglömda saker i hittegods. Alltså måste skrinet finnas i hittegodslådan."
+    },
+    {
+     "typ": "skriv",
+     "text": "Victor säger \"Inte överallt\". Vad visar det om hans sätt att tänka?",
+     "rader": 2,
+     "facit": "Han tänker logiskt och noggrant och ger inte upp."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför är det viktigt för berättelsen att just Victor är den som löser mysteriet?",
+     "rader": 3,
+     "facit": "Han som blev orättvist anklagad blir den som visar sanningen. Det visar hans styrka och att ryktena hade fel."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Amandas händer skakar när hon öppnar skrinet?",
+     "rader": 2,
+     "facit": "Hon är nervös, lättad och upprymd på samma gång."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ett rykte går sönder",
+   "text": [
+    "Alla pengarna låg kvar i skrinet. Varenda krona.",
+    "När de bar in skrinet i klassrummet ställde sig hela klassen upp och jublade. Mattias räknade pengarna två gånger, precis som Amanda hade gjort. 4 312 kronor.",
+    "– Victor löste det, sa Amanda högt. Inte jag. Victor.",
+    "På eftermiddagen kom Mika fram till Victors bänk. Hon stod där en stund och vred på armbandet.",
+    "– Jag sa saker om dig, sa hon till slut. Om Göteborg. Jag hade inte ens hört det från min kusin. Jag hittade på halva. Förlåt.",
+    "Victor tittade upp på henne. – Vill du veta varför vi flyttade? frågade han lugnt.",
+    "Mika nickade osäkert. Flera andra i klassen lyssnade också, även om de låtsades att de inte gjorde det.",
+    "– Mina föräldrar skilde sig, sa Victor. Pappa flyttade utomlands. Mamma fick ett jobb här, och vi hade inte råd att bo kvar. Det är allt. Inget mer.",
+    "Det blev tyst.",
+    "– Det är inget spännande, sa Victor med ett snett leende. Men det är sant.",
+    "Senare samma dag satte sig Victor vid Amandas och Loves bord i matsalen. Ingen hade bett honom. Han bara gjorde det. Och ingen tyckte att det var det minsta konstigt.",
+    "Love delade sin klementin i tre delar.",
+    "– Du ska med till fjällen, sa han till Victor. Det fattar du väl?",
+    "Victor tittade ner. – Vi får se. Det kostar en del.",
+    "Amanda och Love växlade en blick. De sa ingenting. Men båda tänkte samma sak."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad erkänner Mika?",
+     "alt": [
+      "Att hon tycker om Victor",
+      "Att hon hittade på en del av ryktet",
+      "Att hon tog skrinet"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför flyttade Victors familj?",
+     "alt": [
+      "Föräldrarna skilde sig och mamma fick jobb här",
+      "De ville bo nära fjällen",
+      "Victor hade gjort något dumt"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Kapitlet heter \"Ett rykte går sönder\". Förklara rubriken.",
+     "rader": 2,
+     "facit": "Ryktet om Victor visar sig vara falskt när sanningen kommer fram, så ryktet förlorar sin kraft."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Victor är så lugn när han berättar sanningen?",
+     "rader": 2,
+     "facit": "Han har inget att skämmas för. Sanningen är enkel och han vill inte att den ska vara hemlig."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att Amanda och Love tänker i slutet av kapitlet?",
+     "rader": 2,
+     "facit": "Att de vill hjälpa Victor att ha råd att följa med till fjällen."
+    },
+    {
+     "typ": "skriv",
+     "text": "Rykten kan skada människor. Ge exempel på hur man kan stoppa ett rykte. Använd gärna berättelsen.",
+     "rader": 3,
+     "facit": "Eget svar, till exempel att inte sprida vidare, fråga personen själv, säga emot."
+    }
+   ]
+  },
+  {
+   "rubrik": "Fjällen",
+   "text": [
+    "Den artonde december var det julavslutning. Aulan var full av föräldrar och syskon, och lågstadiet sjöng så högt och falskt att till och med rektorn skrattade.",
+    "Efteråt samlades 6b i klassrummet en sista gång innan lovet. Mattias stod framme vid tavlan med ett kuvert i handen.",
+    "– Jag har två saker att berätta, sa han. Först: när föräldrarna hörde om julmarknaden och om allt som hände efteråt, ville flera av dem bidra till resan. Och skolans föräldraförening har lagt till resten. Vi har tjugotusen kronor. Vi åker till fjällen.",
+    "Klassen exploderade i jubel. Isak ställde sig på en stol, och Love gjorde en dans som ingen förstod.",
+    "– Den andra saken, sa Mattias när det hade lugnat sig. Resan betalas helt av klasskassan. Alla i klassen åker. Alla.",
+    "Amanda tittade på Victor. Victor tittade ner på bänken. Sedan tittade han upp, och hans ansikte var alldeles stilla. Men hans ögon var blanka.",
+    "Mattias tog fram något mer. Det var Victors affisch, inramad i en enkel träram.",
+    "– Den här ska hänga i klassrummet resten av året, sa han. Som ett minne av vad vi kan göra tillsammans.",
+    "När Amanda gick hem den kvällen gick hon längs ån med Love på ena sidan och Victor på den andra. Nyckeln på det röda snöret hade hon lämnat tillbaka till Mattias. Den hade känts så tung så länge. Nu var hon lätt.",
+    "Hon tänkte att det svåraste den här julen inte hade varit att förlora pengarna. Det svåraste hade varit att säga sanningen. Och det var just det som hade gjort allt bra igen.",
+    "– Fjällen, sa Victor plötsligt och log. Jag har aldrig sett ett fjäll.",
+    "– Då blir det första gången, sa Amanda.",
+    "Love puffade honom i sidan. – Och första gången vi åker någonstans tillsammans, alla tre. Slut."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Hur får klassen ihop resten av pengarna?",
+     "alt": [
+      "Föräldrar och föräldraföreningen bidrar",
+      "Mattias betalar själv",
+      "De har en till marknad"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad ska hänga i klassrummet resten av året?",
+     "alt": [
+      "Kassaskrinet",
+      "Ett foto av klassen",
+      "Victors inramade affisch"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför säger Mattias \"Alla. Alla.\" och upprepar ordet? Vem tror du att han tänker särskilt på?",
+     "rader": 2,
+     "facit": "Han betonar att ingen ska lämnas utanför på grund av pengar. Han tänker särskilt på Victor."
+    },
+    {
+     "typ": "skriv",
+     "text": "Jämför hur nyckeln beskrivs här med hur den beskrevs tidigare i berättelsen. Vad visar förändringen?",
+     "rader": 3,
+     "facit": "Tidigare kändes den tung av dåligt samvete. Nu har hon lämnat tillbaka den och känner sig lätt, för hon har gjort rätt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Love säger att det blir första gången de åker någonstans \"tillsammans, alla tre\". Varför är det något speciellt för dem?",
+     "rader": 2,
+     "facit": "I början av berättelsen var de inte kompisar alla tre. Efter allt som hänt med skrinet och ryktet om Victor har de blivit vänner."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vilket budskap tycker du att berättelsen har? Använd exempel från flera kapitel.",
+     "rader": 4,
+     "facit": "Eget svar, till exempel om att våga säga sanningen, inte lita på rykten, och inkludera alla."
+    }
+   ]
+  }
+ ]
+}

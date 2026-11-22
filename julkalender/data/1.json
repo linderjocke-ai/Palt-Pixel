@@ -1,0 +1,683 @@
+{
+ "arskurs": "1",
+ "titel": "Thea och den röda vanten",
+ "kapitel": [
+  {
+   "rubrik": "Mormors vantar",
+   "text": [
+    "Thea är sju år och bor i ett gult hus vid skogen.",
+    "Hennes mormor kan sticka. Hon stickar snabbare än någon annan.",
+    "En kväll satt mormor i gungstolen. Klick, klick, lät stickorna.",
+    "– Varsågod, sa mormor till slut. Nu har du vantar till vintern.",
+    "Vantarna var röda med små vita stjärnor. Thea tog på sig dem direkt.",
+    "– De är de finaste vantarna i hela världen, sa hon."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem stickar vantarna?",
+     "alt": [
+      "Thea",
+      "Mormor",
+      "Mamma"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vilken färg har vantarna?",
+     "alt": [
+      "Blå",
+      "Röda",
+      "Gröna"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad finns på vantarna?",
+     "alt": [
+      "Stjärnor",
+      "Prickar",
+      "Hjärtan"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur gammal är Thea?",
+     "rader": 1,
+     "facit": "Sju år."
+    }
+   ]
+  },
+  {
+   "rubrik": "En vante är borta",
+   "text": [
+    "På morgonen gick Thea till skolan. Snön knarrade under stövlarna.",
+    "Hon hade vantarna på sig hela vägen.",
+    "På rasten byggde hon en snölykta med sin kompis Love.",
+    "Men när skolan var slut, hittade Thea bara en vante.",
+    "Hon letade i fickan. Hon letade i skolväskan. Hon letade i snön.",
+    "Den andra vanten var borta. Thea kände en klump i magen."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad bygger Thea på rasten?",
+     "alt": [
+      "En snögubbe",
+      "En snölykta",
+      "En koja"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad heter Theas kompis?",
+     "alt": [
+      "Love",
+      "Måns",
+      "Max"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur många vantar hittar Thea efter skolan?",
+     "alt": [
+      "Ingen",
+      "En",
+      "Två"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Thea när hon letar efter vanten."
+    }
+   ]
+  },
+  {
+   "rubrik": "Spår i snön",
+   "text": [
+    "– Jag hjälper dig att leta, sa Love.",
+    "De gick runt skolgården. Där, vid staketet, såg Thea något rött.",
+    "Det var en lång röd tråd från vanten!",
+    "Bredvid tråden fanns små spår i snön. De gick mot skogen.",
+    "– Någon har tagit vanten, viskade Love.",
+    "– Vem då? sa Thea. Och varför?"
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad hittar Thea vid staketet?",
+     "alt": [
+      "En mössa",
+      "En röd tråd",
+      "En penna"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vart går spåren?",
+     "alt": [
+      "Mot affären",
+      "Mot skogen",
+      "Mot skolan"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem hjälper Thea att leta?",
+     "alt": [
+      "Love",
+      "Läraren",
+      "Mormor"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Vem tror du har tagit vanten?",
+     "rader": 1,
+     "facit": "Eget svar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Mörkt i skogen",
+   "text": [
+    "Thea och Love följde spåren till skogskanten.",
+    "Men det blev mörkt så tidigt. Träden såg stora och svarta ut.",
+    "Thea blev rädd. Hon tog Loves hand.",
+    "– Vi kan inte gå in i skogen nu, sa Love. Det är för mörkt.",
+    "– Vi kommer tillbaka, sa Thea. Jag ska be mormor att följa med.",
+    "På natten drömde Thea om sin röda vante."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför går de inte in i skogen?",
+     "alt": [
+      "De är hungriga",
+      "Det är för mörkt",
+      "Det regnar"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur känner sig Thea vid skogen?",
+     "alt": [
+      "Rädd",
+      "Arg",
+      "Trött"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem ska Thea be att följa med?",
+     "alt": [
+      "Mormor",
+      "Love",
+      "Pappa"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "rita",
+     "text": "Rita skogen när det är mörkt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Under granen",
+   "text": [
+    "På måndagen gick Thea, Love och mormor till skogen.",
+    "Det var ljust nu. Solen glittrade på snön.",
+    "De följde spåren förbi en stor sten och en gammal stubbe.",
+    "Spåren slutade under en tät gran. Där låg vanten!",
+    "Thea skulle just ta upp den. Men då rörde sig vanten.",
+    "I vanten satt en liten fågel med röd mage. Den darrade."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Var ligger vanten?",
+     "alt": [
+      "Under en gran",
+      "I en bäck",
+      "På en sten"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad sitter i vanten?",
+     "alt": [
+      "En mus",
+      "En ekorre",
+      "En fågel"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vilken färg har fågelns mage?",
+     "alt": [
+      "Blå",
+      "Gul",
+      "Röd"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Vem går till skogen?",
+     "rader": 1,
+     "facit": "Thea, Love och mormor."
+    }
+   ]
+  },
+  {
+   "rubrik": "En domherre",
+   "text": [
+    "– Det är en domherre, sa mormor tyst.",
+    "Fågeln hade en vinge som hängde ner. Den kunde inte flyga.",
+    "– Den har använt vanten som ett bo, sa Love. För att hålla sig varm.",
+    "Thea tittade på fågeln. Hon tittade på vanten.",
+    "Hon ville ha tillbaka sin fina vante. Men fågeln behövde den mer.",
+    "– Den får ha vanten, sa Thea. Men hur ska vi hjälpa den?"
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad för fågel är det?",
+     "alt": [
+      "En domherre",
+      "En kråka",
+      "En uggla"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad är det för fel på fågeln?",
+     "alt": [
+      "Den är ledsen",
+      "Den har ont i vingen",
+      "Den är hungrig"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad bestämmer Thea?",
+     "alt": [
+      "Hon tar vanten",
+      "Fågeln får ha vanten",
+      "Hon går hem"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Thea låter fågeln ha vanten?",
+     "rader": 1,
+     "facit": "Till exempel: Fågeln behöver den mer för att hålla sig varm."
+    }
+   ]
+  },
+  {
+   "rubrik": "Gunnel vet",
+   "text": [
+    "Mormor bar försiktigt vanten med fågeln hem.",
+    "Granne med Thea bor Gunnel. Hon vet allt om fåglar.",
+    "– Fågeln behöver lugn och ro, sa Gunnel. Och mat.",
+    "De ställde vanten i en låda med halm på Gunnels farstu.",
+    "Thea strödde solrosfrön bredvid.",
+    "– Nu får vi vänta, sa Gunnel. Vingen behöver tid att läka.",
+    "Thea tyckte att det var svårt att vänta."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem vet mycket om fåglar?",
+     "alt": [
+      "Mormor",
+      "Gunnel",
+      "Love"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad ger Thea fågeln att äta?",
+     "alt": [
+      "Ost",
+      "Bröd",
+      "Solrosfrön"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad behöver vingen?",
+     "alt": [
+      "Ett plåster",
+      "Tid att läka",
+      "Vatten"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "rita",
+     "text": "Rita lådan med fågeln i vanten."
+    }
+   ]
+  },
+  {
+   "rubrik": "Viska, viska",
+   "text": [
+    "I skolan berättade Love om fågeln för hela klassen.",
+    "– Kan vi få se den? ropade alla.",
+    "Thea blev orolig. Tänk om fågeln blev rädd av så många barn.",
+    "– Fågeln behöver lugn, sa Thea. Vi får inte skrämma den.",
+    "Då kom läraren på en idé. Klassen fick göra fågelmat i stället.",
+    "De blandade frön och fett och formade bollar. Snart skulle fåglarna i skogen få ett riktigt julbord."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem berättar om fågeln i skolan?",
+     "alt": [
+      "Love",
+      "Thea",
+      "Läraren"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför blir Thea orolig?",
+     "alt": [
+      "Fågeln kan bli rädd",
+      "Hon har glömt boken",
+      "Hon är hungrig"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör klassen?",
+     "alt": [
+      "De går till skogen",
+      "De gör fågelmat",
+      "De ritar fåglar"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad gör man fågelbollar av?",
+     "rader": 1,
+     "facit": "Frön och fett."
+    }
+   ]
+  },
+  {
+   "rubrik": "Den kalla natten",
+   "text": [
+    "En kväll sa radion att det skulle bli tjugo grader kallt.",
+    "Thea kunde inte sova. Hon tänkte på den lilla fågeln.",
+    "Hon väckte mormor. – Fryser fågeln nu? frågade hon.",
+    "Mormor tog på sig sin tjocka rock. Tillsammans gick de till Gunnel.",
+    "De lade en yllefilt över lådan och ställde den närmare väggen.",
+    "Fågeln kurade ihop sig i vanten. Den var varm och trygg."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Hur kallt ska det bli?",
+     "alt": [
+      "Fem grader",
+      "Tjugo grader",
+      "Hundra grader"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför kan Thea inte sova?",
+     "alt": [
+      "Hon tänker på fågeln",
+      "Hon är hungrig",
+      "Det är för ljust"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad lägger de över lådan?",
+     "alt": [
+      "En jacka",
+      "En yllefilt",
+      "En handduk"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "rita",
+     "text": "Rita Thea och mormor som går ut i den kalla natten."
+    }
+   ]
+  },
+  {
+   "rubrik": "En röd och en grön",
+   "text": [
+    "Fågeln åt och åt. Varje dag såg den lite piggare ut.",
+    "Men Thea frös om ena handen. Hon hade ju bara en vante kvar.",
+    "– Här, sa Love och gav henne en av sina gröna vantar.",
+    "– Men då fryser ju du, sa Thea.",
+    "– Vi kan turas om, sa Love och log.",
+    "Nu hade de en röd och en grön vante var. De skrattade så att de fick hicka."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför fryser Thea?",
+     "alt": [
+      "Hon har bara en vante",
+      "Hon har ingen mössa",
+      "Hon är blöt"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör Love?",
+     "alt": [
+      "Han går hem",
+      "Han ger Thea en vante",
+      "Han skrattar åt Thea"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vilken färg har Loves vantar?",
+     "alt": [
+      "Blå",
+      "Gröna",
+      "Röda"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur är Love som kompis?",
+     "rader": 1,
+     "facit": "Till exempel: snäll, omtänksam."
+    }
+   ]
+  },
+  {
+   "rubrik": "Mormors hemlighet",
+   "text": [
+    "Mormor såg Theas kalla hand. Hon sa ingenting.",
+    "Men på kvällen hörde Thea ett ljud från mormors rum. Klick, klick.",
+    "– Vad gör du, mormor? frågade Thea.",
+    "– Det är en hemlighet, sa mormor och gömde stickningen bakom ryggen.",
+    "Thea försökte kika. Hon såg bara lite rött garn.",
+    "– Vänta och se, sa mormor och blinkade."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad hör Thea från mormors rum?",
+     "alt": [
+      "Knack, knack",
+      "Klick, klick",
+      "Pip, pip"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gömmer mormor?",
+     "alt": [
+      "En bok",
+      "En present",
+      "En stickning"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vilken färg har garnet?",
+     "alt": [
+      "Svart",
+      "Rött",
+      "Vitt"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att mormor stickar?",
+     "rader": 1,
+     "facit": "Eget svar (till exempel nya vantar)."
+    }
+   ]
+  },
+  {
+   "rubrik": "Fågeln provar",
+   "text": [
+    "En morgon hoppade domherren upp på kanten av lådan.",
+    "Den bredde ut vingarna. Vingen hängde inte längre!",
+    "Fågeln flaxade. Men den ramlade ner i snön.",
+    "– Försök igen, viskade Thea. Du klarar det.",
+    "Fågeln flaxade en gång till. Nu lyfte den! Den flög en liten bit och landade på staketet.",
+    "Thea klappade försiktigt händerna."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad händer första gången fågeln försöker flyga?",
+     "alt": [
+      "Den somnar",
+      "Den flyger högt",
+      "Den ramlar i snön"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad säger Thea till fågeln?",
+     "alt": [
+      "Skynda dig",
+      "Gå hem",
+      "Du klarar det"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Var landar fågeln?",
+     "alt": [
+      "På taket",
+      "På Theas huvud",
+      "På staketet"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "rita",
+     "text": "Rita fågeln som flyger till staketet."
+    }
+   ]
+  },
+  {
+   "rubrik": "Flocken kommer",
+   "text": [
+    "Dagen efter satt fågeln i björken utanför skolan.",
+    "Plötsligt kom fler domherrar flygande. Fem, sex, sju stycken!",
+    "Den lilla fågeln flög upp till dem. Nu var den inte ensam längre.",
+    "Thea blev glad. Men också lite ledsen.",
+    "– Det är okej att känna båda sakerna, sa läraren.",
+    "Thea nickade. Hon var mest glad, ändå."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Var sitter fågeln?",
+     "alt": [
+      "I en gran",
+      "I en björk",
+      "På marken"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad kommer flygande?",
+     "alt": [
+      "Fler domherrar",
+      "Kråkor",
+      "Ett flygplan"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur känner sig Thea?",
+     "alt": [
+      "Bara arg",
+      "Bara rädd",
+      "Glad och lite ledsen"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför blir Thea lite ledsen?",
+     "rader": 1,
+     "facit": "Till exempel: Fågeln flyger iväg och hon kommer att sakna den."
+    }
+   ]
+  },
+  {
+   "rubrik": "Den bästa julklappen",
+   "text": [
+    "Sista dagen före jullovet hade klassen julavslutning.",
+    "Mormor kom till skolan med ett paket. – Till dig, Thea, sa hon.",
+    "I paketet låg två nya röda vantar med vita stjärnor. Och en liten röd stickad påse.",
+    "– Den kan du fylla med frön, sa mormor. Till fåglarna.",
+    "Thea hängde upp påsen i björken. Snart satt domherrarna där och åt.",
+    "Thea hade varma händer. Men allra varmast kände hon sig inuti. Slut."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad får Thea i paketet?",
+     "alt": [
+      "En mössa",
+      "Nya vantar och en påse",
+      "En fågel"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad ska påsen fyllas med?",
+     "alt": [
+      "Frön",
+      "Pennor",
+      "Godis"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Var hänger Thea upp påsen?",
+     "alt": [
+      "I björken",
+      "Hemma",
+      "I granen"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du betyder att det var varmast inuti?",
+     "rader": 1,
+     "facit": "Till exempel: Hon var glad och kände sig lycklig."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,742 @@
+{
+ "arskurs": "4",
+ "titel": "När ljuset försvann",
+ "kapitel": [
+  {
+   "rubrik": "Stormen kommer",
+   "text": [
+    "Mika var tio år och bodde i Granliden, en liten by långt upp i norr där skogen tar slut först vid fjällen. I december var det mörkt nästan hela dagen, men Mika tyckte inte att det gjorde något. Hon älskade när snön lyste blå i skymningen och när hela byn tände sina adventsstjärnor.",
+    "Den första december satt hon vid köksfönstret och räknade dagarna till jullovet på fingrarna. Hennes lillebror Sigge, som var sju, satt bredvid och ritade en tomte med alldeles för långt skägg.",
+    "– Det ska bli storm i natt, sa mamma och tittade på väderappen. Riktig storm.",
+    "Vinden hade redan börjat vina runt knutarna. Granarna utanför fönstret böjde sig som om de försökte ducka.",
+    "Plötsligt blinkade lampan i taket. En gång. Två gånger.",
+    "– Oj, sa Sigge och tittade upp.",
+    "– Det är bara vinden, sa mamma. Men hon reste sig ändå och letade fram ficklampan ur lådan."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Var bor Mika?",
+     "alt": [
+      "I en stor stad i söder",
+      "I en liten by långt upp i norr",
+      "På en ö i havet"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör mamma när lampan blinkar?",
+     "alt": [
+      "Hon ringer pappa",
+      "Hon letar fram ficklampan",
+      "Hon går och lägger sig"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Beskriv med egna ord hur det ser ut i Granliden i december.",
+     "rader": 2,
+     "facit": "Mörkt nästan hela dagen, snön lyser blå, adventsstjärnor i fönstren."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att mamma letar fram ficklampan fast hon säger att det bara är vinden?",
+     "rader": 2,
+     "facit": "Hon vill vara förberedd/är lite orolig men vill inte skrämma barnen."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du kommer att hända i nästa kapitel?",
+     "rader": 2,
+     "facit": "Eget svar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Mörkret",
+   "text": [
+    "Mitt i natten vaknade Mika av ett brak. Det lät som om någon hade slagit igen en jättelik dörr. Hon tryckte på lampknappen. Ingenting hände.",
+    "Hela huset var mörkt. Inte en enda lampa syntes ute i byn heller. Ingen gatlykta, inga fönsterlampor. Ingenting. Bara stormen som ylade.",
+    "Sigge kom inspringande i pyjamas. – Mika, jag är rädd, viskade han.",
+    "Mika var också rädd. Men hon tänkte på vad pappa brukade säga: När man är rädd ska man göra något, för då har rädslan mindre plats.",
+    "Hon tände ficklampan och höll den under hakan så att ansiktet lyste.",
+    "– Vet du vad, sa hon med spöklik röst, det här är den perfekta natten för en saga.",
+    "Sigge fnissade. Han kröp ner i hennes säng, och Mika hittade på en lång berättelse om en isbjörn som var rädd för mörker. Mitt i berättelsen somnade Sigge.",
+    "Mika låg vaken länge och lyssnade på stormen."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad vaknar Mika av?",
+     "alt": [
+      "Att mamma ropar",
+      "Ett brak",
+      "Att Sigge gråter"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad handlar Mikas saga om?",
+     "alt": [
+      "En storm som blir snäll",
+      "En tomte som tappar sitt skägg",
+      "En isbjörn som är rädd för mörker"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad brukar pappa säga om rädsla? Förklara med egna ord vad det betyder.",
+     "rader": 2,
+     "facit": "Man ska göra något när man är rädd, för då tänker man mindre på rädslan."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur tar Mika hand om Sigge?",
+     "rader": 2,
+     "facit": "Hon tröstar honom, skämtar med ficklampan och berättar en saga tills han somnar."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Mika ligger vaken länge?",
+     "rader": 2,
+     "facit": "Hon är själv rädd eller orolig."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ingen ström",
+   "text": [
+    "På morgonen var stormen över, men elen hade inte kommit tillbaka. Det var kallt i huset. Elementen var ljumma och blev kallare för varje timme.",
+    "Mamma lyssnade på den gamla radion som gick på batterier. En röst berättade att stormen hade fällt hundratals träd över elledningarna i hela länet.",
+    "– Det kan ta flera dagar innan strömmen kommer tillbaka, sa rösten. Ta hand om varandra.",
+    "Skolan var stängd. Vägarna var blockerade av träd och snö.",
+    "Mammas telefon plingade, med det sista batteriet. Det var pappa. Han körde lastbil och hade fastnat i en annan by, tjugo mil bort.",
+    "– Jag kommer hem så fort vägarna är öppna, skrev han. Var rädda om er.",
+    "Mamma tände en brasa i den gamla kaminen i vardagsrummet. Det var den enda varma platsen i huset nu."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför har strömmen försvunnit?",
+     "alt": [
+      "Träd har fallit över elledningarna",
+      "Elverket har stängt",
+      "Någon har glömt att betala"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Var är pappa?",
+     "alt": [
+      "På jobbet i byn",
+      "Fast i en annan by",
+      "Hos grannen"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur får mamma veta vad som har hänt?",
+     "rader": 2,
+     "facit": "Genom en radio som går på batterier."
+    },
+    {
+     "typ": "skriv",
+     "text": "Rösten på radion säger \"Ta hand om varandra\". Vad tror du att den menar?",
+     "rader": 2,
+     "facit": "Man ska hjälpa grannar och andra som kan behöva hjälp."
+    },
+    {
+     "typ": "skriv",
+     "text": "Skriv två saker som blir svåra när strömmen är borta.",
+     "rader": 2,
+     "facit": "Till exempel: värme, ljus, laga mat, ladda telefonen."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ingrid längst bort",
+   "text": [
+    "Mika satt framför kaminen med en filt runt axlarna. Plötsligt kom hon att tänka på något.",
+    "– Mamma, vad gör Ingrid nu?",
+    "Ingrid var åttiofem år och bodde i det sista huset vid vägens slut. Hon hade ingen kamin, bara element. Mika brukade hjälpa henne att bära hem matkassar från bussen.",
+    "Mamma såg orolig ut. – Hennes hus måste vara iskallt, sa hon. Men det är meterhög snö på vägen. Vi kan inte gå dit i dag, det blir mörkt snart.",
+    "– Men hon är alldeles ensam, sa Mika.",
+    "– Jag vet, sa mamma. Vi går dit så fort det är ljust igen. Jag lovar.",
+    "Hela kvällen tänkte Mika på Ingrid och hur kallt det måste vara i hennes hus. När hon låg i sängen, djupt inkrupen under täcket för att slippa undan kylan, bestämde hon sig. I morgon skulle de ta sig dit, på ett eller annat sätt."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Hur gammal är Ingrid?",
+     "alt": [
+      "Hundra år",
+      "Sextio år",
+      "Åttiofem år"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför kan de inte gå till Ingrid direkt?",
+     "alt": [
+      "Ingrid vill inte ha besök",
+      "Det är meterhög snö och snart mörkt",
+      "De vet inte var hon bor"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför är Ingrids hus extra kallt?",
+     "rader": 2,
+     "facit": "Hon har ingen kamin, bara element som går på el."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur vet vi att Mika bryr sig om Ingrid? Ge två exempel.",
+     "rader": 2,
+     "facit": "Hon tänker på henne, frågar mamma, brukar bära hennes matkassar, bestämmer sig för att hjälpa."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad betyder \"på ett eller annat sätt\"?",
+     "rader": 2,
+     "facit": "Att de ska ta sig dit oavsett hur, även om det blir svårt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Skidturen",
+   "text": [
+    "Nästa morgon spände Mika fast skidorna. Mamma tog sina, och Sigge fick åka pulka efter mamma. I ryggsäcken hade de en termos med varm soppa och en extra sovsäck.",
+    "Snön var djup och tung. Varje steg var ett slit. Fallna träd låg över vägen och de fick klättra över dem. Mikas lår brände och svetten rann under mössan, fast det var femton grader kallt.",
+    "Efter en timme såg de Ingrids röda hus. Ingen rök kom ur skorstenen.",
+    "Mika bultade på dörren. Det dröjde länge innan den öppnades.",
+    "Där stod Ingrid i vinterkappa, mössa och två par vantar. Hennes läppar var lite blå.",
+    "– Nämen, sa hon. Vad gör ni här? Jag klarar mig, ska ni veta.",
+    "Mika tittade på termometern i hallen. Den visade tolv grader.",
+    "– Ingrid, sa hon bestämt. Du följer med oss hem."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Hur tar de sig till Ingrid?",
+     "alt": [
+      "Med bil",
+      "På skidor och med pulka",
+      "Med skoter"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur varmt är det inne hos Ingrid?",
+     "alt": [
+      "Noll grader",
+      "Tolv grader",
+      "Tjugo grader"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hitta två ord eller meningar som visar att skidturen är jobbig.",
+     "rader": 2,
+     "facit": "Till exempel: \"Varje steg var ett slit\", \"lår brände\", \"svetten rann\", fick klättra över träd."
+    },
+    {
+     "typ": "skriv",
+     "text": "Ingrid säger att hon klarar sig. Varför tror du att hon säger så?",
+     "rader": 2,
+     "facit": "Hon är stolt, vill inte vara till besvär eller be om hjälp."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur har Mika förändrats sedan första natten när strömmen gick?",
+     "rader": 2,
+     "facit": "Hon var rädd men är nu modig och bestämd och tar ansvar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Morris och vintern 1955",
+   "text": [
+    "Ingrid fick sitta i fåtöljen närmast kaminen. I knät låg hennes katt Morris, som de hade burit hem i en korg. Han spann så högt att det nästan lät som pappas snarkningar.",
+    "När Ingrid hade druckit två koppar soppa och fått tillbaka färgen i ansiktet började hon berätta.",
+    "– Vintern 1955 hade vi ingen el alls här uppe, sa hon. Den kom inte till byn förrän jag var femton.",
+    "Sigge spärrade upp ögonen. – Hur kunde ni leva då?",
+    "– Vi hjälptes åt, sa Ingrid. Ingen klarade sig ensam. När någon blev sjuk kom grannarna med ved och mat. När någon skulle bygga ladugård byggde hela byn. Så var det.",
+    "Hon strök Morris över ryggen. – Nu för tiden tror alla att de ska klara sig själva. Jag också, märkte jag.",
+    "Mika tänkte på det länge. Hon undrade hur många fler i byn som satt ensamma i kalla hus just nu."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad heter Ingrids katt?",
+     "alt": [
+      "Måns",
+      "Mollan",
+      "Morris"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "När kom elen till Ingrids by?",
+     "alt": [
+      "Förra året",
+      "När hon föddes",
+      "När hon var femton"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur klarade sig folk i byn förr, enligt Ingrid?",
+     "rader": 2,
+     "facit": "De hjälptes åt, till exempel med ved, mat och byggen."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad menar Ingrid med \"Jag också, märkte jag\"?",
+     "rader": 2,
+     "facit": "Hon trodde själv att hon skulle klara sig ensam, men insåg att hon behövde hjälp."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att Mika kommer att göra nu?",
+     "rader": 2,
+     "facit": "Eget svar, till exempel ta reda på vilka andra som behöver hjälp."
+    }
+   ]
+  },
+  {
+   "rubrik": "Skolan har ett aggregat",
+   "text": [
+    "Nästa morgon vaknade Mika med en idé.",
+    "– Skolan! ropade hon. Skolan har ett elaggregat. Vaktmästaren Nils visade det för oss en gång. Det startar om strömmen går, så att datorerna inte kraschar.",
+    "– Det är sant, sa mamma långsamt. Och gympasalen är stor.",
+    "– Om alla som fryser kom till skolan, sa Mika, då skulle ingen behöva vara ensam och kall!",
+    "Ingrid nickade. – Precis som förr, sa hon.",
+    "Mika och mamma skidade till Nils hus. Han var en stor man med ett yvigt skägg och lika yviga ögonbryn. Han lyssnade på Mikas plan utan att säga något.",
+    "Sedan tog han ner en stor nyckelknippa från en spik i hallen.",
+    "– Jag tänkte samma sak, sa han. Jag behövde bara någon som sparkade igång mig."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem är Nils?",
+     "alt": [
+      "Ingrids son",
+      "Mikas lärare",
+      "Skolans vaktmästare"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad har skolan som kan ge ström?",
+     "alt": [
+      "En vindsnurra",
+      "Solceller",
+      "Ett elaggregat"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Förklara Mikas plan med egna ord.",
+     "rader": 2,
+     "facit": "Alla som fryser ska samlas i skolan, där det finns ström och värme, så att ingen är ensam och kall."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad menar Ingrid med \"Precis som förr\"?",
+     "rader": 2,
+     "facit": "Att byn hjälps åt, som de gjorde när hon var ung."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad menar Nils med att någon \"sparkade igång\" honom?",
+     "rader": 2,
+     "facit": "Han behövde någon som fick honom att börja göra det han redan tänkt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Värmestugan",
+   "text": [
+    "Nils låste upp skolan och startade aggregatet. Det brummade och skakade, och sedan tändes lysrören i taket ett efter ett.",
+    "Mika och Sigge sprang runt i byn och knackade på varje dörr. Mamma skrev en lapp och satte upp den på anslagstavlan vid affären: VÄRMESTUGA I SKOLAN. ALLA ÄR VÄLKOMNA.",
+    "Mot kvällen började folk komma. Familjen Lund med sina tre små barn. Gamle Erik med sin hund. Studenten Saga, som bodde ensam i ett hyrt rum. Folk kom med sovsäckar, liggunderlag och kastruller.",
+    "Gympasalen fylldes av röster och ljud. Någon kokade kaffe. Någon annan delade ut filtar.",
+    "Ingrid satt i en stol vid väggen med Morris i knät och nickade nöjt.",
+    "– Så här såg det ut när vi byggde ladugårdar, sa hon till Mika. Massor av folk och lite kaos. Det är bra kaos.",
+    "Mika låg i sin sovsäck den natten och lyssnade på alla som andades runt omkring henne. Hon kände sig inte rädd en enda sekund."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Var sätter mamma upp lappen?",
+     "alt": [
+      "På skolans dörr",
+      "På busshållplatsen",
+      "På anslagstavlan vid affären"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad tar folk med sig till skolan?",
+     "alt": [
+      "Julklappar",
+      "Skidor och stavar",
+      "Sovsäckar, liggunderlag och kastruller"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad är en värmestuga? Förklara med hjälp av texten.",
+     "rader": 2,
+     "facit": "En varm plats där människor kan samlas när de fryser eller inte har värme hemma."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad menar Ingrid med \"bra kaos\"?",
+     "rader": 2,
+     "facit": "Det är rörigt och fullt av folk, men det är positivt eftersom alla hjälps åt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför känner sig Mika inte rädd den här natten?",
+     "rader": 2,
+     "facit": "Hon är inte ensam, det är varmt och många människor finns omkring henne."
+    }
+   ]
+  },
+  {
+   "rubrik": "Dieseln tar slut",
+   "text": [
+    "På tredje dagen i värmestugan kom Nils in i gympasalen med rynkad panna.",
+    "– Aggregatet går på diesel, sa han. Dieseln vi har kvar räcker bara ett dygn till. Närmaste mack ligger tre mil bort, och vägen dit är fortfarande blockerad.",
+    "Det blev tyst i salen. Sedan började de vuxna prata i munnen på varandra.",
+    "– Vi får väl åka hem igen, sa någon.",
+    "– Hem till kalla hus? Med små barn? sa någon annan argt.",
+    "– Det är ju inte mitt fel! ropade Nils.",
+    "Sigge kröp närmare Mika. Han tyckte inte om när vuxna bråkade.",
+    "Mika kände hur det knöt sig i magen. Allt hade gått så bra. Och nu höll det på att gå sönder.",
+    "Hon tittade på Ingrid. Ingrid satt helt stilla med slutna ögon. Hon såg ut som om hon tänkte väldigt hårt."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad är problemet?",
+     "alt": [
+      "Dieseln till aggregatet håller på att ta slut",
+      "Någon har blivit sjuk",
+      "Skolan är för liten"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur långt bort är närmaste mack?",
+     "alt": [
+      "Tjugo mil",
+      "Tre kilometer",
+      "Tre mil"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför börjar de vuxna bråka?",
+     "rader": 2,
+     "facit": "De är oroliga och rädda och vet inte vad de ska göra."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad betyder det att Mika kände \"hur det knöt sig i magen\"?",
+     "rader": 2,
+     "facit": "Hon blev orolig och ledsen."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att Ingrid tänker på?",
+     "rader": 2,
+     "facit": "Eget svar, till exempel en lösning från förr."
+    }
+   ]
+  },
+  {
+   "rubrik": "Slöjdsalens kamin",
+   "text": [
+    "Till slut öppnade Ingrid ögonen och knackade med käppen i golvet. Alla tystnade.",
+    "– När jag gick i den här skolan, sa hon, värmdes den med ved. Finns den gamla kaminen kvar i slöjdsalen?",
+    "Nils kliade sig i skägget. – Den står där. Vi använder den aldrig.",
+    "– Då har vi värme, sa Ingrid. Om alla hjälps åt med veden. Och om vi bara använder aggregatet till kylskåpet och några lampor, räcker dieseln mycket längre.",
+    "Det blev alldeles tyst. Sedan började alla prata samtidigt igen. Men nu var det glada röster.",
+    "Mika samlade alla barnen. – Vi bildar ett vedlag! sa hon.",
+    "Hela eftermiddagen bar barnen ved från vedboden till slöjdsalen. De gjorde en kedja och skickade vedträn från hand till hand. Sigge var minst och fick bära de minsta pinnarna, men han var lika stolt som alla andra.",
+    "På kvällen sprakade elden i den gamla kaminen, och alla flyttade in i slöjdsalen."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad fanns kvar i slöjdsalen?",
+     "alt": [
+      "En gammal kamin",
+      "Ett nytt aggregat",
+      "En gammal spis"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad bildar barnen?",
+     "alt": [
+      "Ett vedlag",
+      "En kör",
+      "Ett fotbollslag"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Förklara Ingrids lösning i två delar.",
+     "rader": 2,
+     "facit": "1. Elda i den gamla kaminen. 2. Använda aggregatet bara till kylskåp och några lampor, så räcker dieseln längre."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför är det bra att barnen gör en kedja med veden?",
+     "rader": 2,
+     "facit": "Det går fortare och alla kan hjälpa till, även de små."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur märks det att stämningen ändras i kapitlet?",
+     "rader": 2,
+     "facit": "Först tyst och oroligt, sedan glada röster och alla hjälps åt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Familjen i hörnet",
+   "text": [
+    "Livet i slöjdsalen blev nästan mysigt. Någon kokade gröt i en stor gryta på kaminen. Gamle Erik lärde barnen att spela kort. Studenten Saga läste högt ur en bok för de minsta.",
+    "Men en kväll lade Mika märke till en familj som satt för sig själva i ett hörn. En mamma, en pappa och två barn i Mikas ålder. De hade flyttat till byn i höstas, men Mika hade aldrig pratat med dem.",
+    "Hon tvekade. Tänk om de inte förstod henne. Tänk om det blev konstigt.",
+    "Sedan tänkte hon på Ingrid, som hade suttit ensam i det kalla huset. Hon gick fram.",
+    "– Hej, jag heter Mika. Vill ni vara med och spela kort?",
+    "Flickan log försiktigt. – Jag heter Dagny, sa hon. Och det här är min bror Ossi.",
+    "Samma kväll bjöd Dagnys pappa alla på sött te med kardemumma, och mamman bakade tunt bröd på kaminens platta. Det var det godaste Mika hade ätit på länge."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem läser högt för de minsta barnen?",
+     "alt": [
+      "Ingrid",
+      "Nils",
+      "Studenten Saga"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad heter flickan i familjen?",
+     "alt": [
+      "Alma",
+      "Dagny",
+      "Aida"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tvekar Mika innan hon går fram till familjen?",
+     "rader": 2,
+     "facit": "Hon är rädd att de inte ska förstå henne eller att det ska bli konstigt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Mika tänker på Ingrid just då?",
+     "rader": 2,
+     "facit": "Hon kommer ihåg hur det är att vara ensam och vill inte att någon annan ska vara det."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad bidrar familjen med till gemenskapen?",
+     "rader": 2,
+     "facit": "Sött te med kardemumma och tunt bröd."
+    }
+   ]
+  },
+  {
+   "rubrik": "Mod är inte att inte vara rädd",
+   "text": [
+    "Det var den sjunde dagen utan ström. Pappa hade fortfarande inte kommit hem. Mammas telefon var död sedan länge, och ingen visste hur det gick för honom.",
+    "Den kvällen satt Mika ensam vid fönstret i korridoren och tittade ut i mörkret. Hon var så trött på att vara stark.",
+    "Ingrid kom haltande med sin käpp och satte sig bredvid henne.",
+    "– Du saknar din pappa, sa hon. Det var inte en fråga.",
+    "Mika nickade. Tårarna kom innan hon hann stoppa dem.",
+    "– Jag har försökt vara modig hela tiden, snyftade hon. Men jag är så rädd att det har hänt honom något.",
+    "Ingrid lade sin skrynkliga hand över Mikas. – Lilla vän. Mod är inte att inte vara rädd. Mod är att vara rädd och ändå göra det som behövs. Det har du gjort varenda dag.",
+    "Hon gav Mika en näsduk. – Och man får gråta. Även modiga människor gråter."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Varför är Mika ledsen?",
+     "alt": [
+      "Hon har bråkat med Sigge",
+      "Hon fryser",
+      "Hon saknar pappa och är orolig för honom"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem tröstar Mika?",
+     "alt": [
+      "Mamma",
+      "Ingrid",
+      "Dagny"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Förklara med egna ord vad Ingrid menar med mod.",
+     "rader": 2,
+     "facit": "Mod är att göra det som behövs fast man är rädd."
+    },
+    {
+     "typ": "skriv",
+     "text": "Ge ett exempel från berättelsen när Mika har varit modig.",
+     "rader": 2,
+     "facit": "Till exempel: skidturen till Ingrid, idén om värmestugan, när hon pratade med den nya familjen."
+    },
+    {
+     "typ": "skriv",
+     "text": "Ingrid säger att man får gråta. Håller du med? Varför?",
+     "rader": 2,
+     "facit": "Eget svar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Montörerna",
+   "text": [
+    "På morgonen hördes motorljud. Hela slöjdsalen rusade till fönstren.",
+    "Längs vägen kom en lång rad av stora gula bilar med blinkande lampor. Det var elbolagets montörer, och framför dem gick en snöplog.",
+    "Montörerna arbetade hela dagen i kylan. De klättrade i stolpar, sågade bort träd och drog nya ledningar. Deras ansikten var röda av köld och de hade is i ögonbrynen.",
+    "– De har jobbat dygnet runt i en vecka, sa Nils. I hela länet.",
+    "Barnen i slöjdsalen bestämde sig för att tacka dem. De målade en stor skylt på ett lakan: TACK FÖR ATT NI KÄMPAR! och hängde den på skolans staket.",
+    "Dagny och Ossi bar ut te i termosar. Sigge delade ut pepparkakor som Ingrid och Erik hade bakat på kaminen.",
+    "En av montörerna, en kvinna med frost i luggen, tog en pepparkaka och skrattade. – Det här är det bästa som hänt på hela veckan, sa hon."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad kommer längs vägen?",
+     "alt": [
+      "Pappas lastbil",
+      "Elbolagets montörer och en snöplog",
+      "En buss med turister"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad står det på skylten?",
+     "alt": [
+      "VÄLKOMNA TILL GRANLIDEN!",
+      "TACK FÖR ATT NI KÄMPAR!",
+      "GOD JUL!"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Beskriv montörernas arbete. Använd minst två detaljer från texten.",
+     "rader": 2,
+     "facit": "De klättrar i stolpar, sågar bort träd, drar nya ledningar, jobbar i kylan dygnet runt."
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur visar barnen sin tacksamhet?",
+     "rader": 2,
+     "facit": "De målar en skylt och delar ut te och pepparkakor."
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att montören säger att det är det bästa som hänt på hela veckan?",
+     "rader": 2,
+     "facit": "Hon har jobbat hårt och är trött och frusen, och barnens tack gjorde henne glad."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ljuset kommer tillbaka",
+   "text": [
+    "Det var den artonde december, sista dagen före jullovet, fast ingen hade varit i skolan på riktigt på länge. Nu var det mörkt igen, klockan var halv fyra på eftermiddagen.",
+    "Alla satt i slöjdsalen och åt soppa när det plötsligt hände. Lysrören i taket fladdrade till. Sedan tändes de. Alla på en gång.",
+    "Det blev ett jubel så högt att Morris flydde under en bänk. Folk kramades och skrattade, och Sigge hoppade runt i cirklar.",
+    "Då hördes ett tut ute på vägen. En lastbil stannade utanför skolan. Ut hoppade en man med skägg och stora vinterkängor.",
+    "– Pappa! skrek Mika och Sigge och sprang ut i snön utan jackor.",
+    "Pappa lyfte upp båda två på en gång. – Ni har klarat er, sa han. Jag hörde om värmestugan på radion. Hela länet pratar om Granliden.",
+    "Senare samma kväll, när alla skulle gå hem, sa Ingrid: – Vi kanske kan ha julfika här i skolan varje år. Även när vi har ström.",
+    "Alla tyckte att det var en strålande idé. Och på julafton satt Ingrid vid Mikas köksbord, med Morris i knät. Slut."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad gör Morris när alla jublar?",
+     "alt": [
+      "Han jamar högt",
+      "Han flyr under en bänk",
+      "Han hoppar upp i Sigges famn"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Var firar Ingrid julafton?",
+     "alt": [
+      "Hos Mika",
+      "Ensam hemma",
+      "Hos Nils"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur fick pappa veta om värmestugan?",
+     "rader": 2,
+     "facit": "Han hörde om den på radion."
+    },
+    {
+     "typ": "skriv",
+     "text": "Ingrid föreslår julfika i skolan varje år, även när de har ström. Varför tror du att hon vill det?",
+     "rader": 2,
+     "facit": "Hon vill behålla gemenskapen och att ingen ska vara ensam."
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad har byn lärt sig under veckan utan ström?",
+     "rader": 2,
+     "facit": "Att man klarar sig bättre när man hjälps åt, och att ingen ska behöva vara ensam."
+    }
+   ]
+  }
+ ]
+}

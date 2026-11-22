@@ -1,0 +1,693 @@
+{
+ "arskurs": "2",
+ "titel": "Lyktorna i Glimmerbyn",
+ "kapitel": [
+  {
+   "rubrik": "Ljusfesten",
+   "text": [
+    "I den lilla byn Glimmerbyn är december mörk. Solen går upp sent och ner tidigt.",
+    "Men varje år, sista dagen före jullovet, har byn en Ljusfest. Alla barn går med lyktor genom byn till torget. Då blir mörkret alldeles glittrigt.",
+    "– I år ska vi göra egna lyktor, sa fröken Annika till klassen.",
+    "Alla jublade. Alla utom Dagny.",
+    "Dagny hade kommit till Glimmerbyn i somras. Hon var ny i klassen och sa inte så mycket. Hon satt längst bak och tittade ut genom fönstret på snön."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "När är Ljusfesten?",
+     "alt": [
+      "På nyårsafton",
+      "På midsommar",
+      "Sista dagen före jullovet"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad ska klassen göra?",
+     "alt": [
+      "Pepparkakor",
+      "En snögubbe",
+      "Egna lyktor"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "När kom Dagny till Glimmerbyn?",
+     "alt": [
+      "I våras",
+      "I går",
+      "I somras"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Dagny inte jublar?",
+     "rader": 2,
+     "facit": "Till exempel: Hon är ny, blyg eller känner sig ensam."
+    }
+   ]
+  },
+  {
+   "rubrik": "Dagnys lykta",
+   "text": [
+    "Klassen klippte lyktor av tjockt papper. De flesta klippte hjärtan och raka streck.",
+    "Dagny klippte långsamt och noga. När hon var klar höll hon upp sin lykta mot fönstret.",
+    "Ljuset sken igenom hundra små stjärnor i ett fint mönster.",
+    "– Vad konstig den ser ut, sa Axel högt. Det är ju inte så man gör en lykta!",
+    "Några skrattade. Dagny tittade ner i bänken. Hennes kinder blev varma.",
+    "Hon lade lyktan i bänken och sa ingenting mer den dagen."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad klipper Dagny i sin lykta?",
+     "alt": [
+      "Hjärtan",
+      "Små stjärnor",
+      "Raka streck"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem säger att lyktan är konstig?",
+     "alt": [
+      "Mika",
+      "Axel",
+      "Fröken Annika"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur känner sig Dagny?",
+     "alt": [
+      "Stolt",
+      "Ledsen",
+      "Glad"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tycker du om det Axel säger? Varför?",
+     "rader": 2,
+     "facit": "Eget svar, till exempel att det var elakt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Mika sätter sig bredvid",
+   "text": [
+    "På rasten satt Dagny ensam på en bänk. Mika gick fram och satte sig bredvid henne. Hon höll i ett äpple.",
+    "– Jag tyckte din lykta var jättefin, sa Mika.",
+    "Dagny tittade upp. – Min morfar gjorde lyktor, sa hon tyst. I staden där vi bodde förut. Han hade en egen verkstad.",
+    "– Wow, sa Mika. Kan han fortfarande göra lyktor?",
+    "– Ja. Men han har inga verktyg här.",
+    "Mika delade sin frukt med Dagny. Det var första gången Mika såg Dagny le."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem sätter sig bredvid Dagny?",
+     "alt": [
+      "Axel",
+      "Fröken Annika",
+      "Mika"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem gjorde lyktor förut?",
+     "alt": [
+      "Mikas pappa",
+      "Dagnys morfar",
+      "Dagnys mamma"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad delar Mika med Dagny?",
+     "alt": [
+      "En bok",
+      "Sin frukt",
+      "En mössa"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur visar Mika att hon är en bra kompis?",
+     "rader": 2,
+     "facit": "Hon sätter sig bredvid Dagny, säger något snällt och delar sin frukt."
+    }
+   ]
+  },
+  {
+   "rubrik": "Lyktorna får torka",
+   "text": [
+    "Nu var alla lyktor klara. Det var tjugotvå lyktor i olika färger.",
+    "– Vi ställer dem i förrådet bakom gympasalen, sa fröken Annika. Där får limmet torka över helgen.",
+    "Barnen bar lyktorna försiktigt, en och en.",
+    "Dagny ställde sin stjärnlykta längst in på hyllan.",
+    "– På måndag får vi prova att tända dem, sa fröken.",
+    "Alla gick hem och längtade. Det var bara två veckor kvar till Ljusfesten."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Hur många lyktor är det?",
+     "alt": [
+      "Tjugotvå",
+      "Tolv",
+      "Tjugo"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Var ställer de lyktorna?",
+     "alt": [
+      "I klassrummet",
+      "Hemma",
+      "I förrådet bakom gympasalen"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför ska lyktorna stå över helgen?",
+     "alt": [
+      "Ingen vill ha dem",
+      "Limmet ska torka",
+      "De ska bli kalla"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur länge är det kvar till Ljusfesten?",
+     "rader": 1,
+     "facit": "Två veckor."
+    }
+   ]
+  },
+  {
+   "rubrik": "Stormen",
+   "text": [
+    "Under helgen kom en stor snöstorm till Glimmerbyn. Det ven i skorstenarna hela natten.",
+    "På måndagen sprang klassen till förrådet. Fröken Annika öppnade dörren och stannade.",
+    "Ett fönster hade gått sönder i stormen. Snö hade blåst in och smält.",
+    "Alla lyktor var förstörda. Pappret hade blivit till mos. Dagnys stjärnlykta också.",
+    "Det blev alldeles tyst. Sedan började någon gråta.",
+    "– Nu blir det ingen Ljusfest! skrek Axel och sparkade i snön."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad händer under helgen?",
+     "alt": [
+      "Det blir varmt",
+      "Skolan brinner",
+      "Det kommer en snöstorm"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad har gått sönder i förrådet?",
+     "alt": [
+      "Taket",
+      "Dörren",
+      "Ett fönster"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur ser lyktorna ut?",
+     "alt": [
+      "Som nya",
+      "Blöta och sönder",
+      "Lite smutsiga"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur tror du att Axel känner sig? Hur vet du det?",
+     "rader": 2,
+     "facit": "Arg och ledsen. Han skriker och sparkar i snön."
+    }
+   ]
+  },
+  {
+   "rubrik": "Inget papper kvar",
+   "text": [
+    "– Vi gör nya lyktor, sa Mika.",
+    "Men i skolans förråd fanns inget tjockt papper kvar. Fröken Annika ringde till affären. De hade inte heller något.",
+    "– Och skolan har ändå inga pengar kvar till pyssel i år, sa fröken med en suck.",
+    "Klassen satt tyst. Ute föll snön.",
+    "– Vi får tänka nytt, sa fröken Annika till slut. Finns det något annat man kan göra lyktor av?",
+    "Ingen svarade. Men Dagny tittade på Mika. Hon såg ut som om hon ville säga något."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad finns det inte kvar?",
+     "alt": [
+      "Tjockt papper",
+      "Saxar",
+      "Penslar"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad säger fröken Annika att de får göra?",
+     "alt": [
+      "Tänka nytt",
+      "Ställa in festen",
+      "Gå hem"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem ser ut att vilja säga något?",
+     "alt": [
+      "Dagny",
+      "Fröken",
+      "Axel"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tror du att Dagny vill säga?",
+     "rader": 2,
+     "facit": "Eget svar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Dagny vågar",
+   "text": [
+    "På rasten viskade Dagny till Mika:",
+    "– Morfar gjorde lyktor av plåtburkar. Man slår små hål i burken med en spik. Då lyser ljuset ut genom hålen.",
+    "– Det måste du säga till fröken! sa Mika.",
+    "– Jag vågar inte, sa Dagny. Tänk om alla skrattar igen.",
+    "– Jag står bredvid dig, sa Mika.",
+    "Efter rasten räckte Dagny upp handen. Hennes röst darrade lite, men hon berättade allt.",
+    "– Vilken fantastisk idé! sa fröken Annika. Kan din morfar komma hit och visa oss?"
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad gjorde morfar lyktor av?",
+     "alt": [
+      "Plåtburkar",
+      "Trä",
+      "Glas"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför vågar inte Dagny först?",
+     "alt": [
+      "Hon har glömt",
+      "Hon är trött",
+      "Hon är rädd att alla ska skratta"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad tycker fröken om idén?",
+     "alt": [
+      "Att den är för svår",
+      "Att den är dålig",
+      "Att den är fantastisk"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur hjälper Mika Dagny att våga?",
+     "rader": 2,
+     "facit": "Hon peppar henne och lovar att stå bredvid henne."
+    }
+   ]
+  },
+  {
+   "rubrik": "Morfar Yusuf",
+   "text": [
+    "Dagen efter kom Dagnys morfar till skolan. Han hette Yusuf och hade ett stort grått skägg och varma ögon.",
+    "Han hade med sig en plåtburk, en hammare och en spik.",
+    "– Först fyller man burken med vatten och låter den frysa, sa morfar. Då blir den inte bucklig när man slår.",
+    "Sedan knackade han försiktigt med spiken. Tick, tick, tick. Hål efter hål.",
+    "– Det där kommer aldrig att funka, mumlade Axel.",
+    "Morfar log bara och fortsatte knacka."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad heter Dagnys morfar?",
+     "alt": [
+      "Yasin",
+      "Yusuf",
+      "Yonas"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför fyller man burken med vatten som fryser?",
+     "alt": [
+      "För att den inte ska bli bucklig",
+      "För att den ska bli tung",
+      "För att den ska bli kall"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad tror Axel?",
+     "alt": [
+      "Att det är lätt",
+      "Att det är roligt",
+      "Att det inte kommer att funka"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad behöver man för att göra en plåtlykta?",
+     "rader": 2,
+     "facit": "En plåtburk, vatten, en hammare och en spik."
+    }
+   ]
+  },
+  {
+   "rubrik": "Hela byn hjälper",
+   "text": [
+    "Nu behövde klassen många tomma plåtburkar. Minst tjugotvå!",
+    "Barnen gick runt i Glimmerbyn och knackade på dörrar.",
+    "– Har ni några tomma burkar? frågade de.",
+    "Fru Lindgren gav dem fem burkar. Bagaren gav dem tio stora burkar. En gammal man på en spark gav dem en hel påse.",
+    "– Är det till Ljusfesten? frågade han. Då vill jag gärna hjälpa till.",
+    "När dagen var slut hade de fyrtio burkar. Fler än de behövde!"
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad samlar klassen?",
+     "alt": [
+      "Pengar",
+      "Ljus",
+      "Tomma plåtburkar"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem ger dem tio stora burkar?",
+     "alt": [
+      "Bagaren",
+      "Fru Lindgren",
+      "Fröken"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur många burkar har de när dagen är slut?",
+     "alt": [
+      "Fyrtio",
+      "Hundra",
+      "Tjugo"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att alla i byn vill hjälpa till?",
+     "rader": 2,
+     "facit": "Till exempel: Ljusfesten är viktig för hela byn och de vill att barnen ska bli glada."
+    }
+   ]
+  },
+  {
+   "rubrik": "Axel säger förlåt",
+   "text": [
+    "Nu knackade hela klassen hål i burkarna. Tick, tick, tick.",
+    "Axel slog för hårt. Burken sprack och spiken for iväg.",
+    "– Det går inte! sa han argt.",
+    "Dagny satte sig bredvid honom. – Försiktigt, sa hon. Som en hackspett. Små, små slag.",
+    "Hon visade honom. Axel försökte igen. Nu blev det ett fint litet hål.",
+    "Axel tittade på Dagny. – Förlåt för att jag sa att din lykta var konstig, sa han. Den var faktiskt jättefin.",
+    "– Tack, sa Dagny."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad händer när Axel slår för hårt?",
+     "alt": [
+      "Burken spricker",
+      "Burken blir fin",
+      "Han vinner"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem hjälper Axel?",
+     "alt": [
+      "Dagny",
+      "Mika",
+      "Morfar"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad säger Axel till Dagny?",
+     "alt": [
+      "Jag kan själv",
+      "Gå härifrån",
+      "Förlåt"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Axel säger förlåt nu?",
+     "rader": 2,
+     "facit": "Till exempel: Han ser att Dagny är snäll och förstår att han var dum."
+    }
+   ]
+  },
+  {
+   "rubrik": "Axels idé",
+   "text": [
+    "Lyktorna var nästan klara. Men det fanns ett problem.",
+    "– Hur ska vi bära dem? frågade Mika. Burkarna blir varma när ljuset brinner.",
+    "Alla funderade. Då sprack Axel upp i ett leende.",
+    "– Min pappa har en verkstad med massor av ståltråd! Vi kan göra handtag!",
+    "Nästa dag kom Axel med en stor rulle ståltråd. Morfar Yusuf visade hur man böjer den till ett handtag.",
+    "– Bra tänkt, Axel, sa morfar. Tillsammans blir vi kloka."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad är problemet med lyktorna?",
+     "alt": [
+      "De är fula",
+      "De är för tunga",
+      "De blir varma"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vem har en verkstad?",
+     "alt": [
+      "Axels pappa",
+      "Dagnys mamma",
+      "Fröken"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör de handtagen av?",
+     "alt": [
+      "Ståltråd",
+      "Snören",
+      "Papper"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad menar morfar med \"Tillsammans blir vi kloka\"?",
+     "rader": 2,
+     "facit": "Till exempel: När man hjälps åt kommer man på bättre lösningar."
+    }
+   ]
+  },
+  {
+   "rubrik": "Stjärnor i snön",
+   "text": [
+    "På eftermiddagen var det mörkt ute. Klassen gick ut på skolgården med alla lyktorna.",
+    "Fröken Annika tände ett värmeljus i varje burk.",
+    "Då hände något magiskt. Ljuset lyste ut genom alla små hål. Tusen prickar av ljus föll på snön runt omkring dem.",
+    "– Det ser ut som en stjärnhimmel på marken! ropade Mika.",
+    "Dagny skrattade högt. Det var första gången klassen hörde henne skratta.",
+    "Axel höll upp sin lykta bredvid hennes. Mönstren blandades i snön."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vad tänder fröken i burkarna?",
+     "alt": [
+      "Värmeljus",
+      "Lampor",
+      "Tändstickor"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad ser ljuset ut som på snön?",
+     "alt": [
+      "En regnbåge",
+      "Ett hav",
+      "En stjärnhimmel"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad gör Dagny för första gången?",
+     "alt": [
+      "Gråter",
+      "Springer",
+      "Skrattar högt"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "skriv",
+     "text": "Varför tror du att Dagny skrattar nu?",
+     "rader": 2,
+     "facit": "Till exempel: Hon är glad, stolt och känner sig som en del av klassen."
+    }
+   ]
+  },
+  {
+   "rubrik": "Vem ska gå först?",
+   "text": [
+    "Dagen före Ljusfesten samlades klassen.",
+    "– Någon ska gå först i tåget, sa fröken Annika. Vem tycker ni?",
+    "Axel räckte upp handen. – Dagny och hennes morfar, sa han. Utan dem hade det inte blivit någon fest.",
+    "Alla nickade och klappade i händerna.",
+    "Dagny blev röd om kinderna. – Men alla kommer att titta på mig, viskade hon.",
+    "– Vi går precis bakom dig, sa Mika. Hela klassen."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vem föreslår att Dagny ska gå först?",
+     "alt": [
+      "Fröken",
+      "Mika",
+      "Axel"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Varför ska Dagny och morfar gå först?",
+     "alt": [
+      "De går snabbast",
+      "Utan dem hade det inte blivit någon fest",
+      "De är längst"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad säger Mika?",
+     "alt": [
+      "Vi går precis bakom dig",
+      "Du kan gå själv",
+      "Jag vill gå först"
+     ],
+     "ratt": 0
+    },
+    {
+     "typ": "skriv",
+     "text": "Hur har Axel förändrats sedan början av berättelsen?",
+     "rader": 2,
+     "facit": "Förut skrattade han åt Dagny, nu är han snäll och vill att hon ska gå först."
+    }
+   ]
+  },
+  {
+   "rubrik": "Ljusfesten",
+   "text": [
+    "Äntligen var det den sista dagen före jullovet. Hela Glimmerbyn stod längs gatan i mörkret.",
+    "Längst fram gick Dagny och morfar Yusuf. Bakom dem gick hela klassen med sina plåtlyktor.",
+    "Tusen små ljusprickar dansade på husväggarna och i snön. Folk sa oj och åh.",
+    "På torget sjöng alla tillsammans. Bagaren bjöd på varma bullar och fru Lindgren på saft.",
+    "Dagny tittade på alla glada ansikten. Hon kände något varmt i magen.",
+    "Glimmerbyn kändes inte ny och främmande längre. Den kändes som hemma. Slut."
+   ],
+   "fragor": [
+    {
+     "typ": "kryss",
+     "text": "Vilka går först i tåget?",
+     "alt": [
+      "Axel och hans pappa",
+      "Dagny och morfar",
+      "Fröken och Mika"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "kryss",
+     "text": "Vad bjuder bagaren på?",
+     "alt": [
+      "Glass",
+      "Soppa",
+      "Varma bullar"
+     ],
+     "ratt": 2
+    },
+    {
+     "typ": "kryss",
+     "text": "Hur känns Glimmerbyn för Dagny nu?",
+     "alt": [
+      "Nytt och konstigt",
+      "Som hemma",
+      "Kallt och mörkt"
+     ],
+     "ratt": 1
+    },
+    {
+     "typ": "skriv",
+     "text": "Vad tyckte du bäst om i berättelsen? Varför?",
+     "rader": 2,
+     "facit": "Eget svar."
+    }
+   ]
+  }
+ ]
+}

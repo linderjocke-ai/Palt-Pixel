@@ -177,6 +177,51 @@
       "skarmbild": "/assets/video/treomdagen-stod.jpg"
     },
     {
+      "id": "julkalender",
+      "namn": "Julkalendern",
+      "text": "En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.",
+      "typ": "app",
+      "kategori": "Skola",
+      "ikon": "app",
+      "storlek": "bred",
+      "farg": "alvbla",
+      "bild": "assets/img/julkalender.webp",
+      "alt": "Julkalendern: en isometrisk by i snön med numrerade luckor",
+      "lank": "/julkalender/",
+      "ar": 2026,
+      "genre": "Julkalender för skolan",
+      "knapp": "Öppna",
+      "spelare": "Lärare och klasser i F–6",
+      "ingress": "En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.",
+      "beskrivning": [
+        "Julkalendern gör december till en gemensam berättelse. Varje skoldag fram till jullovet öppnar klassen ett nytt kapitel i en julsaga skriven för just er årskurs – från förskoleklass till sexan – och en eller flera elever får öppna sin egen lucka.",
+        "Välj mellan en isometrisk by i snön eller filtfickor på en trävägg. Luckorna kan innehålla snällhetsuppdrag, rastutmaningar eller kluringar, och du kan ändra texterna själv. Till varje kapitel finns arbetsblad med facit, pyssel och hela berättelsen som en bok att skriva ut."
+      ],
+      "hojdpunkter": [
+        "Sju julsagor i 14 kapitel, en för varje årskurs F–6",
+        "En lucka per elev – byn i snön eller filtfickor",
+        "Uppläsning och bilder till varje kapitel",
+        "Arbetsblad, facit och pyssel som PDF",
+        "Hela sagan som A5-bok med egen julhälsning"
+      ],
+      "video": "/assets/video/julkalender-promo.mp4",
+      "klipp": "/assets/video/julkalender-kort.mp4",
+      "poster": "/assets/video/julkalender-poster.jpg",
+      "sida": "/projekt/julkalender/",
+      "tema": {
+        "topp": "#1D2B5A",
+        "botten": "#EDEFF7",
+        "ord": "#C9D3F5",
+        "ljus": "#F1F3FC",
+        "ink": "#0D1430",
+        "knapp": "#B23A2E",
+        "knappText": "#FFF4E6"
+      },
+      "format": "bred",
+      "skarm": "/assets/video/julkalender-stod.mp4",
+      "skarmbild": "/assets/video/julkalender-stod.jpg"
+    },
+    {
       "id": "veckopalten",
       "namn": "Veckopalten",
       "text": "Familjens skolvecka: prov, läxor och schema.",
