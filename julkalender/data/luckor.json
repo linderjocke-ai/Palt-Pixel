@@ -1,206 +1,1662 @@
 {
-"snall": {
-"yngre": [
-{"typ":"Snällhet","text":"Säg något snällt till den som sitter bredvid dig."},
-{"typ":"Snällhet","text":"Ge en kompis en high five och säg: Bra jobbat!"},
-{"typ":"Snällhet","text":"Hjälp någon att plocka undan efter lektionen."},
-{"typ":"Snällhet","text":"Fråga någon som är ensam på rasten om den vill vara med och leka."},
-{"typ":"Snällhet","text":"Säg tack till någon som jobbar i matsalen."},
-{"typ":"Snällhet","text":"Rita en teckning till någon i klassen och ge bort den."},
-{"typ":"Snällhet","text":"Håll upp dörren för någon i dag."},
-{"typ":"Snällhet","text":"Ge din bänkgranne ett stort leende och säg god morgon."},
-{"typ":"Snällhet","text":"Berätta för en kompis vad du tycker att den är bra på."},
-{"typ":"Snällhet","text":"Hjälp en kompis med dragkedjan eller skorna innan rasten."},
-{"typ":"Snällhet","text":"Låt någon annan gå före dig i kön i dag."},
-{"typ":"Snällhet","text":"Hjälp två kompisar att bli sams om de har bråkat."},
-{"typ":"Snällhet","text":"Hela klassen säger tack till sin lärare. Ett, två, tre: TACK!"},
-{"typ":"Snällhet","text":"Gör en hemlig snällhet: lägg en glad lapp i någons bänk."},
-{"typ":"Snällhet","text":"Fråga en kompis: Hur mår du i dag? Lyssna noga på svaret."},
-{"typ":"Snällhet","text":"Hela klassen städar klassrummet i två minuter. Alla tillsammans!"},
-{"typ":"Snällhet","text":"Säg något snällt om något du själv har gjort. Det är också viktigt!"},
-{"typ":"Snällhet","text":"Låna ut något till en kompis som behöver det."},
-{"typ":"Snällhet","text":"Vinka och säg hej till någon i en annan klass."},
-{"typ":"Snällhet","text":"Ge en kompis beröm för något den har gjort i dag."},
-{"typ":"Snällhet","text":"Fråga någon som inte brukar leka med dig om den vill vara med."},
-{"typ":"Snällhet","text":"Säg tack till någon som hjälper till på skolan, till exempel vaktmästaren."},
-{"typ":"Snällhet","text":"Hjälp en kompis som tycker att något är svårt."},
-{"typ":"Snällhet","text":"Rita ett hjärta och ge det till någon hemma i kväll."},
-{"typ":"Snällhet","text":"Säg till någon: Vad bra att du är här!"},
-{"typ":"Snällhet","text":"Gör plats för någon som vill sitta bredvid dig."},
-{"typ":"Snällhet","text":"Hjälp en kompis på traven när den inte vet vad den ska rita eller skriva."},
-{"typ":"Snällhet","text":"Vänta snällt på din tur hela dagen. Klarar du det?"},
-{"typ":"Snällhet","text":"Säg något snällt till dig själv i spegeln."},
-{"typ":"Snällhet","text":"Ta hand om en växt eller ett djur, hemma eller i skolan."},
-{"typ":"Snällhet","text":"Tänk en snäll tanke till någon som är sjuk eller borta i dag."},
-{"typ":"Snällhet","text":"Hela klassen säger en sak som har varit bra i dag."}],
-"aldre": [
-{"typ":"Snällhet","text":"Skriv en anonym komplimang till någon i klassen. Läraren delar ut dem."},
-{"typ":"Snällhet","text":"Fråga någon du sällan pratar med om den vill vara med på rasten."},
-{"typ":"Snällhet","text":"Tacka någon på skolan som sällan blir tackad, personligen eller med en lapp."},
-{"typ":"Snällhet","text":"Säg något positivt om en klasskamrats arbete under en lektion."},
-{"typ":"Snällhet","text":"Hjälp någon med en uppgift utan att göra den åt hen."},
-{"typ":"Snällhet","text":"Låt någon annan välja lek eller lag i dag."},
-{"typ":"Snällhet","text":"Lyssna utan att avbryta när någon pratar. En hel dag!"},
-{"typ":"Snällhet","text":"Skriv ett tackbrev till någon som har betytt mycket för dig."},
-{"typ":"Snällhet","text":"Be om förlåtelse för något du har gjort, även om det var ett tag sedan."},
-{"typ":"Snällhet","text":"Gör en osynlig snällhet: något snällt som ingen får veta att du gjorde."},
-{"typ":"Snällhet","text":"Plocka skräp på skolgården i fem minuter."},
-{"typ":"Snällhet","text":"Skriv julhälsningar som klassen kan skicka till ett äldreboende."},
-{"typ":"Snällhet","text":"Berätta för någon vad du uppskattar hos hen."},
-{"typ":"Snällhet","text":"Stå upp för någon som blir retad, eller berätta för en vuxen."},
-{"typ":"Snällhet","text":"Peppa en kompis inför något som känns svårt."},
-{"typ":"Snällhet","text":"Ställ en följdfråga när någon berättar något. Visa att du lyssnar."},
-{"typ":"Snällhet","text":"Fråga en vuxen på skolan hur dagen har varit."},
-{"typ":"Snällhet","text":"Hjälp till hemma i kväll utan att någon ber dig om det."},
-{"typ":"Snällhet","text":"Tacka matsalspersonalen efter lunchen."},
-{"typ":"Snällhet","text":"Hälsa på några i en yngre klass och fråga vad de håller på med."},
-{"typ":"Snällhet","text":"Prata inte om någon som inte är där. En hel dag!"},
-{"typ":"Snällhet","text":"Berömm någon för att den har kämpat, inte bara för resultatet."},
-{"typ":"Snällhet","text":"Skriv tre saker du är tacksam för och berätta en av dem för klassen."},
-{"typ":"Snällhet","text":"Bjud in någon som brukar sitta ensam att sitta med dig i matsalen."},
-{"typ":"Snällhet","text":"Snabbstäda klassens hyllor och lådor tillsammans. Ett städkalas!"},
-{"typ":"Snällhet","text":"Fråga om någon behöver hjälp med något i dag."},
-{"typ":"Snällhet","text":"Ring eller skriv till en släkting i kväll och fråga hur hen mår."},
-{"typ":"Snällhet","text":"Var extra tålmodig med ett syskon eller en kompis i dag."},
-{"typ":"Snällhet","text":"Skriv en lapp med uppmuntrande ord och sätt upp den på klassrumsdörren."},
-{"typ":"Snällhet","text":"Säg en sak som du själv har gjort bra den här terminen."},
-{"typ":"Snällhet","text":"Hela klassen säger något bra om personen till höger om sig."},
-{"typ":"Snällhet","text":"Tänk på någon som kan ha det svårt i jul. Vad kan vi göra för att hjälpa?"}]
-},
-"rorelse": {
-"yngre": [
-{"typ":"Rastutmaning","text":"Hoppa jämfota tio gånger. Kan du hoppa lite längre för varje hopp?"},
-{"typ":"Rastutmaning","text":"Gör en snöängel på rasten!"},
-{"typ":"Rastutmaning","text":"Spring till närmaste träd och tillbaka. Hur många gånger hinner du på en minut?"},
-{"typ":"Rastutmaning","text":"Gå som en pingvin hela vägen ut till rasten."},
-{"typ":"Rastutmaning","text":"Stå på ett ben och räkna till tjugo. Byt ben!"},
-{"typ":"Rastutmaning","text":"Hoppa som en hare runt hela skolgården."},
-{"typ":"Rastutmaning","text":"Leken Följa John! Den som har luckan i dag är John."},
-{"typ":"Rastutmaning","text":"Bygg en snögubbe tillsammans på rasten."},
-{"typ":"Rastutmaning","text":"Kasta snöboll mot ett mål, till exempel ett träd. Aldrig mot någon!"},
-{"typ":"Rastutmaning","text":"Gör tio stjärnhopp innan ni går in efter rasten."},
-{"typ":"Rastutmaning","text":"Kryp som en björn tre meter. Gå sedan som en krabba tre meter."},
-{"typ":"Rastutmaning","text":"Lek Under hökens vingar på rasten."},
-{"typ":"Rastutmaning","text":"Balansera längs en linje eller en kant utan att trilla av."},
-{"typ":"Rastutmaning","text":"Åk kana eller rulla nerför en kulle om det finns någon."},
-{"typ":"Rastutmaning","text":"Trampa upp en hage i snön och hoppa hage!"},
-{"typ":"Rastutmaning","text":"Lek kurragömma i fem minuter."},
-{"typ":"Rastutmaning","text":"Frysdans! Någon nynnar, alla dansar och fryser när det blir tyst."},
-{"typ":"Rastutmaning","text":"Spring stafett två och två till staketet och tillbaka."},
-{"typ":"Rastutmaning","text":"Hoppa på ett ben runt sandlådan eller klätterställningen."},
-{"typ":"Rastutmaning","text":"Gå på tå hela vägen till matsalen, tyst som en tomte."},
-{"typ":"Rastutmaning","text":"Gör en tunnel med benen och låt kompisarna krypa igenom."},
-{"typ":"Rastutmaning","text":"Lek Tomten säger, som Simon säger, i fem minuter."},
-{"typ":"Rastutmaning","text":"Spring i sicksack mellan fem saker på skolgården."},
-{"typ":"Rastutmaning","text":"Försök fånga snöflingor med tungan!"},
-{"typ":"Rastutmaning","text":"Hoppa hopprep, eller låtsashoppa, tjugo gånger."},
-{"typ":"Rastutmaning","text":"Lek Bro, bro, breja på rasten."},
-{"typ":"Rastutmaning","text":"Gå baklänges tio steg. Försiktigt!"},
-{"typ":"Rastutmaning","text":"Rulla en jättestor snöboll tillsammans."},
-{"typ":"Rastutmaning","text":"Gör fem stora grodhopp i rad."},
-{"typ":"Rastutmaning","text":"Lek Kom alla mina kycklingar på rasten."},
-{"typ":"Rastutmaning","text":"Hitta tre olika sorters pinnar eller stenar på skolgården."},
-{"typ":"Rastutmaning","text":"Hela klassen går som ett långt tåg ut på rasten. Tut tut!"}],
-"aldre": [
-{"typ":"Rastutmaning","text":"Gör tjugo stjärnhopp innan ni går ut på rast. Klarar alla det?"},
-{"typ":"Rastutmaning","text":"Plankan! Håll så länge du kan och försök slå ditt rekord i morgon."},
-{"typ":"Rastutmaning","text":"Spring ett varv runt skolgården och ta tid."},
-{"typ":"Rastutmaning","text":"Spela kull med hela klassen på rasten."},
-{"typ":"Rastutmaning","text":"Stå på ett ben med slutna ögon i femton sekunder."},
-{"typ":"Rastutmaning","text":"Gör tio armhävningar, gärna på knä, och tio situps."},
-{"typ":"Rastutmaning","text":"Bygg den största snögubben på skolgården. Mät den!"},
-{"typ":"Rastutmaning","text":"Lek Röd lampa, grön lampa på rasten."},
-{"typ":"Rastutmaning","text":"Stafett i lag: spring till staketet och tillbaka."},
-{"typ":"Rastutmaning","text":"Hoppa hopprep femtio gånger utan att trampa fel."},
-{"typ":"Rastutmaning","text":"Sitt mot väggen utan stol. Hur länge klarar ni?"},
-{"typ":"Rastutmaning","text":"Kasta snöboll mot ett mål. Hur många träffar får du av tio?"},
-{"typ":"Rastutmaning","text":"Hitta på och led en lek för yngre elever på rasten."},
-{"typ":"Rastutmaning","text":"Gå eller spring tusen steg på rasten. Räkna i huvudet!"},
-{"typ":"Rastutmaning","text":"Spela fotboll, brännboll eller kubb. Alla får vara med."},
-{"typ":"Rastutmaning","text":"Gör en snöskulptur i grupp på temat vinter."},
-{"typ":"Rastutmaning","text":"Jogga på stället i en minut. Höga knän!"},
-{"typ":"Rastutmaning","text":"Spela dunken eller kurragömma på rasten."},
-{"typ":"Rastutmaning","text":"Leta efter djurspår i snön. Vilket djur kan det vara?"},
-{"typ":"Rastutmaning","text":"Bygg en hinderbana av saker på skolgården och prova den."},
-{"typ":"Rastutmaning","text":"Gör tio utfallssteg på varje ben. Djupt och lugnt."},
-{"typ":"Rastutmaning","text":"Gå trappan upp och ner tre gånger, i lugnt tempo."},
-{"typ":"Rastutmaning","text":"Längdhopp jämfota! Mät era hopp i snön."},
-{"typ":"Rastutmaning","text":"Gå en promenad och prata med någon du inte brukar prata med."},
-{"typ":"Rastutmaning","text":"Lek Under hökens vingar med hela klassen."},
-{"typ":"Rastutmaning","text":"Yoga: stå som ett träd i trettio sekunder på varje ben."},
-{"typ":"Rastutmaning","text":"Kasta en boll till varandra tjugo gånger utan att tappa den."},
-{"typ":"Rastutmaning","text":"Spring stafett två och två med en sked och en kotte."},
-{"typ":"Rastutmaning","text":"Rulla snöbollar och bygg en snölykta tillsammans."},
-{"typ":"Rastutmaning","text":"Hitta på en egen rastutmaning och lär ut den till klassen."},
-{"typ":"Rastutmaning","text":"Spring baklänges tjugo meter i lugnt tempo. Titta dig över axeln!"},
-{"typ":"Rastutmaning","text":"Hela klassen: stå tysta ute en minut och andas in den friska vinterluften."}]
-},
-"kluring": {
-"yngre": [
-{"typ":"Matte","text":"Tomten har 3 röda paket och 4 blå paket. Hur många paket har han?","svar":"7 paket"},
-{"typ":"Svenska","text":"Hitta tre ord som rimmar på snö.","svar":"Till exempel sjö, ö, frö och kö"},
-{"typ":"NO","text":"Vad händer med snö om man tar in den i värmen?","svar":"Den smälter och blir vatten."},
-{"typ":"SO","text":"Vad heter månaden som kommer efter december?","svar":"Januari"},
-{"typ":"Matte","text":"Hur många skoldagar är det kvar till jullovet? Räkna tillsammans!"},
-{"typ":"Svenska","text":"Vilken bokstav börjar ordet julgran på?","svar":"J"},
-{"typ":"NO","text":"Vilka djur sover hela vintern?","svar":"Till exempel igelkotten och björnen"},
-{"typ":"Matte","text":"Du har 10 pepparkakor och äter upp 2. Hur många har du kvar?","svar":"8 pepparkakor"},
-{"typ":"SO","text":"Vad heter landet vi bor i? Vad heter huvudstaden?","svar":"Sverige. Huvudstaden heter Stockholm."},
-{"typ":"Svenska","text":"Klappa stavelserna i ordet pep-par-ka-ka. Hur många är de?","svar":"4 stavelser"},
-{"typ":"NO","text":"Varför fryser vattnet i sjöarna på vintern?","svar":"Det blir kallare än noll grader."},
-{"typ":"Matte","text":"Vad är dubbelt så mycket som 4?","svar":"8"},
-{"typ":"Svenska","text":"Hitta på en mening som börjar med: I december …"},
-{"typ":"SO","text":"Säg veckodagarna i rätt ordning, alla tillsammans!","svar":"Måndag, tisdag, onsdag, torsdag, fredag, lördag, söndag"},
-{"typ":"NO","text":"Vilken fågel har röd mage och syns ofta på vintern?","svar":"Domherren"},
-{"typ":"Matte","text":"Vilket tal är störst: 12, 21 eller 15?","svar":"21"},
-{"typ":"Svenska","text":"Vad är motsatsen till kall?","svar":"Varm"},
-{"typ":"SO","text":"Vad gör man på lucia?","svar":"Man går i luciatåg med ljus och sjunger."},
-{"typ":"Matte","text":"Räkna alla fönster i klassrummet. Hur många blev det?"},
-{"typ":"NO","text":"Vad är is?","svar":"Fruset vatten"},
-{"typ":"Svenska","text":"Hur många ord som börjar på S kan klassen komma på? Ni har en minut!"},
-{"typ":"Matte","text":"Vad är 5 + 5 + 5?","svar":"15"},
-{"typ":"SO","text":"Varför är det mörkt så länge på dagarna i december?","svar":"Solen står lågt och är uppe en kort stund."},
-{"typ":"NO","text":"Vad behöver en snögubbe för att inte smälta?","svar":"Kyla, minusgrader"},
-{"typ":"Svenska","text":"Vilket ord är längst: snö, snöboll eller snögubbe?","svar":"Snögubbe"},
-{"typ":"Matte","text":"Vilken form har en julgranskula?","svar":"Den är rund som ett klot."},
-{"typ":"SO","text":"Vilka högtider firar man i december i olika familjer?","svar":"Till exempel jul, lucia och hanukka"},
-{"typ":"NO","text":"Varför har renar så tjock päls?","svar":"För att hålla värmen i kylan"},
-{"typ":"Svenska","text":"Byt ut första bokstaven i ordet HUS. Vilka nya ord kan du göra?","svar":"Till exempel mus och bus"},
-{"typ":"Matte","text":"Hur många ben har tre tomtar tillsammans?","svar":"6 ben"},
-{"typ":"SO","text":"Vad heter vår kommun? Vet någon hur många som bor här?"},
-{"typ":"NO","text":"Varför syns andedräkten när det är kallt ute?","svar":"Vattnet i andedräkten blir till små droppar i kylan."}],
-"aldre": [
-{"typ":"Matte","text":"En ljusstake kostar 45 kr. Vad kostar fyra ljusstakar?","svar":"180 kr"},
-{"typ":"Svenska","text":"Hur många ord kan ni bilda av bokstäverna i JULKLAPPAR? Ni har två minuter."},
-{"typ":"NO","text":"Varför är snö vit?","svar":"Snöflingorna reflekterar allt ljus, alla färger på en gång."},
-{"typ":"SO","text":"Vilket datum är vintersolståndet och vad betyder det?","svar":"Den 21 december. Det är årets kortaste dag."},
-{"typ":"Matte","text":"Hur många timmar är det på 24 dygn?","svar":"576 timmar"},
-{"typ":"Svenska","text":"Vad betyder ordet tradition?","svar":"Något man gör på samma sätt år efter år."},
-{"typ":"NO","text":"Vid hur många grader fryser vatten?","svar":"0 grader Celsius"},
-{"typ":"SO","text":"Vad heter Sveriges nordligaste stad?","svar":"Kiruna"},
-{"typ":"Matte","text":"Vilket tal kommer sedan: 2, 4, 8, 16 …","svar":"32. Talet dubbleras varje gång."},
-{"typ":"Svenska","text":"Hitta tre ord som betyder ungefär samma sak som glad.","svar":"Till exempel lycklig, nöjd och munter"},
-{"typ":"NO","text":"Hur kan fiskar överleva under isen på vintern?","svar":"Vattnet på botten är runt fyra grader varmt och fryser inte."},
-{"typ":"SO","text":"Vilka länder har landgräns mot Sverige?","svar":"Norge och Finland"},
-{"typ":"Matte","text":"Julafton är en torsdag i år. Vilken veckodag är nyårsafton?","svar":"Torsdag, en vecka senare"},
-{"typ":"Svenska","text":"Skriv en mening där alla ord börjar på samma bokstav."},
-{"typ":"NO","text":"Vad är polarnatt?","svar":"När solen inte går upp alls, längst upp i norr."},
-{"typ":"SO","text":"Varför firar vi lucia just den 13 december?","svar":"Enligt den gamla kalendern var det årets längsta natt."},
-{"typ":"Matte","text":"Ett paket väger 1,5 kg. Hur mycket väger fyra sådana paket?","svar":"6 kg"},
-{"typ":"Svenska","text":"Jul och juli skiljer sig på en bokstav. Hitta fler sådana ordpar!","svar":"Till exempel sol och sal, snö och sno"},
-{"typ":"NO","text":"Vilka djur får vit päls på vintern?","svar":"Till exempel hermelin, fjällräv och skogshare"},
-{"typ":"SO","text":"Hur kan vi glädja de som bor på ett äldreboende i december?"},
-{"typ":"Matte","text":"Det är 14 skoldagar i december. Hur många har gått och hur många är kvar?"},
-{"typ":"Svenska","text":"Vad betyder uttrycket att ha is i magen?","svar":"Att vara lugn, även när det är spännande"},
-{"typ":"NO","text":"Vad är norrsken?","svar":"Partiklar från solen som får luften högt upp att lysa."},
-{"typ":"SO","text":"Vad heter Sveriges största sjö?","svar":"Vänern"},
-{"typ":"Matte","text":"3 kg pepparkaksdeg räcker till 150 kakor. Hur många kakor blir det av 1 kg?","svar":"50 kakor"},
-{"typ":"Svenska","text":"Hitta motsatsen till mörk, tyst, kall och början.","svar":"Ljus, högljudd, varm och slut"},
-{"typ":"NO","text":"Varför strör man sand och salt på vägarna på vintern?","svar":"Sanden gör att man inte halkar. Saltet smälter isen."},
-{"typ":"SO","text":"Vad gör en kommun? Nämn tre saker.","svar":"Till exempel skolor, bibliotek och snöröjning"},
-{"typ":"Matte","text":"Hur många minuter är två och en halv timme?","svar":"150 minuter"},
-{"typ":"Svenska","text":"Gåta: Vad har tangenter men kan inte låsa upp några dörrar?","svar":"Ett piano eller ett tangentbord"},
-{"typ":"NO","text":"Varför ser man stjärnorna så bra en kall vinternatt?","svar":"Det är mörkt länge och luften är ofta klar."},
-{"typ":"SO","text":"Nämn tre saker som var annorlunda för barn för hundra år sedan."}]
-}
+ "snall": {
+  "yngre": [
+   {
+    "typ": "Snällhet",
+    "text": "Säg något snällt till den som sitter bredvid dig."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Ge en kompis en high five och säg: Bra jobbat!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp någon att plocka undan efter lektionen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Fråga någon som är ensam på rasten om den vill vara med och leka."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg tack till någon som jobbar i matsalen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Rita en teckning till någon i klassen och ge bort den."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Håll upp dörren för någon i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Ge din bänkgranne ett stort leende och säg god morgon."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Berätta för en kompis vad du tycker att den är bra på."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp en kompis med dragkedjan eller skorna innan rasten."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Låt någon annan gå före dig i kön i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp två kompisar att bli sams om de har bråkat."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hela klassen säger tack till sin lärare. Ett, två, tre: TACK!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Gör en hemlig snällhet: lägg en glad lapp i någons bänk."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Fråga en kompis: Hur mår du i dag? Lyssna noga på svaret."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hela klassen städar klassrummet i två minuter. Alla tillsammans!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg något snällt om något du själv har gjort. Det är också viktigt!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Låna ut något till en kompis som behöver det."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Vinka och säg hej till någon i en annan klass."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Ge en kompis beröm för något den har gjort i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Fråga någon som inte brukar leka med dig om den vill vara med."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg tack till någon som hjälper till på skolan, till exempel vaktmästaren."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp en kompis som tycker att något är svårt."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Rita ett hjärta och ge det till någon hemma i kväll."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg till någon: Vad bra att du är här!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Gör plats för någon som vill sitta bredvid dig."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp en kompis på traven när den inte vet vad den ska rita eller skriva."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Vänta snällt på din tur hela dagen. Klarar du det?"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg något snällt till dig själv i spegeln."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Ta hand om en växt eller ett djur, hemma eller i skolan."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Tänk en snäll tanke till någon som är sjuk eller borta i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hela klassen säger en sak som har varit bra i dag."
+   }
+  ],
+  "aldre": [
+   {
+    "typ": "Snällhet",
+    "text": "Skriv en anonym komplimang till någon i klassen. Läraren delar ut dem."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Fråga någon du sällan pratar med om den vill vara med på rasten."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Tacka någon på skolan som sällan blir tackad, personligen eller med en lapp."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg något positivt om en klasskamrats arbete under en lektion."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp någon med en uppgift utan att göra den åt hen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Låt någon annan välja lek eller lag i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Lyssna utan att avbryta när någon pratar. En hel dag!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Skriv ett tackbrev till någon som har betytt mycket för dig."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Be om förlåtelse för något du har gjort, även om det var ett tag sedan."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Gör en osynlig snällhet: något snällt som ingen får veta att du gjorde."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Plocka skräp på skolgården i fem minuter."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Skriv julhälsningar som klassen kan skicka till ett äldreboende."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Berätta för någon vad du uppskattar hos hen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Stå upp för någon som blir retad, eller berätta för en vuxen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Peppa en kompis inför något som känns svårt."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Ställ en följdfråga när någon berättar något. Visa att du lyssnar."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Fråga en vuxen på skolan hur dagen har varit."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hjälp till hemma i kväll utan att någon ber dig om det."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Tacka matsalspersonalen efter lunchen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hälsa på några i en yngre klass och fråga vad de håller på med."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Prata inte om någon som inte är där. En hel dag!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Berömm någon för att den har kämpat, inte bara för resultatet."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Skriv tre saker du är tacksam för och berätta en av dem för klassen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Bjud in någon som brukar sitta ensam att sitta med dig i matsalen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Snabbstäda klassens hyllor och lådor tillsammans. Ett städkalas!"
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Fråga om någon behöver hjälp med något i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Ring eller skriv till en släkting i kväll och fråga hur hen mår."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Var extra tålmodig med ett syskon eller en kompis i dag."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Skriv en lapp med uppmuntrande ord och sätt upp den på klassrumsdörren."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Säg en sak som du själv har gjort bra den här terminen."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Hela klassen säger något bra om personen till höger om sig."
+   },
+   {
+    "typ": "Snällhet",
+    "text": "Tänk på någon som kan ha det svårt i jul. Vad kan vi göra för att hjälpa?"
+   }
+  ]
+ },
+ "rorelse": {
+  "yngre": [
+   {
+    "typ": "Rastutmaning",
+    "text": "Hoppa jämfota tio gånger. Kan du hoppa lite längre för varje hopp?"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör en snöängel på rasten!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spring till närmaste träd och tillbaka. Hur många gånger hinner du på en minut?"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gå som en pingvin hela vägen ut till rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Stå på ett ben och räkna till tjugo. Byt ben!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hoppa som en hare runt hela skolgården."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Leken Följa John! Den som har luckan i dag är John."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Bygg en snögubbe tillsammans på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Kasta snöboll mot ett mål, till exempel ett träd. Aldrig mot någon!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör tio stjärnhopp innan ni går in efter rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Kryp som en björn tre meter. Gå sedan som en krabba tre meter."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek Under hökens vingar på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Balansera längs en linje eller en kant utan att trilla av."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Åk kana eller rulla nerför en kulle om det finns någon."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Trampa upp en hage i snön och hoppa hage!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek kurragömma i fem minuter."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Frysdans! Någon nynnar, alla dansar och fryser när det blir tyst."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spring stafett två och två till staketet och tillbaka."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hoppa på ett ben runt sandlådan eller klätterställningen."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gå på tå hela vägen till matsalen, tyst som en tomte."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör en tunnel med benen och låt kompisarna krypa igenom."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek Tomten säger, som Simon säger, i fem minuter."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spring i sicksack mellan fem saker på skolgården."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Försök fånga snöflingor med tungan!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hoppa hopprep, eller låtsashoppa, tjugo gånger."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek Bro, bro, breja på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gå baklänges tio steg. Försiktigt!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Rulla en jättestor snöboll tillsammans."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör fem stora grodhopp i rad."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek Kom alla mina kycklingar på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hitta tre olika sorters pinnar eller stenar på skolgården."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hela klassen går som ett långt tåg ut på rasten. Tut tut!"
+   }
+  ],
+  "aldre": [
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör tjugo stjärnhopp innan ni går ut på rast. Klarar alla det?"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Plankan! Håll så länge du kan och försök slå ditt rekord i morgon."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spring ett varv runt skolgården och ta tid."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spela kull med hela klassen på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Stå på ett ben med slutna ögon i femton sekunder."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör tio armhävningar, gärna på knä, och tio situps."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Bygg den största snögubben på skolgården. Mät den!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek Röd lampa, grön lampa på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Stafett i lag: spring till staketet och tillbaka."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hoppa hopprep femtio gånger utan att trampa fel."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Sitt mot väggen utan stol. Hur länge klarar ni?"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Kasta snöboll mot ett mål. Hur många träffar får du av tio?"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hitta på och led en lek för yngre elever på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gå eller spring tusen steg på rasten. Räkna i huvudet!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spela fotboll, brännboll eller kubb. Alla får vara med."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör en snöskulptur i grupp på temat vinter."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Jogga på stället i en minut. Höga knän!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spela dunken eller kurragömma på rasten."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Leta efter djurspår i snön. Vilket djur kan det vara?"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Bygg en hinderbana av saker på skolgården och prova den."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gör tio utfallssteg på varje ben. Djupt och lugnt."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gå trappan upp och ner tre gånger, i lugnt tempo."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Längdhopp jämfota! Mät era hopp i snön."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Gå en promenad och prata med någon du inte brukar prata med."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Lek Under hökens vingar med hela klassen."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Yoga: stå som ett träd i trettio sekunder på varje ben."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Kasta en boll till varandra tjugo gånger utan att tappa den."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spring stafett två och två med en sked och en kotte."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Rulla snöbollar och bygg en snölykta tillsammans."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hitta på en egen rastutmaning och lär ut den till klassen."
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Spring baklänges tjugo meter i lugnt tempo. Titta dig över axeln!"
+   },
+   {
+    "typ": "Rastutmaning",
+    "text": "Hela klassen: stå tysta ute en minut och andas in den friska vinterluften."
+   }
+  ]
+ },
+ "kluring": {
+  "F": [
+   {
+    "typ": "Matte",
+    "text": "Räkna högt tillsammans: Hur många fönster finns det i vårt klassrum?",
+    "svar": "Räkna tillsammans!"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ljud börjar ordet TOMTE med? Kan ni komma på fler ord som börjar på samma ljud?",
+    "svar": "T, som i tåg, tant och tårta"
+   },
+   {
+    "typ": "Matte",
+    "text": "Tomten har 2 paket. Han får 1 till. Hur många paket har han nu? Visa med fingrarna!",
+    "svar": "3 paket"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad rimmar på MUS? Säg så många ord ni kan!",
+    "svar": "Till exempel hus, sus, lus och krus"
+   },
+   {
+    "typ": "Klura",
+    "text": "Jag är vit och kall och faller från himlen på vintern. Vad är jag?",
+    "svar": "Snö"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilken form har en julgranskula? Rund, fyrkantig eller trekantig?",
+    "svar": "Rund"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? Röd, grön, röd, grön, röd …",
+    "svar": "Grön"
+   },
+   {
+    "typ": "Matte",
+    "text": "Visa 5 fingrar. Ta bort 2. Hur många fingrar är kvar?",
+    "svar": "3 fingrar"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Klappa ordet PEP-PAR-KA-KA. Hur många klapp blev det?",
+    "svar": "4 klapp"
+   },
+   {
+    "typ": "Klura",
+    "text": "Motsatsen till varm är …?",
+    "svar": "Kall"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många ben har en tomte? Hur många ben har två tomtar?",
+    "svar": "2 ben, och 4 ben för två tomtar"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilken passar inte in: äpple, banan, sko, päron?",
+    "svar": "Sko, för den kan man inte äta"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ord blir det? S – N – Ö. Säg ljuden fort efter varandra.",
+    "svar": "Snö"
+   },
+   {
+    "typ": "Klura",
+    "text": "Jag har en röd näsa och drar tomtens släde. Vem är jag?",
+    "svar": "Rudolf, renen"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilket tal kommer efter 7?",
+    "svar": "8"
+   },
+   {
+    "typ": "Logik",
+    "text": "Stor, mindre, minst. Ställ tre saker i rad från störst till minst.",
+    "svar": "Visa tillsammans!"
+   },
+   {
+    "typ": "Matte",
+    "text": "Det finns 4 ljus i adventsljusstaken. 1 är tänt. Hur många är inte tända?",
+    "svar": "3 ljus"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad rimmar på GRAN?",
+    "svar": "Till exempel kran, svan och plan"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har man på händerna när det är kallt ute?",
+    "svar": "Vantar"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hitta något i klassrummet som har formen av en fyrkant.",
+    "svar": "Till exempel ett fönster, en bok eller tavlan"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? Stjärna, hjärta, stjärna, hjärta …",
+    "svar": "Stjärna"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta på ett ord som börjar på samma ljud som ditt eget namn.",
+    "svar": "Alla svar som börjar på rätt ljud är rätt!"
+   },
+   {
+    "typ": "Matte",
+    "text": "Räkna baklänges från 10 till 0. Sedan säger alla: GOD JUL!",
+    "svar": "10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0"
+   },
+   {
+    "typ": "Klura",
+    "text": "Motsatsen till stor är …?",
+    "svar": "Liten"
+   },
+   {
+    "typ": "Matte",
+    "text": "Tre pepparkakor ligger på ett fat. Du äter en. Hur många är kvar?",
+    "svar": "2 pepparkakor"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ord gömmer sig i SNÖ-BOLL? Kan man dela ordet i två ord?",
+    "svar": "Snö och boll"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vem är längst i klassen just nu: läraren eller du? Ställ er bredvid varandra och titta.",
+    "svar": "Titta tillsammans!"
+   },
+   {
+    "typ": "Klura",
+    "text": "Jag är grön, står i stugan i jul och har kulor på mig. Vad är jag?",
+    "svar": "En julgran"
+   },
+   {
+    "typ": "Matte",
+    "text": "Klappa 6 gånger tillsammans. Stampa sedan 3 gånger.",
+    "svar": "Räkna högt medan ni gör det!"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad rimmar på JUL?",
+    "svar": "Till exempel hjul, kul, ful och gul"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 1, 2, 3, 1, 2, 3, 1, 2 …",
+    "svar": "3"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad blir snö till när det blir varmt?",
+    "svar": "Vatten"
+   }
+  ],
+  "1": [
+   {
+    "typ": "Matte",
+    "text": "Tomten har 3 röda paket och 4 blå paket. Hur många paket har han?",
+    "svar": "7 paket"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre ord som rimmar på SNÖ.",
+    "svar": "Till exempel sjö, ö, frö och kö"
+   },
+   {
+    "typ": "Matte",
+    "text": "8 pepparkakor ligger på ett fat. Ni äter 3. Hur många är kvar?",
+    "svar": "5 pepparkakor"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad blir blötare ju mer det torkar?",
+    "svar": "En handduk"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilket tal är dubbelt så stort som 6?",
+    "svar": "12"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hur många stavelser har ordet JUL-KLAPP? Klappa och räkna.",
+    "svar": "2 stavelser"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal saknas? 2, 4, 6, __, 10",
+    "svar": "8"
+   },
+   {
+    "typ": "Matte",
+    "text": "10 tomtar dansar. 4 går hem och sover. Hur många dansar kvar?",
+    "svar": "6 tomtar"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ord blir det om du byter första bokstaven i HUS till M?",
+    "svar": "Mus"
+   },
+   {
+    "typ": "Klura",
+    "text": "Jag har ett öga men kan inte se. Jag syr. Vad är jag?",
+    "svar": "En nål"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många vantar behövs till 5 barn?",
+    "svar": "10 vantar"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Säg ett ord som betyder samma sak som GLAD.",
+    "svar": "Till exempel nöjd, lycklig och munter"
+   },
+   {
+    "typ": "Logik",
+    "text": "Lisa är längre än Ali. Ali är längre än Bo. Vem är kortast?",
+    "svar": "Bo"
+   },
+   {
+    "typ": "Matte",
+    "text": "7 + 7 = ?",
+    "svar": "14"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Ställ orden i bokstavsordning: tomte, anka, ren.",
+    "svar": "anka, ren, tomte"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har ben men kan inte gå?",
+    "svar": "Till exempel ett bord eller en stol"
+   },
+   {
+    "typ": "Matte",
+    "text": "Klockan är 3. Om 2 timmar ska vi gå hem. Vad är klockan då?",
+    "svar": "Klockan 5"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket djur gömmer sig i ordet KATTUNGE?",
+    "svar": "Katt"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 15, 14, 13, 12, __",
+    "svar": "11"
+   },
+   {
+    "typ": "Matte",
+    "text": "Det finns 9 kulor i granen. 3 är röda och resten är guld. Hur många är guld?",
+    "svar": "6 kulor"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta på en mening med orden SNÖ och HUND.",
+    "svar": "Alla meningar med båda orden är rätt!"
+   },
+   {
+    "typ": "Klura",
+    "text": "Ju mer du tar, desto mer lämnar du efter dig. Vad är det?",
+    "svar": "Fotsteg"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilket tal ligger mitt emellan 10 och 20?",
+    "svar": "15"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket är motsatsen till TIDIG?",
+    "svar": "Sen"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket ord passar inte: tomte, pepparkaka, glass, julgran?",
+    "svar": "Glass, för den hör inte till jul"
+   },
+   {
+    "typ": "Matte",
+    "text": "5 + 5 + 5 = ?",
+    "svar": "15"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hur många bokstäver har ordet STJÄRNA?",
+    "svar": "7 bokstäver"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad går upp men aldrig ner?",
+    "svar": "Åldern"
+   },
+   {
+    "typ": "Matte",
+    "text": "Du har 12 kr. En godispåse kostar 5 kr. Hur mycket pengar har du kvar om du köper en?",
+    "svar": "7 kr"
+   },
+   {
+    "typ": "Logik",
+    "text": "Det är 4 skoldagar kvar till jullovet. Hur många är det kvar i övermorgon?",
+    "svar": "2 skoldagar"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Säg ett ord som börjar och slutar på samma bokstav.",
+    "svar": "Till exempel apa, mamma, kök och sms"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många hörn har en trekant och en fyrkant tillsammans?",
+    "svar": "7 hörn"
+   }
+  ],
+  "2": [
+   {
+    "typ": "Matte",
+    "text": "Tomten har 24 paket. Hälften är till barn i Umeå. Hur många är det?",
+    "svar": "12 paket"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre sammansatta ord som börjar med JUL.",
+    "svar": "Till exempel julgran, julklapp och julmat"
+   },
+   {
+    "typ": "Matte",
+    "text": "30 + 45 = ?",
+    "svar": "75"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har tänder men kan inte bita?",
+    "svar": "Till exempel en kam eller en dragkedja"
+   },
+   {
+    "typ": "Matte",
+    "text": "En kartong rymmer 10 ljus. Hur många ljus finns i 6 kartonger?",
+    "svar": "60 ljus"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilka av orden är substantiv: SPRINGA, GRAN, KALL, SNÖ?",
+    "svar": "Gran och snö"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal saknas? 5, 10, 15, __, 25",
+    "svar": "20"
+   },
+   {
+    "typ": "Matte",
+    "text": "Klockan är halv tio. Hur mycket är klockan en halvtimme senare?",
+    "svar": "Klockan tio"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv ordet JULKLAPPAR baklänges. Vad står det?",
+    "svar": "RAPPALKLUJ"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har ett huvud men kan inte tänka?",
+    "svar": "En spik"
+   },
+   {
+    "typ": "Matte",
+    "text": "62 – 30 = ?",
+    "svar": "32"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta ett ord som rimmar på STJÄRNA.",
+    "svar": "Till exempel gärna, hjärna och kärna"
+   },
+   {
+    "typ": "Logik",
+    "text": "Sara har fler pepparkakor än Leo. Leo har fler än Mo. Vem har flest?",
+    "svar": "Sara"
+   },
+   {
+    "typ": "Matte",
+    "text": "Dubbla 35. Vad blir det?",
+    "svar": "70"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad heter det i plural (flera): EN TOMTE, TVÅ …?",
+    "svar": "Tomtar"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad kan resa jorden runt men stannar ändå i hörnet?",
+    "svar": "Ett frimärke"
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett paket väger 3 kg. Hur mycket väger 4 likadana paket?",
+    "svar": "12 kg"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket är motsatsen till BÖRJAN?",
+    "svar": "Slut"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 2, 4, 8, 16, __",
+    "svar": "32"
+   },
+   {
+    "typ": "Matte",
+    "text": "Det är 31 dagar i december. Hur många dagar är kvar efter julafton den 24:e?",
+    "svar": "7 dagar"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Sätt ihop två ord till ett nytt: SNÖ + ____ = något man kan åka på.",
+    "svar": "Snöskoter"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad blir större ju mer man tar bort?",
+    "svar": "Ett hål"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många minuter är en halvtimme?",
+    "svar": "30 minuter"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hur många ord kan ni bilda av bokstäverna i TOMTEBLOSS? Ni har två minuter.",
+    "svar": "Till exempel tom, mos, lott, boss och stol"
+   },
+   {
+    "typ": "Logik",
+    "text": "I en kö står Ali före Mia. Mia står före Ted. Vem står sist?",
+    "svar": "Ted"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilket tal är 10 mer än 89?",
+    "svar": "99"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilka två ord bildar ordet PEPPARKAKSHUS?",
+    "svar": "Pepparkaka och hus"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vilken månad har 28 dagar?",
+    "svar": "Alla månader har minst 28 dagar"
+   },
+   {
+    "typ": "Matte",
+    "text": "Du har 50 kr och köper en bok för 35 kr. Hur mycket får du tillbaka?",
+    "svar": "15 kr"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal passar inte in: 10, 20, 25, 30, 40?",
+    "svar": "25, de andra går i tiotal"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta på en mening där alla ord börjar på J.",
+    "svar": "Till exempel: Julia jagar jultomtar."
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett halvt dussin pepparkakor. Hur många är det?",
+    "svar": "6 pepparkakor"
+   }
+  ],
+  "3": [
+   {
+    "typ": "Matte",
+    "text": "En ljusstake har 7 ljus. Hur många ljus behövs till 5 ljusstakar?",
+    "svar": "35 ljus"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre synonymer till SNABB.",
+    "svar": "Till exempel kvick, fort och rask"
+   },
+   {
+    "typ": "Matte",
+    "text": "8 · 6 = ?",
+    "svar": "48"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har en hals men inget huvud?",
+    "svar": "En flaska"
+   },
+   {
+    "typ": "Matte",
+    "text": "40 pepparkakor ska delas lika mellan 8 barn. Hur många får var och en?",
+    "svar": "5 pepparkakor"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilka ord är verb: TOMTE, SJUNGA, RÖD, BAKA, SNABB?",
+    "svar": "Sjunga och baka"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal saknas? 3, 6, 12, 24, __",
+    "svar": "48"
+   },
+   {
+    "typ": "Matte",
+    "text": "En film börjar 17.45 och är 1 timme och 30 minuter lång. När slutar den?",
+    "svar": "19.15"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Byt ut en bokstav i GRAN så att det blir ett annat ord. Hur många hittar ni?",
+    "svar": "Till exempel kran, gram och grav"
+   },
+   {
+    "typ": "Klura",
+    "text": "Två fäder och två söner fiskar. De får tre fiskar och alla får en var. Hur går det ihop?",
+    "svar": "Det är en farfar, en pappa och en son"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många meter är 3 km?",
+    "svar": "3 000 meter"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad betyder uttrycket ATT HA BRÅTTOM?",
+    "svar": "Att ha ont om tid och behöva skynda sig"
+   },
+   {
+    "typ": "Logik",
+    "text": "Fyra barn står i en ring. Alla ger varandra en julklapp. Hur många julklappar blir det?",
+    "svar": "12 julklappar"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilket är störst: 3 · 9 eller 4 · 7?",
+    "svar": "4 · 7 = 28 är större än 3 · 9 = 27"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv ett ord som innehåller alla vokalerna A, E och O.",
+    "svar": "Till exempel pepparkakor och pianolektion"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad är svart när du köper det, rött när du använder det och grått när du slänger det?",
+    "svar": "Grillkol"
+   },
+   {
+    "typ": "Matte",
+    "text": "Du har två 20-kronor och tre 5-kronor. Hur mycket pengar har du?",
+    "svar": "55 kr"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ordspråk passar: ”Den som väntar på något gott …”?",
+    "svar": "… väntar aldrig för länge"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 1, 4, 9, 16, __",
+    "svar": "25, talen är 1·1, 2·2, 3·3, 4·4, 5·5"
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett paket väger 450 g. Hur mycket väger två paket?",
+    "svar": "900 g"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta ett ord som blir ett nytt ord när man läser det baklänges.",
+    "svar": "Till exempel ros → sor, tak → kat, nos → son"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har städer men inga hus, skogar men inga träd och vatten men inga fiskar?",
+    "svar": "En karta"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många sekunder är 3 minuter?",
+    "svar": "180 sekunder"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Sätt rätt skiljetecken: Vad heter du",
+    "svar": "Vad heter du?"
+   },
+   {
+    "typ": "Logik",
+    "text": "Tre tomtar, Ada, Bo och Cia, står i rad. Bo står inte först. Cia står sist. Vem står först?",
+    "svar": "Ada"
+   },
+   {
+    "typ": "Matte",
+    "text": "9 · 9 = ?",
+    "svar": "81"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hur många ord kan ni bilda av bokstäverna i ADVENTSLJUS? Ni har två minuter.",
+    "svar": "Till exempel ljus, vad, dans, slut och sten"
+   },
+   {
+    "typ": "Klura",
+    "text": "Ju mer det finns av den, desto mindre ser du. Vad är det?",
+    "svar": "Mörker"
+   },
+   {
+    "typ": "Matte",
+    "text": "Klockan är 08.40. Lektionen slutar 09.20. Hur lång tid är det kvar?",
+    "svar": "40 minuter"
+   },
+   {
+    "typ": "Logik",
+    "text": "En snigel klättrar 3 meter upp i en gran på dagen men glider ner 2 meter på natten. Hur högt har den kommit efter 3 dygn?",
+    "svar": "3 meter"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad heter motsatsen till ORDNING?",
+    "svar": "Oordning eller kaos"
+   },
+   {
+    "typ": "Matte",
+    "text": "En halv tårta delas i 4 lika bitar. Hur stor del av hela tårtan är en bit?",
+    "svar": "En åttondel"
+   }
+  ],
+  "4": [
+   {
+    "typ": "Matte",
+    "text": "En julmarknad har 248 besökare på lördagen och 175 på söndagen. Hur många besökare var det totalt?",
+    "svar": "423 besökare"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre adjektiv som beskriver en vinterkväll.",
+    "svar": "Till exempel mörk, kall och stjärnklar"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vad är 3/4 av 20?",
+    "svar": "15"
+   },
+   {
+    "typ": "Klura",
+    "text": "En tegelsten väger 1 kg plus en halv tegelsten. Hur mycket väger tegelstenen?",
+    "svar": "2 kg"
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett rektangulärt pepparkakshus har en bottenplatta som är 12 cm lång och 8 cm bred. Vad är omkretsen?",
+    "svar": "40 cm"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad betyder uttrycket ATT GÅ SOM KATTEN KRING HET GRÖT?",
+    "svar": "Att undvika att prata om det viktiga"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal saknas? 1, 1, 2, 3, 5, 8, __",
+    "svar": "13, man lägger ihop de två talen innan"
+   },
+   {
+    "typ": "Matte",
+    "text": "144 julgranskulor ska fördelas på 12 granar. Hur många kulor får varje gran?",
+    "svar": "12 kulor"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Böj verbet SKRIVA: i dag skriver jag, i går … jag, jag har …",
+    "svar": "Skrev, skrivit"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad kan du hålla i din högra hand men aldrig i din vänstra?",
+    "svar": "Din vänstra armbåge"
+   },
+   {
+    "typ": "Matte",
+    "text": "Avrunda 3 486 till närmaste hundratal.",
+    "svar": "3 500"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre ord med dubbelteckning, som i KNÄCK och SNÖBOLL.",
+    "svar": "Till exempel pappa, kaffe och mössa"
+   },
+   {
+    "typ": "Logik",
+    "text": "Ett tåg går 14.25 och resan tar 2 timmar och 50 minuter. När är tåget framme?",
+    "svar": "17.15"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vilket bråk är störst: 2/3 eller 3/5?",
+    "svar": "2/3, eftersom 10/15 är mer än 9/15"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilken ordklass är det understrukna ordet? Vi springer SNABBT hem.",
+    "svar": "Adverb"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har tangenter men kan inte öppna några dörrar?",
+    "svar": "Ett piano eller ett tangentbord"
+   },
+   {
+    "typ": "Matte",
+    "text": "7 · 8 · 10 = ?",
+    "svar": "560"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre ord som innehåller sj-ljudet men stavas på olika sätt.",
+    "svar": "Till exempel sjö, skjorta, stjärna och schal"
+   },
+   {
+    "typ": "Logik",
+    "text": "Mika är 3 år äldre än Sigge. Tillsammans är de 23 år. Hur gammal är Mika?",
+    "svar": "13 år"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många centimeter är 2,5 meter?",
+    "svar": "250 cm"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv om meningen till dåtid: Det snöar och vi bygger en snögubbe.",
+    "svar": "Det snöade och vi byggde en snögubbe."
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad finns en gång i en minut, två gånger i ett ögonblick men aldrig på tusen år?",
+    "svar": "Bokstaven M"
+   },
+   {
+    "typ": "Matte",
+    "text": "En pall med ved väger 36 kg. Hur mycket väger 25 pallar?",
+    "svar": "900 kg"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad är skillnaden mellan HAN och HONOM? Gör en mening med vardera.",
+    "svar": "Han är subjekt, honom är objekt. Han sover. Jag ser honom."
+   },
+   {
+    "typ": "Logik",
+    "text": "I en låda finns röda och gröna strumpor. Det är mörkt. Hur många strumpor måste du ta för att vara säker på att få ett par i samma färg?",
+    "svar": "3 strumpor"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vad är 1 000 – 357?",
+    "svar": "643"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hur många ord kan ni bilda av bokstäverna i STRÖMAVBROTT? Ni har tre minuter.",
+    "svar": "Till exempel ström, mört, rost, bort och tro"
+   },
+   {
+    "typ": "Klura",
+    "text": "En man bor på tionde våningen. Varje dag åker han hiss ner. På vägen hem åker han bara till sjunde och går resten. Varför?",
+    "svar": "Han är för kort för att nå knappen till tionde våningen"
+   },
+   {
+    "typ": "Matte",
+    "text": "Dela upp 60 i två tal där det ena är dubbelt så stort som det andra.",
+    "svar": "20 och 40"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 100, 91, 82, 73, __",
+    "svar": "64"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ordspråk passar: ”Borta bra men …”?",
+    "svar": "… hemma bäst"
+   },
+   {
+    "typ": "Matte",
+    "text": "En timme har 60 minuter. Hur många minuter är det på ett dygn?",
+    "svar": "1 440 minuter"
+   }
+  ],
+  "5": [
+   {
+    "typ": "Matte",
+    "text": "Knäck kostar 20 kr per påse. Klassen säljer 37 påsar. Hur mycket pengar blir det?",
+    "svar": "740 kr"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad betyder uttrycket ATT HA EN RÄV BAKOM ÖRAT?",
+    "svar": "Att vara listig och ha något i bakfickan"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vad är 10 % av 450 kr?",
+    "svar": "45 kr"
+   },
+   {
+    "typ": "Klura",
+    "text": "En flaska och en kork kostar 11 kr tillsammans. Flaskan kostar 10 kr mer än korken. Vad kostar korken?",
+    "svar": "50 öre"
+   },
+   {
+    "typ": "Matte",
+    "text": "2,5 + 3,75 = ?",
+    "svar": "6,25"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Byt första bokstaven i HUND så att det blir nya ord. Hur många hittar ni?",
+    "svar": "Till exempel lund, rund, sund och fund"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal saknas? 2, 6, 18, 54, __",
+    "svar": "162, talen multipliceras med 3"
+   },
+   {
+    "typ": "Matte",
+    "text": "Medelvärdet av 4, 7 och 10 är …?",
+    "svar": "7"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta ett palindrom, ett ord som blir samma ord baklänges.",
+    "svar": "Till exempel kajak, radar, gag och sms"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad går och går men kommer aldrig fram?",
+    "svar": "En klocka"
+   },
+   {
+    "typ": "Matte",
+    "text": "En hund går 1,2 km på morgonen och 1,8 km på kvällen. Hur långt går den på en vecka?",
+    "svar": "21 km"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket är subjektet i meningen: I går fick Thea ett brev från fastighetsbolaget.",
+    "svar": "Thea"
+   },
+   {
+    "typ": "Logik",
+    "text": "Om två hundar äter två skålar mat på två minuter, hur lång tid tar det för fyra hundar att äta fyra skålar?",
+    "svar": "2 minuter"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vad är 3/5 av 250?",
+    "svar": "150"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv en mening som innehåller både ett substantiv, ett verb och ett adjektiv. Markera dem.",
+    "svar": "Till exempel: Den lurviga (adj.) hunden (subst.) skäller (verb)."
+   },
+   {
+    "typ": "Klura",
+    "text": "Du ser ett hus med fyra väggar som alla vetter mot söder. En björn går förbi. Vilken färg har björnen?",
+    "svar": "Vit, huset står på nordpolen"
+   },
+   {
+    "typ": "Matte",
+    "text": "En rektangel har arean 48 cm² och bredden 6 cm. Hur lång är den?",
+    "svar": "8 cm"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ord är stavat fel: ÄNDÅ, ÄNTLIGEN, IGENTLIGEN, EGENTLIGEN?",
+    "svar": "Igentligen, det heter egentligen"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 1, 3, 6, 10, 15, __",
+    "svar": "21"
+   },
+   {
+    "typ": "Matte",
+    "text": "Avrunda 7,46 till en decimal.",
+    "svar": "7,5"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad är skillnaden mellan DE och DEM? Gör en mening med vardera.",
+    "svar": "De är subjekt, dem är objekt. De leker. Jag ser dem."
+   },
+   {
+    "typ": "Klura",
+    "text": "Vilket tal blir mindre om du vänder det upp och ner?",
+    "svar": "Till exempel 9, som blir 6"
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett paket kostar 80 kr. Det blir 25 % rabatt. Vad kostar paketet nu?",
+    "svar": "60 kr"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hur många ord kan ni bilda av bokstäverna i JULMARKNADEN? Ni har tre minuter.",
+    "svar": "Till exempel mark, jul, kan, land och kram"
+   },
+   {
+    "typ": "Logik",
+    "text": "Thea, Victor och Amanda har varsitt husdjur: hund, katt och kanin. Thea har inte katt. Victor har kanin. Vem har katten?",
+    "svar": "Amanda"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många sekunder är en timme?",
+    "svar": "3 600 sekunder"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad betyder ordet HITTEGODS?",
+    "svar": "Saker som någon har hittat och lämnat in"
+   },
+   {
+    "typ": "Klura",
+    "text": "Vilket ord stavas fel i alla ordböcker?",
+    "svar": "Fel"
+   },
+   {
+    "typ": "Matte",
+    "text": "Skriv 0,75 som ett bråk och i procent.",
+    "svar": "3/4 och 75 %"
+   },
+   {
+    "typ": "Logik",
+    "text": "Klockan är 15.00. Vilken vinkel bildar visarna?",
+    "svar": "90 grader, en rät vinkel"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta på en rubrik till en nyhetsartikel om en hund som har två namn.",
+    "svar": "Alla bra rubriker räknas!"
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett tåg kör 90 km på en timme. Hur långt kör det på 20 minuter?",
+    "svar": "30 km"
+   }
+  ],
+  "6": [
+   {
+    "typ": "Matte",
+    "text": "Klassen vill samla in 20 000 kr. De har 13 750 kr. Hur stor andel av målet har de nått?",
+    "svar": "68,75 %, ungefär 69 %"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad betyder uttrycket ATT FÅ SKÄGGET I BREVLÅDAN?",
+    "svar": "Att bli påkommen och hamna i en pinsam situation"
+   },
+   {
+    "typ": "Matte",
+    "text": "Lös ekvationen: 3x + 7 = 31",
+    "svar": "x = 8"
+   },
+   {
+    "typ": "Klura",
+    "text": "Loves pappa är fyra gånger så gammal som Love. Om 20 år är pappan dubbelt så gammal som Love. Hur gammal är Love nu?",
+    "svar": "10 år, och pappan är 40"
+   },
+   {
+    "typ": "Matte",
+    "text": "Temperaturen är −8 °C på morgonen och stiger med 13 grader. Vad är temperaturen nu?",
+    "svar": "5 °C"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilken ordklass är ”snabbt” i meningen: Hon sprang snabbt?",
+    "svar": "Adverb"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vilket tal saknas? 2, 3, 5, 7, 11, 13, __",
+    "svar": "17, det är primtal"
+   },
+   {
+    "typ": "Matte",
+    "text": "Ett pris höjs från 80 kr till 100 kr. Hur många procent är höjningen?",
+    "svar": "25 %"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv om meningen till passiv form: Victor bakade knäcken.",
+    "svar": "Knäcken bakades av Victor."
+   },
+   {
+    "typ": "Klura",
+    "text": "Vad har ett huvud och en svans men ingen kropp?",
+    "svar": "Ett mynt"
+   },
+   {
+    "typ": "Matte",
+    "text": "Förhållandet mellan pojkar och flickor i en klass är 2:3. Klassen har 25 elever. Hur många är flickor?",
+    "svar": "15 flickor"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad är skillnaden mellan ett ordspråk och ett talesätt? Ge ett exempel på varje.",
+    "svar": "Ett ordspråk är en hel mening med en lärdom (Borta bra men hemma bäst). Ett talesätt är ett uttryck (att ta tjuren vid hornen)."
+   },
+   {
+    "typ": "Logik",
+    "text": "Sannolikheten att slå en sexa med en tärning är 1/6. Hur stor är chansen att slå två sexor i rad?",
+    "svar": "1/36"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vad är kvadratroten ur 144?",
+    "svar": "12"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Hitta tre ord med prefixet O- som betyder motsatsen till grundordet.",
+    "svar": "Till exempel ovän, olycka och ordning → oordning"
+   },
+   {
+    "typ": "Klura",
+    "text": "Fem maskiner gör fem knäckpåsar på fem minuter. Hur lång tid tar det för 100 maskiner att göra 100 påsar?",
+    "svar": "5 minuter"
+   },
+   {
+    "typ": "Matte",
+    "text": "En cirkel har diametern 10 cm. Ungefär hur lång är omkretsen? (π ≈ 3,14)",
+    "svar": "Ungefär 31,4 cm"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad betyder ordet ANONYM?",
+    "svar": "Utan namn, när man inte vet vem som har gjort något"
+   },
+   {
+    "typ": "Logik",
+    "text": "Vad kommer sedan? 1, 2, 4, 7, 11, 16, __",
+    "svar": "22, ökningen blir 1 större varje gång"
+   },
+   {
+    "typ": "Matte",
+    "text": "(−4) · (−6) = ?",
+    "svar": "24"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv en mening där ordet ”fast” betyder två olika saker.",
+    "svar": "Till exempel: Fast jag drog i dörren satt den fast."
+   },
+   {
+    "typ": "Klura",
+    "text": "En person hör ett rykte. Varje timme berättar alla som har hört det för två nya personer. Efter hur många timmar har över 100 personer hört ryktet?",
+    "svar": "Efter 5 timmar: 1, 3, 9, 27, 81, 243"
+   },
+   {
+    "typ": "Matte",
+    "text": "Medianen av 3, 8, 1, 9, 5 är …?",
+    "svar": "5"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vad är en metafor? Hitta på en om vintern.",
+    "svar": "En jämförelse utan ”som”, till exempel: Snön är ett vitt täcke över byn."
+   },
+   {
+    "typ": "Logik",
+    "text": "Amanda, Love och Victor sitter på en bänk. Love sitter inte bredvid Victor. Amanda sitter inte längst till vänster. Vem sitter i mitten?",
+    "svar": "Amanda, med Love längst till vänster och Victor längst till höger"
+   },
+   {
+    "typ": "Matte",
+    "text": "Hur många minuter är 3,4 timmar?",
+    "svar": "204 minuter"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Vilket ord är sammansatt av tre ord: JULMARKNADSSTÅND?",
+    "svar": "Jul, marknad och stånd"
+   },
+   {
+    "typ": "Klura",
+    "text": "Jag tas ur marken, stängs in i trä och används av nästan alla. Vad är jag?",
+    "svar": "Stiftet i en blyertspenna"
+   },
+   {
+    "typ": "Matte",
+    "text": "En jacka kostar 1 200 kr efter 30 % rabatt. Vad kostade den innan rabatten?",
+    "svar": "Ungefär 1 714 kr"
+   },
+   {
+    "typ": "Logik",
+    "text": "Om det inte är sant att alla katter är svarta, vad måste då vara sant?",
+    "svar": "Minst en katt är inte svart"
+   },
+   {
+    "typ": "Svenska",
+    "text": "Skriv en mening med en bisats. Stryk under bisatsen.",
+    "svar": "Till exempel: Vi går ut när det slutar snöa. (Bisats: när det slutar snöa)"
+   },
+   {
+    "typ": "Matte",
+    "text": "Vad är 15 % av 360?",
+    "svar": "54"
+   }
+  ]
+ }
 }
