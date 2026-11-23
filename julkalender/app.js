@@ -50,12 +50,34 @@ function content(l){
   const i=l.idx!=null?l.idx:(40+l.day),age=young()?"yngre":"aldre";
   let type=S.ctype,item;
   if(type==="blandat"){type=["snall","rorelse","kluring"][i%3];item=(Math.floor(i/3)*7+(i%3)*11)%32}else item=(i*7+3)%32;
-  const it=(LIB&&LIB[type]&&LIB[type][age]&&LIB[type][age][item])||{typ:"Snällhet",text:"…"};
+  const sub=type==="kluring"?(S.grade||"1"):age;const it=(LIB&&LIB[type]&&LIB[type][sub]&&LIB[type][sub][item])||{typ:"Snällhet",text:"…"};
   const key=S.ctype+":"+l.id,ed=S.edits[key];
-  return{typ:it.typ,text:ed!=null?ed:it.text,orig:it.text,svar:ed!=null?null:it.svar,lib:type+"-"+age,item,key,edited:ed!=null};
+  return{typ:it.typ,text:ed!=null?ed:it.text,orig:it.text,svar:ed!=null?null:it.svar,lib:type+"-"+sub,item,key,edited:ed!=null};
 }
 function state(l,D){if(S.opened[l.id])return"open";if(l.day===D.idx)return"today";if(l.day<D.idx)return"missed";return"locked"}
 
+const HANDLING={"F": "Musen Pim hittar en liten stjärna, Glimt, som har ramlat ner från himlen. Tillsammans med ekorren Ester, haren Hoppe och ugglan Ulla försöker han hjälpa henne hem. De upptäcker att Glimt lyser av glädje, så hela skogen – till och med den brummiga grävlingen Bruno – ordnar en fest i gläntan. Glimt lyser starkare och starkare och svävar till slut hem till himlen.", "1": "Thea får röda vantar av mormor, men en dag är den ena borta. Med kompisen Love följer hon spåren in i skogen och hittar vanten under en gran – en skadad domherre har gjort den till sitt bo. Med hjälp av mormor och grannen Gunnel tar de hand om fågeln tills den kan flyga igen och får följa med sin flock. Thea lär sig att det känns bra att dela med sig, och mormor har en stickad hemlighet till julavslutningen.", "2": "Dagny är ny i Glimmerbyn och klassen ska göra lyktor till Ljusfesten. När en storm förstör alla papperslyktor och skolan inte har råd med nytt papper vågar Dagny föreslå något: lyktor av plåtburkar, som hennes morfar Yusuf gör. Hela byn samlar burkar och Axel, som först retade henne, blir hennes medhjälpare. På Ljusfesten går Dagny och morfar först i tåget, och Glimmerbyn känns till slut som hemma.", "3": "Amanda och Isak bor i samma trappuppgång. Någon lägger hemliga små saker – en pappersstjärna, hjärtan, pappersfåglar – utanför grannarnas dörrar. De båda detektiverna följer ledtrådarna till herr Berg, en ensam änkling som fortsätter sin fru Majs gamla tradition. Barnen bestämmer sig för att ordna en julfest på gården för alla grannar. Den sura fru Ek säger först nej, men ändrar sig efter ett brev från hela huset, och festen blir av.", "4": "En snöstorm slår ut strömmen i Mikas by mitt i december. Familjen eldar i kaminen och undrar hur det går för gamla Ingrid längst bort på vägen. Mika, mamma och lillebror Sigge åker skidor dit och tar med Ingrid till skolans värmestuga, där byn samlas. När dieseln till aggregatet tar slut får alla hjälpas åt: barnen bär ved, grannar delar med sig och Mika vågar prata med en familj som sitter ensam i ett hörn. Till slut kommer montörerna och ljuset tillbaka.", "5": "Thea hittar en hund vid älven en kväll och döper den till Kompis. Chippet visar att hunden heter Doris och tillhör A. Holm, men ingen öppnar på adressen. Med pappa och kompisen Victor letar Thea vidare tills de hittar ägaren Arne på sjukhuset, och hon besöker honom varje dag med filmer på Doris. När Arne inte får ha hund i sin nya lägenhet skriver Thea och Victor ett brev till fastighetsbolaget. De får ja, och sista dagen före jullovet får Doris komma hem till Arne.", "6": "Klass 6b ska samla in 20 000 kr till en fjällresa genom att ha ett stånd på julmarknaden: knäck, pepparkakor, ljusstakar och varm choklad. Victor, som inte har råd med resan, gör det mesta av jobbet. När kassaskrinet försvinner efter marknaden börjar ett rykte om att Victor har tagit det. Amanda vågar säga sanningen inför klassen, och tillsammans med Love och Victor hittar hon skrinet hos vaktmästaren med alla pengar kvar. Klassen åker till fjällen – och de tre har blivit vänner."};
+/* ===================== guide ===================== */
+const TOUR=[[null,"Inställningar hittar du här uppe."],["klass","Klassen – byt årskurs och antal elever."],["namn","Elevernas namn – skriv in eller ändra namnen."],["utseende","Utseende – byn i snön eller filtfickorna."],["innehall","Luckornas innehåll – snällhet, rastutmaningar eller kluringar."],["forhand","Förhandsgranska – se luckor och kapitel innan eleverna gör det."]];
+let tourT=null;
+function startTour(){
+  endTour(true);const st=$("stage");const t=document.createElement("div");t.id="tour";
+  t.innerHTML=`<div class="tspot" id="tSpot"></div><div class="tcap" id="tCap"><span id="tTxt"></span><div class="tbar"><i id="tBar"></i></div><div class="trow"><span id="tNum"></span><button id="tSkip">Hoppa över</button></div></div>`;
+  st.appendChild(t);$("tSkip").onclick=()=>endTour();let i=0;
+  const step=()=>{
+    if(i>=TOUR.length){closeOv();const sp=$("tSpot");sp.style.opacity="0";$("tTxt").textContent="Klart! Guiden finns kvar under Inställningar → Om kalendern.";$("tBar").style.transition="none";$("tBar").style.width="100%";$("tNum").textContent="";$("tSkip").textContent="Sätt igång";const c=$("tCap");c.style.left="560px";c.style.top="380px";return}
+    const [tab,txt]=TOUR[i];if(tab)openSettings(tab);else if($("ovl").innerHTML)closeOv();
+    setTimeout(()=>{const el=tab?document.querySelector(`.snav button[data-t="${tab}"]`):$("gearBtn");if(!el){i++;step();return}
+      const k=st.getBoundingClientRect().width/1600,r=el.getBoundingClientRect(),sr=st.getBoundingClientRect();
+      const x=(r.left-sr.left)/k,y=(r.top-sr.top)/k,w=r.width/k,h=r.height/k,sp=$("tSpot");
+      Object.assign(sp.style,{left:x-8+"px",top:y-8+"px",width:w+16+"px",height:h+16+"px",opacity:"1"});
+      const c=$("tCap");const cx=tab?x+w+40:x-480,cy=tab?y-20:y+h+30;c.style.left=Math.max(20,Math.min(1600-470,cx))+"px";c.style.top=Math.max(20,Math.min(900-170,cy))+"px";
+      $("tTxt").textContent=txt;$("tNum").textContent=(i+1)+" av "+TOUR.length;
+      const b=$("tBar");b.style.transition="none";b.style.width="0";void b.offsetWidth;b.style.transition="width 3.4s linear";b.style.width="100%";
+      i++;tourT=setTimeout(step,3600)},tab?420:60)};
+  step();
+}
+function endTour(quiet){clearTimeout(tourT);const t=$("tour");if(t)t.remove();if(!quiet){S.tourSeen=true;save();if($("ovl").innerHTML)closeOv()}}
 /* ===================== spara ===================== */
 let saveT;
 function save(){
@@ -156,12 +178,11 @@ function cardHTML(l,o={}){
   const fs=c.text.length<60?50:c.text.length<110?42:34;
   return`<div class="cardin"><div class="chead"><span class="who">${who} · ${dLabel(l.day)}${late}</span><span class="chip" style="background:${CHIP[c.typ]||"#1b2747"}">${esc(c.typ)}</span></div>
   <div class="cmid"><h3 id="ltxt" style="font-size:${fs}px">${esc(c.text)}</h3>${c.svar?`<div class="svar hide" id="svar">${esc(c.svar)}</div>`:""}</div>
-  <div class="crow" id="crow"><button class="lnk" id="edBtn">${ICO.pen}Ändra texten</button><span style="flex:1"></span>${c.svar?'<button class="btn gold" id="showSvar">Visa svaret</button>':""}<button class="btn light" id="spk">${ICO.spk}<span>Läs upp</span></button><button class="btn main" id="cClose">Klar</button></div></div>`;
+  <div class="crow" id="crow"><button class="lnk" id="edBtn">${ICO.pen}Ändra texten</button><span style="flex:1"></span>${c.svar?'<button class="btn gold" id="showSvar">Visa svaret</button>':""}<button class="btn main" id="cClose">Klar</button></div></div>`;
 }
 function bindCard(root,l,close){
   const c=content(l);
   if($("showSvar"))$("showSvar").onclick=()=>{$("svar").classList.remove("hide");$("showSvar").remove()};
-  $("spk").onclick=()=>playLucka(l,$("spk"));
   $("cClose").onclick=()=>{stopAudio();close()};
   $("edBtn").onclick=()=>editLucka(root,l,close);
 }
@@ -259,7 +280,7 @@ function openReader(i,preview){
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
    <div class="rbody"><div class="rleft"><div class="pic">${A.chapterSVG(g,cur)}</div>
      <div class="rk">Kapitel ${cur+1} av 14 · ${dLabel(cur)}</div><h2 data-p="-1" id="rh">${esc(k.rubrik)}</h2>
-     <div class="rbar"><button class="btn gold big" id="rspk">${ICO.spk}<span>Läs upp</span></button><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
+     <div class="rbar"><div class="soon">${ICO.spk}<span>Vi jobbar på att få till en fungerande uppläsning av alla böcker.</span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
      <button class="btn light" id="toKop">${ICO.print}Arbetsblad till kapitlet</button></div>
    <div class="rtext" id="rtext"><div id="paras" style="--rf:${rf}px">${k.text.map((p,j)=>`<p data-p="${j}">${esc(p)}</p>`).join("")}</div>
      <div class="rnav">${cur>0?'<button class="btn light" id="prevCh">Förra kapitlet</button>':"<span></span>"}${cur<max?'<button class="btn main" id="nextCh">Nästa kapitel</button>':""}</div></div></div></div>`,"rd");
@@ -269,15 +290,6 @@ function openReader(i,preview){
   $("toKop").onclick=()=>{stopAudio();openKop(cur)};
   if($("prevCh"))$("prevCh").onclick=()=>{stopAudio();openReader(cur-1,preview)};
   if($("nextCh"))$("nextCh").onclick=()=>{stopAudio();openReader(cur+1,preview)};
-  const btn=$("rspk");
-  const mark=p=>{document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));const el=document.querySelector(`.reader [data-p="${p}"]`);if(el){el.classList.add("reading");if(+p>=0)el.scrollIntoView({block:"nearest",behavior:"smooth"})}};
-  const cb={seg:s=>mark(Array.isArray(s)?s[1]:(+s-1)),end:()=>{document.querySelectorAll(".reading").forEach(e=>e.classList.remove("reading"));btn.classList.remove("playing");btn.innerHTML=ICO.spk+"<span>Läs upp</span>"}};
-  const segs=TID&&TID["ak"+g]?TID["ak"+g].segs.filter(s=>s[0]===cur):null;
-  const start=(from)=>{btn.classList.add("playing");btn.innerHTML=ICO.pause+"<span>Stoppa</span>";
-    if(segs&&segs.length){const fi=Math.max(0,segs.findIndex(s=>s[1]===from));playSegs(`audio/ak${g}.mp3`,segs,cb,fi)}
-    else ttsSpeak([k.rubrik,...k.text].slice(from+1),{seg:id=>mark(+id+from),end:cb.end})};
-  btn.onclick=()=>{if(btn.classList.contains("playing")){stopAudio();return}start(-1)};
-  document.querySelectorAll(".reader [data-p]").forEach(p=>p.onclick=()=>start(+p.dataset.p));
 }
 
 /* ===================== kopieringsmaterial ===================== */
@@ -413,7 +425,8 @@ function openSettings(tab){
     <div class="about"><div class="pp"><span class="ppmark"><svg width="54" height="54" viewBox="0 0 3 3" aria-hidden="true"><rect width="1" height="1" fill="#ffd27a"/><rect x="1" width="1" height="1" fill="#c23a2b"/><rect x="2" width="1" height="1" fill="#ffd27a"/><rect y="1" width="1" height="1" fill="#c23a2b"/><rect x="1" y="1" width="1" height="1" fill="#f7f1e6"/><rect x="2" y="1" width="1" height="1" fill="#2d5e48"/><rect y="2" width="1" height="1" fill="#ffd27a"/><rect x="1" y="2" width="1" height="1" fill="#2d5e48"/><rect x="2" y="2" width="1" height="1" fill="#c23a2b"/></svg></span><div><b>Utvecklad av Palt &amp; pixel</b><span>Digitala verktyg för klassrummet.</span><a href="https://paltpixel.se" target="_blank" rel="noopener">paltpixel.se</a></div></div>
     <p>En digital julkalender för förskoleklass till årskurs 6, med en följetong i fjorton kapitel, läsförståelse som kopieringsmaterial och en lucka för varje elev.</p>
     <p>Berättelserna har en icke-konfessionell inriktning och handlar om glädje, gemenskap, mod, omsorg och empati.</p>
-    <p>Uppläsningen görs av rösten Astrid. Luckor som du har ändrat läses upp med datorns röst.</p></div>`;
+    <p>Vi jobbar på att få till en fungerande uppläsning av alla böcker.</p><button class="btn light" id="tourAgain">Visa guiden till inställningarna igen</button></div>`;
+    $("tourAgain").onclick=()=>{closeOv();setTimeout(startTour,300)};
   }
 }
 
@@ -446,7 +459,8 @@ function showOnb(){
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Nästa</button></div>`}
   if(onbStep===4){const t=CTYPES.find(x=>x.id===S.ctype);
     h=`${dots}<h1>Allt är klart!</h1><p class="lead">${esc(gName(S.grade))} · ${S.n} elever · ${S.theme==="byn"?"Byn i snön":"Filtfickorna"} · ${t?t.name:""}</p>
-    <div class="ready"><div><b>Luckorna</b><span>Dagens luckor lyser. Missade luckor kan öppnas i efterhand. Framtida luckor är låsta.</span></div><div><b>Dagens kapitel</b><span>${STORY?"”"+esc(STORY.titel)+"” – ":""}ett nytt kapitel varje skoldag, uppläst av rösten Astrid.</span></div><div><b>Kopieringsmaterial</b><span>Läsförståelse till varje kapitel som PDF, plus facit. Knappen finns uppe till höger.</span></div></div>
+    <div class="ready"><div><b>Luckorna</b><span>Dagens luckor lyser. Missade luckor kan öppnas i efterhand. Framtida luckor är låsta.</span></div><div><b>Dagens kapitel</b><span>${STORY?"”"+esc(STORY.titel)+"” – ":""}ett nytt kapitel varje skoldag.</span></div><div><b>Kopieringsmaterial</b><span>Läsförståelse till varje kapitel som PDF, plus facit. Knappen finns uppe till höger.</span></div></div>
+    ${STORY&&HANDLING[S.grade]?`<div class="plot"><b>Det här handlar ”${esc(STORY.titel)}” om</b><p>${esc(HANDLING[S.grade])}</p></div>`:""}
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Öppna kalendern</button></div>`}
   const gear=onbStep===1&&nameMode==="later"?`<div class="ogear"><span class="tbtn sq">${ICO.gear}<i class="ring"></i></span></div><div class="pointer"><svg width="96" height="74" viewBox="0 0 96 74" aria-hidden="true"><path d="M8 66 C34 62 64 48 80 14" stroke="#ffd27a" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M66 16 82 8 84 26" stroke="#ffd27a" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="bubble">Här hittar du <b>Inställningar</b>. Där kan du skriva in namnen när du vill.</div></div>`:"";
   o.innerHTML=`${gear}<div class="onbcard ${wcls}">${h}</div>`;
@@ -464,7 +478,7 @@ function showOnb(){
   }
   if(onbStep===2){o.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;save();showOnb()});nx.onclick=()=>{onbStep=3;showOnb()}}
   if(onbStep===3){o.querySelectorAll("[data-ct]").forEach(b=>b.onclick=()=>{S.ctype=b.dataset.ct;save();showOnb()});nx.onclick=async()=>{if(!STORY)await loadStory();onbStep=4;showOnb()}}
-  if(onbStep===4)nx.onclick=()=>{S.onboarded=true;save();o.innerHTML="";render()};
+  if(onbStep===4)nx.onclick=()=>{S.onboarded=true;save();o.innerHTML="";render();if(!S.tourSeen)setTimeout(startTour,900)};
 }
 
 /* ===================== start ===================== */
