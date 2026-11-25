@@ -1,92 +1,51 @@
 {
   "projekt": [
     {
-      "id": "frontlinjen",
-      "namn": "Frontlinjen",
-      "text": "Bygg en bas, samla malm och erövra kartan i lugn realtid.",
-      "typ": "spel",
-      "kategori": "Strategi",
-      "ikon": "flagga",
-      "storlek": "stor",
-      "farg": "alvbla",
-      "bild": "assets/img/frontlinjen.webp",
-      "alt": "Frontlinjen: en utbyggd bas med kraftverk, baracker, fabrik och en tropp soldater och fordon",
-      "lank": "/frontlinjen/",
-      "ar": 2026,
-      "genre": "Realtidsstrategi",
-      "knapp": "Spela",
-      "spelare": "1 spelare mot datorn",
-      "ingress": "Bygg en bas, samla malm och ta över kartan – i lugn realtid.",
-      "beskrivning": [
-        "Du börjar med ett högkvarter, en handfull arbetare och en karta full av glittrande malm. Bygg kraftverk och baracker, skicka ut arbetare och sträck ut ditt område bit för bit. Motståndarna gör samma sak – och förr eller senare möts ni vid frontlinjen.",
-        "Välj kartstorlek, antal motståndare och hur lång fredstid du vill ha innan första anfallet. Snabba upp tiden när du vill att det ska hända saker, eller ta det lugnt och planera."
-      ],
-      "hojdpunkter": [
-        "Bygg och styr i en levande isometrisk värld",
-        "Arméer, arbetare och flyg",
-        "Liten, medel eller stor karta",
-        "Fredstid i början om du vill komma igång lugnt"
-      ],
-      "video": "/assets/video/frontlinjen-promo.mp4",
-      "klipp": "/assets/video/frontlinjen-kort.mp4",
-      "poster": "/assets/video/frontlinjen-poster.jpg",
-      "sida": "/projekt/frontlinjen/",
-      "tema": {
-        "topp": "#1E4E9C",
-        "botten": "#E8EEF8",
-        "ord": "#D3E2FF",
-        "ljus": "#EEF3FF",
-        "ink": "#0C1B33",
-        "knapp": "#0F2A57",
-        "knappText": "#EEF3FF"
-      },
-      "format": "bred",
-      "skarm": "/assets/video/frontlinjen-stod.mp4",
-      "skarmbild": "/assets/video/frontlinjen-stod.jpg"
-    },
-    {
-      "id": "vaggen",
-      "namn": "Väggen",
-      "text": "Bygg hem, kaféer och repbroar på en gammal tegelvägg.",
-      "typ": "spel",
-      "kategori": "Bygga och mysa",
-      "ikon": "vagg",
+      "id": "julkalender",
+      "namn": "Julkalendern",
+      "text": "En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.",
+      "typ": "app",
+      "kategori": "Skola",
+      "ikon": "app",
       "storlek": "bred",
-      "farg": "smor",
-      "bild": "assets/img/vaggen.webp",
-      "alt": "Väggen: en tegelvägg full av små hus, växthus, trappor och invånare",
-      "lank": "/vaggen/",
+      "farg": "alvbla",
+      "bild": "assets/img/julkalender.webp",
+      "alt": "Julkalendern: en isometrisk by i snön med numrerade luckor",
+      "lank": "/julkalender/",
       "ar": 2026,
-      "genre": "Bygga och mysa",
-      "knapp": "Spela",
-      "spelare": "1 spelare",
-      "ingress": "Ett lugnt spel om att bygga ett hem tillsammans på en gammal vägg.",
+      "genre": "Julkalender för skolan",
+      "knapp": "Öppna",
+      "spelare": "Lärare och klasser i F–6",
+      "ingress": "En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.",
       "beskrivning": [
-        "Någonstans står en gammal tegelvägg. Ingen minns vem som byggde den – men en dag flyttar någon in. Bygg hem, kaféer, hängträdgårdar, ateljéer och små hörn för musik, och se väggen fyllas av liv.",
-        "Alla som flyttar in är någon: en grubblare, en drömmare, en som alltid sjunger. De har egna önskningar, blir vänner med varandra och påverkas av vad som står bredvid. Det finns ingen brådska. Bara du, väggen och årstiderna."
+        "Julkalendern gör december till en gemensam berättelse. Varje skoldag fram till jullovet öppnar klassen ett nytt kapitel i en julsaga skriven för just er årskurs – från förskoleklass till sexan – och en eller flera elever får öppna sin egen lucka.",
+        "Välj mellan en isometrisk by i snön eller filtfickor på en trävägg. Luckorna kan innehålla snällhetsuppdrag, rastutmaningar eller kluringar, och du kan ändra texterna själv. Till varje kapitel finns arbetsblad med facit, pyssel och hela berättelsen som en bok att skriva ut."
       ],
       "hojdpunkter": [
-        "Över 25 sorters byggen",
-        "Invånare med egna personligheter och önskningar",
-        "Dag, natt och årstider",
-        "Ta polaroider och följ väggens dagbok"
+        "Sju julsagor i 14 kapitel, en för varje årskurs F–6",
+        "En lucka per elev – byn i snön eller filtfickor",
+        "En egen bild till varje kapitel",
+        "Arbetsblad, facit och pyssel som PDF",
+        "Hela sagan som A5-bok med egen julhälsning"
       ],
-      "video": "/assets/video/vaggen-promo.mp4",
-      "klipp": "/assets/video/vaggen-kort.mp4",
-      "poster": "/assets/video/vaggen-poster.jpg",
-      "sida": "/projekt/vaggen/",
+      "video": "/assets/video/julkalender-promo.mp4",
+      "klipp": "/assets/video/julkalender-kort.mp4",
+      "poster": "/assets/video/julkalender-poster.jpg",
+      "sida": "/projekt/julkalender/",
       "tema": {
-        "topp": "#9A452D",
-        "botten": "#F3E6D8",
-        "ord": "#FFD8C6",
-        "ljus": "#FFF1EA",
-        "ink": "#3A160B",
-        "knapp": "#5A2414",
-        "knappText": "#FFF1EA"
+        "topp": "#1D2B5A",
+        "botten": "#EDEFF7",
+        "ord": "#C9D3F5",
+        "ljus": "#F1F3FC",
+        "ink": "#0D1430",
+        "knapp": "#B23A2E",
+        "knappText": "#FFF4E6"
       },
       "format": "bred",
-      "skarm": "/assets/video/vaggen-stod.mp4",
-      "skarmbild": "/assets/video/vaggen-stod.jpg"
+      "skarm": "/assets/video/julkalender-stod.mp4",
+      "skarmbild": "/assets/video/julkalender-stod.jpg",
+      "malgrupp": "För klassen · F–6",
+      "utvald": true
     },
     {
       "id": "kluro",
@@ -130,12 +89,13 @@
       },
       "format": "stod",
       "skarm": "/assets/video/kluro-stod.mp4",
-      "skarmbild": "/assets/video/kluro-stod.jpg"
+      "skarmbild": "/assets/video/kluro-stod.jpg",
+      "malgrupp": "För arbetslaget"
     },
     {
       "id": "treomdagen",
       "namn": "Tre om dagen",
-      "text": "Ett kort quiz till paltkoman: Dagens ord, Tidslinjen och Emoji-gåtan.",
+      "text": "Ett kort quiz för dig själv till paltkoman: Dagens ord, Tidslinjen och Emoji-gåtan.",
       "typ": "spel",
       "kategori": "Quiz",
       "ikon": "spel",
@@ -148,7 +108,7 @@
       "genre": "Dagligt quiz",
       "knapp": "Spela",
       "spelare": "1 spelare",
-      "ingress": "Ett kort quiz till paltkoman.",
+      "ingress": "Ett kort quiz för dig själv till paltkoman.",
       "beskrivning": [
         "Tre små utmaningar, nya varje dag. Gissa Dagens ord på sex försök, sortera fem händelser i rätt ordning på Tidslinjen och lös Emoji-gåtan.",
         "Tidslinjen växlar mellan Norrbotten, Sverige och världen. När du är klar kan du dela ditt resultat – utan att avslöja svaren – och sedan är det bara att vänta till i morgon."
@@ -174,140 +134,53 @@
       },
       "format": "stod",
       "skarm": "/assets/video/treomdagen-stod.mp4",
-      "skarmbild": "/assets/video/treomdagen-stod.jpg"
+      "skarmbild": "/assets/video/treomdagen-stod.jpg",
+      "malgrupp": "För dig själv"
     },
     {
-      "id": "julkalender",
-      "namn": "Julkalendern",
-      "text": "En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.",
-      "typ": "app",
-      "kategori": "Skola",
-      "ikon": "app",
+      "id": "vaggen",
+      "namn": "Väggen",
+      "text": "Bygg hem, kaféer och repbroar på en gammal tegelvägg.",
+      "typ": "spel",
+      "kategori": "Bygga och mysa",
+      "ikon": "vagg",
       "storlek": "bred",
-      "farg": "alvbla",
-      "bild": "assets/img/julkalender.webp",
-      "alt": "Julkalendern: en isometrisk by i snön med numrerade luckor",
-      "lank": "/julkalender/",
+      "farg": "smor",
+      "bild": "assets/img/vaggen.webp",
+      "alt": "Väggen: en tegelvägg full av små hus, växthus, trappor och invånare",
+      "lank": "/vaggen/",
       "ar": 2026,
-      "genre": "Julkalender för skolan",
-      "knapp": "Öppna",
-      "spelare": "Lärare och klasser i F–6",
-      "ingress": "En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.",
+      "genre": "Bygga och mysa",
+      "knapp": "Spela",
+      "spelare": "1 spelare",
+      "ingress": "Ett lugnt spel om att bygga ett hem tillsammans på en gammal vägg.",
       "beskrivning": [
-        "Julkalendern gör december till en gemensam berättelse. Varje skoldag fram till jullovet öppnar klassen ett nytt kapitel i en julsaga skriven för just er årskurs – från förskoleklass till sexan – och en eller flera elever får öppna sin egen lucka.",
-        "Välj mellan en isometrisk by i snön eller filtfickor på en trävägg. Luckorna kan innehålla snällhetsuppdrag, rastutmaningar eller kluringar, och du kan ändra texterna själv. Till varje kapitel finns arbetsblad med facit, pyssel och hela berättelsen som en bok att skriva ut."
+        "Någonstans står en gammal tegelvägg. Ingen minns vem som byggde den – men en dag flyttar någon in. Bygg hem, kaféer, hängträdgårdar, ateljéer och små hörn för musik, och se väggen fyllas av liv.",
+        "Alla som flyttar in är någon: en grubblare, en drömmare, en som alltid sjunger. De har egna önskningar, blir vänner med varandra och påverkas av vad som står bredvid. Det finns ingen brådska. Bara du, väggen och årstiderna."
       ],
       "hojdpunkter": [
-        "Sju julsagor i 14 kapitel, en för varje årskurs F–6",
-        "En lucka per elev – byn i snön eller filtfickor",
-        "En egen bild till varje kapitel",
-        "Arbetsblad, facit och pyssel som PDF",
-        "Hela sagan som A5-bok med egen julhälsning"
+        "Över 25 sorters byggen",
+        "Invånare med egna personligheter och önskningar",
+        "Dag, natt och årstider",
+        "Ta polaroider och följ väggens dagbok"
       ],
-      "video": "/assets/video/julkalender-promo.mp4",
-      "klipp": "/assets/video/julkalender-kort.mp4",
-      "poster": "/assets/video/julkalender-poster.jpg",
-      "sida": "/projekt/julkalender/",
+      "video": "/assets/video/vaggen-promo.mp4",
+      "klipp": "/assets/video/vaggen-kort.mp4",
+      "poster": "/assets/video/vaggen-poster.jpg",
+      "sida": "/projekt/vaggen/",
       "tema": {
-        "topp": "#1D2B5A",
-        "botten": "#EDEFF7",
-        "ord": "#C9D3F5",
-        "ljus": "#F1F3FC",
-        "ink": "#0D1430",
-        "knapp": "#B23A2E",
-        "knappText": "#FFF4E6"
+        "topp": "#9A452D",
+        "botten": "#F3E6D8",
+        "ord": "#FFD8C6",
+        "ljus": "#FFF1EA",
+        "ink": "#3A160B",
+        "knapp": "#5A2414",
+        "knappText": "#FFF1EA"
       },
       "format": "bred",
-      "skarm": "/assets/video/julkalender-stod.mp4",
-      "skarmbild": "/assets/video/julkalender-stod.jpg"
-    },
-    {
-      "id": "veckopalten",
-      "namn": "Veckopalten",
-      "text": "Familjens skolvecka: prov, läxor och schema.",
-      "typ": "app",
-      "kategori": "Plugg",
-      "ikon": "lista",
-      "storlek": "liten",
-      "farg": "tall",
-      "bild": "assets/img/veckopalten.webp",
-      "alt": "Veckopaltens Idag-vy med dagens schema och prov som är på gång",
-      "lank": "/veckopalten/",
-      "ar": 2026,
-      "genre": "Familjeplanering",
-      "knapp": "Öppna",
-      "spelare": "För hela familjen",
-      "ingress": "Familjens skolvecka på ett ställe: prov, läxor, schema och lunch.",
-      "beskrivning": [
-        "Veckopalten samlar allt som skolveckan består av. Klistra in ett veckobrev, en länk eller en bild, så sorterar appen ut prov, läxor och instuderingsmaterial och lägger dem på rätt dag.",
-        "Se dagens schema och lunch, prenumerera på träningskalendern och håll koll på flera barn samtidigt. Det du lägger till kompletterar alltid det som redan finns."
-      ],
-      "hojdpunkter": [
-        "Läs in veckobrev, länkar och bilder",
-        "Schema, prov och läxor per barn",
-        "Skollunchen direkt i dagsvyn",
-        "Kalenderprenumerationer som uppdateras av sig själva"
-      ],
-      "video": "/assets/video/veckopalten-promo.mp4",
-      "klipp": "/assets/video/veckopalten-kort.mp4",
-      "poster": "/assets/video/veckopalten-poster.jpg",
-      "sida": "/projekt/veckopalten/",
-      "tema": {
-        "topp": "#276C4E",
-        "botten": "#E6F2EA",
-        "ord": "#C9EEDB",
-        "ljus": "#EFFFF6",
-        "ink": "#0F3B28",
-        "knapp": "#0F3B28",
-        "knappText": "#EFFFF6"
-      },
-      "format": "stod",
-      "skarm": "/assets/video/veckopalten-stod.mp4",
-      "skarmbild": "/assets/video/veckopalten-stod.jpg"
-    },
-    {
-      "id": "matte",
-      "namn": "Matteträning",
-      "text": "Genomgångar, övning och träningsprov för åk 4 och åk 7.",
-      "typ": "app",
-      "kategori": "Plugg",
-      "ikon": "plus",
-      "storlek": "liten",
-      "farg": "hjortron",
-      "bild": "assets/img/matte.webp",
-      "alt": "Matteträning: välj Årskurs 4 eller Årskurs 7",
-      "lank": "/matte/",
-      "ar": 2026,
-      "genre": "Lärande",
-      "knapp": "Öppna",
-      "spelare": "För åk 4 och åk 7",
-      "ingress": "Genomgångar, övning och träningsprov – steg för steg.",
-      "beskrivning": [
-        "Matteträning går igenom matten steg för steg, med uppställningar som byggs upp framför dig och en röst som förklarar. Sedan är det din tur att öva, i egen takt.",
-        "Logga in med ditt Google-konto så sparas resultaten, och en förälder kan följa hur det går."
-      ],
-      "hojdpunkter": [
-        "Genomgångar med uppläst förklaring",
-        "Övning och träningsprov",
-        "Anpassat för åk 4 och åk 7",
-        "Resultaten sparas när du loggar in"
-      ],
-      "video": "/assets/video/matte-promo.mp4",
-      "klipp": "/assets/video/matte-kort.mp4",
-      "poster": "/assets/video/matte-poster.jpg",
-      "sida": "/projekt/matte/",
-      "tema": {
-        "topp": "#EE8A2B",
-        "botten": "#FCEEDC",
-        "ord": "#FFD9A8",
-        "ljus": "#3B1E00",
-        "ink": "#3B1E00",
-        "knapp": "#3B1E00",
-        "knappText": "#FFE7C7"
-      },
-      "format": "stod",
-      "skarm": "/assets/video/matte-stod.mp4",
-      "skarmbild": "/assets/video/matte-stod.jpg"
+      "skarm": "/assets/video/vaggen-stod.mp4",
+      "skarmbild": "/assets/video/vaggen-stod.jpg",
+      "malgrupp": "För dig själv"
     },
     {
       "id": "paltboken",
@@ -351,7 +224,8 @@
       },
       "format": "stod",
       "skarm": "/assets/video/paltboken-stod.mp4",
-      "skarmbild": "/assets/video/paltboken-stod.jpg"
+      "skarmbild": "/assets/video/paltboken-stod.jpg",
+      "malgrupp": "För köket"
     },
     {
       "id": "lovely",
@@ -393,7 +267,143 @@
       },
       "format": "stod",
       "skarm": "/assets/video/lovely-stod.mp4",
-      "skarmbild": "/assets/video/lovely-stod.jpg"
+      "skarmbild": "/assets/video/lovely-stod.jpg",
+      "malgrupp": "Kommer snart"
+    },
+    {
+      "id": "frontlinjen",
+      "namn": "Frontlinjen",
+      "text": "Bygg en bas, samla malm och erövra kartan i lugn realtid.",
+      "typ": "spel",
+      "kategori": "Strategi",
+      "ikon": "flagga",
+      "storlek": "stor",
+      "farg": "alvbla",
+      "bild": "assets/img/frontlinjen.webp",
+      "alt": "Frontlinjen: en utbyggd bas med kraftverk, baracker, fabrik och en tropp soldater och fordon",
+      "lank": "/frontlinjen/",
+      "ar": 2026,
+      "genre": "Realtidsstrategi",
+      "knapp": "Spela",
+      "spelare": "1 spelare mot datorn",
+      "ingress": "Bygg en bas, samla malm och ta över kartan – i lugn realtid.",
+      "beskrivning": [
+        "Du börjar med ett högkvarter, en handfull arbetare och en karta full av glittrande malm. Bygg kraftverk och baracker, skicka ut arbetare och sträck ut ditt område bit för bit. Motståndarna gör samma sak – och förr eller senare möts ni vid frontlinjen.",
+        "Välj kartstorlek, antal motståndare och hur lång fredstid du vill ha innan första anfallet. Snabba upp tiden när du vill att det ska hända saker, eller ta det lugnt och planera."
+      ],
+      "hojdpunkter": [
+        "Bygg och styr i en levande isometrisk värld",
+        "Arméer, arbetare och flyg",
+        "Liten, medel eller stor karta",
+        "Fredstid i början om du vill komma igång lugnt"
+      ],
+      "video": "/assets/video/frontlinjen-promo.mp4",
+      "klipp": "/assets/video/frontlinjen-kort.mp4",
+      "poster": "/assets/video/frontlinjen-poster.jpg",
+      "sida": "/projekt/frontlinjen/",
+      "tema": {
+        "topp": "#1E4E9C",
+        "botten": "#E8EEF8",
+        "ord": "#D3E2FF",
+        "ljus": "#EEF3FF",
+        "ink": "#0C1B33",
+        "knapp": "#0F2A57",
+        "knappText": "#EEF3FF"
+      },
+      "format": "bred",
+      "skarm": "/assets/video/frontlinjen-stod.mp4",
+      "skarmbild": "/assets/video/frontlinjen-stod.jpg",
+      "dold": true
+    },
+    {
+      "id": "veckopalten",
+      "namn": "Veckopalten",
+      "text": "Familjens skolvecka: prov, läxor och schema.",
+      "typ": "app",
+      "kategori": "Plugg",
+      "ikon": "lista",
+      "storlek": "liten",
+      "farg": "tall",
+      "bild": "assets/img/veckopalten.webp",
+      "alt": "Veckopaltens Idag-vy med dagens schema och prov som är på gång",
+      "lank": "/veckopalten/",
+      "ar": 2026,
+      "genre": "Familjeplanering",
+      "knapp": "Öppna",
+      "spelare": "För hela familjen",
+      "ingress": "Familjens skolvecka på ett ställe: prov, läxor, schema och lunch.",
+      "beskrivning": [
+        "Veckopalten samlar allt som skolveckan består av. Klistra in ett veckobrev, en länk eller en bild, så sorterar appen ut prov, läxor och instuderingsmaterial och lägger dem på rätt dag.",
+        "Se dagens schema och lunch, prenumerera på träningskalendern och håll koll på flera barn samtidigt. Det du lägger till kompletterar alltid det som redan finns."
+      ],
+      "hojdpunkter": [
+        "Läs in veckobrev, länkar och bilder",
+        "Schema, prov och läxor per barn",
+        "Skollunchen direkt i dagsvyn",
+        "Kalenderprenumerationer som uppdateras av sig själva"
+      ],
+      "video": "/assets/video/veckopalten-promo.mp4",
+      "klipp": "/assets/video/veckopalten-kort.mp4",
+      "poster": "/assets/video/veckopalten-poster.jpg",
+      "sida": "/projekt/veckopalten/",
+      "tema": {
+        "topp": "#276C4E",
+        "botten": "#E6F2EA",
+        "ord": "#C9EEDB",
+        "ljus": "#EFFFF6",
+        "ink": "#0F3B28",
+        "knapp": "#0F3B28",
+        "knappText": "#EFFFF6"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/veckopalten-stod.mp4",
+      "skarmbild": "/assets/video/veckopalten-stod.jpg",
+      "dold": true
+    },
+    {
+      "id": "matte",
+      "namn": "Matteträning",
+      "text": "Genomgångar, övning och träningsprov för åk 4 och åk 7.",
+      "typ": "app",
+      "kategori": "Plugg",
+      "ikon": "plus",
+      "storlek": "liten",
+      "farg": "hjortron",
+      "bild": "assets/img/matte.webp",
+      "alt": "Matteträning: välj Årskurs 4 eller Årskurs 7",
+      "lank": "/matte/",
+      "ar": 2026,
+      "genre": "Lärande",
+      "knapp": "Öppna",
+      "spelare": "För åk 4 och åk 7",
+      "ingress": "Genomgångar, övning och träningsprov – steg för steg.",
+      "beskrivning": [
+        "Matteträning går igenom matten steg för steg, med uppställningar som byggs upp framför dig och en röst som förklarar. Sedan är det din tur att öva, i egen takt.",
+        "Logga in med ditt Google-konto så sparas resultaten, och en förälder kan följa hur det går."
+      ],
+      "hojdpunkter": [
+        "Genomgångar med uppläst förklaring",
+        "Övning och träningsprov",
+        "Anpassat för åk 4 och åk 7",
+        "Resultaten sparas när du loggar in"
+      ],
+      "video": "/assets/video/matte-promo.mp4",
+      "klipp": "/assets/video/matte-kort.mp4",
+      "poster": "/assets/video/matte-poster.jpg",
+      "sida": "/projekt/matte/",
+      "tema": {
+        "topp": "#EE8A2B",
+        "botten": "#FCEEDC",
+        "ord": "#FFD9A8",
+        "ljus": "#3B1E00",
+        "ink": "#3B1E00",
+        "knapp": "#3B1E00",
+        "knappText": "#FFE7C7"
+      },
+      "format": "stod",
+      "skarm": "/assets/video/matte-stod.mp4",
+      "skarmbild": "/assets/video/matte-stod.jpg",
+      "dold": true
     }
   ]
 }

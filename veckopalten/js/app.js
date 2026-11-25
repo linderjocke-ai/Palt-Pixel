@@ -732,7 +732,7 @@ async function visaFamilj() {
     ${temaDel}${foralderDel}${demoDel}
     <section class="kort"><div class="rad" style="justify-content:space-between"><span>Inloggad som <b>${e(S.medlem.namn || '')}</b> <span class="dampad liten-text">${arForalder() ? 'vuxen' : 'barn'}</span></span></div>
       <button class="knapp sekundar" data-g="loggaut">Logga ut</button></section>
-    <p class="tom" style="text-align:center;margin:0"><a href="/projekt/veckopalten/">← Till Palt &amp; pixel</a> · <a href="/integritet/">Integritetspolicy</a></p>
+    <p class="tom" style="text-align:center;margin:0"><a href="/">← Till Palt &amp; pixel</a> · <a href="/integritet/">Integritetspolicy</a></p>
   </main>`, 'familj');
 }
 // Matsedel: välj kommun och skola för varje barn. Listorna kommer från Mateo Meny.
@@ -841,7 +841,7 @@ function visaInloggning() {
       <form class="stack" data-form="familjekod" style="gap:10px"><label class="falt">Familjekod<input name="kod" required inputmode="numeric" pattern="[0-9]{6}" autocomplete="off" maxlength="6" placeholder="6 siffror" style="letter-spacing:.2em"></label>
         <button class="knapp bred">Fortsätt</button><p class="fel dold" data-fel></p></form>
     </section>
-    <p class="tom" style="text-align:center;margin:0"><a href="/projekt/veckopalten/">← Till Palt &amp; pixel</a> · <a href="/integritet/">Integritetspolicy</a></p>
+    <p class="tom" style="text-align:center;margin:0"><a href="/">← Till Palt &amp; pixel</a> · <a href="/integritet/">Integritetspolicy</a></p>
   </main>`;
 }
 // Visa bara knappar för inloggningssätt som är påslagna i Supabase.

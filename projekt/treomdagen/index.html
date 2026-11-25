@@ -4,124 +4,127 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Tre om dagen – Palt &amp; pixel</title>
-  <meta name="description" content="Ett kort quiz till paltkoman.">
+  <meta name="description" content="Ett kort quiz för dig själv till paltkoman.">
   <meta property="og:title" content="Tre om dagen – Palt &amp; pixel">
-  <meta property="og:description" content="Ett kort quiz till paltkoman.">
+  <meta property="og:description" content="Ett kort quiz för dig själv till paltkoman.">
   <meta property="og:image" content="/assets/video/treomdagen-poster.jpg">
+  <meta name="theme-color" content="#FBF8F2">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/css/typsnitt.css">
-  <link rel="stylesheet" href="/assets/css/pop.css?v=5">
-  <meta name="theme-color" content="#E7B321">
-  <link rel="preload" as="image" href="/assets/video/treomdagen-stod.jpg">
+  <link rel="stylesheet" href="/assets/css/typsnitt.css">
+  <link rel="stylesheet" href="/assets/css/ljus.css?v=6">
 </head>
-<body class="pop pop-projekt" style="--topp:#E7B321;--botten:#FBF3DC;--ord:#FFF0BF;--ljus:#3A2A00;--ink:#3A2A00;--knapp:#3A2A00;--knapptext:#FFF3CC">
+<body>
   <a class="hoppa" href="#innehall">Hoppa till innehållet</a>
-  <header class="pop-huvud">
-    <a class="rund" href="/spel/" data-tillbaka aria-label="Tillbaka"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Tillbaka</span></a>
-    <a class="marke" href="/" aria-label="Palt & pixel, till startsidan"><svg class="logga" viewBox="0 0 22 18" aria-hidden="true"><ellipse cx="8" cy="9" rx="7.5" ry="7" fill="currentColor"/><rect x="13" y="3" width="3" height="3" fill="currentColor"/><rect x="16" y="7" width="3" height="3" fill="currentColor" opacity=".8"/><rect x="13" y="11" width="3" height="3" fill="currentColor" opacity=".9"/><rect x="19" y="2" width="2" height="2" fill="#C4122F"/></svg><span>Palt &amp; pixel</span></a>
-    <nav class="segment" aria-label="Bläddra">
-      <a href="/spel/" aria-current="page">Spel</a>
-      <a href="/appar/">Appar</a>
-      <a href="/alla/">Allt</a>
-    </nav>
-    <a class="rund bara-mobil" href="/alla/" aria-label="Alla spel och appar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></a>
+  <header class="sidhuvud">
+    <div class="sidhuvud-inre">
+      <a class="marke" href="/" aria-label="Palt & pixel, till startsidan">
+        <img src="/assets/logo.svg" alt="" width="40" height="32"><span>Palt <em>&amp;</em> pixel</span>
+      </a>
+      <nav class="meny" aria-label="Huvudmeny">
+        <a href="/alla/">Allt</a>
+        <a href="/spel/" aria-current="page">Spel</a>
+        <a href="/appar/">Appar</a>
+        <a href="/om/">Om</a>
+      </nav>
+      <a class="logga-in" href="/konto/" id="konto-lank">Logga in</a>
+    </div>
   </header>
-  <main id="innehall">
-    <section class="scen scen-stod" style="--n:12">
-      <p class="meta"><span>SPEL · DAGLIGT QUIZ</span><span>2026 · I WEBBLÄSAREN</span></p>
-      <h1 class="jatte">TRE OM DAGEN</h1>
-      <div class="svav">
-        <span class="skugga" aria-hidden="true"></span>
-        <span class="skarm">
-          <video class="banderoll-video" src="/assets/video/treomdagen-stod.mp4" poster="/assets/video/treomdagen-stod.jpg" autoplay muted loop playsinline preload="auto" aria-label="Klipp ur Tre om dagen"></video>
-        </span>
-        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span><span class="vox v3" aria-hidden="true"></span>
+  <main id="innehall" class="sida projekt" style="--accent:#E7B321">
+    <a class="bakat" href="/alla/" data-tillbaka><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Tillbaka</a>
+    <section class="projekt-topp">
+      <div class="projekt-text">
+        <span class="tagg">För dig själv</span>
+        <h1>Tre om dagen</h1>
+        <p class="ingress">Ett kort quiz för dig själv till paltkoman.</p>
+        <div class="knapprad"><a class="knapp knapp-stor" href="/treomdagen/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/></svg>Spela Tre om dagen</a></div>
+        <p class="info-rad"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Körs direkt i webbläsaren – inget att installera eller ladda ner.</span></p>
+      </div>
+      <div class="projekt-media">
+        <span class="media media-stod" style="--accent:#E7B321"><span class="telefon"><video class="banderoll-video" src="/assets/video/treomdagen-stod.mp4" poster="/assets/video/treomdagen-stod.jpg" autoplay muted loop playsinline preload="auto" aria-label="Klipp ur Tre om dagen"></video></span></span>
         <button class="paus" type="button" aria-label="Pausa klippet" data-paus><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg></button>
       </div>
     </section>
 
-    <section class="info">
-      <div class="info-rad">
-        <div><span class="etikett">Genre</span><span class="varde">Dagligt quiz</span></div>
-        <div class="info-ar"><span class="etikett">Utgiven</span><span class="varde">2026</span></div>
+    <section class="projekt-kropp">
+      <div class="beskrivning">
+        <h2>Om Tre om dagen</h2>
+        <p>Tre små utmaningar, nya varje dag. Gissa Dagens ord på sex försök, sortera fem händelser i rätt ordning på Tidslinjen och lös Emoji-gåtan.</p>
+        <p>Tidslinjen växlar mellan Norrbotten, Sverige och världen. När du är klar kan du dela ditt resultat – utan att avslöja svaren – och sedan är det bara att vänta till i morgon.</p>
+        <h2>Det här finns</h2>
+        <ul class="bockar">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Dagens ord, Tidslinjen och Emoji-gåtan</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Nytt varje dag – samma för alla</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Statistik och svit om du loggar in</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Dela resultatet utan att avslöja svaren</span></li>
+        </ul>
       </div>
-      <p class="ingress">Ett kort quiz till paltkoman.</p>
-      <div class="spela-rad"><a class="spela" href="/treomdagen/"><span class="spela-v"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/></svg>Spela</span><span class="spela-h">Ingen installation</span></a></div>
-      <p class="webblasare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Spela direkt i webbläsaren – inget att installera eller ladda ner.</span></p>
-
-      <div class="kropp">
-        <div class="beskrivning">
-          <p>Tre små utmaningar, nya varje dag. Gissa Dagens ord på sex försök, sortera fem händelser i rätt ordning på Tidslinjen och lös Emoji-gåtan.</p>
-          <p>Tidslinjen växlar mellan Norrbotten, Sverige och världen. När du är klar kan du dela ditt resultat – utan att avslöja svaren – och sedan är det bara att vänta till i morgon.</p>
-          <h2>Det här finns i Tre om dagen</h2>
-          <ul class="hojdpunkter">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Dagens ord, Tidslinjen och Emoji-gåtan</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Nytt varje dag – samma för alla</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Statistik och svit om du loggar in</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span>Dela resultatet utan att avslöja svaren</span></li>
-          </ul>
-        </div>
-        <aside class="fakta" aria-label="Information">
-          <h2>Information</h2>
-          <dl>
-            <div><dt>Utvecklare</dt><dd>Palt &amp; pixel</dd></div>
-            <div><dt>Utgivningsår</dt><dd>2026</dd></div>
-            <div><dt>Genre</dt><dd>Dagligt quiz</dd></div>
-            <div><dt>Spelare</dt><dd>1 spelare</dd></div>
-            <div><dt>Plattform</dt><dd>Webbläsare – dator, surfplatta och mobil</dd></div>
-            <div><dt>Installation</dt><dd>Ingen – körs direkt i webbläsaren</dd></div>
-          </dl>
-        </aside>
-      </div>
-
-      <section class="trailer" aria-label="Trailer">
-        <h2>Trailer</h2>
-        <video controls playsinline preload="none" poster="/assets/video/treomdagen-poster.jpg" src="/assets/video/treomdagen-promo.mp4"></video>
-      </section>
+      <aside class="fakta" aria-label="Fakta">
+        <h2>Fakta</h2>
+        <dl>
+          <div><dt>Passar för</dt><dd>1 spelare</dd></div>
+          <div><dt>Typ</dt><dd>Spel · Dagligt quiz</dd></div>
+          <div><dt>Utgivningsår</dt><dd>2026</dd></div>
+          <div><dt>Fungerar på</dt><dd>Dator, Chromebook, surfplatta och mobil</dd></div>
+          <div><dt>Installation</dt><dd>Ingen – körs direkt i webbläsaren</dd></div>
+          <div><dt>Pris</dt><dd>Gratis</dd></div>
+          <div><dt>Utvecklare</dt><dd>Palt &amp; pixel</dd></div>
+        </dl>
+      </aside>
     </section>
 
-    <section class="fler">
-      <h2>Mer från Palt &amp; pixel</h2>
-      <div class="pk-rutnat">
-      <a class="pk pk-bred" href="/projekt/frontlinjen/" style="--topp:#1E4E9C;--botten:#E8EEF8;--ord:#D3E2FF;--ljus:#EEF3FF;--ink:#0C1B33;--knapp:#0F2A57;--knapptext:#EEF3FF">
-        <span class="pk-skarm"><img src="/assets/video/frontlinjen-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/frontlinjen-stod.mp4" aria-hidden="true"></video></span>
-        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
-        <span class="pk-text">
-          <span class="pk-meta">Realtidsstrategi</span>
-          <span class="pk-namn">Frontlinjen</span>
-          <span class="pk-ingress">Bygg en bas, samla malm och ta över kartan – i lugn realtid.</span>
-          <span class="pk-cta">Spela →</span>
-        </span>
-      </a>
-      <a class="pk pk-bred" href="/projekt/vaggen/" style="--topp:#9A452D;--botten:#F3E6D8;--ord:#FFD8C6;--ljus:#FFF1EA;--ink:#3A160B;--knapp:#5A2414;--knapptext:#FFF1EA">
-        <span class="pk-skarm"><img src="/assets/video/vaggen-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/vaggen-stod.mp4" aria-hidden="true"></video></span>
-        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
-        <span class="pk-text">
-          <span class="pk-meta">Bygga och mysa</span>
-          <span class="pk-namn">Väggen</span>
-          <span class="pk-ingress">Ett lugnt spel om att bygga ett hem tillsammans på en gammal vägg.</span>
-          <span class="pk-cta">Spela →</span>
-        </span>
-      </a>
-      <a class="pk pk-stod" href="/projekt/kluro/" style="--topp:#17414A;--botten:#E7F0EE;--ord:#9FDCE3;--ljus:#E9F6F5;--ink:#0E2A30;--knapp:#0E2A30;--knapptext:#FFE7A0">
-        <span class="pk-skarm"><img src="/assets/video/kluro-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/kluro-stod.mp4" aria-hidden="true"></video></span>
-        <span class="vox v1" aria-hidden="true"></span><span class="vox v2" aria-hidden="true"></span>
-        <span class="pk-text">
-          <span class="pk-meta">Sällskapsspel</span>
-          <span class="pk-namn">Kluro</span>
-          <span class="pk-ingress">Dagens kluringar och en topplista – perfekt för fikarummet.</span>
-          <span class="pk-cta">Spela →</span>
-        </span>
-      </a>
+    <section class="film" aria-labelledby="film-rubrik">
+      <h2 id="film-rubrik">Se filmen</h2>
+      <video controls playsinline preload="none" poster="/assets/video/treomdagen-poster.jpg" src="/assets/video/treomdagen-promo.mp4"></video>
+    </section>
+
+    <section class="fler" aria-labelledby="fler-rubrik">
+      <h2 id="fler-rubrik">Mer från Palt &amp; pixel</h2>
+      <div class="rutnat">
+        <article class="kort" style="--accent:#1D2B5A">
+          <span class="media media-bred" style="--accent:#1D2B5A"><span class="skarm"><img src="/assets/video/julkalender-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/julkalender-stod.mp4" aria-hidden="true"></video></span></span>
+          <div class="kort-text">
+            <span class="tagg">För klassen · F–6</span>
+            <h3 class="kort-namn"><a class="kort-lank" href="/projekt/julkalender/">Julkalendern</a></h3>
+            <p>En julberättelse i 14 kapitel och en lucka till varje elev – för F–6.</p>
+            <div class="kort-knappar"><a class="knapp knapp-liten" href="/julkalender/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>Öppna</a><a class="las-mer" href="/projekt/julkalender/">Läs mer</a></div>
+          </div>
+        </article>
+        <article class="kort" style="--accent:#17414A">
+          <span class="media media-stod" style="--accent:#17414A"><span class="telefon"><img src="/assets/video/kluro-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/kluro-stod.mp4" aria-hidden="true"></video></span></span>
+          <div class="kort-text">
+            <span class="tagg">För arbetslaget</span>
+            <h3 class="kort-namn"><a class="kort-lank" href="/projekt/kluro/">Kluro</a></h3>
+            <p>Dagens kluringar och en topplista – perfekt för fikarummet.</p>
+            <div class="kort-knappar"><a class="knapp knapp-liten" href="/kluro/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/></svg>Spela</a><a class="las-mer" href="/projekt/kluro/">Läs mer</a></div>
+          </div>
+        </article>
+        <article class="kort" style="--accent:#9A452D">
+          <span class="media media-bred" style="--accent:#9A452D"><span class="skarm"><img src="/assets/video/vaggen-stod.jpg" alt="" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-klipp="/assets/video/vaggen-stod.mp4" aria-hidden="true"></video></span></span>
+          <div class="kort-text">
+            <span class="tagg">För dig själv</span>
+            <h3 class="kort-namn"><a class="kort-lank" href="/projekt/vaggen/">Väggen</a></h3>
+            <p>Ett lugnt spel om att bygga ett hem tillsammans på en gammal vägg.</p>
+            <div class="kort-knappar"><a class="knapp knapp-liten" href="/vaggen/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/></svg>Spela</a><a class="las-mer" href="/projekt/vaggen/">Läs mer</a></div>
+          </div>
+        </article>
       </div>
     </section>
   </main>
-  <footer class="pop-fot">
-    <a href="/">paltpixel.se</a>
-    <span>Gjort i Piteå-anda med smör och lingon · <a href="/integritet/">Integritetspolicy</a> · <a href="/om/">Om innehåll och licenser</a></span>
+  <footer class="sidfot">
+    <div class="sidfot-inre">
+      <div>
+        <a class="marke" href="/"><img src="/assets/logo.svg" alt="" width="34" height="27"><span>Palt <em>&amp;</em> pixel</span></a>
+        <p>Gratis, utan annonser och utan spårning. Gjort med smör och lingon i Piteå-anda.</p>
+      </div>
+      <nav aria-label="Mer">
+        <a href="/alla/">Alla spel och appar</a>
+        <a href="/om/">Om sidan och kontakt</a>
+        <a href="/integritet/">Integritetspolicy</a>
+      </nav>
+    </div>
   </footer>
   <script src="/assets/js/konfig.js"></script>
-  <script src="/assets/js/konto.js?v=5"></script>
-  <script src="/assets/js/sidor.js?v=5" defer></script>
+  <script src="/assets/js/konto.js?v=6"></script>
+  <script src="/assets/js/sidor.js?v=6" defer></script>
 </body>
 </html>

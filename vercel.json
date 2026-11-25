@@ -44,5 +44,67 @@
       "source": "/mateo-api/(.*)",
       "destination": "https://meny-api.mateo.se/api/v1/$1"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/mattetraning",
+      "destination": "/matte/",
+      "permanent": false
+    },
+    {
+      "source": "/matteträning",
+      "destination": "/matte/",
+      "permanent": false
+    },
+    {
+      "source": "/frontlinje",
+      "destination": "/frontlinjen/",
+      "permanent": false
+    },
+    {
+      "source": "/projekt/frontlinjen",
+      "destination": "/frontlinjen/",
+      "permanent": false
+    },
+    {
+      "source": "/projekt/veckopalten",
+      "destination": "/veckopalten/",
+      "permanent": false
+    },
+    {
+      "source": "/projekt/matte",
+      "destination": "/matte/",
+      "permanent": false
+    },
+    {
+      "source": "/mattetraning/",
+      "destination": "/matte/",
+      "permanent": false
+    },
+    {
+      "source": "/matteträning/",
+      "destination": "/matte/",
+      "permanent": false
+    },
+    {
+      "source": "/frontlinje/",
+      "destination": "/frontlinjen/",
+      "permanent": false
+    },
+    {
+      "source": "/projekt/frontlinjen/",
+      "destination": "/frontlinjen/",
+      "permanent": false
+    },
+    {
+      "source": "/projekt/veckopalten/",
+      "destination": "/veckopalten/",
+      "permanent": false
+    },
+    {
+      "source": "/projekt/matte/",
+      "destination": "/matte/",
+      "permanent": false
+    }
   ]
 }

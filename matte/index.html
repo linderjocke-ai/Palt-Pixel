@@ -1311,7 +1311,7 @@ function showProfiles(){
     <div class="profs">${PROFILES.map(p=>`<button class="prof" data-prof="${p.id}"><span class="pi">${p.icon}</span><span><div class="t">${p.name}</div>
       <div class="s">${p.chapters.map(c=>CHAPTERS[c].book+' · '+CHAPTERS[c].title).join('<br>')}</div></span></button>`).join('')}</div>
     <button class="btn" style="margin-top:12px;width:100%" data-a="results" data-p="${S.profile||PROFILES[0].id}">📊 Se resultat för barnen</button>
-    <a href="/projekt/matte/" style="display:block;text-align:center;margin-top:14px;color:inherit;opacity:.75">← Palt &amp; pixel</a>
+    <a href="/" style="display:block;text-align:center;margin-top:14px;color:inherit;opacity:.75">← Palt &amp; pixel</a>
     <div class="kontorad">${KONTO.html()}</div></div>`;
 }
 function showMenu(){

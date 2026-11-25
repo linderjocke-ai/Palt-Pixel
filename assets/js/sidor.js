@@ -29,16 +29,16 @@
   }
   if (kanHovra) {
     document.addEventListener("pointerover", (e) => {
-      const k = e.target.closest && e.target.closest("a:has(video[data-klipp])");
+      const k = e.target.closest && e.target.closest(".kort:has(video[data-klipp]), .utvald:has(video[data-klipp]), a:has(video[data-klipp])");
       if (k && !k.contains(e.relatedTarget)) starta(k);
     });
     document.addEventListener("pointerout", (e) => {
-      const k = e.target.closest && e.target.closest("a:has(video[data-klipp])");
+      const k = e.target.closest && e.target.closest(".kort:has(video[data-klipp]), .utvald:has(video[data-klipp]), a:has(video[data-klipp])");
       if (k && !k.contains(e.relatedTarget)) stoppa(k);
     });
   }
-  document.addEventListener("focusin", (e) => { const k = e.target.closest && e.target.closest("a:has(video[data-klipp])"); if (k && kanHovra) starta(k); });
-  document.addEventListener("focusout", (e) => { const k = e.target.closest && e.target.closest("a:has(video[data-klipp])"); if (k) stoppa(k); });
+  document.addEventListener("focusin", (e) => { const k = e.target.closest && e.target.closest(".kort:has(video[data-klipp]), .utvald:has(video[data-klipp]), a:has(video[data-klipp])"); if (k && kanHovra) starta(k); });
+  document.addEventListener("focusout", (e) => { const k = e.target.closest && e.target.closest(".kort:has(video[data-klipp]), .utvald:has(video[data-klipp]), a:has(video[data-klipp])"); if (k) stoppa(k); });
 
   /* Banderollen på projektsidan */
   const film = document.querySelector(".banderoll-video");
