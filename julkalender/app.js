@@ -11,10 +11,10 @@ const GRADES=[["F","Förskoleklass","Läses högt · ja/nej-frågor och rita"],[
 const gName=g=>(GRADES.find(x=>x[0]===g)||["","Årskurs "+g])[1];
 const CTYPES=[
  {id:"snall",name:"Snällkalender",sub:"Snälla uppmaningar som gör klassen varmare",ex:"Säg något snällt till den som sitter bredvid dig.",col:"#c23a2b",icon:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'},
- {id:"rorelse",name:"Rastutmaningar",sub:"En fysisk utmaning att göra på rasten",ex:"Gör en snöängel på rasten!",col:"#2d5e48",icon:'<circle cx="14" cy="4.5" r="2"/><path d="M9 21l2.5-6 3 2.5V21M7 11l3-3.5 4 1 2.5 3.5M10 7.5l-1.5 6"/>'},
- {id:"kluring",name:"Kluringar",sub:"Små frågor i svenska, matte, SO och NO",ex:"Tomten har 3 röda och 4 blå paket. Hur många har han?",col:"#5f4b8b",icon:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/>'},
+ {id:"rorelse",name:"Fysiska rastutmaningar",sub:"En fysisk utmaning att göra på rasten, ibland med timer",ex:"Gör en snöängel på rasten!",col:"#2d5e48",icon:'<circle cx="14" cy="4.5" r="2"/><path d="M9 21l2.5-6 3 2.5V21M7 11l3-3.5 4 1 2.5 3.5M10 7.5l-1.5 6"/>'},
+ {id:"kluring",name:"Kluringar",sub:"Gåtor, logik och matte – med svar att visa",ex:"Vad blir blötare och blötare ju mer den torkar?",col:"#5f4b8b",icon:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/>'},
  {id:"blandat",name:"Blandat",sub:"Lite av allt – snällhet, rörelse och kluringar",ex:"Varje dag blir en överraskning.",col:"#c9762b",icon:'<path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.4 6.8 19.2l1-5.9L3.5 9.2l5.9-.8z"/>'}];
-const CHIP={"Snällhet":"#c23a2b","Rastutmaning":"#2d5e48","Matte":"#8a4a6a","Svenska":"#a8452f","SO":"#34506e","NO":"#3f6f5a"};
+const CHIP={"Snällhet":"#c23a2b","Rastutmaning":"#2d5e48","Kluring":"#5f4b8b","Matte":"#8a4a6a","Svenska":"#a8452f","SO":"#34506e","NO":"#3f6f5a"};
 const DEF={v:2,onboarded:false,grade:null,n:22,names:[],theme:"byn",ctype:"blandat",opened:{},testDay:null,edits:{}};
 let S=JSON.parse(JSON.stringify(DEF));
 let STORY=null,LIB=null,TID=null,db=null,uid=null,tts=null,dl=null;
@@ -24,7 +24,9 @@ try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={.
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ===================== skalning ===================== */
-function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k)}
+function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k);
+  const b=document.getElementById("bdrop");if(b){const t=64*k,isF=b.classList.contains("filt");b.style.backgroundImage=isF?`url("data:image/svg+xml,${encodeURIComponent(A.wallTile)}")`:"";b.style.backgroundSize=isF?`${t}px ${t}px`:"";b.style.backgroundPosition=isF?`${(innerWidth-1600*k)/2}px ${(innerHeight-900*k)/2}px`:"";const c=$("bsnow");if(c){c.width=innerWidth;c.height=innerHeight}}}
+function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn"?"byn":"filt";fit()}
 addEventListener("resize",fit);fit();
 
 /* ===================== datum ===================== */
@@ -47,16 +49,15 @@ function buildLuckor(){
 }
 const young=()=>["F","1","2","3"].includes(S.grade||"1");
 function content(l){
-  const i=l.idx!=null?l.idx:(40+l.day),age=young()?"yngre":"aldre";
-  let type=S.ctype,item;
-  if(type==="blandat"){type=["snall","rorelse","kluring"][i%3];item=(Math.floor(i/3)*7+(i%3)*11)%32}else item=(i*7+3)%32;
-  const sub=type==="kluring"?(S.grade||"1"):age;const it=(LIB&&LIB[type]&&LIB[type][sub]&&LIB[type][sub][item])||{typ:"Snällhet",text:"…"};
+  const i=l.idx!=null?l.idx:(100+l.day);
+  const it=LK.item(S.grade||"1",S.ctype,i)||{chip:"Snällhet",text:"…",facit:null,bild:null,inter:null,id:"x"};
   const key=S.ctype+":"+l.id,ed=S.edits[key];
-  return{typ:it.typ,text:ed!=null?ed:it.text,orig:it.text,svar:ed!=null?null:it.svar,lib:type+"-"+sub,item,key,edited:ed!=null};
+  return{typ:it.chip,text:ed!=null?ed:it.text,orig:it.text,svar:ed!=null?null:it.facit,bild:it.bild,inter:ed!=null?null:it.inter,lib:it.id,key,edited:ed!=null};
 }
+const isRich=c=>!!(c.bild||c.inter);
 function state(l,D){if(S.opened[l.id])return"open";if(l.day===D.idx)return"today";if(l.day<D.idx)return"missed";return"locked"}
 
-const HANDLING={"F": "Musen Pim hittar en liten stjärna, Glimt, som har ramlat ner från himlen. Tillsammans med ekorren Ester, haren Hoppe och ugglan Ulla försöker han hjälpa henne hem. De upptäcker att Glimt lyser av glädje, så hela skogen – till och med den brummiga grävlingen Bruno – ordnar en fest i gläntan. Glimt lyser starkare och starkare och svävar till slut hem till himlen.", "1": "Thea får röda vantar av mormor, men en dag är den ena borta. Med kompisen Love följer hon spåren in i skogen och hittar vanten under en gran – en skadad domherre har gjort den till sitt bo. Med hjälp av mormor och grannen Gunnel tar de hand om fågeln tills den kan flyga igen och får följa med sin flock. Thea lär sig att det känns bra att dela med sig, och mormor har en stickad hemlighet till julavslutningen.", "2": "Dagny är ny i Glimmerbyn och klassen ska göra lyktor till Ljusfesten. När en storm förstör alla papperslyktor och skolan inte har råd med nytt papper vågar Dagny föreslå något: lyktor av plåtburkar, som hennes morfar Yusuf gör. Hela byn samlar burkar och Axel, som först retade henne, blir hennes medhjälpare. På Ljusfesten går Dagny och morfar först i tåget, och Glimmerbyn känns till slut som hemma.", "3": "Amanda och Isak bor i samma trappuppgång. Någon lägger hemliga små saker – en pappersstjärna, hjärtan, pappersfåglar – utanför grannarnas dörrar. De båda detektiverna följer ledtrådarna till herr Berg, en ensam änkling som fortsätter sin fru Majs gamla tradition. Barnen bestämmer sig för att ordna en julfest på gården för alla grannar. Den sura fru Ek säger först nej, men ändrar sig efter ett brev från hela huset, och festen blir av.", "4": "En snöstorm slår ut strömmen i Mikas by mitt i december. Familjen eldar i kaminen och undrar hur det går för gamla Ingrid längst bort på vägen. Mika, mamma och lillebror Sigge åker skidor dit och tar med Ingrid till skolans värmestuga, där byn samlas. När dieseln till aggregatet tar slut får alla hjälpas åt: barnen bär ved, grannar delar med sig och Mika vågar prata med en familj som sitter ensam i ett hörn. Till slut kommer montörerna och ljuset tillbaka.", "5": "Thea hittar en hund vid älven en kväll och döper den till Kompis. Chippet visar att hunden heter Doris och tillhör A. Holm, men ingen öppnar på adressen. Med pappa och kompisen Victor letar Thea vidare tills de hittar ägaren Arne på sjukhuset, och hon besöker honom varje dag med filmer på Doris. När Arne inte får ha hund i sin nya lägenhet skriver Thea och Victor ett brev till fastighetsbolaget. De får ja, och sista dagen före jullovet får Doris komma hem till Arne.", "6": "Klass 6b ska samla in 20 000 kr till en fjällresa genom att ha ett stånd på julmarknaden: knäck, pepparkakor, ljusstakar och varm choklad. Victor, som inte har råd med resan, gör det mesta av jobbet. När kassaskrinet försvinner efter marknaden börjar ett rykte om att Victor har tagit det. Amanda vågar säga sanningen inför klassen, och tillsammans med Love och Victor hittar hon skrinet hos vaktmästaren med alla pengar kvar. Klassen åker till fjällen – och de tre har blivit vänner."};
+const HANDLING={"F": "Under en stor gran bor musen Pim. En kväll faller något glittrande ner från himlen och landar i snön alldeles i närheten. Det är en liten stjärna som heter Glimt, och hon har kommit bort. Hur tar man sig upp till himlen när man är en liten mus? Pim, ekorren Ester och haren Hoppe gör allt de kan. Men varje dag lyser Glimt lite svagare, och snart är det bråttom.", "1": "Mormor har stickat de finaste röda vantarna i hela världen. Men en dag är den ena borta! Thea och hennes kompis Love hittar spår i snön och en röd tråd som leder bort mot den mörka skogen. Vem har tagit vanten, och varför? Svaret är något helt annat än Thea någonsin hade kunnat tro.", "2": "Dagny har just flyttat till Glimmerbyn, och allt är nytt och främmande. Hennes klass ska göra lyktor till den stora Ljusfesten, och Dagnys lykta blir den finaste av alla. Men så kommer stormen. När allt verkar förstört måste någon våga räcka upp handen och komma med en idé. Kan det verkligen bli en Ljusfest i år?", "3": "Någon smyger omkring i trappuppgången. En pappersstjärna på en dörrmatta, små hjärtan på dörrhandtagen, en pappersfågel i brevlådan. Vem är den hemliga hjälparen? Amanda och Isak bestämmer sig för att ta reda på det. De gör listor, spanar och letar ledtrådar. Men hemligheten de kommer på spåren är större än de anar.", "4": "Det börjar med en smäll. Sedan blir allt mörkt i hela byn. Ingen ström, ingen värme, inga lampor, och snöstormen bara fortsätter. Mika kan inte sluta tänka på gamla Ingrid, som bor ensam längst bort på vägen. Ingen har sett röken från hennes skorsten. Hur långt är man beredd att gå för att hjälpa någon när det är som mörkast?", "5": "En kväll vid den frusna älven hittar Thea en hund. Den är ensam, frusen och har ett öra som hänger. Thea vill inget hellre än att få behålla den. Men någonstans finns kanske någon som saknar den. Chippet ger ett namn och en adress, men ingen öppnar dörren. Vem är A. Holm, och varför har ingen letat efter sin hund?", "6": "Klass 6b har ett mål: 20 000 kronor till fjällresan. Ståndet på julmarknaden blir succé, med knäck, pepparkakor och varm choklad. Men dagen efter är kassaskrinet borta, och snart viskar alla om vem som har tagit det. Amanda vet något som ingen annan vet. Frågan är om hon vågar säga det."};
 /* ===================== guide ===================== */
 const TOUR=[[null,"Inställningar hittar du här uppe."],["klass","Klassen – byt årskurs och antal elever."],["namn","Elevernas namn – skriv in eller ändra namnen."],["utseende","Utseende – byn i snön eller filtfickorna."],["innehall","Luckornas innehåll – snällhet, rastutmaningar eller kluringar."],["forhand","Förhandsgranska – se luckor och kapitel innan eleverna gör det."]];
 let tourT=null;
@@ -87,7 +88,7 @@ function save(){
 
 /* ===================== data ===================== */
 async function loadStory(){if(!S.grade)return;try{STORY=await (await fetch("data/"+S.grade+".json")).json()}catch(e){STORY=null}}
-async function loadLib(){try{LIB=await (await fetch("data/luckor.json")).json()}catch(e){LIB=null}}
+async function loadLib(){LIB=await LK.load()}
 async function loadTid(){try{TID=await (await fetch("audio/tider.json")).json()}catch(e){TID=null}}
 
 /* ===================== toast ===================== */
@@ -96,10 +97,12 @@ let tT;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on"
 /* ===================== snö ===================== */
 let snowRAF=null;const cv=$("snow"),cx=cv.getContext("2d");const flakes=[];
 for(let i=0;i<150;i++)flakes.push({x:Math.random()*1600,y:Math.random()*900,r:1+Math.random()*2.4,s:.3+Math.random()*.6,w:Math.random()*6});
+const bcv=document.getElementById("bsnow"),bcx=bcv?bcv.getContext("2d"):null;const bfl=[];for(let i=0;i<160;i++)bfl.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.6,s:Math.random()*.0012+.0006,w:Math.random()*6});
 function snowOn(on){
-  cancelAnimationFrame(snowRAF);cx.clearRect(0,0,1600,900);cv.style.display=on?"block":"none";if(!on)return;
+  cancelAnimationFrame(snowRAF);cx.clearRect(0,0,1600,900);cv.style.display=on?"block":"none";if(bcx){bcx.clearRect(0,0,bcv.width,bcv.height);bcv.style.display=on?"block":"none"}if(!on)return;
   let t0=0;const step=t=>{snowRAF=requestAnimationFrame(step);if(t-t0<33)return;t0=t;cx.clearRect(0,0,1600,900);cx.fillStyle="rgba(255,255,255,.88)";
-    for(const f of flakes){if(!reduce){f.y+=f.s;f.x+=Math.sin((t/1800)+f.w)*.3;if(f.y>905){f.y=-5;f.x=Math.random()*1600}}cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()}};
+    for(const f of flakes){if(!reduce){f.y+=f.s;f.x+=Math.sin((t/1800)+f.w)*.3;if(f.y>905){f.y=-5;f.x=Math.random()*1600}}cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()}
+    if(bcx&&bcv.width>0){const W=bcv.width,H=bcv.height;bcx.clearRect(0,0,W,H);bcx.fillStyle="rgba(255,255,255,.85)";for(const f of bfl){if(!reduce){f.y+=f.s;f.x+=Math.sin((t/1800)+f.w)*.0002;if(f.y>1.01){f.y=-.01;f.x=Math.random()}}bcx.beginPath();bcx.arc(f.x*W,f.y*H,f.r,0,7);bcx.fill()}}};
   snowRAF=requestAnimationFrame(step);
 }
 
@@ -131,13 +134,15 @@ function topUI(L,D){
   <div class="tools"><div class="count"><b>${D.after&&!D.test?"0":left===0?"Sista":left}</b><span>${left===0?"dagen!":"skoldagar kvar"}</span></div><button class="tbtn" id="kopBtn">${ICO.print}Kopieringsmaterial</button><button class="tbtn sq" id="gearBtn" aria-label="Inställningar">${ICO.gear}</button></div></div>${ban}`;
 }
 function chapLabel(D){const i=Math.max(0,D.idx),ch=STORY&&STORY.kapitel[i];return D.idx<0?"Kapitel 1 öppnas 1 december":ch?`Kapitel ${i+1}: ${ch.rubrik}`:""}
-function render(){
+function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
+
   if(!S.onboarded){renderOnbBg();return}
   const L=buildLuckor(),D=dayInfo();LCUR=L;
   $("stage").dataset.theme=S.theme;
   const w=$("world");w.style.transition="none";w.style.transform="";void w.offsetWidth;w.style.transition="";
   $("fly").innerHTML="";busy=false;
   const ui=$("ui");ui.style.opacity="1";
+  setBackdrop(S.theme);
   if(S.theme==="byn"){
     const r=A.bynSVG(L.map(l=>({...l,st:state(l,D)})));
     const bsz=Math.round(Math.max(28,Math.min(40,r.sc*1.05)));
@@ -172,19 +177,24 @@ function render(){
 
 /* ----- luckkortet ----- */
 function cardHTML(l,o={}){
-  const c=content(l),D=dayInfo();
+  const c=content(l),D=dayInfo(),rich=isRich(c);
   const who=l.whole?"Hela klassens lucka":l.named?esc(l.name)+"s lucka":esc(l.name);
   const late=!o.preview&&l.day<D.idx&&!S.opened[l.id]?" · sparad lucka":"";
-  const fs=c.text.length<60?50:c.text.length<110?42:34;
-  return`<div class="cardin"><div class="chead"><span class="who">${who} · ${dLabel(l.day)}${late}</span><span class="chip" style="background:${CHIP[c.typ]||"#1b2747"}">${esc(c.typ)}</span></div>
-  <div class="cmid"><h3 id="ltxt" style="font-size:${fs}px">${esc(c.text)}</h3>${c.svar?`<div class="svar hide" id="svar">${esc(c.svar)}</div>`:""}</div>
-  <div class="crow" id="crow"><button class="lnk" id="edBtn">${ICO.pen}Ändra texten</button><span style="flex:1"></span>${c.svar?'<button class="btn gold" id="showSvar">Visa svaret</button>':""}<button class="btn main" id="cClose">Klar</button></div></div>`;
+  const n=c.text.length,fs=rich?(c.bild?(n<70?38:n<140?32:n<240?26:22):(n<90?40:n<180?32:26)):(n<60?50:n<110?42:n<200?34:28);
+  const pic=c.bild?`<figure class="cimg"><img src="${c.bild.src}" alt="${esc(c.bild.alt)}" onerror="this.closest('.cimg').remove();this.closest('.cbody')&&this.closest('.cbody').classList.remove('withimg')"></figure>`:"";
+  return`<div class="cardin${rich?" rich":""}"><div class="chead"><span class="who">${who} · ${dLabel(l.day)}${late}</span><span class="chip" style="background:${CHIP[c.typ]||"#1b2747"}">${esc(c.typ)}</span></div>
+  <div class="cbody${c.bild?" withimg":""}">${pic}<div class="cmid"><h3 id="ltxt" style="font-size:${fs}px">${esc(c.text)}</h3>${c.svar?`<div class="svar hide" id="svar"><span>Svar</span>${esc(c.svar)}</div>`:""}</div></div>
+  ${c.inter?`<div class="cint" id="cint"></div>`:""}
+  <div class="crow" id="crow"><button class="lnk" id="edBtn">${ICO.pen}Ändra texten</button><span style="flex:1"></span>${c.svar?'<button class="btn light sm" id="showSvar" aria-pressed="false">Visa svar</button>':""}<button class="btn main" id="cClose">Klar</button></div></div>`;
 }
+let cardCleanup=()=>{};
 function bindCard(root,l,close){
   const c=content(l);
-  if($("showSvar"))$("showSvar").onclick=()=>{$("svar").classList.remove("hide");$("showSvar").remove()};
-  $("cClose").onclick=()=>{stopAudio();close()};
-  $("edBtn").onclick=()=>editLucka(root,l,close);
+  cardCleanup();cardCleanup=c.inter?LK.mount($("cint"),c.inter):()=>{};
+  const sb=$("showSvar");
+  if(sb)sb.onclick=()=>{const h=$("svar").classList.toggle("hide");sb.textContent=h?"Visa svar":"Dölj svar";sb.setAttribute("aria-pressed",String(!h))};
+  $("cClose").onclick=()=>{stopAudio();cardCleanup();cardCleanup=()=>{};close()};
+  $("edBtn").onclick=()=>{cardCleanup();cardCleanup=()=>{};editLucka(root,l,close)};
 }
 function editLucka(root,l,close){
   stopAudio();const c=content(l),h=$("ltxt");
@@ -203,7 +213,7 @@ function zoomTo(el,l){
   busy=true;const x=+el.dataset.x,y=+el.dataset.y,w=$("world"),sc=+(w.dataset.sc||30);
   const k=Math.max(2.2,Math.min(4,95/(parseFloat(el.style.getPropertyValue("--b"))||32)));
   $("ui").style.opacity="0";w.style.transform=`translate(${400-x*k}px,${480-y*k}px) scale(${k})`;
-  setTimeout(()=>{const f=$("fly");f.innerHTML=`<div class="dim soft"></div><div class="burst"></div><div class="card byncard" id="lcard">${cardHTML(l)}</div>`;
+  setTimeout(()=>{const f=$("fly");f.innerHTML=`<div class="dim soft"></div><div class="burst"></div><div class="card byncard${isRich(content(l))?" rich":""}" id="lcard">${cardHTML(l)}</div>`;
     const card=$("lcard");requestAnimationFrame(()=>card.classList.add("on"));
     S.opened[l.id]=true;save();
     bindCard(card,l,()=>{card.classList.remove("on");f.querySelector(".dim").style.opacity="0";setTimeout(()=>{f.innerHTML="";w.style.transform="";setTimeout(()=>{render()},1050)},320)});
@@ -218,12 +228,12 @@ function pullOut(el,l){
   el.style.visibility="hidden";
   const fl=$("flip"),ffb=fl.querySelector(".ff .body");ffb.style.inset="0";ffb.style.position="absolute";
   S.opened[l.id]=true;save();
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{fl.classList.add("go");fl.style.left="400px";fl.style.top="170px";fl.style.width="800px";fl.style.height="560px";f.querySelector(".dim").style.opacity="1";setTimeout(()=>fl.classList.add("turn"),reduce?0:560)}));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{fl.classList.add("go");const RB=isRich(content(l))?[300,40,1000,820]:[400,170,800,560];fl.style.left=RB[0]+"px";fl.style.top=RB[1]+"px";fl.style.width=RB[2]+"px";fl.style.height=RB[3]+"px";f.querySelector(".dim").style.opacity="1";setTimeout(()=>fl.classList.add("turn"),reduce?0:560)}));
   bindCard($("lcard"),l,()=>{fl.classList.remove("turn");f.querySelector(".dim").style.opacity="0";setTimeout(()=>{fl.style.left=x0+"px";fl.style.top=y0+"px";fl.style.width=w0+"px";fl.style.height=h0+"px";setTimeout(()=>render(),820)},reduce?0:650)});
 }
 /* ----- förhandsvisa en lucka (lärare) ----- */
 function previewLucka(l,back){
-  const o=$("ovl2");o.innerHTML=`<div class="ov"><div class="card ${S.theme==="byn"?"byncard":"feltcard"} on static" id="lcard">${cardHTML(l,{preview:true})}</div></div>`;
+  const o=$("ovl2");o.innerHTML=`<div class="ov"><div class="card ${S.theme==="byn"?"byncard":"feltcard"} on static${isRich(content(l))?" rich":""}" id="lcard">${cardHTML(l,{preview:true})}</div></div>`;
   bindCard($("lcard"),l,()=>{o.innerHTML="";if(back)back()});
 }
 
@@ -278,7 +288,7 @@ function openReader(i,preview){
   overlay(`<div class="panel reader">${X}
    <div class="rhead"><div class="rt"><b>${esc(STORY.titel)}</b><span>${gName(g)}${preview?" · förhandsgranskning":""}</span></div>
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
-   <div class="rbody"><div class="rleft"><div class="pic">${A.chapterSVG(g,cur)}</div>
+   <div class="rbody"><div class="rleft"><div class="pic${A.isPhoto(g)?" wide":""}">${A.chapterSVG(g,cur)}</div>
      <div class="rk">Kapitel ${cur+1} av 14 · ${dLabel(cur)}</div><h2 data-p="-1" id="rh">${esc(k.rubrik)}</h2>
      <div class="rbar"><div class="soon">${ICO.spk}<span>Vi jobbar på att få till en fungerande uppläsning av alla böcker.</span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
      <button class="btn light" id="toKop">${ICO.print}Arbetsblad till kapitlet</button></div>
@@ -366,7 +376,8 @@ async function getPdf(f,name){
 
 /* ===================== inställningar ===================== */
 let setTab="klass";
-function perDayText(){const n=S.n;const b=Math.floor(n/14),e=n%14;if(n<14)return`${n} luckor fördelas över 14 skoldagar. Dagar utan elevlucka får en lucka för hela klassen.`;return e?`${e} dagar öppnas ${b+1} luckor, ${14-e} dagar öppnas ${b} ${b===1?"lucka":"luckor"}.`:`Varje dag öppnas ${b} ${b===1?"lucka":"luckor"}.`}
+function perDayText(){const t=perDayBase();return S.n>28&&S.ctype!=="blandat"?t+" Varje innehållstyp har 28 olika luckor, så med fler elever börjar de om. Välj Blandat för 84 olika.":t}
+function perDayBase(){const n=S.n;const b=Math.floor(n/14),e=n%14;if(n<14)return`${n} luckor fördelas över 14 skoldagar. Dagar utan elevlucka får en lucka för hela klassen.`;return e?`${e} dagar öppnas ${b+1} luckor, ${14-e} dagar öppnas ${b} ${b===1?"lucka":"luckor"}.`:`Varje dag öppnas ${b} ${b===1?"lucka":"luckor"}.`}
 function themeCards(){return`<button class="tcard ${S.theme==="byn"?"on":""}" data-th="byn"><span class="pv">${A.miniByn()}</span><b>Byn i snön</b><span class="ds">En isometrisk miniatyrby som svävar under norrskenet. Varje fönster är en lucka – kameran zoomar in när den öppnas.</span></button>
   <button class="tcard ${S.theme==="filt"?"on":""}" data-th="filt"><span class="pv">${A.miniFilt()}</span><b>Filtfickorna</b><span class="ds">Målat som en sagobok: tovade fickor på snören mot en varm trävägg. Fickan dras fram och vänds när den öppnas.</span></button>`}
 function ctypeCards(cls=""){return CTYPES.map(t=>`<button class="ccard ${cls} ${S.ctype===t.id?"on":""}" data-ct="${t.id}"><span class="ci" style="background:${t.col}">${ctIcon(t,"#fff",34)}</span><span class="ct"><b>${t.name}</b><span>${t.sub}</span><i>”${esc(t.ex)}”</i></span></button>`).join("")}
@@ -399,7 +410,7 @@ function openSettings(tab){
     sb.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;save();openSettings()});
   }
   if(setTab==="innehall"){
-    sb.innerHTML=`<h2>Luckornas innehåll</h2><p>Välj vad luckorna ska innehålla. Texterna anpassas efter årskursen. Egna ändringar sparas för varje innehållstyp.</p><div class="ccards in">${ctypeCards("lt")}</div>`;
+    sb.innerHTML=`<h2>Luckornas innehåll</h2><p>Välj vad luckorna ska innehålla. Texterna anpassas efter stadiet (${LK.stadie(S.grade||"1").replace("-","–")}). Egna ändringar sparas för varje innehållstyp.</p><div class="ccards in">${ctypeCards("lite")}</div>`;
     sb.querySelectorAll("[data-ct]").forEach(b=>b.onclick=()=>{S.ctype=b.dataset.ct;save();openSettings()});
   }
   if(setTab==="forhand"){
@@ -434,7 +445,7 @@ function openSettings(tab){
 let onbStep=0,nameMode=null;
 function renderOnbBg(){
   $("stage").dataset.theme="onb";$("ui").innerHTML="";$("ui").style.opacity="1";$("fly").innerHTML="";
-  const w=$("world");w.style.transform="";w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${A.onbSVG()}</svg>`;snowOn(true);
+  const w=$("world");w.style.transform="";w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${A.onbSVG()}</svg>`;setBackdrop("byn");snowOn(true);
 }
 function showOnb(){
   const o=$("onb");if(S.onboarded){o.innerHTML="";return}
@@ -455,12 +466,12 @@ function showOnb(){
     h=`${dots}<h1>Hur ska kalendern se ut?</h1><p class="lead">Båda är levande men lugna. Du kan byta när du vill under Inställningar.</p><div class="tcards">${themeCards()}</div>
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Nästa</button></div>`}
   if(onbStep===3){wcls="wide";
-    h=`${dots}<h1>Vad ska luckorna innehålla?</h1><p class="lead">Texterna anpassas efter årskursen. Du kan byta och ändra enskilda luckor senare.</p><div class="ccards">${ctypeCards()}</div>
+    h=`${dots}<h1>Vad ska luckorna innehålla?</h1><p class="lead">Texterna anpassas efter stadiet (${LK.stadie(S.grade||"1").replace("-","–")}). Du kan byta och ändra enskilda luckor senare.</p><div class="ccards">${ctypeCards()}</div>
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Nästa</button></div>`}
   if(onbStep===4){const t=CTYPES.find(x=>x.id===S.ctype);
     h=`${dots}<h1>Allt är klart!</h1><p class="lead">${esc(gName(S.grade))} · ${S.n} elever · ${S.theme==="byn"?"Byn i snön":"Filtfickorna"} · ${t?t.name:""}</p>
     <div class="ready"><div><b>Luckorna</b><span>Dagens luckor lyser. Missade luckor kan öppnas i efterhand. Framtida luckor är låsta.</span></div><div><b>Dagens kapitel</b><span>${STORY?"”"+esc(STORY.titel)+"” – ":""}ett nytt kapitel varje skoldag.</span></div><div><b>Kopieringsmaterial</b><span>Läsförståelse till varje kapitel som PDF, plus facit. Knappen finns uppe till höger.</span></div></div>
-    ${STORY&&HANDLING[S.grade]?`<div class="plot"><b>Det här handlar ”${esc(STORY.titel)}” om</b><p>${esc(HANDLING[S.grade])}</p></div>`:""}
+    ${STORY&&HANDLING[S.grade]?`<div class="plot"><b>”${esc(STORY.titel)}”</b><p>${esc(HANDLING[S.grade])}</p></div>`:""}
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Öppna kalendern</button></div>`}
   const gear=onbStep===1&&nameMode==="later"?`<div class="ogear"><span class="tbtn sq">${ICO.gear}<i class="ring"></i></span></div><div class="pointer"><svg width="96" height="74" viewBox="0 0 96 74" aria-hidden="true"><path d="M8 66 C34 62 64 48 80 14" stroke="#ffd27a" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M66 16 82 8 84 26" stroke="#ffd27a" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="bubble">Här hittar du <b>Inställningar</b>. Där kan du skriva in namnen när du vill.</div></div>`:"";
   o.innerHTML=`${gear}<div class="onbcard ${wcls}">${h}</div>`;
