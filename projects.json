@@ -76,7 +76,7 @@
       "poster": "/assets/video/vaggen-poster.jpg",
       "sida": "/projekt/vaggen/",
       "tema": {
-        "topp": "#B4553A",
+        "topp": "#9A452D",
         "botten": "#F3E6D8",
         "ord": "#FFD8C6",
         "ljus": "#FFF1EA",
@@ -253,7 +253,7 @@
       "poster": "/assets/video/veckopalten-poster.jpg",
       "sida": "/projekt/veckopalten/",
       "tema": {
-        "topp": "#2E7D5B",
+        "topp": "#276C4E",
         "botten": "#E6F2EA",
         "ord": "#C9EEDB",
         "ljus": "#EFFFF6",
@@ -341,7 +341,7 @@
       "poster": "/assets/video/paltboken-poster.jpg",
       "sida": "/projekt/paltboken/",
       "tema": {
-        "topp": "#B8283A",
+        "topp": "#A82334",
         "botten": "#F6E7E4",
         "ord": "#FFC9CF",
         "ljus": "#FFF0F1",

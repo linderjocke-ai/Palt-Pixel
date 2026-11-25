@@ -98,7 +98,7 @@ a { color: inherit; }
 /* Projektsida: info */
 .info { max-width: var(--bredd); margin: 0 auto; padding: 14px 24px 0; }
 .info-rad { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
-.etikett { display: block; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .62; }
+.etikett { display: block; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
 .varde { display: block; font-family: var(--rubrik); font-stretch: 112%; font-weight: 800; font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; line-height: 1.1; margin-top: 2px; }
 .info-ar { text-align: right; }
 .info > .ingress { font-size: 19px; margin: 14px 0 0; max-width: 60ch; }
@@ -112,7 +112,7 @@ a { color: inherit; }
 .spela:hover { transform: translateY(-2px) scale(1.015); }
 .spela-v { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
 .spela-v svg { width: 19px; height: 19px; }
-.spela-h { font-size: 14px; opacity: .72; }
+.spela-h { font-size: 14px; opacity: .92; }
 .spela.av { opacity: .55; box-shadow: none; }
 .webblasare { display: flex; align-items: center; gap: 10px; margin: 14px 0 0; font-size: 15px; opacity: .85; }
 .webblasare svg { width: 20px; height: 20px; flex-shrink: 0; }
@@ -127,7 +127,7 @@ a { color: inherit; }
 .fakta dl { margin: 0; }
 .fakta dl div { display: grid; grid-template-columns: 118px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid rgba(0,0,0,.08); font-size: 15px; }
 .fakta dl div:first-child { border-top: 0; }
-.fakta dt { opacity: .65; }
+.fakta dt { opacity: .82; }
 .fakta dd { margin: 0; font-weight: 500; }
 .trailer { margin-top: 30px; }
 .trailer video { width: 100%; max-width: 860px; aspect-ratio: 16 / 9; border-radius: 22px; background: #0D0F14; }
@@ -165,9 +165,9 @@ a { color: inherit; }
 .pk .v2 { background: #FFD75E; width: 9px; height: 9px; left: 40px; top: 30px; animation-delay: -2s; }
 .pk-bred .v2 { left: -5px; top: auto; bottom: 120px; }
 .pk-text { display: flex; flex-direction: column; gap: 3px; }
-.pk-meta { font-family: var(--pixel); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.pk-meta { font-family: var(--pixel); font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
 .pk-namn { font-family: var(--rubrik); font-stretch: 115%; font-weight: 800; font-size: 26px; letter-spacing: -0.03em; line-height: 1.05; }
-.pk-ingress { font-size: 14px; line-height: 1.4; opacity: .88; }
+.pk-ingress { font-size: 14px; line-height: 1.4; }
 .pk-cta { font-size: 13px; font-weight: 700; margin-top: 6px; }
 
 /* Sidfot */

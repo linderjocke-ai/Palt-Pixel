@@ -257,15 +257,31 @@ const AU=new Audio();AU.preload="none";
 let auSegs=null,auI=-1,auCb=null,auRAF=null,auSrc="";
 const AUV="20261125e";
 function fmtT(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
-function bindListen(g,cur){const b=$("lyssna");if(!b)return;const src="audio/ola/"+g+"-"+String(cur+1).padStart(2,"0")+".mp3?v="+AUV;
+let TIDER=null;const tiderP=()=>TIDER?Promise.resolve(TIDER):fetch("audio/ola/tider.json?v="+AUV).then(r=>r.json()).then(j=>TIDER=j).catch(()=>null);
+let hlRAF=0;
+function wrapSentences(key){const T=TIDER&&TIDER[key];if(!T)return null;const els=[];
+  const byP={};T.forEach((u,k)=>{(byP[u[0]]=byP[u[0]]||[]).push([u,k])});
+  Object.keys(byP).forEach(pi=>{const el=pi==="-1"?$("rh"):document.querySelector('#paras p[data-p="'+pi+'"]');if(!el)return;
+    if(pi==="-1"){els[byP[pi][0][1]]=el;return}
+    const txt=el.textContent;let h="",pos=0;byP[pi].forEach(([u,k])=>{h+=esc(txt.slice(pos,u[1]))+'<span class="ss" data-k="'+k+'">'+esc(txt.slice(u[1],u[2]))+"</span>";pos=u[2]});h+=esc(txt.slice(pos));el.innerHTML=h;
+    el.querySelectorAll(".ss").forEach(s=>els[+s.dataset.k]=s)});
+  return{T,els}}
+function bindListen(g,cur){const b=$("lyssna");if(!b)return;const key=g+"-"+String(cur+1).padStart(2,"0");let W=null,lastK=-1;
+  tiderP().then(()=>{W=wrapSentences(key)});
+  const mark=()=>{if(!W)return;const t=AU.currentTime,on=AU.src.indexOf(key+".mp3")>=0&&!AU.paused;let k=-1;
+    if(on||AU.currentTime>0&&AU.src.indexOf(key+".mp3")>=0){for(let i=0;i<W.T.length;i++){if(t>=W.T[i][3]-0.15)k=i;else break}}
+    if(k===lastK)return;if(lastK>=0&&W.els[lastK])W.els[lastK].classList.remove("hl");lastK=k;
+    const el=k>=0&&W.els[k];if(el){el.classList.add("hl");const box=$("rtext");if(box&&el.id!=="rh"){const r=el.getBoundingClientRect(),bb=box.getBoundingClientRect();if(r.bottom>bb.bottom-40||r.top<bb.top+20)box.scrollBy({top:r.top-bb.top-bb.height*.35,behavior:"smooth"})}}};
+  const loop=()=>{mark();if(!AU.paused)hlRAF=requestAnimationFrame(loop)};
+  AU.onseeked=mark;const src="audio/ola/"+g+"-"+String(cur+1).padStart(2,"0")+".mp3?v="+AUV;
   const ui=()=>{const on=!AU.paused&&AU.src.indexOf(src.split("?")[0])>=0;b.classList.toggle("playing",on);b.innerHTML=(on?ICO.pause:ICO.play)+"<span>"+(on?"Pausa":(AU.currentTime>0&&AU.src.indexOf(src.split("?")[0])>=0?"Fortsätt":"Lyssna"))+"</span>";
     const f=$("lfill"),t=$("ltime");if(f&&AU.duration)f.style.width=(100*AU.currentTime/AU.duration)+"%";if(t)t.textContent=AU.duration?fmtT(AU.currentTime)+" / "+fmtT(AU.duration):""};
-  AU.ontimeupdate=ui;AU.onplay=ui;AU.onpause=ui;AU.onended=()=>{AU.currentTime=0;ui()};AU.onloadedmetadata=ui;
+  AU.ontimeupdate=ui;AU.onplay=()=>{ui();cancelAnimationFrame(hlRAF);loop()};AU.onpause=()=>{ui();mark()};AU.onended=()=>{AU.currentTime=0;ui();if(lastK>=0&&W&&W.els[lastK])W.els[lastK].classList.remove("hl");lastK=-1};AU.onloadedmetadata=ui;
   b.onclick=()=>{if(AU.src.indexOf(src.split("?")[0])<0){AU.src=src;AU.preload="auto"}
     if(AU.paused)AU.play().catch(()=>toast("Ljudet kunde inte spelas"));else AU.pause()};
   const bar=b.parentNode.querySelector(".lbar");bar.onclick=e=>{if(AU.src.indexOf(src.split("?")[0])<0||!AU.duration)return;const r=bar.getBoundingClientRect();AU.currentTime=AU.duration*(e.clientX-r.left)/r.width};
   ui()}
-function stopAudio(){try{AU.pause()}catch(e){}cancelAnimationFrame(auRAF);if(auCb&&auCb.end)auCb.end();auSegs=null;auCb=null;if(tts){try{tts.stop()}catch(e){}}}
+function stopAudio(){try{AU.pause()}catch(e){}cancelAnimationFrame(hlRAF);cancelAnimationFrame(auRAF);if(auCb&&auCb.end)auCb.end();auSegs=null;auCb=null;if(tts){try{tts.stop()}catch(e){}}}
 function playSegs(src,segs,cb,from=0){
   stopAudio();if(!segs||!segs.length)return false;
   auSegs=segs;auCb=cb;auI=-1;
@@ -315,7 +331,7 @@ function openReader(i,preview){
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
    <div class="rbody"><div class="rleft"><div class="pic${A.isPhoto(g)?" wide":""}">${A.chapterSVG(g,cur)}</div>
      <div class="rk">Kapitel ${cur+1} av 14 · ${dLabel(cur)}</div><h2 data-p="-1" id="rh">${esc(k.rubrik)}</h2>
-     <div class="rbar"><div class="lplay"><button id="lyssna" class="lbtn" aria-label="Lyssna på kapitlet">${ICO.play}<span>Lyssna</span></button><div class="lbar"><i id="lfill"></i></div><span id="ltime" class="ltime"></span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
+     <div class="rbar"><div class="lplay"><button id="lyssna" class="lbtn" aria-label="Lyssna på kapitlet">${ICO.play}<span>Lyssna</span></button><div class="lbar"><i id="lfill"></i></div><span id="ltime" class="ltime"></span><span class="aitag" title="Uppläsningen är en AI-röst, inte en människa">AI-röst</span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
      <button class="btn light" id="toKop">${ICO.print}Arbetsblad till kapitlet</button></div>
    <div class="rtext" id="rtext"><div id="paras" style="--rf:${rf}px">${k.text.map((p,j)=>`<p data-p="${j}">${esc(p)}</p>`).join("")}</div>
      <div class="rnav">${cur>0?'<button class="btn light" id="prevCh">Förra kapitlet</button>':"<span></span>"}${cur<max?'<button class="btn main" id="nextCh">Nästa kapitel</button>':""}</div></div></div></div>`,"rd");
@@ -462,7 +478,7 @@ function openSettings(tab){
     <div class="about"><div class="pp"><span class="ppmark"><svg width="54" height="54" viewBox="0 0 3 3" aria-hidden="true"><rect width="1" height="1" fill="#ffd27a"/><rect x="1" width="1" height="1" fill="#c23a2b"/><rect x="2" width="1" height="1" fill="#ffd27a"/><rect y="1" width="1" height="1" fill="#c23a2b"/><rect x="1" y="1" width="1" height="1" fill="#f7f1e6"/><rect x="2" y="1" width="1" height="1" fill="#2d5e48"/><rect y="2" width="1" height="1" fill="#ffd27a"/><rect x="1" y="2" width="1" height="1" fill="#2d5e48"/><rect x="2" y="2" width="1" height="1" fill="#c23a2b"/></svg></span><div><b>Utvecklad av Palt &amp; pixel</b><span>Digitala verktyg för klassrummet.</span><a href="https://paltpixel.se" target="_blank" rel="noopener">paltpixel.se</a></div></div>
     <p>En digital julkalender för förskoleklass till årskurs 6, med en följetong i fjorton kapitel, läsförståelse som kopieringsmaterial och en lucka för varje elev.</p>
     <p>Berättelserna har en icke-konfessionell inriktning och handlar om glädje, gemenskap, mod, omsorg och empati.</p>
-    <p>Alla berättelser finns inlästa. Tryck på Lyssna i läsaren. Uppläsning: rösten Ola från ElevenLabs.</p><button class="btn light" id="tourAgain">Visa guiden till inställningarna igen</button></div>`;
+    <p>Alla berättelser finns inlästa. Tryck på Lyssna i läsaren.</p><p><b>Skapat med AI:</b> Berättelserna, arbetsbladen och luckornas uppgifter är skrivna med hjälp av AI (Claude) och granskade av en lärare. Bilderna i åk 2–6 är ritade med hjälp av AI. Uppläsningen är en AI-röst (Ola från ElevenLabs), inte en människa.</p><button class="btn light" id="tourAgain">Visa guiden till inställningarna igen</button></div>`;
     $("tourAgain").onclick=()=>{closeOv();setTimeout(startTour,300)};
   }
 }

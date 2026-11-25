@@ -8,8 +8,7 @@
 <link rel="icon" href="/assets/favicon.svg">
 <script src="/assets/js/konfig.js"></script>
 <script src="/assets/js/konto.js" data-spel="treomdagen" data-nycklar="^tod_"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Silkscreen&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/typsnitt.css">
 <style>
 :root{
   --bg:#FFF8EC; --kort:#FFFFFF; --text:#22202E; --dampad:#6E6878; --linje:#E9DFCC;
@@ -226,7 +225,7 @@ function visaOrd(vand = -1) {
   const tangentbord = [["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "å"], ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ö", "ä"], ["enter", "z", "x", "c", "v", "b", "n", "m", "bak"]];
   vy.innerHTML = `<section class="kort">
     <div class="rubrik"><h2>Dagens ord</h2><span>Fem bokstäver, sex försök</span></div>
-    <div class="rutnat" aria-label="Gissningar">${rader.join("")}</div>
+    <div class="rutnat" role="group" aria-label="Gissningar">${rader.join("")}</div>
     ${L.ord.klar ? `<div class="svar">${L.ord.vann ? `Snyggt! Du klarade det på ${L.ord.gissningar.length} försök.` : "Det var svårt i dag. Ordet var"}<div class="stor">${e(DAGENS_ORD)}</div></div>
       <button class="knapp" data-ga="tid">Nästa: Tidslinjen →</button>`
     : `<div class="tangenter">${tangentbord.map((rad) => `<div class="trad">${rad.map(tangent).join("")}</div>`).join("")}</div>`}
