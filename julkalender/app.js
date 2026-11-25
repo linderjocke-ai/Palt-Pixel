@@ -256,7 +256,7 @@ function previewLucka(l,back){
 const AU=new Audio();AU.preload="none";
 let auSegs=null,auI=-1,auCb=null,auRAF=null,auSrc="";
 const NOPIC=new Set(["4","5","6"]);
-const AUV="20261125h";
+const AUV="20261125i";
 function fmtT(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 let TIDER=null;const tiderP=()=>TIDER?Promise.resolve(TIDER):fetch("audio/ola/tider.json?v="+AUV).then(r=>r.json()).then(j=>TIDER=j).catch(()=>null);
 let hlRAF=0;
