@@ -145,7 +145,9 @@ A.byn2SVG=function(L,preview){
     rows.push({by,s,sp,hs})});
   const img=(f,x,y,w,h,ex="")=>`<image href="${R}${f}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" ${ex}/>`;
   const dek=(nm,cx,by,ht,flip)=>{const d=A.DEK2[nm],w=d[0]*ht/d[1];return img(nm+".webp",cx-w/2,by-ht,w,ht,flip?`transform="translate(${(2*cx).toFixed(1)},0) scale(-1,1)"`:"")};
-  let svg=img("bakgrund.jpg",0,0,1600,900,'preserveAspectRatio="xMidYMid slice"');
+  const pa='preserveAspectRatio="xMidYMid slice"';
+  let svg="";[-1,0,1].forEach(gy=>[-1,0,1].forEach(gx=>{const fx=gx?-1:1,fy=gy?-1:1,X=gx*1600,Y=gy*900;
+    svg+=`<g transform="translate(${X+(fx<0?1600:0)},${Y+(fy<0?900:0)}) scale(${fx},${fy})">${img("bakgrund.jpg",-1,-1,1602,902,pa)}</g>`}));
   const cent=[];let li=0,bsz=40;let smoke="";
   rows.forEach((row,r)=>{
     let back="",front="";
