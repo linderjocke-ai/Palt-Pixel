@@ -162,7 +162,7 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
   if(isByn(S.theme)){
     const r=(S.theme==="byn2"?A.byn2SVG:A.bynSVG)(L.map(l=>({...l,st:state(l,D)})));
     const bsz=Math.round(r.bsz||Math.max(22,Math.min(38,r.sc*.82)));
-    w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${r.svg}</svg><div class="hs">${r.cent.map(c=>{const st=c.l.st;return`<button class="bd ${st}" data-id="${c.l.id}" data-x="${c.x.toFixed(1)}" data-y="${c.y.toFixed(1)}" style="left:${c.x.toFixed(1)}px;top:${c.y.toFixed(1)}px;--b:${bsz}px" aria-label="${esc(c.l.name)}, ${dLabel(c.l.day)}"><span class="no">${dNum(c.l.day)}</span><span class="nm">${esc(c.l.name)}</span></button>`}).join("")}</div>`;
+    w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${r.svg}</svg><div class="hs">${r.cent.map(c=>{const st=c.l.st;return`<button class="bd ${st}" data-id="${c.l.id}" data-x="${c.x.toFixed(1)}" data-y="${c.y.toFixed(1)}" style="left:${c.x.toFixed(1)}px;top:${c.y.toFixed(1)}px;--b:${bsz}px" aria-label="${esc(c.l.name)}, ${dLabel(c.l.day)}"><span class="no">${dNum(c.l.day)}<i class="mo">dec</i></span><span class="nm">${esc(c.l.name)}</span></button>`}).join("")}</div>`;
     ui.innerHTML=topUI(L,D)+`<button class="moonbtn" id="chBtn">${ICO.book("#1e2f5c")}<b>Dagens kapitel</b><span>${esc(chapLabel(D))}</span></button>`;
     snowOn(true);
   }else{
