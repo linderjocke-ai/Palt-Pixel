@@ -126,6 +126,7 @@ const ICO={
  gear:`<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`,
  print:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v7H7z"/></svg>`,
  spk:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>`,
+ play:`<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>`,
  pause:`<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>`,
  pen:`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/></svg>`,
  x:`<svg width="26" height="26" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>`,
@@ -254,6 +255,16 @@ function previewLucka(l,back){
 /* ===================== ljud ===================== */
 const AU=new Audio();AU.preload="none";
 let auSegs=null,auI=-1,auCb=null,auRAF=null,auSrc="";
+const AUV="20261125c";
+function fmtT(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function bindListen(g,cur){const b=$("lyssna");if(!b)return;const src="audio/ola/"+g+"-"+String(cur+1).padStart(2,"0")+".mp3?v="+AUV;
+  const ui=()=>{const on=!AU.paused&&AU.src.indexOf(src.split("?")[0])>=0;b.classList.toggle("playing",on);b.innerHTML=(on?ICO.pause:ICO.play)+"<span>"+(on?"Pausa":(AU.currentTime>0&&AU.src.indexOf(src.split("?")[0])>=0?"Fortsätt":"Lyssna"))+"</span>";
+    const f=$("lfill"),t=$("ltime");if(f&&AU.duration)f.style.width=(100*AU.currentTime/AU.duration)+"%";if(t)t.textContent=AU.duration?fmtT(AU.currentTime)+" / "+fmtT(AU.duration):""};
+  AU.ontimeupdate=ui;AU.onplay=ui;AU.onpause=ui;AU.onended=()=>{AU.currentTime=0;ui()};AU.onloadedmetadata=ui;
+  b.onclick=()=>{if(AU.src.indexOf(src.split("?")[0])<0){AU.src=src;AU.preload="auto"}
+    if(AU.paused)AU.play().catch(()=>toast("Ljudet kunde inte spelas"));else AU.pause()};
+  const bar=b.parentNode.querySelector(".lbar");bar.onclick=e=>{if(AU.src.indexOf(src.split("?")[0])<0||!AU.duration)return;const r=bar.getBoundingClientRect();AU.currentTime=AU.duration*(e.clientX-r.left)/r.width};
+  ui()}
 function stopAudio(){try{AU.pause()}catch(e){}cancelAnimationFrame(auRAF);if(auCb&&auCb.end)auCb.end();auSegs=null;auCb=null;if(tts){try{tts.stop()}catch(e){}}}
 function playSegs(src,segs,cb,from=0){
   stopAudio();if(!segs||!segs.length)return false;
@@ -304,7 +315,7 @@ function openReader(i,preview){
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
    <div class="rbody"><div class="rleft"><div class="pic${A.isPhoto(g)?" wide":""}">${A.chapterSVG(g,cur)}</div>
      <div class="rk">Kapitel ${cur+1} av 14 · ${dLabel(cur)}</div><h2 data-p="-1" id="rh">${esc(k.rubrik)}</h2>
-     <div class="rbar"><div class="soon">${ICO.spk}<span>Vi jobbar på att få till en fungerande uppläsning av alla böcker.</span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
+     <div class="rbar"><div class="lplay"><button id="lyssna" class="lbtn" aria-label="Lyssna på kapitlet">${ICO.play}<span>Lyssna</span></button><div class="lbar"><i id="lfill"></i></div><span id="ltime" class="ltime"></span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
      <button class="btn light" id="toKop">${ICO.print}Arbetsblad till kapitlet</button></div>
    <div class="rtext" id="rtext"><div id="paras" style="--rf:${rf}px">${k.text.map((p,j)=>`<p data-p="${j}">${esc(p)}</p>`).join("")}</div>
      <div class="rnav">${cur>0?'<button class="btn light" id="prevCh">Förra kapitlet</button>':"<span></span>"}${cur<max?'<button class="btn main" id="nextCh">Nästa kapitel</button>':""}</div></div></div></div>`,"rd");
@@ -312,6 +323,7 @@ function openReader(i,preview){
   $("fm").onclick=()=>{rf=Math.max(22,rf-3);$("paras").style.setProperty("--rf",rf+"px")};
   $("fp").onclick=()=>{rf=Math.min(46,rf+3);$("paras").style.setProperty("--rf",rf+"px")};
   $("toKop").onclick=()=>{stopAudio();openKop(cur)};
+  bindListen(g,cur);
   if($("prevCh"))$("prevCh").onclick=()=>{stopAudio();openReader(cur-1,preview)};
   if($("nextCh"))$("nextCh").onclick=()=>{stopAudio();openReader(cur+1,preview)};
 }
@@ -450,7 +462,7 @@ function openSettings(tab){
     <div class="about"><div class="pp"><span class="ppmark"><svg width="54" height="54" viewBox="0 0 3 3" aria-hidden="true"><rect width="1" height="1" fill="#ffd27a"/><rect x="1" width="1" height="1" fill="#c23a2b"/><rect x="2" width="1" height="1" fill="#ffd27a"/><rect y="1" width="1" height="1" fill="#c23a2b"/><rect x="1" y="1" width="1" height="1" fill="#f7f1e6"/><rect x="2" y="1" width="1" height="1" fill="#2d5e48"/><rect y="2" width="1" height="1" fill="#ffd27a"/><rect x="1" y="2" width="1" height="1" fill="#2d5e48"/><rect x="2" y="2" width="1" height="1" fill="#c23a2b"/></svg></span><div><b>Utvecklad av Palt &amp; pixel</b><span>Digitala verktyg för klassrummet.</span><a href="https://paltpixel.se" target="_blank" rel="noopener">paltpixel.se</a></div></div>
     <p>En digital julkalender för förskoleklass till årskurs 6, med en följetong i fjorton kapitel, läsförståelse som kopieringsmaterial och en lucka för varje elev.</p>
     <p>Berättelserna har en icke-konfessionell inriktning och handlar om glädje, gemenskap, mod, omsorg och empati.</p>
-    <p>Vi jobbar på att få till en fungerande uppläsning av alla böcker.</p><button class="btn light" id="tourAgain">Visa guiden till inställningarna igen</button></div>`;
+    <p>Alla berättelser finns inlästa. Tryck på Lyssna i läsaren. Uppläsning: rösten Ola från ElevenLabs.</p><button class="btn light" id="tourAgain">Visa guiden till inställningarna igen</button></div>`;
     $("tourAgain").onclick=()=>{closeOv();setTimeout(startTour,300)};
   }
 }
