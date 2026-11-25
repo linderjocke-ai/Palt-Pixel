@@ -52,7 +52,7 @@ function defsA(){return`<defs><linearGradient id="skyA" x1="0" y1="0" x2="0" y2=
 <linearGradient id="aurA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(120,255,200,0)"/><stop offset=".5" stop-color="rgba(120,255,200,.55)"/><stop offset="1" stop-color="rgba(90,170,255,0)"/></linearGradient></defs>`}
 function skyA(){rs(3);let s=`<rect width="1600" height="900" fill="url(#skyA)"/>`;
   for(let i=0;i<110;i++)s+=`<circle class="tw" cx="${(R()*1600).toFixed(0)}" cy="${(R()*520).toFixed(0)}" r="${(R()*1.6+.6).toFixed(1)}" fill="#fff" style="animation-delay:${(R()*4).toFixed(1)}s"/>`;
-  s+=`<g class="aur" filter="url(#blurA)"><path d="M-100 260 C200 120 420 300 700 170 S1200 60 1700 200 L1700 330 C1300 220 1000 380 700 300 S200 260 -100 390Z" fill="url(#aurA)"/><path d="M200 140 C500 40 800 200 1100 100 S1500 60 1700 120 L1700 190 C1400 140 1100 260 800 210 S400 160 200 230Z" fill="rgba(170,120,255,.25)"/></g>`;
+  s+=`<defs><linearGradient id="aurMg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000"/><stop offset=".2" stop-color="#fff"/><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="aurM" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900"><rect width="1600" height="900" fill="url(#aurMg)"/></mask></defs><g mask="url(#aurM)"><g class="aur" filter="url(#blurA)"><path d="M-100 260 C200 120 420 300 700 170 S1200 60 1700 200 L1700 330 C1300 220 1000 380 700 300 S200 260 -100 390Z" fill="url(#aurA)"/><path d="M200 140 C500 40 800 200 1100 100 S1500 60 1700 120 L1700 190 C1400 140 1100 260 800 210 S400 160 200 230Z" fill="rgba(170,120,255,.25)"/></g></g>`;
   return s}
 
 /* onboarding-ö */
@@ -438,21 +438,101 @@ const COVER={
  "5":()=>sky("dusk")+forest(320,"#566c84",18,61,60)+`<path d="M0 360 C200 350 600 370 800 350 V430 H0Z" fill="#cfe0ee" filter="url(#wc)"/><path d="M0 380 C300 372 500 392 800 378" stroke="#f4f8fb" stroke-width="4" fill="none" opacity=".7"/><g filter="url(#wc)"><path d="M480,400 Q600,300 760,400 L740,410 Q600,330 500,410Z" fill="#7a6a6a"/></g>`+ground(440,"#f3f1ec",10,62)+[90,700].map(x=>`<rect x="${x-3}" y="320" width="6" height="140" fill="#3b2f3f"/><circle cx="${x}" cy="315" r="40" fill="url(#winB)" class="flk"/><circle cx="${x}" cy="315" r="8" fill="#fff1c4"/>`).join("")+kid(300,565,1,{coat:"#2f6a6a",hat:"#b23a2e",hair:"#6b3e26",pose:"hand"})+dog(440,560,1,{leash:true,flip:false})+`<path d="M358,494 Q400,470 470,500" stroke="#b23a2e" stroke-width="3" fill="none"/>`+flakes(30),
  "6":()=>room("#5a3c3a","#7a5236")+`<path d="M0,60 Q200,110 400,60 T800,60" stroke="#2b1c14" stroke-width="2" fill="none"/>${[0,1,2,3,4,5,6,7,8,9,10,11].map(i=>`<circle cx="${i*70+20}" cy="${72+Math.sin(i)*10}" r="11" fill="url(#winB)" class="tw" style="animation-delay:${(i*.3).toFixed(1)}s"/><circle cx="${i*70+20}" cy="${72+Math.sin(i)*10}" r="3.5" fill="#fff2c0"/>`).join("")}`+`<g filter="url(#wc)"><path d="M140,170 L660,170 L700,230 L100,230Z" fill="#b23a2e"/>${[0,1,2,3,4,5,6,7,8,9].map(i=>`<path d="M${100+i*60},230 q30,30 60,0" fill="${i%2?"#f4f1ea":"#b23a2e"}"/>`).join("")}<rect x="130" y="230" width="14" height="210" fill="#8a5636"/><rect x="656" y="230" width="14" height="210" fill="#8a5636"/><rect x="110" y="380" width="580" height="60" fill="#b98a55"/></g><text x="400" y="212" text-anchor="middle" font-family="Fredoka" font-size="30" fill="#f4f1ea">Sexans Vinterstuga</text>`+`<g filter="url(#wcs)"><rect x="350" y="340" width="90" height="44" rx="6" fill="#3f8a4a"/><rect x="350" y="340" width="90" height="12" fill="#2f6a3a"/><circle cx="395" cy="366" r="5" fill="#e8c676"/></g>`+[0,1,2].map(i=>`<g filter="url(#wcs)"><rect x="${170+i*40}" y="${340}" width="18" height="40" rx="4" fill="#e3c9a0"/></g><ellipse class="flame" cx="${179+i*40}" cy="330" rx="5" ry="10" fill="#ffd27a"/>`).join("")+`<g filter="url(#wcs)">${[0,1,2,3].map(i=>`<rect x="${500+i*36}" y="${350-(i%2)*6}" width="30" height="24" rx="3" fill="#c7903c"/>`).join("")}</g>`+kid(250,580,.8,{coat:"#7b4f7d",hat:"#e8b04a",hair:"#a05a2c",pose:"hold"})+kid(400,585,.82,{coat:"#3b3e63",hat:"#7d7f8f",hair:"#2a1d18",skin:SKIN[1],pose:"down"})+kid(560,582,.8,{coat:"#2f6a6a",hat:"#b23a2e",hair:"#3b2a22",skin:SKIN[2],pose:"wave",flip:true})
 };
+
+/* ---------- lärarens egna bilder ---------- */
+const PH={
+F:[
+ {s:1,st:[.55,0,.8,.22],g:[[.665,.52,.035]]},
+ {s:1,st:[.35,0,.75,.1],g:[[.82,.70,.07]]},
+ {g:[[.30,.55,.12],[.86,.62,.07]]},
+ {s:1,g:[[.24,.62,.05]]},
+ {s:1,st:[0,0,.5,.22],g:[[.55,.36,.05]]},
+ {s:1,g:[[.62,.65,.06]]},
+ {s:1,g:[[.56,.40,.07]]},
+ {s:1,g:[[.55,.47,.04]]},
+ {s:1,st:[0,0,.22,.28],g:[[.5,.58,.05]]},
+ {s:1,st:[.6,0,1,.28],g:[[.79,.76,.05]]},
+ {s:1,st:[.3,0,.95,.1],g:[[.38,.33,.035],[.425,.54,.025],[.58,.53,.025],[.76,.57,.025],[.78,.83,.025],[.375,.89,.025],[.5,.88,.025]]},
+ {g:[[.20,.57,.1],[.94,.67,.06]]},
+ {s:1,st:[0,0,1,.09],g:[[.48,.3,.12],[.195,.78,.025],[.23,.875,.025],[.37,.57,.025],[.78,.58,.025],[.875,.65,.025],[.89,.76,.025],[.78,.9,.025],[.70,.94,.025]]},
+ {s:1,st:[.45,0,.85,.3],g:[[.54,.17,.06],[.2,.9,.03],[.41,.78,.03],[.65,.92,.03]]}],
+"1":[
+ {sa:[[.4,0,.61,.36],[.84,0,1,.44]],st:[.42,.02,.6,.26],g:[[.06,.66,.06],[.13,.25,.07],[.47,.37,.05],[.57,.37,.04]]},
+ {s:1,g:[[.02,.22,.02],[.175,.22,.02],[.53,.28,.02]]},
+ {s:1,g:[[.18,.18,.02],[.28,.18,.02]]},
+ {s:1,g:[[.21,.42,.018],[.27,.41,.018]]},
+ {s:1,g:[[.43,.08,.1]]},
+ {s:1},
+ {s:1,g:[[.72,.23,.04]]},
+ {sa:[[.33,.05,.66,.3],[.71,.08,.8,.3]]},
+ {s:1,st:[0,0,.52,.22],g:[[.87,.35,.05]]},
+ {s:1,g:[[.02,.22,.02],[.17,.22,.02]]},
+ {},
+ {s:1,g:[[.72,.29,.04]]},
+ {s:1},
+ {s:1,g:[[.375,.68,.025],[.32,.86,.025],[.515,.29,.02],[.99,.58,.02]]}]
+};
+A.isPhoto=g=>!!PH[g];
+A.photoURL=(g,i)=>`img/${g}/${String(i+1).padStart(2,"0")}.jpg`;
+A.coverURL=g=>PH[g]?`img/${g}/omslag.jpg`:null;
+function photoSVG(g,i,still){
+  const c=PH[g][i]||{},W=1600,H=893;let o=`<image href="${A.photoURL(g,i)}" width="${W}" height="${H}" preserveAspectRatio="none"/>`;
+  if(still)return`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">${o}</svg>`;
+  rs(i*31+(g==="F"?7:3));let d="";
+  (c.g||[]).forEach(([x,y,r],k)=>{const id=`pg${g}${i}_${k}`;d+=`<radialGradient id="${id}"><stop offset="0" stop-color="rgba(255,226,150,.85)"/><stop offset=".35" stop-color="rgba(255,200,110,.35)"/><stop offset="1" stop-color="rgba(255,190,100,0)"/></radialGradient>`;
+    o+=`<circle class="phglow" style="animation-delay:-${(R()*4).toFixed(1)}s" cx="${x*W}" cy="${y*H}" r="${Math.max(r*W*1.6,26)}" fill="url(#${id})"/>`});
+  if(c.st){const[a,b,e,f]=c.st;const n=Math.round((e-a)*(f-b)*260)+6;for(let k=0;k<n;k++){const x=(a+R()*(e-a))*W,y=(b+R()*(f-b))*H,r=1.2+R()*1.8;o+=`<g class="phstar" style="animation-delay:-${(R()*5).toFixed(1)}s;animation-duration:${(3+R()*4).toFixed(1)}s"><circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r.toFixed(1)}" fill="#fffbe8"/>${r>2.4?`<path d="M${(x-r*3).toFixed(0)},${y.toFixed(0)} H${(x+r*3).toFixed(0)} M${x.toFixed(0)},${(y-r*3).toFixed(0)} V${(y+r*3).toFixed(0)}" stroke="rgba(255,251,232,.7)" stroke-width=".8"/>`:""}</g>`}}
+  const areas=c.s?[[0,0,1,1]]:(c.sa||[]);
+  areas.forEach(([a,b,e,f],k)=>{const id=`pc${g}${i}_${k}`;d+=`<clipPath id="${id}"><rect x="${a*W}" y="${b*H}" width="${(e-a)*W}" height="${(f-b)*H}"/></clipPath>`;
+    const n=Math.round((e-a)*(f-b)*(c.s?110:160))+8;let fl="";for(let q=0;q<n;q++){const r=1.4+R()*2.6;const dur=((f-b)*7+5+R()*5);fl+=`<circle class="phfall" style="--d:${((f-b)*H+40).toFixed(0)}px;animation-duration:${dur.toFixed(1)}s;animation-delay:-${(R()*dur).toFixed(1)}s" cx="${((a+R()*(e-a))*W).toFixed(0)}" cy="${(b*H-20).toFixed(0)}" r="${r.toFixed(1)}" fill="#fff" opacity="${(.45+R()*.4).toFixed(2)}"/>`}
+    o+=`<g clip-path="url(#${id})">${fl}</g>`});
+  return`<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg"><defs>${d}</defs>${o}</svg>`}
+A.photoSVG=photoSVG;
 A.chapterSVG=function(g,i){
+  if(PH[g])return photoSVG(g,i);
   let body;try{const SS={"1":S1,F:SF,"2":S2,"3":S3,"4":S4,"5":S5,"6":S6}[g];body=SS&&SS[i]?SS[i]():MATURE[g]?MATURE[g]():(COVER[g]||COVER.F)()}catch(e){console.error("art",g,i,e);body=sky("dusk")}
   return`<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">${defsB()}${body}${grain(800,600)}</svg>`};
 A.hasOwnImages=g=>true;
 
 /* ---------- Filtfickornas vägg ---------- */
+const WALL_TILE=`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" fill="#f1e5d1"/><rect x="0" width="2" height="64" fill="#e9dbc3"/><rect x="32" width="1" height="64" fill="#ece0ca"/><g fill="#d6a08f" opacity=".55"><path d="M16 9 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6z"/><path d="M48 41 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6z"/></g><g fill="#9fb39a" opacity=".5"><circle cx="48" cy="14" r="1.6"/><circle cx="16" cy="46" r="1.6"/></g></svg>`;
+A.wallTile=WALL_TILE;
 A.filtBgSVG=function(rows){
-  let s=defsB()+`<rect width="1600" height="900" fill="#6e4630"/>`;
-  for(let i=0;i<40;i++)s+=`<rect x="${i*42}" y="0" width="40" height="900" fill="${["#7a4e36","#6a432e","#744a33"][i%3]}" filter="url(#wcs)"/>`;
-  s+=`<rect x="610" y="40" width="380" height="200" rx="10" fill="#f4ead6" filter="url(#wc)"/><rect x="626" y="54" width="348" height="172" fill="#2c3a63"/><circle cx="910" cy="96" r="20" fill="#fff4dc"/>`;
-  rs(6);for(let i=0;i<8;i++)s+=spruce(645+i*45,226,46+R()*40,"#1e3040",true);
-  s+=`<rect x="626" y="138" width="348" height="5" fill="#f4ead6"/><rect x="797" y="54" width="5" height="172" fill="#f4ead6"/><rect x="590" y="234" width="420" height="18" rx="6" fill="#4a2e20" filter="url(#wcs)"/>`;
-  [[640,234],[945,234]].forEach(([x,y])=>s+=`<rect x="${x}" y="${y-44}" width="16" height="44" fill="#f7efe1"/><ellipse class="flame" cx="${x+8}" cy="${y-55}" rx="6" ry="12" fill="#ffd27a"/><circle cx="${x+8}" cy="${y-55}" r="36" fill="url(#winB)" class="flk"/>`);
-  let lights="";rows.forEach(r=>{lights+=`<path d="M0 ${r} Q800 ${r+100} 1600 ${r}" fill="none" stroke="#2b1c14" stroke-width="3"/>`;for(let i=0;i<24;i++){const t=(i+.5)/24,x=t*1600,y=r+100*2*t*(1-t);lights+=`<circle cx="${x}" cy="${y+5}" r="14" fill="url(#winB)" class="tw" style="animation-delay:${(i*.37%4).toFixed(1)}s"/><circle cx="${x}" cy="${y+5}" r="3.5" fill="#fff2c0"/>`}});
-  s+=lights+`<radialGradient id="warmB"><stop offset="0" stop-color="rgba(255,200,130,.32)"/><stop offset="1" stop-color="rgba(40,20,10,.38)"/></radialGradient><rect width="1600" height="900" fill="url(#warmB)" class="flk" pointer-events="none"/>`+grain(1600,900);
+  const WX=520,WY=22,WW=560,WH=262;
+  let s=defsB()+`<defs><pattern id="wallP" width="64" height="64" patternUnits="userSpaceOnUse">${WALL_TILE.replace(/^<svg[^>]*>|<\/svg>$/g,"")}</pattern>
+<linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1533"/><stop offset=".7" stop-color="#22386c"/><stop offset="1" stop-color="#3f5f96"/></linearGradient>
+<linearGradient id="aurW" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(120,255,190,0)"/><stop offset=".3" stop-color="rgba(120,255,190,.55)"/><stop offset=".6" stop-color="rgba(150,170,255,.45)"/><stop offset="1" stop-color="rgba(150,170,255,0)"/></linearGradient>
+<clipPath id="winClip"><rect x="${WX}" y="${WY}" width="${WW}" height="${WH}" rx="6"/></clipPath>
+<radialGradient id="moonG"><stop offset="0" stop-color="rgba(255,244,210,.55)"/><stop offset="1" stop-color="rgba(255,244,210,0)"/></radialGradient></defs>
+<rect width="1600" height="900" fill="url(#wallP)"/>`;
+  // fönstret – utsikt
+  rs(6);let out=`<rect x="${WX}" y="${WY}" width="${WW}" height="${WH}" fill="url(#nsky)"/>`;
+  for(let i=0;i<46;i++)out+=`<circle class="tw" cx="${(WX+R()*WW).toFixed(0)}" cy="${(WY+R()*WH*.6).toFixed(0)}" r="${(R()*1.3+.5).toFixed(1)}" fill="#fff" style="animation-delay:${(R()*4).toFixed(1)}s"/>`;
+  out+=`<g class="aurw" filter="url(#blurA)"><path d="M${WX-120} ${WY+120} C${WX+80} ${WY+40} ${WX+260} ${WY+150} ${WX+420} ${WY+70} S${WX+640} ${WY+40} ${WX+720} ${WY+90} L${WX+720} ${WY+140} C${WX+560} ${WY+100} ${WX+400} ${WY+200} ${WX+220} ${WY+150} S${WX} ${WY+140} ${WX-120} ${WY+190}Z" fill="url(#aurW)"/></g>`;
+  // månen som vaknar och vinkar
+  const mx=WX+WW-92,my=WY+66;
+  out+=`<circle cx="${mx}" cy="${my}" r="70" fill="url(#moonG)"/><g class="moon"><circle cx="${mx}" cy="${my}" r="30" fill="#fff4d6"/><circle cx="${mx-10}" cy="${my-8}" r="5" fill="#efe0b6"/><circle cx="${mx+12}" cy="${my+10}" r="4" fill="#efe0b6"/>
+<g class="msleep"><path d="M${mx-13} ${my-1} q5 4 10 0 M${mx+4} ${my-1} q5 4 10 0" stroke="#7a6a52" stroke-width="2.2" fill="none" stroke-linecap="round"/></g>
+<g class="mwake"><circle cx="${mx-8}" cy="${my-1}" r="2.8" fill="#4a3c2c"/><circle cx="${mx+9}" cy="${my-1}" r="2.8" fill="#4a3c2c"/><path d="M${mx-6} ${my+9} q6 6 12 0" stroke="#7a6a52" stroke-width="2.2" fill="none" stroke-linecap="round"/><circle cx="${mx-15}" cy="${my+7}" r="3.5" fill="#f2b8a0" opacity=".6"/><circle cx="${mx+16}" cy="${my+7}" r="3.5" fill="#f2b8a0" opacity=".6"/>
+<g class="mwave" style="transform-origin:${mx-26}px ${my+12}px"><path d="M${mx-26} ${my+12} q-14 -6 -18 -22" stroke="#fff4d6" stroke-width="7" fill="none" stroke-linecap="round"/><circle cx="${mx-44}" cy="${my-12}" r="6" fill="#fff4d6"/></g></g></g>`;
+  // snöiga kullar och svajande granar
+  out+=`<path d="M${WX} ${WY+WH-52} C${WX+120} ${WY+WH-78} ${WX+260} ${WY+WH-44} ${WX+380} ${WY+WH-66} S${WX+520} ${WY+WH-58} ${WX+WW} ${WY+WH-70} L${WX+WW} ${WY+WH} L${WX} ${WY+WH}Z" fill="#cdd8ec"/>`;
+  [[.07,.9,70],[.17,.95,96],[.29,.86,60],[.62,.9,84],[.74,.96,104],[.86,.88,66],[.95,.93,88],[.45,.97,50]].forEach(([fx,fy,h],k)=>{const x=WX+fx*WW,y=WY+fy*WH;out+=`<g class="sway" style="transform-origin:${x}px ${y}px;animation-delay:-${(k*1.3).toFixed(1)}s;animation-duration:${(5+k%3*1.4).toFixed(1)}s">${spruce(x,y,h,"#1d3246",true)}</g>`});
+  out+=`<path d="M${WX} ${WY+WH-20} C${WX+200} ${WY+WH-36} ${WX+400} ${WY+WH-14} ${WX+WW} ${WY+WH-28} L${WX+WW} ${WY+WH} L${WX} ${WY+WH}Z" fill="#e8eef8"/>`;
+  for(let i=0;i<40;i++){const d=(6+R()*6).toFixed(1);out+=`<circle class="wfall" style="animation-duration:${d}s;animation-delay:-${(R()*d).toFixed(1)}s" cx="${(WX+R()*WW).toFixed(0)}" cy="${WY-6}" r="${(1.2+R()*1.8).toFixed(1)}" fill="#fff" opacity=".85"/>`}
+  s+=`<rect x="${WX-22}" y="${WY-22}" width="${WW+44}" height="${WH+44}" rx="12" fill="#fbf6ec" filter="url(#wcs)"/><rect x="${WX-22}" y="${WY-22}" width="${WW+44}" height="${WH+44}" rx="12" fill="none" stroke="#e4d6bd" stroke-width="3"/>`;
+  s+=`<g clip-path="url(#winClip)">${out}</g>`;
+  s+=`<rect x="${WX+WW/2-4}" y="${WY}" width="8" height="${WH}" fill="#fbf6ec"/><rect x="${WX}" y="${WY+WH*.46}" width="${WW}" height="7" fill="#fbf6ec"/>`;
+  // gardiner
+  s+=`<path d="M${WX-24} ${WY-36} h${WW+48}" stroke="#8a5a3a" stroke-width="7" stroke-linecap="round"/>`;
+  [[WX-70,1],[WX+WW+70,-1]].forEach(([x,d])=>{s+=`<path d="M${x} ${WY-34} h${62*d} q${-14*d} 60 ${-6*d} 120 q${10*d} 50 ${-18*d} 150 h${-38*d} q${10*d} -80 0 -150 q${-8*d} -60 0 -120z" fill="#b8473d"/><path d="M${x+20*d} ${WY-30} q${6*d} 120 ${-4*d} 270" stroke="rgba(0,0,0,.12)" stroke-width="5" fill="none"/><path d="M${x+6*d} ${WY+112} q${24*d} 10 ${48*d} 0" stroke="#e8c676" stroke-width="5" fill="none" stroke-linecap="round"/>`});
+  // fönsterbräda med ljus
+  s+=`<rect x="${WX-48}" y="${WY+WH+16}" width="${WW+96}" height="20" rx="6" fill="#fbf6ec" filter="url(#wcs)"/><rect x="${WX-48}" y="${WY+WH+34}" width="${WW+96}" height="6" fill="rgba(120,90,60,.18)"/>`;
+  const sy=WY+WH+16;
+  [[WX+40,0],[WX+WW-56,1]].forEach(([x,k])=>s+=`<circle cx="${x+8}" cy="${sy-60}" r="60" fill="url(#winB)" class="flk"/><rect x="${x}" y="${sy-46}" width="16" height="46" rx="2" fill="#f7efe1"/><rect x="${x}" y="${sy-46}" width="16" height="6" fill="#ece0cc"/><path class="flame2" style="animation-delay:-${k*.4}s" d="M${x+8} ${sy-74} C${x+15} ${sy-62} ${x+14} ${sy-52} ${x+8} ${sy-49} C${x+2} ${sy-52} ${x+1} ${sy-62} ${x+8} ${sy-74}Z" fill="#ffd27a"/><path class="flame2" style="animation-delay:-${k*.4+.2}s" d="M${x+8} ${sy-64} C${x+11} ${sy-58} ${x+11} ${sy-53} ${x+8} ${sy-51} C${x+5} ${sy-53} ${x+5} ${sy-58} ${x+8} ${sy-64}Z" fill="#fff3c4"/>`);
+  s+=`<g transform="translate(${WX+WW/2-34} ${sy-30})"><ellipse cx="34" cy="28" rx="40" ry="8" fill="#6a8a5a"/><path d="M4 26 q30 -40 60 0" fill="#3f6a4a"/><circle cx="20" cy="14" r="5" fill="#c23a2b"/><circle cx="40" cy="10" r="5" fill="#c23a2b"/><circle cx="52" cy="18" r="4" fill="#c23a2b"/></g>`;
+  let lights="";rows.forEach(r=>{lights+=`<path d="M0 ${r} Q800 ${r+100} 1600 ${r}" fill="none" stroke="#6b4a32" stroke-width="3"/>`;for(let i=0;i<24;i++){const t=(i+.5)/24,x=t*1600,y=r+100*2*t*(1-t);lights+=`<circle cx="${x}" cy="${y+5}" r="14" fill="url(#winB)" class="tw" style="animation-delay:${(i*.37%4).toFixed(1)}s"/><circle cx="${x}" cy="${y+5}" r="3.5" fill="#fff2c0"/>`}});
+  s+=lights+`<radialGradient id="warmB" cx=".5" cy=".42" r=".75"><stop offset="0" stop-color="rgba(255,214,150,.18)"/><stop offset=".7" stop-color="rgba(120,70,30,.10)"/><stop offset="1" stop-color="rgba(70,40,20,.32)"/></radialGradient><rect width="1600" height="900" fill="url(#warmB)" pointer-events="none"/>`+grain(1600,900);
   return s};
 A.sag=(r,y)=>y+100*2*(r)*(1-r);
 

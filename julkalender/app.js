@@ -24,7 +24,9 @@ try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={.
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ===================== skalning ===================== */
-function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k)}
+function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k);
+  const b=document.getElementById("bdrop");if(b){const t=64*k,isF=b.classList.contains("filt");b.style.backgroundImage=isF?`url("data:image/svg+xml,${encodeURIComponent(A.wallTile)}")`:"";b.style.backgroundSize=isF?`${t}px ${t}px`:"";b.style.backgroundPosition=isF?`${(innerWidth-1600*k)/2}px ${(innerHeight-900*k)/2}px`:"";const c=$("bsnow");if(c){c.width=innerWidth;c.height=innerHeight}}}
+function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn"?"byn":"filt";fit()}
 addEventListener("resize",fit);fit();
 
 /* ===================== datum ===================== */
@@ -96,10 +98,12 @@ let tT;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on"
 /* ===================== snö ===================== */
 let snowRAF=null;const cv=$("snow"),cx=cv.getContext("2d");const flakes=[];
 for(let i=0;i<150;i++)flakes.push({x:Math.random()*1600,y:Math.random()*900,r:1+Math.random()*2.4,s:.3+Math.random()*.6,w:Math.random()*6});
+const bcv=document.getElementById("bsnow"),bcx=bcv?bcv.getContext("2d"):null;const bfl=[];for(let i=0;i<160;i++)bfl.push({x:Math.random(),y:Math.random(),r:Math.random()*1.8+.6,s:Math.random()*.0012+.0006,w:Math.random()*6});
 function snowOn(on){
-  cancelAnimationFrame(snowRAF);cx.clearRect(0,0,1600,900);cv.style.display=on?"block":"none";if(!on)return;
+  cancelAnimationFrame(snowRAF);cx.clearRect(0,0,1600,900);cv.style.display=on?"block":"none";if(bcx){bcx.clearRect(0,0,bcv.width,bcv.height);bcv.style.display=on?"block":"none"}if(!on)return;
   let t0=0;const step=t=>{snowRAF=requestAnimationFrame(step);if(t-t0<33)return;t0=t;cx.clearRect(0,0,1600,900);cx.fillStyle="rgba(255,255,255,.88)";
-    for(const f of flakes){if(!reduce){f.y+=f.s;f.x+=Math.sin((t/1800)+f.w)*.3;if(f.y>905){f.y=-5;f.x=Math.random()*1600}}cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()}};
+    for(const f of flakes){if(!reduce){f.y+=f.s;f.x+=Math.sin((t/1800)+f.w)*.3;if(f.y>905){f.y=-5;f.x=Math.random()*1600}}cx.beginPath();cx.arc(f.x,f.y,f.r,0,7);cx.fill()}
+    if(bcx&&bcv.width>0){const W=bcv.width,H=bcv.height;bcx.clearRect(0,0,W,H);bcx.fillStyle="rgba(255,255,255,.85)";for(const f of bfl){if(!reduce){f.y+=f.s;f.x+=Math.sin((t/1800)+f.w)*.0002;if(f.y>1.01){f.y=-.01;f.x=Math.random()}}bcx.beginPath();bcx.arc(f.x*W,f.y*H,f.r,0,7);bcx.fill()}}};
   snowRAF=requestAnimationFrame(step);
 }
 
@@ -138,6 +142,7 @@ function render(){
   const w=$("world");w.style.transition="none";w.style.transform="";void w.offsetWidth;w.style.transition="";
   $("fly").innerHTML="";busy=false;
   const ui=$("ui");ui.style.opacity="1";
+  setBackdrop(S.theme);
   if(S.theme==="byn"){
     const r=A.bynSVG(L.map(l=>({...l,st:state(l,D)})));
     const bsz=Math.round(Math.max(28,Math.min(40,r.sc*1.05)));
@@ -278,7 +283,7 @@ function openReader(i,preview){
   overlay(`<div class="panel reader">${X}
    <div class="rhead"><div class="rt"><b>${esc(STORY.titel)}</b><span>${gName(g)}${preview?" · förhandsgranskning":""}</span></div>
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
-   <div class="rbody"><div class="rleft"><div class="pic">${A.chapterSVG(g,cur)}</div>
+   <div class="rbody"><div class="rleft"><div class="pic${A.isPhoto(g)?" wide":""}">${A.chapterSVG(g,cur)}</div>
      <div class="rk">Kapitel ${cur+1} av 14 · ${dLabel(cur)}</div><h2 data-p="-1" id="rh">${esc(k.rubrik)}</h2>
      <div class="rbar"><div class="soon">${ICO.spk}<span>Vi jobbar på att få till en fungerande uppläsning av alla böcker.</span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
      <button class="btn light" id="toKop">${ICO.print}Arbetsblad till kapitlet</button></div>
@@ -399,7 +404,7 @@ function openSettings(tab){
     sb.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;save();openSettings()});
   }
   if(setTab==="innehall"){
-    sb.innerHTML=`<h2>Luckornas innehåll</h2><p>Välj vad luckorna ska innehålla. Texterna anpassas efter årskursen. Egna ändringar sparas för varje innehållstyp.</p><div class="ccards in">${ctypeCards("lt")}</div>`;
+    sb.innerHTML=`<h2>Luckornas innehåll</h2><p>Välj vad luckorna ska innehålla. Texterna anpassas efter årskursen. Egna ändringar sparas för varje innehållstyp.</p><div class="ccards in">${ctypeCards("lite")}</div>`;
     sb.querySelectorAll("[data-ct]").forEach(b=>b.onclick=()=>{S.ctype=b.dataset.ct;save();openSettings()});
   }
   if(setTab==="forhand"){
@@ -434,7 +439,7 @@ function openSettings(tab){
 let onbStep=0,nameMode=null;
 function renderOnbBg(){
   $("stage").dataset.theme="onb";$("ui").innerHTML="";$("ui").style.opacity="1";$("fly").innerHTML="";
-  const w=$("world");w.style.transform="";w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${A.onbSVG()}</svg>`;snowOn(true);
+  const w=$("world");w.style.transform="";w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${A.onbSVG()}</svg>`;setBackdrop("byn");snowOn(true);
 }
 function showOnb(){
   const o=$("onb");if(S.onboarded){o.innerHTML="";return}
