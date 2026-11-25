@@ -199,7 +199,7 @@ a.ruta:hover .miniatyr img { transform: scale(1.04); }
 .f-smor     { --bg: #F6C945; --fg: #3A2A00; --sub: #5C4500; --etikett-bg: #3A2A00; --etikett-fg: #F6C945; --sken: rgba(246,201,69,.8); }
 .f-hjortron { --bg: #F39A2E; --fg: #3B1E00; --sub: #5A3000; --etikett-bg: #3B1E00; --etikett-fg: #FFC47F; --sken: rgba(243,154,46,.85); }
 .f-flask    { --bg: #F2A39A; --fg: #4A1610; --sub: #5E2219; --etikett-bg: #4A1610; --etikett-fg: #FFD2CC; --sken: rgba(242,163,154,.8); }
-.f-tall     { --bg: #2E7D5B; --fg: #EFFFF6; --sub: #CDEEDC; --etikett-bg: #0F3B28; --etikett-fg: #A8F0CC; --sken: rgba(46,125,91,.9); }
+.f-tall     { --bg: #276C4E; --fg: #EFFFF6; --sub: #CDEEDC; --etikett-bg: #0F3B28; --etikett-fg: #A8F0CC; --sken: rgba(39,108,78,.9); }
 
 .ruta.nasta {
   --fg: var(--sno); --sub: var(--dimma); --sken: transparent;

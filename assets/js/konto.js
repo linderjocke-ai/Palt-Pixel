@@ -142,7 +142,7 @@
   function klient() {
     if (!HAR_KONTO) return Promise.resolve(null);
     if (!klientLofte) {
-      klientLofte = import("https://esm.sh/@supabase/supabase-js@2").then(function (m) {
+      klientLofte = (function(){return window.supabase?Promise.resolve(window.supabase):new Promise(function(ok,nej){var s=document.createElement("script");s.src="/assets/vendor/supabase.js";s.onload=function(){ok(window.supabase)};s.onerror=nej;document.head.appendChild(s)})})().then(function (m) {
         return m.createClient(K.supabaseUrl, K.supabaseAnonKey, {
           auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: "pkce" }
         });

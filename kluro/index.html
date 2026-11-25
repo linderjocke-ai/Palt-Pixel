@@ -2,12 +2,10 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#F7F5F0">
 <title>Kluro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Lexend:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/typsnitt.css">
 <style>:root{
   --turk:#00A8B5; --turk-d:#00818B; --paper:#F7F5F0; --paper2:#EFEBE2; --petrol:#1B4958; --petrol-d:#123642; --ink:#25352D;
   --coral:#FF7A59; --sun:#FFC845; --green:#2FA866; --yellow:#E5B22B; --gray:#8D9993;
@@ -416,6 +414,7 @@ html.dark .inp{background:var(--paper2);color:var(--ink)}
 .pp-tillbaka{display:grid;place-items:center;width:36px;height:44px;margin-right:2px;font:700 30px/1 system-ui;color:var(--muted);text-decoration:none;flex-shrink:0}
 .pp-tillbaka:hover{color:var(--ink)}
 </style>
+<style>html{touch-action:manipulation}</style>
 </head>
 <body>
 <div id="app">
@@ -429,7 +428,7 @@ html.dark .inp{background:var(--paper2);color:var(--ink)}
 </div>
 <div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
 <div class="toast" id="toast"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/assets/vendor/supabase.js"></script>
 <script src="/assets/js/konfig.js"></script>
 <script>
 /* Palt & pixel: Kluro pratar med paltpixels databas. Spelet hittar klienten via window.__KLURO_SB__. */

@@ -24,9 +24,9 @@
   --falt-bg: rgba(255,255,255,.75);
   --falt-kant: 1px solid rgba(27,34,54,.14);
   --linje: rgba(27,34,54,.08);
-  --accent: #E06A2C;
+  --accent: #B8541C;
   --accent-text: #FFFFFF;
-  --accent-skugga: 0 8px 20px rgba(224,106,44,.4);
+  --accent-skugga: 0 8px 20px rgba(184,84,28,.4);
   --lank: #1F5F55;
   --prov: #C2253B;
   --prov-text: #FFFFFF;
@@ -110,7 +110,7 @@
   --falt-bg: rgba(255,255,255,.08);
   --falt-kant: 1px solid rgba(255,255,255,.2);
   --linje: rgba(255,255,255,.1);
-  --accent: #C8643A;
+  --accent: #A9512C;
   --accent-text: #FFFFFF;
   --accent-skugga: 0 0 24px rgba(200,100,58,.55);
   --lank: #F0A070;

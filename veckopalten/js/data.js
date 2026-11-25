@@ -73,7 +73,7 @@ function supabaseLager() {
 
   async function klient() {
     if (sb) return sb;
-    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    const { createClient } = await (function(){return window.supabase?Promise.resolve(window.supabase):new Promise(function(ok,nej){var s=document.createElement("script");s.src="/assets/vendor/supabase.js";s.onload=function(){ok(window.supabase)};s.onerror=nej;document.head.appendChild(s)})})();
     sb = createClient(K.supabaseUrl, K.supabaseAnonKey, { auth: { flowType: 'pkce', persistSession: true, detectSessionInUrl: true, storageKey: 'veckopalten-inloggning' } });
     return sb;
   }
