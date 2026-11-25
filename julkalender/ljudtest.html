@@ -7,54 +7,112 @@
 <meta name="robots" content="noindex">
 <style>
 body{margin:0;background:#FBF8F2;color:#1F2A24;font:18px/1.5 system-ui,sans-serif}
-main{max-width:640px;margin:0 auto;padding:32px 20px}
+main{max-width:680px;margin:0 auto;padding:32px 20px 60px}
 h1{font-size:30px;margin:0 0 8px}
-button{font:inherit;font-weight:600;padding:14px 22px;border-radius:14px;border:0;background:#2F6B4F;color:#fff;cursor:pointer;min-height:52px}
-ul{list-style:none;padding:0;margin:20px 0}
-li{background:#fff;border:1px solid #E8E1D3;border-radius:14px;padding:12px 16px;margin:8px 0}
+h2{font-size:21px;margin:28px 0 6px}
+p{margin:6px 0}
+button{font:inherit;font-weight:600;padding:12px 20px;border-radius:14px;border:0;background:#2F6B4F;color:#fff;cursor:pointer;min-height:50px;margin:6px 0}
+ul{list-style:none;padding:0;margin:10px 0}
+li{background:#fff;border:1px solid #E8E1D3;border-radius:14px;padding:10px 14px;margin:6px 0;font-size:16px}
 .ok::before{content:"✓ ";color:#2F6B4F;font-weight:700}
 .fel::before{content:"✗ ";color:#B8283A;font-weight:700}
 .info::before{content:"• ";color:#6B4A00;font-weight:700}
+.tips{background:#FFF3CF;border-radius:14px;padding:12px 16px;font-size:16px}
 </style>
 </head>
 <body>
 <main>
   <h1>Ljudtest för Julkalendern</h1>
-  <p>Sidan kontrollerar att uppläsningen kan spelas på den här datorn. Tryck på knappen och lyssna.</p>
-  <button id="spela" type="button">Spela upp ett kort ljud</button>
-  <ul id="lista"></ul>
+  <p>Gör de tre testerna i tur och ordning. Ta gärna en skärmbild av hela sidan när du är klar.</p>
+
+  <h2>1. Pip</h2>
+  <p>Ett kort pip som skapas direkt i webbläsaren, utan någon ljudfil.</p>
+  <button id="t1" type="button">Spela pip</button>
+  <ul id="l1"></ul>
+
+  <h2>2. Uppläsningen som vanligt</h2>
+  <p>Spelar början av ett kapitel på samma sätt som Julkalendern gör.</p>
+  <button id="t2" type="button">Spela kapitlet</button>
+  <ul id="l2"></ul>
+
+  <h2>3. Uppläsningen, hämtad i förväg</h2>
+  <p>Laddar ner hela ljudfilen först och spelar den sedan.</p>
+  <button id="t3" type="button">Hämta och spela</button>
+  <ul id="l3"></ul>
+
+  <p class="tips" id="slutsats" hidden></p>
+  <ul id="l0"></ul>
   <p><a href="/julkalender/">Tillbaka till Julkalendern</a></p>
 </main>
 <script>
 "use strict";
-const lista = document.getElementById("lista");
-const rad = (klass, text) => { const li = document.createElement("li"); li.className = klass; li.textContent = text; lista.appendChild(li); return li; };
-const FEL = { 1: "avbröts", 2: "nätverksfel", 3: "kunde inte avkodas", 4: "filen hittades inte eller formatet stöds inte" };
-const fil = "/julkalender/audio/ola/2-01.mp3?v=test";
-const a = new Audio(); a.preload = "metadata";
-a.addEventListener("loadedmetadata", () => rad("ok", `Ljudfilen hittades (${Math.round(a.duration)} sekunder lång).`));
-a.addEventListener("error", () => rad("fel", `Ljudfilen kunde inte laddas: ${FEL[a.error && a.error.code] || "okänt fel"}.`));
-a.src = fil;
-rad("info", "Webbläsare: " + navigator.userAgent.replace(/^Mozilla\/5\.0 /, ""));
-rad(a.canPlayType("audio/mpeg") ? "ok" : "fel", a.canPlayType("audio/mpeg") ? "Webbläsaren kan spela mp3." : "Webbläsaren säger att den inte kan spela mp3.");
-function roster() {
-  if (!("speechSynthesis" in window)) { rad("info", "Datorns egen talsyntes finns inte i den här webbläsaren."); return; }
-  const v = speechSynthesis.getVoices();
-  if (!v.length) return false;
-  const sv = v.filter((x) => /^sv/i.test(x.lang));
-  rad(sv.length ? "ok" : "info", sv.length ? "Svensk röst för talsyntes finns: " + sv.map((x) => x.name).join(", ") : "Ingen svensk röst för talsyntes finns på datorn (behövs bara för luckor du har ändrat texten i).");
-  return true;
+const FIL = "/julkalender/audio/ola/2-01.mp3";
+const FEL = { 1: "avbröts", 2: "nätverksfel", 3: "kunde inte avkodas", 4: "hittades inte eller formatet stöds inte" };
+const RS = ["inget laddat", "bara information om filen", "lite data", "tillräckligt för att börja", "allt som behövs"];
+const rad = (id, klass, text) => { const li = document.createElement("li"); li.className = klass; li.textContent = text; document.getElementById(id).appendChild(li); };
+const resultat = {};
+rad("l0", "info", "Webbläsare: " + navigator.userAgent.replace(/^Mozilla\/5\.0 /, ""));
+
+function slutsats() {
+  const s = document.getElementById("slutsats");
+  const { pip, vanlig, forhand } = resultat;
+  let t = "";
+  if (pip === false) t = "Webbläsaren får inte ut något ljud alls på den här datorn. Det beror på datorns ljudinställningar: kontrollera ljudenheten (högtalare/hörlurar) i Windows och att ljudet inte är avstängt. Starta gärna om datorn.";
+  else if (vanlig === false && forhand === true) t = "Ljud fungerar, men uppspelningen fastnar när filen strömmas. Det brukar bero på ett antivirusprogram, en VPN eller ett nätverk som stoppar ljudfiler.";
+  else if (vanlig === false && forhand === false) t = "Ljud fungerar, men ljudfilerna går inte att spela. Det kan bero på ett antivirusprogram, en VPN eller ett nätverk som stoppar mp3-filer.";
+  else if (vanlig === true) t = "Allt fungerar. Hörs ändå inget i Julkalendern är ljudet troligen avstängt för fliken eller sidan.";
+  if (t) { s.textContent = t; s.hidden = false; }
 }
-if (roster() === false && "speechSynthesis" in window) speechSynthesis.addEventListener("voiceschanged", roster, { once: true });
-document.getElementById("spela").addEventListener("click", async () => {
+
+// Följer en ljudspelare i några sekunder och rapporterar om tiden faktiskt går framåt
+function folj(a, lista, nyckel) {
+  const start = performance.now();
+  const handelser = new Set();
+  ["waiting", "stalled", "suspend", "error"].forEach((h) => a.addEventListener(h, () => handelser.add(h)));
+  const t = setInterval(() => {
+    if ((performance.now() - start) / 1000 < 6) return;
+    clearInterval(t); a.pause();
+    const buf = a.buffered.length ? a.buffered.end(a.buffered.length - 1) : 0;
+    const ok = a.currentTime > 1;
+    rad(lista, ok ? "ok" : "fel", `Spelade ${a.currentTime.toFixed(1)} sekunder på 6 sekunder.`);
+    rad(lista, "info", `Laddat: ${buf.toFixed(1)} s · Läge: ${RS[a.readyState] || a.readyState}${handelser.size ? " · Händelser: " + [...handelser].join(", ") : ""}${a.error ? " · Fel: " + (FEL[a.error.code] || a.error.code) : ""}`);
+    resultat[nyckel] = ok; slutsats();
+  }, 250);
+}
+
+document.getElementById("t1").addEventListener("click", async () => {
   try {
-    a.currentTime = 0; a.volume = 1; a.muted = false;
-    await a.play();
-    rad("ok", "Uppspelningen startade. Hörs ingenting nu är ljudet avstängt eller för lågt på datorn – eller så går det till fel högtalare/hörlurar.");
-    setTimeout(() => { a.pause(); rad("info", `Spelade ${a.currentTime.toFixed(1)} sekunder och stoppade.`); }, 6000);
-  } catch (e) {
-    rad("fel", "Uppspelningen kunde inte starta: " + (e && e.name ? e.name : e) + ".");
-  }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    const ctx = new AC();
+    await ctx.resume();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = 660; g.gain.value = 0.15; o.connect(g).connect(ctx.destination);
+    const t0 = ctx.currentTime; o.start(); o.stop(t0 + 0.6);
+    setTimeout(() => {
+      const gick = ctx.currentTime - t0;
+      const ok = gick > 0.5;
+      rad("l1", ok ? "ok" : "fel", ok ? "Pipet spelades. Hörde du det? Om inte går ljudet till fel högtalare eller är avstängt i Windows." : `Ljudmotorn står still (läge: ${ctx.state}). Webbläsaren får inte ut något ljud på den här datorn.`);
+      resultat.pip = ok; slutsats(); ctx.close();
+    }, 1200);
+  } catch (e) { rad("l1", "fel", "Pipet kunde inte spelas: " + (e.name || e)); resultat.pip = false; slutsats(); }
+});
+
+document.getElementById("t2").addEventListener("click", async () => {
+  const a = new Audio(FIL + "?t=" + Date.now());
+  a.addEventListener("error", () => rad("l2", "fel", "Ljudfilen kunde inte laddas: " + (FEL[a.error && a.error.code] || "okänt fel")));
+  try { await a.play(); rad("l2", "ok", "Uppspelningen startade."); folj(a, "l2", "vanlig"); }
+  catch (e) { rad("l2", "fel", "Uppspelningen kunde inte starta: " + (e.name || e)); resultat.vanlig = false; slutsats(); }
+});
+
+document.getElementById("t3").addEventListener("click", async () => {
+  try {
+    const r = await fetch(FIL + "?h=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error("svar " + r.status);
+    const blob = await r.blob();
+    rad("l3", "ok", `Filen hämtades (${Math.round(blob.size / 1024)} kB, typ ${blob.type || "okänd"}).`);
+    const a = new Audio(URL.createObjectURL(blob));
+    await a.play(); rad("l3", "ok", "Uppspelningen startade."); folj(a, "l3", "forhand");
+  } catch (e) { rad("l3", "fel", "Det gick inte: " + (e.message || e.name || e)); resultat.forhand = false; slutsats(); }
 });
 </script>
 </body>
