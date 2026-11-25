@@ -362,11 +362,11 @@ select{font:inherit;font-size:20px;padding:10px 14px;border-radius:14px;border:2
 .pp a{color:#a3392c;font-weight:700;font-size:19px}
 
 /* temakort och innehållskort */
-.tcards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px;margin-top:22px}
+.tcards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:22px}
 .tcard{background:#fff;color:var(--ink);border-radius:26px;padding:14px 14px 20px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 0 rgba(0,0,0,.2);transition:transform .2s,box-shadow .2s;text-align:left}
 .tcard:hover{transform:translateY(-4px)}
 .tcard.on{box-shadow:0 0 0 7px var(--gold2),0 8px 0 rgba(0,0,0,.2);transform:translateY(-4px)}
-.tcard .pv{display:block;height:268px;border-radius:16px;overflow:hidden}
+.tcard .pv{display:block;height:190px;border-radius:16px;overflow:hidden}
 .tcard .pv svg{width:100%;height:100%;display:block}
 .tcard b{font-family:Fredoka;font-weight:700;font-size:30px;padding:0 8px}
 .tcard .ds{font-size:17px;color:var(--soft);padding:0 8px;line-height:1.35}
@@ -427,6 +427,20 @@ select{font:inherit;font-size:20px;padding:10px 14px;border-radius:14px;border:2
 .kscroll{flex:1;min-height:0;overflow:auto}.kscroll .kgrid{overflow:visible}
 .kh3{font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;margin:26px 0 2px;color:inherit}
 .sway2{animation:sway2 3.2s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0%}@keyframes sway2{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+
+/* målade byn */
+#bdrop.byn2{background:linear-gradient(#0b1533,#1d3366 35%,#dbe5f2 55%,#eef3fa)}
+.w2{fill:#16224a;opacity:.86}
+.w2.missed{fill:#2a3c74;opacity:.7}
+.w2.today{fill:#ffd36b;opacity:.55;animation:w2p 2.4s ease-in-out infinite}
+@keyframes w2p{50%{opacity:.15}}
+.smk circle{fill:rgba(235,240,250,.55);filter:blur(3px);animation:smk 6s linear infinite;opacity:0}
+.smk circle:nth-child(2){animation-delay:-2s}.smk circle:nth-child(3){animation-delay:-4s}
+@keyframes smk{0%{transform:translate(0,0) scale(.5);opacity:0}15%{opacity:.8}100%{transform:translate(18px,-90px) scale(1.6);opacity:0}}
+#stage[data-v=byn2] .bd .no{box-shadow:none;font-size:calc(var(--b)*.62)}
+#stage[data-v=byn2] .bd.locked .no{background:transparent;color:#fff3d6;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+#stage[data-v=byn2] .bd.open .no{background:transparent;color:rgba(120,62,8,.9)}
+@media (prefers-reduced-motion:reduce){.smk circle,.w2.today{animation:none}}
 </style>
 </head>
 <body>
@@ -441,8 +455,8 @@ select{font:inherit;font-size:20px;padding:10px 14px;border-radius:14px;border:2
   <div id="ovl2"></div>
   <div class="toast" id="toast" role="status"></div>
 </div>
-<script src="art.js?v=20261125i"></script>
+<script src="art.js?v=20261125k"></script>
 <script src="luckor.js?v=20261125h"></script>
-<script src="app.js?v=20261125n"></script>
+<script src="app.js?v=20261125p"></script>
 </body>
 </html>

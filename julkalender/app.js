@@ -26,7 +26,8 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* ===================== skalning ===================== */
 function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k);
   const b=document.getElementById("bdrop");if(b){const t=64*k,isF=b.classList.contains("filt");b.style.backgroundImage=isF?`url("data:image/svg+xml,${encodeURIComponent(A.wallTile)}")`:"";b.style.backgroundSize=isF?`${t}px ${t}px`:"";b.style.backgroundPosition=isF?`${(innerWidth-1600*k)/2}px ${(innerHeight-900*k)/2}px`:"";const c=$("bsnow");if(c){c.width=innerWidth;c.height=innerHeight}}}
-function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn"?"byn":"filt";document.body.classList.toggle("th-filt",th!=="byn");fit()}
+const isByn=th=>th==="byn"||th==="byn2";
+function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn2"?"byn byn2":isByn(th)?"byn":"filt";document.body.classList.toggle("th-filt",!isByn(th));fit()}
 addEventListener("resize",fit);fit();
 /* filtfickorna dinglar när muspekaren drar förbi */
 (function(){let lx=null,lt=0;const RM=matchMedia("(prefers-reduced-motion: reduce)");
@@ -153,14 +154,14 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
 
   if(!S.onboarded){renderOnbBg();return}
   const L=buildLuckor(),D=dayInfo();LCUR=L;
-  $("stage").dataset.theme=S.theme;
+  $("stage").dataset.theme=isByn(S.theme)?"byn":S.theme;$("stage").dataset.v=S.theme;
   const w=$("world");w.style.transition="none";w.style.transform="";void w.offsetWidth;w.style.transition="";
   $("fly").innerHTML="";busy=false;
   const ui=$("ui");ui.style.opacity="1";
   setBackdrop(S.theme);
-  if(S.theme==="byn"){
-    const r=A.bynSVG(L.map(l=>({...l,st:state(l,D)})));
-    const bsz=Math.round(Math.max(22,Math.min(38,r.sc*.82)));
+  if(isByn(S.theme)){
+    const r=(S.theme==="byn2"?A.byn2SVG:A.bynSVG)(L.map(l=>({...l,st:state(l,D)})));
+    const bsz=Math.round(r.bsz||Math.max(22,Math.min(38,r.sc*.82)));
     w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${r.svg}</svg><div class="hs">${r.cent.map(c=>{const st=c.l.st;return`<button class="bd ${st}" data-id="${c.l.id}" data-x="${c.x.toFixed(1)}" data-y="${c.y.toFixed(1)}" style="left:${c.x.toFixed(1)}px;top:${c.y.toFixed(1)}px;--b:${bsz}px" aria-label="${esc(c.l.name)}, ${dLabel(c.l.day)}"><span class="no">${dNum(c.l.day)}</span><span class="nm">${esc(c.l.name)}</span></button>`}).join("")}</div>`;
     ui.innerHTML=topUI(L,D)+`<button class="moonbtn" id="chBtn">${ICO.book("#1e2f5c")}<b>Dagens kapitel</b><span>${esc(chapLabel(D))}</span></button>`;
     snowOn(true);
@@ -186,7 +187,7 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
   w.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>{
     if(busy)return;const l=L.find(x=>x.id===b.dataset.id),D2=dayInfo(),st=state(l,D2);
     if(st==="locked"){b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");toast("Den här luckan öppnas "+dLabel(l.day));return}
-    if(S.theme==="byn")zoomTo(b,l);else pullOut(b,l);
+    if(isByn(S.theme))zoomTo(b,l);else pullOut(b,l);
   });
 }
 
@@ -248,7 +249,7 @@ function pullOut(el,l){
 }
 /* ----- förhandsvisa en lucka (lärare) ----- */
 function previewLucka(l,back){
-  const o=$("ovl2");o.innerHTML=`<div class="ov"><div class="card ${S.theme==="byn"?"byncard":"feltcard"} on static${isRich(content(l))?" rich":""}" id="lcard">${cardHTML(l,{preview:true})}</div></div>`;
+  const o=$("ovl2");o.innerHTML=`<div class="ov"><div class="card ${isByn(S.theme)?"byncard":"feltcard"} on static${isRich(content(l))?" rich":""}" id="lcard">${cardHTML(l,{preview:true})}</div></div>`;
   bindCard($("lcard"),l,()=>{o.innerHTML="";if(back)back()});
 }
 
@@ -422,6 +423,7 @@ let setTab="klass";
 function perDayText(){const t=perDayBase();return S.n>28&&S.ctype!=="blandat"?t+" Varje innehållstyp har 28 olika luckor, så med fler elever börjar de om. Välj Blandat för 84 olika.":t}
 function perDayBase(){const n=S.n;const b=Math.floor(n/14),e=n%14;if(n<14)return`${n} luckor fördelas över 14 skoldagar. Dagar utan elevlucka får en lucka för hela klassen.`;return e?`${e} dagar öppnas ${b+1} luckor, ${14-e} dagar öppnas ${b} ${b===1?"lucka":"luckor"}.`:`Varje dag öppnas ${b} ${b===1?"lucka":"luckor"}.`}
 function themeCards(){return`<button class="tcard ${S.theme==="byn"?"on":""}" data-th="byn"><span class="pv">${A.miniByn()}</span><b>Byn i snön</b><span class="ds">En isometrisk miniatyrby som svävar under norrskenet. Varje fönster är en lucka – kameran zoomar in när den öppnas.</span></button>
+  <button class="tcard ${S.theme==="byn2"?"on":""}" data-th="byn2"><span class="pv">${A.miniByn2()}</span><b>Byn i snön (målad)</b><span class="ds">Handmålade trähus i snön under norrskenet. Mörka fönster är stängda luckor – när en lucka öppnas tänds fönstret.</span></button>
   <button class="tcard ${S.theme==="filt"?"on":""}" data-th="filt"><span class="pv">${A.miniFilt()}</span><b>Filtfickorna</b><span class="ds">Målat som en sagobok: tovade fickor på snören mot en varm trävägg. Fickan dras fram och vänds när den öppnas.</span></button>`}
 function ctypeCards(cls=""){return CTYPES.map(t=>`<button class="ccard ${cls} ${S.ctype===t.id?"on":""}" data-ct="${t.id}"><span class="ci" style="background:${t.col}">${ctIcon(t,"#fff",34)}</span><span class="ct"><b>${t.name}</b><span>${t.sub}</span><i>”${esc(t.ex)}”</i></span></button>`).join("")}
 function openSettings(tab){
@@ -506,13 +508,13 @@ function showOnb(){
     ${nameMode==="now"?`<div class="names"><textarea id="nm" placeholder="Skriv ett namn per rad&#10;Alva&#10;Hugo">${esc(S.names.join("\n"))}</textarea><div class="info" id="nmInfo">${S.names.length?S.names.length+" namn – antalet elever följer namnlistan":"Ett namn per rad. Antalet elever räknas automatiskt."}</div></div>`:""}
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next" ${nameMode?"":"disabled"}>Nästa</button></div>`}
   if(onbStep===2){wcls="wide";
-    h=`${dots}<h1>Hur ska kalendern se ut?</h1><p class="lead">Båda är levande men lugna. Du kan byta när du vill under Inställningar.</p><div class="tcards">${themeCards()}</div>
+    h=`${dots}<h1>Hur ska kalendern se ut?</h1><p class="lead">Alla är levande men lugna. Du kan byta när du vill under Inställningar.</p><div class="tcards">${themeCards()}</div>
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Nästa</button></div>`}
   if(onbStep===3){wcls="wide";
     h=`${dots}<h1>Vad ska luckorna innehålla?</h1><p class="lead">Texterna anpassas efter stadiet (${LK.stadie(S.grade||"1").replace("-","–")}). Du kan byta och ändra enskilda luckor senare.</p><div class="ccards">${ctypeCards()}</div>
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Nästa</button></div>`}
   if(onbStep===4){const t=CTYPES.find(x=>x.id===S.ctype);
-    h=`${dots}<h1>Allt är klart!</h1><p class="lead">${esc(gName(S.grade))} · ${S.n} elever · ${S.theme==="byn"?"Byn i snön":"Filtfickorna"} · ${t?t.name:""}</p>
+    h=`${dots}<h1>Allt är klart!</h1><p class="lead">${esc(gName(S.grade))} · ${S.n} elever · ${S.theme==="byn"?"Byn i snön":S.theme==="byn2"?"Byn i snön (målad)":"Filtfickorna"} · ${t?t.name:""}</p>
     <div class="ready"><div><b>Luckorna</b><span>Dagens luckor lyser. Missade luckor kan öppnas i efterhand. Framtida luckor är låsta.</span></div><div><b>Dagens kapitel</b><span>${STORY?"”"+esc(STORY.titel)+"” – ":""}ett nytt kapitel varje skoldag.</span></div><div><b>Kopieringsmaterial</b><span>Läsförståelse till varje kapitel som PDF, plus facit. Knappen finns uppe till höger.</span></div></div>
     ${STORY&&HANDLING[S.grade]?`<div class="plot"><b>”${esc(STORY.titel)}”</b><p>${esc(HANDLING[S.grade])}</p></div>`:""}
     <div class="foot"><button class="back" id="back">Tillbaka</button><button class="go" id="next">Öppna kalendern</button></div>`}
