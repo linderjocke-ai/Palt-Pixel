@@ -5,18 +5,18 @@
   {
    "rubrik": "En stjärna på dörrmattan",
    "text": [
-    "Amanda bodde på andra våningen i ett stort, gult hus på Björkgatan 7. Det var den första december och fortfarande mörkt när hon öppnade dörren för att gå till skolan.",
+    "Elsa bodde på andra våningen i ett stort, gult hus på Björkgatan 7. Det var den första december och fortfarande mörkt när hon öppnade dörren för att gå till skolan.",
     "På dörrmattan låg något litet och vitt. Det var en stjärna, vikt av papper. På den stod det med darrig skrift: God jul, granne!",
-    "Amanda tittade upp och ner i trapphuset. Där var tomt och tyst.",
-    "Då öppnades dörren mittemot. Ut kom Isak, som gick i samma klass som Amanda. I handen höll han en likadan pappersstjärna.",
+    "Elsa tittade upp och ner i trapphuset. Där var tomt och tyst.",
+    "Då öppnades dörren mittemot. Ut kom Omar, som gick i samma klass som Elsa. I handen höll han en likadan pappersstjärna.",
     "– Fick du också en? frågade han förvånat.",
-    "– Ja, sa Amanda. Men vem har lagt dem här?",
+    "– Ja, sa Elsa. Men vem har lagt dem här?",
     "Ingen av dem visste. Men båda kände ett litet pirr i magen. Det här var början på ett mysterium."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Var bor Amanda?",
+     "text": "Var bor Elsa?",
      "alt": [
       "På Björkgatan 7",
       "På Ekgatan 12",
@@ -29,24 +29,24 @@
      "text": "Vad står det på stjärnan?",
      "alt": [
       "God jul, granne!",
-      "Hej Amanda!",
+      "Hej Elsa!",
       "Glad vinter!"
      ],
      "ratt": 0
     },
     {
      "typ": "kryss",
-     "text": "Vem bor mittemot Amanda?",
+     "text": "Vem bor mittemot Elsa?",
      "alt": [
       "Hennes mormor",
-      "Isak",
+      "Omar",
       "Hennes lärare"
      ],
      "ratt": 1
     },
     {
      "typ": "skriv",
-     "text": "Varför känner Amanda och Isak ett pirr i magen?",
+     "text": "Varför känner Elsa och Omar ett pirr i magen?",
      "rader": 2,
      "facit": "De har hittat ett mysterium och är nyfikna/spända."
     },
@@ -62,11 +62,11 @@
    "rubrik": "Fler överraskningar",
    "text": [
     "Nästa morgon hängde ett litet papphjärta på varje dörrhandtag i hela huset. Dagen efter låg en pepparkaka inslagen i bakplåtspapper vid varje dörr.",
-    "– Det är någon som bor här i huset, sa Isak. Någon som går upp väldigt tidigt.",
-    "– Eller väldigt sent, sa Amanda.",
-    "De bestämde sig för att bli detektiver. Amanda tog fram ett tomt anteckningsblock och skrev på första sidan med stora bokstäver: DEN HEMLIGA HJÄLPAREN.",
+    "– Det är någon som bor här i huset, sa Omar. Någon som går upp väldigt tidigt.",
+    "– Eller väldigt sent, sa Elsa.",
+    "De bestämde sig för att bli detektiver. Elsa tog fram ett tomt anteckningsblock och skrev på första sidan med stora bokstäver: DEN HEMLIGA HJÄLPAREN.",
     "Under skrev hon allt de visste. Hjälparen lägger presenter vid alla dörrar. Hjälparen viker papper. Hjälparen har darrig handstil.",
-    "– Nu behöver vi misstänkta, sa Isak och kisade med ögonen som en riktig detektiv."
+    "– Nu behöver vi misstänkta, sa Omar och kisade med ögonen som en riktig detektiv."
    ],
    "fragor": [
     {
@@ -81,7 +81,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad bestämmer Amanda och Isak?",
+     "text": "Vad bestämmer Elsa och Omar?",
      "alt": [
       "Att flytta",
       "Att bli detektiver",
@@ -101,7 +101,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Skriv två saker som Amanda och Isak vet om hjälparen.",
+     "text": "Skriv två saker som Elsa och Omar vet om hjälparen.",
      "rader": 2,
      "facit": "Till exempel: lägger presenter vid alla dörrar, viker papper, har darrig handstil, bor i huset."
     },
@@ -116,13 +116,13 @@
   {
    "rubrik": "Listan med misstänkta",
    "text": [
-    "I Amandas kök skrev de en lista över alla som bodde i huset.",
+    "I Elsas kök skrev de en lista över alla som bodde i huset.",
     "Fru Ek på bottenvåningen. Hon var ordförande i föreningen och satte upp arga lappar om att man inte fick ställa barnvagnar i trappan.",
     "Familjen Nguyen på första våningen, med lilla Tilde som var fyra år.",
     "Jonas, som studerade på universitetet och spelade gitarr på nätterna.",
     "Och herr Berg på tredje våningen. Han var gammal, gick med käpp och hälsade aldrig.",
-    "– Herr Berg kan vi stryka direkt, sa Isak. Han är alldeles för sur för att ge bort pepparkakor.",
-    "Amanda drog ett streck över hans namn. Men något fick henne att tveka."
+    "– Herr Berg kan vi stryka direkt, sa Omar. Han är alldeles för sur för att ge bort pepparkakor.",
+    "Elsa drog ett streck över hans namn. Men något fick henne att tveka."
    ],
    "fragor": [
     {
@@ -147,7 +147,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Varför vill Isak stryka herr Berg från listan?",
+     "text": "Varför vill Omar stryka herr Berg från listan?",
      "alt": [
       "Han verkar för sur",
       "Han bor inte i huset",
@@ -157,7 +157,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Amanda tvekar?",
+     "text": "Varför tror du att Elsa tvekar?",
      "rader": 2,
      "facit": "Till exempel: Man kan inte veta hur någon är bara för att de verkar sura."
     },
@@ -172,18 +172,18 @@
   {
    "rubrik": "Spaning i trapphuset",
    "text": [
-    "På fredagskvällen fick Amanda sova över hos Isak. De hade en plan.",
+    "På fredagskvällen fick Elsa sova över hos Omar. De hade en plan.",
     "När alla vuxna hade somnat smög de ut i trapphuset med en ficklampa och en filt. De gömde sig bakom dörren till källaren. Därifrån kunde de se trappan.",
-    "Det var tyst. Bara elementet knäppte ibland. Amanda gäspade. Isak gäspade ännu mer.",
-    "– Vi turas om att vakta, viskade Amanda. Du sover först.",
+    "Det var tyst. Bara elementet knäppte ibland. Elsa gäspade. Omar gäspade ännu mer.",
+    "– Vi turas om att vakta, viskade Elsa. Du sover först.",
     "Men det blev inte så. Efter en stund sov de båda två, hoprullade i filten.",
     "När de vaknade var det morgon. Och vid varje dörr låg en liten fågel, vikt av papper.",
-    "– Nej! stönade Isak. Vi missade det!"
+    "– Nej! stönade Omar. Vi missade det!"
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Var gömmer sig Amanda och Isak?",
+     "text": "Var gömmer sig Elsa och Omar?",
      "alt": [
       "Bakom dörren till källaren",
       "Under trappan",
@@ -228,12 +228,12 @@
   {
    "rubrik": "En ledtråd",
    "text": [
-    "På måndagen satt Amanda och vecklade försiktigt upp en av pappersfåglarna.",
+    "På måndagen satt Elsa och vecklade försiktigt upp en av pappersfåglarna.",
     "– Titta! sa hon. Pappret är från en tidning.",
     "På insidan syntes rutor med bokstäver i. Det var ett korsord. Någon hade fyllt i det med blyerts och samma darriga handstil.",
-    "Isak tittade på de andra sakerna de hade sparat. Hjärtat och stjärnan var också vikta av korsordssidor.",
-    "– Hjälparen löser korsord, sa Isak långsamt. Och läser papperstidning.",
-    "– Vem läser papperstidning nu för tiden? sa Amanda.",
+    "Omar tittade på de andra sakerna de hade sparat. Hjärtat och stjärnan var också vikta av korsordssidor.",
+    "– Hjälparen löser korsord, sa Omar långsamt. Och läser papperstidning.",
+    "– Vem läser papperstidning nu för tiden? sa Elsa.",
     "De tittade på varandra. Sedan sa de samma sak samtidigt:",
     "– Pappersinsamlingen!"
    ],
@@ -285,14 +285,14 @@
   {
    "rubrik": "I soprummet",
    "text": [
-    "Soprummet låg på gården. Det luktade lite av gamla äppelskal, men Amanda och Isak brydde sig inte.",
+    "Soprummet låg på gården. Det luktade lite av gamla äppelskal, men Elsa och Omar brydde sig inte.",
     "I tunnan för tidningar låg massor av reklam. Men längst ner hittade de en hel bunt riktiga tidningar.",
     "Varje tidning hade ett hål. Någon hade klippt ut korsordet.",
-    "På den översta tidningen satt en adresslapp. Amanda läste högt:",
+    "På den översta tidningen satt en adresslapp. Elsa läste högt:",
     "– Herr G. Berg. Björkgatan 7, tredje våningen.",
-    "Isak tappade hakan.",
+    "Omar tappade hakan.",
     "– Herr Berg? Men han som är så sur!",
-    "Amanda tänkte på strecket hon hade dragit över hans namn. Det hade varit fel."
+    "Elsa tänkte på strecket hon hade dragit över hans namn. Det hade varit fel."
    ],
    "fragor": [
     {
@@ -327,13 +327,13 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför blir Isak så förvånad?",
+     "text": "Varför blir Omar så förvånad?",
      "rader": 2,
      "facit": "Han trodde att herr Berg var för sur för att vara hjälparen."
     },
     {
      "typ": "skriv",
-     "text": "Vad har Amanda lärt sig om att döma andra?",
+     "text": "Vad har Elsa lärt sig om att döma andra?",
      "rader": 2,
      "facit": "Till exempel: Man ska inte bestämma hur någon är utan att känna dem."
     }
@@ -342,12 +342,12 @@
   {
    "rubrik": "Knack på tredje våningen",
    "text": [
-    "Amanda och Isak stod utanför herr Bergs dörr. Amandas hjärta slog hårt.",
-    "– Tänk om han blir arg, viskade Isak.",
-    "– Tänk om han blir glad, viskade Amanda tillbaka. Sedan knackade hon.",
+    "Elsa och Omar stod utanför herr Bergs dörr. Elsas hjärta slog hårt.",
+    "– Tänk om han blir arg, viskade Omar.",
+    "– Tänk om han blir glad, viskade Elsa tillbaka. Sedan knackade hon.",
     "Det dröjde länge. Till slut gick dörren upp. Herr Berg stod där med käppen och glasögonen på näsan.",
     "– Ja? sa han kort.",
-    "Amanda höll fram pappersfågeln. – Är det du som är den hemliga hjälparen?",
+    "Elsa höll fram pappersfågeln. – Är det du som är den hemliga hjälparen?",
     "Herr Berg sa ingenting. Han tittade på fågeln. Sedan blev hans ögon blanka.",
     "– Kom in, sa han till slut. Jag har varm choklad."
    ],
@@ -356,15 +356,15 @@
      "typ": "kryss",
      "text": "Vem knackar på dörren?",
      "alt": [
-      "Amanda",
+      "Elsa",
       "Fru Ek",
-      "Isak"
+      "Omar"
      ],
      "ratt": 0
     },
     {
      "typ": "kryss",
-     "text": "Vad håller Amanda fram?",
+     "text": "Vad håller Elsa fram?",
      "alt": [
       "En pappersfågel",
       "En pepparkaka",
@@ -390,7 +390,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur visar Amanda mod i det här kapitlet?",
+     "text": "Hur visar Elsa mod i det här kapitlet?",
      "rader": 2,
      "facit": "Hon knackar på fast hon är nervös och frågar rakt ut."
     }
@@ -403,8 +403,8 @@
     "– Det är Maj, min fru, sa herr Berg. Hon dog förra vintern.",
     "Han berättade att Maj alltid hade vikt stjärnor till grannarna i december. Varje år, i femtio år.",
     "– I år ville jag fortsätta, sa han. Men jag är inte så bra på att prata med folk. Så jag gjorde det i hemlighet.",
-    "Amanda tittade på honom. Han såg inte sur ut längre. Han såg ensam ut.",
-    "– Vad ska du göra på julafton? frågade Isak.",
+    "Elsa tittade på honom. Han såg inte sur ut längre. Han såg ensam ut.",
+    "– Vad ska du göra på julafton? frågade Omar.",
     "– Jag är ensam, sa herr Berg och ryckte på axlarna. Det går bra.",
     "Men det lät inte som om det gick bra."
    ],
@@ -441,7 +441,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Amanda tycker att herr Berg ser ensam ut i stället för sur. Vad betyder det?",
+     "text": "Elsa tycker att herr Berg ser ensam ut i stället för sur. Vad betyder det?",
      "rader": 2,
      "facit": "Hon förstår att han inte är elak, utan ledsen och ensam."
     },
@@ -456,18 +456,18 @@
   {
    "rubrik": "En stor idé",
    "text": [
-    "Amanda och Isak gick ner för trappan under tystnad.",
-    "– Ingen borde vara ensam på jul, sa Amanda till slut.",
-    "– Nej, sa Isak. Särskilt inte någon som har gett hela huset presenter.",
-    "Amanda stannade mitt i trappan. – Tänk om vi har en fest! För hela huset! Här i trapphuset, med Majs stjärnor överallt!",
-    "Isak studsade av glädje. – Och herr Berg är hedersgäst!",
+    "Elsa och Omar gick ner för trappan under tystnad.",
+    "– Ingen borde vara ensam på jul, sa Elsa till slut.",
+    "– Nej, sa Omar. Särskilt inte någon som har gett hela huset presenter.",
+    "Elsa stannade mitt i trappan. – Tänk om vi har en fest! För hela huset! Här i trapphuset, med Majs stjärnor överallt!",
+    "Omar studsade av glädje. – Och herr Berg är hedersgäst!",
     "Resten av kvällen gjorde de en plan. De ritade inbjudningskort och skrev en lista på vad de behövde: ljus, saft, pepparkakor och musik.",
     "Det var bara ett problem kvar. Någon måste säga ja. Och det var fru Ek som bestämde i huset."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad tycker Amanda att ingen borde vara?",
+     "text": "Vad tycker Elsa att ingen borde vara?",
      "alt": [
       "Arg på jul",
       "Hungrig på jul",
@@ -480,7 +480,7 @@
      "text": "Var vill de först ha festen?",
      "alt": [
       "I trapphuset",
-      "Hos Isak",
+      "Hos Omar",
       "I skolan"
      ],
      "ratt": 0
@@ -512,15 +512,15 @@
   {
    "rubrik": "Fru Ek säger nej",
    "text": [
-    "Nästa dag knackade Amanda och Isak på hos fru Ek. De berättade om festen i trapphuset.",
+    "Nästa dag knackade Elsa och Omar på hos fru Ek. De berättade om festen i trapphuset.",
     "Fru Ek lyssnade med rynkad panna. Sedan skakade hon på huvudet.",
     "– Absolut inte, sa hon. Trapphuset är en utrymningsväg. Om det börjar brinna måste alla kunna komma ut. Där får man inte ha fest.",
     "Hon stängde dörren. Klick.",
-    "Amanda satte sig på trappsteget. Hon var så besviken att hon nästan grät.",
-    "– Hon är bara sur, sa Isak.",
-    "Amanda tänkte efter. – Nej, sa hon långsamt. Hon har faktiskt rätt. Det kan vara farligt. Vi har tänkt fel.",
+    "Elsa satte sig på trappsteget. Hon var så besviken att hon nästan grät.",
+    "– Hon är bara sur, sa Omar.",
+    "Elsa tänkte efter. – Nej, sa hon långsamt. Hon har faktiskt rätt. Det kan vara farligt. Vi har tänkt fel.",
     "– Så vad gör vi nu?",
-    "– Vi tänker rätt, sa Amanda."
+    "– Vi tänker rätt, sa Elsa."
    ],
    "fragor": [
     {
@@ -545,7 +545,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad kommer Amanda fram till?",
+     "text": "Vad kommer Elsa fram till?",
      "alt": [
       "Att fru Ek har rätt",
       "Att fru Ek är elak",
@@ -561,7 +561,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför är det klokt av Amanda att lyssna på fru Ek?",
+     "text": "Varför är det klokt av Elsa att lyssna på fru Ek?",
      "rader": 2,
      "facit": "Till exempel: Fru Ek hade en bra anledning, och nu kan de hitta en bättre plan."
     }
@@ -570,11 +570,11 @@
   {
    "rubrik": "Ett brev till föreningen",
    "text": [
-    "Amanda och Isak skrev ett brev till fru Ek. De skrev det tre gånger innan det blev bra.",
-    "Kära fru Ek! Du har rätt om trapphuset. Därför vill vi i stället ha festen ute på gården. Där är det säkert. Vi ställer lyktor på marken och har ljus i burkar. Vi lovar att städa efteråt. Hälsningar Amanda och Isak.",
+    "Elsa och Omar skrev ett brev till fru Ek. De skrev det tre gånger innan det blev bra.",
+    "Kära fru Ek! Du har rätt om trapphuset. Därför vill vi i stället ha festen ute på gården. Där är det säkert. Vi ställer lyktor på marken och har ljus i burkar. Vi lovar att städa efteråt. Hälsningar Elsa och Omar.",
     "Sedan knackade de på hos alla grannar och frågade om de ville skriva under.",
     "Familjen Nguyen skrev under och bjöd på vårrullar. Jonas skrev under och lovade att spela gitarr. Lilla Tilde ritade en blomma i stället för att skriva sitt namn.",
-    "Amanda insåg att hon hade bott i huset i hela sitt liv, men aldrig pratat med de flesta grannarna förut.",
+    "Elsa insåg att hon hade bott i huset i hela sitt liv, men aldrig pratat med de flesta grannarna förut.",
     "Till sist lade de brevet, med alla namnen, i fru Eks brevlåda."
    ],
    "fragor": [
@@ -616,7 +616,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Vad upptäcker Amanda när hon pratar med grannarna?",
+     "text": "Vad upptäcker Elsa när hon pratar med grannarna?",
      "rader": 2,
      "facit": "Att hon aldrig har pratat med de flesta grannarna förut."
     }
@@ -625,13 +625,13 @@
   {
    "rubrik": "Fru Ek har också en hemlighet",
    "text": [
-    "Nästa morgon ringde det på Amandas dörr. Där stod fru Ek med brevet i handen.",
+    "Nästa morgon ringde det på Elsas dörr. Där stod fru Ek med brevet i handen.",
     "– Det här var ett mycket bra brev, sa hon. Ni har tänkt på säkerheten. Det uppskattar jag.",
-    "Amanda höll andan.",
+    "Elsa höll andan.",
     "– Ni får ha festen på gården, sa fru Ek. På ett villkor. Jag vill vara med och hjälpa till.",
     "Hon tittade ner på sina skor. – Jag har bott ensam i tio år, sa hon. Jag sätter upp lappar för att det är lättare än att knacka på. Kanske är det dags att ändra på det.",
-    "Amanda log. – Du kan få ansvara för lyktorna, sa hon.",
-    "Fru Ek log också. Det var första gången Amanda såg henne le."
+    "Elsa log. – Du kan få ansvara för lyktorna, sa hon.",
+    "Fru Ek log också. Det var första gången Elsa såg henne le."
    ],
    "fragor": [
     {
@@ -683,10 +683,10 @@
    "text": [
     "Hela veckan förberedde huset festen. Varje kväll samlades grannarna i herr Bergs kök.",
     "Herr Berg lärde alla att vika Majs stjärnor. Vik, vik, vänd och vik.",
-    "– Nej, nej, inte så hårt, sa han till Isak. Pappret ska kännas som att du håller en fågel.",
+    "– Nej, nej, inte så hårt, sa han till Omar. Pappret ska kännas som att du håller en fågel.",
     "Jonas övade på julsånger. Familjen Nguyen planerade vad de skulle laga. Fru Ek räknade lyktor och värmeljus på en lista.",
     "Lilla Tilde vek bara skrynkliga bollar. Men herr Berg sa att de var de finaste av alla.",
-    "En kväll hörde Amanda herr Berg skratta. Det var ett hest, ovant skratt, som om det inte hade använts på länge."
+    "En kväll hörde Elsa herr Berg skratta. Det var ett hest, ovant skratt, som om det inte hade använts på länge."
    ],
    "fragor": [
     {
@@ -740,9 +740,9 @@
     "Jonas spelade gitarr. Familjen Nguyen bjöd på vårrullar och fru Ek på pepparkakor. Alla grannar var där, även några från huset bredvid.",
     "Sedan knackade fru Ek med en sked på sin kopp. – Herr Berg vill säga något.",
     "Herr Berg ställde sig upp med käppen. – Maj älskade december, sa han. Hon sa alltid att ett hus blir ett hem när grannarna känner varandra. Hon hade älskat det här.",
-    "Alla klappade. Amanda tittade på Isak.",
+    "Alla klappade. Elsa tittade på Omar.",
     "– Vi löste mysteriet, viskade han.",
-    "– Ja, sa Amanda. Och vi hittade ett helt hus av vänner. Slut."
+    "– Ja, sa Elsa. Och vi hittade ett helt hus av vänner. Slut."
    ],
    "fragor": [
     {
@@ -759,7 +759,7 @@
      "typ": "kryss",
      "text": "Vem håller tal på festen?",
      "alt": [
-      "Amanda",
+      "Elsa",
       "Herr Berg",
       "Jonas"
      ],

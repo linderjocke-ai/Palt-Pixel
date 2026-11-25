@@ -8,8 +8,8 @@
     "I den lilla byn Glimmerbyn är december mörk. Solen går upp sent och ner tidigt.",
     "Men varje år, sista dagen före jullovet, har byn en Ljusfest. Alla barn går med lyktor genom byn till torget. Då blir mörkret alldeles glittrigt.",
     "– I år ska vi göra egna lyktor, sa fröken Annika till klassen.",
-    "Alla jublade. Alla utom Dagny.",
-    "Dagny hade kommit till Glimmerbyn i somras. Hon var ny i klassen och sa inte så mycket. Hon satt längst bak och tittade ut genom fönstret på snön."
+    "Alla jublade. Alla utom Noor.",
+    "Noor hade kommit till Glimmerbyn i somras. Hon var ny i klassen och sa inte så mycket. Hon satt längst bak och tittade ut genom fönstret på snön."
    ],
    "fragor": [
     {
@@ -34,7 +34,7 @@
     },
     {
      "typ": "kryss",
-     "text": "När kom Dagny till Glimmerbyn?",
+     "text": "När kom Noor till Glimmerbyn?",
      "alt": [
       "I våras",
       "I går",
@@ -44,26 +44,26 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Dagny inte jublar?",
+     "text": "Varför tror du att Noor inte jublar?",
      "rader": 2,
      "facit": "Till exempel: Hon är ny, blyg eller känner sig ensam."
     }
    ]
   },
   {
-   "rubrik": "Dagnys lykta",
+   "rubrik": "Noors lykta",
    "text": [
     "Klassen klippte lyktor av tjockt papper. De flesta klippte hjärtan och raka streck.",
-    "Dagny klippte långsamt och noga. När hon var klar höll hon upp sin lykta mot fönstret.",
+    "Noor klippte långsamt och noga. När hon var klar höll hon upp sin lykta mot fönstret.",
     "Ljuset sken igenom hundra små stjärnor i ett fint mönster.",
-    "– Vad konstig den ser ut, sa Axel högt. Det är ju inte så man gör en lykta!",
-    "Några skrattade. Dagny tittade ner i bänken. Hennes kinder blev varma.",
+    "– Vad konstig den ser ut, sa Viggo högt. Det är ju inte så man gör en lykta!",
+    "Några skrattade. Noor tittade ner i bänken. Hennes kinder blev varma.",
     "Hon lade lyktan i bänken och sa ingenting mer den dagen."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad klipper Dagny i sin lykta?",
+     "text": "Vad klipper Noor i sin lykta?",
      "alt": [
       "Hjärtan",
       "Små stjärnor",
@@ -75,15 +75,15 @@
      "typ": "kryss",
      "text": "Vem säger att lyktan är konstig?",
      "alt": [
-      "Mika",
-      "Axel",
+      "Ella",
+      "Viggo",
       "Fröken Annika"
      ],
      "ratt": 1
     },
     {
      "typ": "kryss",
-     "text": "Hur känner sig Dagny?",
+     "text": "Hur känner sig Noor?",
      "alt": [
       "Stolt",
       "Ledsen",
@@ -93,30 +93,30 @@
     },
     {
      "typ": "skriv",
-     "text": "Vad tycker du om det Axel säger? Varför?",
+     "text": "Vad tycker du om det Viggo säger? Varför?",
      "rader": 2,
      "facit": "Eget svar, till exempel att det var elakt."
     }
    ]
   },
   {
-   "rubrik": "Mika sätter sig bredvid",
+   "rubrik": "Ella sätter sig bredvid",
    "text": [
-    "På rasten satt Dagny ensam på en bänk. Mika gick fram och satte sig bredvid henne. Hon höll i ett äpple.",
-    "– Jag tyckte din lykta var jättefin, sa Mika.",
-    "Dagny tittade upp. – Min morfar gjorde lyktor, sa hon tyst. I staden där vi bodde förut. Han hade en egen verkstad.",
-    "– Wow, sa Mika. Kan han fortfarande göra lyktor?",
+    "På rasten satt Noor ensam på en bänk. Ella gick fram och satte sig bredvid henne. Hon höll i ett äpple.",
+    "– Jag tyckte din lykta var jättefin, sa Ella.",
+    "Noor tittade upp. – Min morfar gjorde lyktor, sa hon tyst. I staden där vi bodde förut. Han hade en egen verkstad.",
+    "– Wow, sa Ella. Kan han fortfarande göra lyktor?",
     "– Ja. Men han har inga verktyg här.",
-    "Mika delade sin frukt med Dagny. Det var första gången Mika såg Dagny le."
+    "Ella delade sin frukt med Noor. Det var första gången Ella såg Noor le."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vem sätter sig bredvid Dagny?",
+     "text": "Vem sätter sig bredvid Noor?",
      "alt": [
-      "Axel",
+      "Viggo",
       "Fröken Annika",
-      "Mika"
+      "Ella"
      ],
      "ratt": 2
     },
@@ -124,15 +124,15 @@
      "typ": "kryss",
      "text": "Vem gjorde lyktor förut?",
      "alt": [
-      "Mikas pappa",
-      "Dagnys morfar",
-      "Dagnys mamma"
+      "Ellas pappa",
+      "Noors morfar",
+      "Noors mamma"
      ],
      "ratt": 1
     },
     {
      "typ": "kryss",
-     "text": "Vad delar Mika med Dagny?",
+     "text": "Vad delar Ella med Noor?",
      "alt": [
       "En bok",
       "Sin frukt",
@@ -142,9 +142,9 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur visar Mika att hon är en bra kompis?",
+     "text": "Hur visar Ella att hon är en bra kompis?",
      "rader": 2,
-     "facit": "Hon sätter sig bredvid Dagny, säger något snällt och delar sin frukt."
+     "facit": "Hon sätter sig bredvid Noor, säger något snällt och delar sin frukt."
     }
    ]
   },
@@ -154,7 +154,7 @@
     "Nu var alla lyktor klara. Det var tjugotvå lyktor i olika färger.",
     "– Vi ställer dem i förrådet bakom gympasalen, sa fröken Annika. Där får limmet torka över helgen.",
     "Barnen bar lyktorna försiktigt, en och en.",
-    "Dagny ställde sin stjärnlykta längst in på hyllan.",
+    "Noor ställde sin stjärnlykta längst in på hyllan.",
     "– På måndag får vi prova att tända dem, sa fröken.",
     "Alla gick hem och längtade. Det var bara två veckor kvar till Ljusfesten."
    ],
@@ -203,9 +203,9 @@
     "Under helgen kom en stor snöstorm till Glimmerbyn. Det ven i skorstenarna hela natten.",
     "På måndagen sprang klassen till förrådet. Fröken Annika öppnade dörren och stannade.",
     "Ett fönster hade gått sönder i stormen. Snö hade blåst in och smält.",
-    "Alla lyktor var förstörda. Pappret hade blivit till mos. Dagnys stjärnlykta också.",
+    "Alla lyktor var förstörda. Pappret hade blivit till mos. Noors stjärnlykta också.",
     "Det blev alldeles tyst. Sedan började någon gråta.",
-    "– Nu blir det ingen Ljusfest! skrek Axel och sparkade i snön."
+    "– Nu blir det ingen Ljusfest! skrek Viggo och sparkade i snön."
    ],
    "fragor": [
     {
@@ -240,7 +240,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur tror du att Axel känner sig? Hur vet du det?",
+     "text": "Hur tror du att Viggo känner sig? Hur vet du det?",
      "rader": 2,
      "facit": "Arg och ledsen. Han skriker och sparkar i snön."
     }
@@ -249,12 +249,12 @@
   {
    "rubrik": "Inget papper kvar",
    "text": [
-    "– Vi gör nya lyktor, sa Mika.",
+    "– Vi gör nya lyktor, sa Ella.",
     "Men i skolans förråd fanns inget tjockt papper kvar. Fröken Annika ringde till affären. De hade inte heller något.",
     "– Och skolan har ändå inga pengar kvar till pyssel i år, sa fröken med en suck.",
     "Klassen satt tyst. Ute föll snön.",
     "– Vi får tänka nytt, sa fröken Annika till slut. Finns det något annat man kan göra lyktor av?",
-    "Ingen svarade. Men Dagny tittade på Mika. Hon såg ut som om hon ville säga något."
+    "Ingen svarade. Men Noor tittade på Ella. Hon såg ut som om hon ville säga något."
    ],
    "fragor": [
     {
@@ -281,29 +281,29 @@
      "typ": "kryss",
      "text": "Vem ser ut att vilja säga något?",
      "alt": [
-      "Dagny",
+      "Noor",
       "Fröken",
-      "Axel"
+      "Viggo"
      ],
      "ratt": 0
     },
     {
      "typ": "skriv",
-     "text": "Vad tror du att Dagny vill säga?",
+     "text": "Vad tror du att Noor vill säga?",
      "rader": 2,
      "facit": "Eget svar."
     }
    ]
   },
   {
-   "rubrik": "Dagny vågar",
+   "rubrik": "Noor vågar",
    "text": [
-    "På rasten viskade Dagny till Mika:",
+    "På rasten viskade Noor till Ella:",
     "– Morfar gjorde lyktor av plåtburkar. Man slår små hål i burken med en spik. Då lyser ljuset ut genom hålen.",
-    "– Det måste du säga till fröken! sa Mika.",
-    "– Jag vågar inte, sa Dagny. Tänk om alla skrattar igen.",
-    "– Jag står bredvid dig, sa Mika.",
-    "Efter rasten räckte Dagny upp handen. Hennes röst darrade lite, men hon berättade allt.",
+    "– Det måste du säga till fröken! sa Ella.",
+    "– Jag vågar inte, sa Noor. Tänk om alla skrattar igen.",
+    "– Jag står bredvid dig, sa Ella.",
+    "Efter rasten räckte Noor upp handen. Hennes röst darrade lite, men hon berättade allt.",
     "– Vilken fantastisk idé! sa fröken Annika. Kan din morfar komma hit och visa oss?"
    ],
    "fragor": [
@@ -319,7 +319,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Varför vågar inte Dagny först?",
+     "text": "Varför vågar inte Noor först?",
      "alt": [
       "Hon har glömt",
       "Hon är trött",
@@ -339,7 +339,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur hjälper Mika Dagny att våga?",
+     "text": "Hur hjälper Ella Noor att våga?",
      "rader": 2,
      "facit": "Hon peppar henne och lovar att stå bredvid henne."
     }
@@ -348,17 +348,17 @@
   {
    "rubrik": "Morfar Yusuf",
    "text": [
-    "Dagen efter kom Dagnys morfar till skolan. Han hette Yusuf och hade ett stort grått skägg och varma ögon.",
+    "Dagen efter kom Noors morfar till skolan. Han hette Yusuf och hade ett stort grått skägg och varma ögon.",
     "Han hade med sig en plåtburk, en hammare och en spik.",
     "– Först fyller man burken med vatten och låter den frysa, sa morfar. Då blir den inte bucklig när man slår.",
     "Sedan knackade han försiktigt med spiken. Tick, tick, tick. Hål efter hål.",
-    "– Det där kommer aldrig att funka, mumlade Axel.",
+    "– Det där kommer aldrig att funka, mumlade Viggo.",
     "Morfar log bara och fortsatte knacka."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad heter Dagnys morfar?",
+     "text": "Vad heter Noors morfar?",
      "alt": [
       "Yasin",
       "Yusuf",
@@ -378,7 +378,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad tror Axel?",
+     "text": "Vad tror Viggo?",
      "alt": [
       "Att det är lätt",
       "Att det är roligt",
@@ -444,20 +444,20 @@
    ]
   },
   {
-   "rubrik": "Axel säger förlåt",
+   "rubrik": "Viggo säger förlåt",
    "text": [
     "Nu knackade hela klassen hål i burkarna. Tick, tick, tick.",
-    "Axel slog för hårt. Burken sprack och spiken for iväg.",
+    "Viggo slog för hårt. Burken sprack och spiken for iväg.",
     "– Det går inte! sa han argt.",
-    "Dagny satte sig bredvid honom. – Försiktigt, sa hon. Som en hackspett. Små, små slag.",
-    "Hon visade honom. Axel försökte igen. Nu blev det ett fint litet hål.",
-    "Axel tittade på Dagny. – Förlåt för att jag sa att din lykta var konstig, sa han. Den var faktiskt jättefin.",
-    "– Tack, sa Dagny."
+    "Noor satte sig bredvid honom. – Försiktigt, sa hon. Som en hackspett. Små, små slag.",
+    "Hon visade honom. Viggo försökte igen. Nu blev det ett fint litet hål.",
+    "Viggo tittade på Noor. – Förlåt för att jag sa att din lykta var konstig, sa han. Den var faktiskt jättefin.",
+    "– Tack, sa Noor."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad händer när Axel slår för hårt?",
+     "text": "Vad händer när Viggo slår för hårt?",
      "alt": [
       "Burken spricker",
       "Burken blir fin",
@@ -467,17 +467,17 @@
     },
     {
      "typ": "kryss",
-     "text": "Vem hjälper Axel?",
+     "text": "Vem hjälper Viggo?",
      "alt": [
-      "Dagny",
-      "Mika",
+      "Noor",
+      "Ella",
       "Morfar"
      ],
      "ratt": 0
     },
     {
      "typ": "kryss",
-     "text": "Vad säger Axel till Dagny?",
+     "text": "Vad säger Viggo till Noor?",
      "alt": [
       "Jag kan själv",
       "Gå härifrån",
@@ -487,21 +487,21 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Axel säger förlåt nu?",
+     "text": "Varför tror du att Viggo säger förlåt nu?",
      "rader": 2,
-     "facit": "Till exempel: Han ser att Dagny är snäll och förstår att han var dum."
+     "facit": "Till exempel: Han ser att Noor är snäll och förstår att han var dum."
     }
    ]
   },
   {
-   "rubrik": "Axels idé",
+   "rubrik": "Viggos idé",
    "text": [
     "Lyktorna var nästan klara. Men det fanns ett problem.",
-    "– Hur ska vi bära dem? frågade Mika. Burkarna blir varma när ljuset brinner.",
-    "Alla funderade. Då sprack Axel upp i ett leende.",
+    "– Hur ska vi bära dem? frågade Ella. Burkarna blir varma när ljuset brinner.",
+    "Alla funderade. Då sprack Viggo upp i ett leende.",
     "– Min pappa har en verkstad med massor av ståltråd! Vi kan göra handtag!",
-    "Nästa dag kom Axel med en stor rulle ståltråd. Morfar Yusuf visade hur man böjer den till ett handtag.",
-    "– Bra tänkt, Axel, sa morfar. Tillsammans blir vi kloka."
+    "Nästa dag kom Viggo med en stor rulle ståltråd. Morfar Yusuf visade hur man böjer den till ett handtag.",
+    "– Bra tänkt, Viggo, sa morfar. Tillsammans blir vi kloka."
    ],
    "fragor": [
     {
@@ -518,8 +518,8 @@
      "typ": "kryss",
      "text": "Vem har en verkstad?",
      "alt": [
-      "Axels pappa",
-      "Dagnys mamma",
+      "Viggos pappa",
+      "Noors mamma",
       "Fröken"
      ],
      "ratt": 0
@@ -548,9 +548,9 @@
     "På eftermiddagen var det mörkt ute. Klassen gick ut på skolgården med alla lyktorna.",
     "Fröken Annika tände ett värmeljus i varje burk.",
     "Då hände något magiskt. Ljuset lyste ut genom alla små hål. Tusen prickar av ljus föll på snön runt omkring dem.",
-    "– Det ser ut som en stjärnhimmel på marken! ropade Mika.",
-    "Dagny skrattade högt. Det var första gången klassen hörde henne skratta.",
-    "Axel höll upp sin lykta bredvid hennes. Mönstren blandades i snön."
+    "– Det ser ut som en stjärnhimmel på marken! ropade Ella.",
+    "Noor skrattade högt. Det var första gången klassen hörde henne skratta.",
+    "Viggo höll upp sin lykta bredvid hennes. Mönstren blandades i snön."
    ],
    "fragor": [
     {
@@ -575,7 +575,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad gör Dagny för första gången?",
+     "text": "Vad gör Noor för första gången?",
      "alt": [
       "Gråter",
       "Springer",
@@ -585,7 +585,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Dagny skrattar nu?",
+     "text": "Varför tror du att Noor skrattar nu?",
      "rader": 2,
      "facit": "Till exempel: Hon är glad, stolt och känner sig som en del av klassen."
     }
@@ -596,25 +596,25 @@
    "text": [
     "Dagen före Ljusfesten samlades klassen.",
     "– Någon ska gå först i tåget, sa fröken Annika. Vem tycker ni?",
-    "Axel räckte upp handen. – Dagny och hennes morfar, sa han. Utan dem hade det inte blivit någon fest.",
+    "Viggo räckte upp handen. – Noor och hennes morfar, sa han. Utan dem hade det inte blivit någon fest.",
     "Alla nickade och klappade i händerna.",
-    "Dagny blev röd om kinderna. – Men alla kommer att titta på mig, viskade hon.",
-    "– Vi går precis bakom dig, sa Mika. Hela klassen."
+    "Noor blev röd om kinderna. – Men alla kommer att titta på mig, viskade hon.",
+    "– Vi går precis bakom dig, sa Ella. Hela klassen."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vem föreslår att Dagny ska gå först?",
+     "text": "Vem föreslår att Noor ska gå först?",
      "alt": [
       "Fröken",
-      "Mika",
-      "Axel"
+      "Ella",
+      "Viggo"
      ],
      "ratt": 2
     },
     {
      "typ": "kryss",
-     "text": "Varför ska Dagny och morfar gå först?",
+     "text": "Varför ska Noor och morfar gå först?",
      "alt": [
       "De går snabbast",
       "Utan dem hade det inte blivit någon fest",
@@ -624,7 +624,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad säger Mika?",
+     "text": "Vad säger Ella?",
      "alt": [
       "Vi går precis bakom dig",
       "Du kan gå själv",
@@ -634,9 +634,9 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur har Axel förändrats sedan början av berättelsen?",
+     "text": "Hur har Viggo förändrats sedan början av berättelsen?",
      "rader": 2,
-     "facit": "Förut skrattade han åt Dagny, nu är han snäll och vill att hon ska gå först."
+     "facit": "Förut skrattade han åt Noor, nu är han snäll och vill att hon ska gå först."
     }
    ]
   },
@@ -644,10 +644,10 @@
    "rubrik": "Ljusfesten",
    "text": [
     "Äntligen var det den sista dagen före jullovet. Hela Glimmerbyn stod längs gatan i mörkret.",
-    "Längst fram gick Dagny och morfar Yusuf. Bakom dem gick hela klassen med sina plåtlyktor.",
+    "Längst fram gick Noor och morfar Yusuf. Bakom dem gick hela klassen med sina plåtlyktor.",
     "Tusen små ljusprickar dansade på husväggarna och i snön. Folk sa oj och åh.",
     "På torget sjöng alla tillsammans. Bagaren bjöd på varma bullar och fru Lindgren på saft.",
-    "Dagny tittade på alla glada ansikten. Hon kände något varmt i magen.",
+    "Noor tittade på alla glada ansikten. Hon kände något varmt i magen.",
     "Glimmerbyn kändes inte ny och främmande längre. Den kändes som hemma. Slut."
    ],
    "fragor": [
@@ -655,9 +655,9 @@
      "typ": "kryss",
      "text": "Vilka går först i tåget?",
      "alt": [
-      "Axel och hans pappa",
-      "Dagny och morfar",
-      "Fröken och Mika"
+      "Viggo och hans pappa",
+      "Noor och morfar",
+      "Fröken och Ella"
      ],
      "ratt": 1
     },
@@ -673,7 +673,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Hur känns Glimmerbyn för Dagny nu?",
+     "text": "Hur känns Glimmerbyn för Noor nu?",
      "alt": [
       "Nytt och konstigt",
       "Som hemma",
