@@ -284,6 +284,47 @@ h1,h2,h3{font-family:Fredoka,system-ui,sans-serif;margin:0;line-height:1.08;text
 #bdrop.filt{background-color:#f1e5d1}
 #bdrop.filt:after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%,rgba(120,70,30,.12),rgba(70,40,20,.34))}
 #stage{z-index:1}
+/* ----- luckkort med bild och interaktivitet ----- */
+.card.byncard.rich{left:560px;top:40px;width:1000px;height:820px}
+.card.static.rich{left:auto;top:auto;width:1000px;height:820px}
+.cardin.rich{gap:14px}
+.cbody{flex:1;display:flex;gap:30px;align-items:center;min-height:0}
+.cbody .cmid{flex:1;min-width:0}
+.cimg{margin:0;flex:none;width:380px;aspect-ratio:4/3;border-radius:22px;overflow:hidden;box-shadow:0 8px 22px rgba(20,30,70,.22);background:#dfe6f3}
+.cimg img{width:100%;height:100%;object-fit:cover;display:block}
+.cardin:not(.rich) .cbody{display:contents}
+.svar{display:flex;flex-direction:column;gap:2px}.svar span{font-family:Andika;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.7}
+.btn.sm{padding:10px 18px;font-size:17px}
+.cint{background:rgba(27,39,71,.05);border:2px solid rgba(27,39,71,.08);border-radius:22px;padding:18px 22px;display:flex;flex-direction:column;gap:12px}
+.feltcard .cint{background:rgba(120,80,40,.06);border-color:rgba(120,80,40,.14)}
+.itl{font-weight:700;font-size:16px;opacity:.7;text-transform:uppercase;letter-spacing:.06em}
+.ich{display:flex;flex-wrap:wrap;gap:12px}
+.ich button{font:inherit;font-weight:700;font-size:21px;padding:12px 22px;border-radius:16px;background:#fff;color:inherit;border:2.5px solid rgba(27,39,71,.18);cursor:pointer;transition:transform .15s,background .2s}
+.ich button:hover:not(:disabled){transform:translateY(-2px)}
+.ich button.ok{background:#2d5e48;color:#fff;border-color:#2d5e48}.ich button.bad{background:#f6dcd6;border-color:#d9a093;text-decoration:line-through;opacity:.75}
+.ich button:disabled:not(.ok){cursor:default}
+.inum{display:flex;gap:12px}.inum input{font:inherit;font-size:34px;font-weight:700;width:180px;padding:6px 16px;border-radius:14px;border:2.5px solid rgba(27,39,71,.2);text-align:center}
+.inum button,.tbtns button,.rctl button{font:inherit;font-weight:700;font-size:19px;padding:10px 20px;border-radius:14px;background:#1b2747;color:#fff;border:0;cursor:pointer}
+.feltcard .inum button,.feltcard .tbtns button,.feltcard .rctl button{background:#a3392c}
+.tbtns .rs,.rctl .undo,.rctl .again{background:#e6e1d6!important;color:#1b2747!important}
+button:disabled{opacity:.5;cursor:default}
+.ifb{min-height:26px;font-weight:700;font-size:19px}.ifb.good{color:#2d7a4e}.ifb.tryagain{color:#a35a1e}.ifb.fail{color:#b23a2e}
+.itimer{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"lab lab btn" "dig bar btn";align-items:center;gap:6px 22px}
+.itimer .tlab{grid-area:lab;font-weight:700;font-size:17px;opacity:.75}.itimer .tdig{grid-area:dig;font-family:Fredoka;font-weight:700;font-size:64px;line-height:1;font-variant-numeric:tabular-nums;min-width:170px}
+.itimer .tbar{grid-area:bar;height:14px;border-radius:7px;background:rgba(27,39,71,.12);overflow:hidden}.itimer .tbar i{display:block;height:100%;width:0;background:#2d5e48;transition:width .2s linear}
+.itimer.rest .tbar i{background:#c9762b}.itimer.done .tdig{color:#2d7a4e}
+.itimer .tbtns{grid-area:btn;display:flex;flex-direction:column;gap:8px}
+.itimer.sw{grid-template-areas:"lab lab btn" "dig best btn"}.itimer .tbest{grid-area:best;font-weight:700;font-size:18px;color:#2d7a4e}
+.river{display:grid;grid-template-columns:1fr 1.25fr 1fr;height:150px;border-radius:16px;overflow:hidden}
+.river .bank{background:linear-gradient(#f4f7fc,#dfe7f3);display:flex;flex-direction:column;padding:8px 10px;gap:6px}.river .bl{font-size:13px;font-weight:700;opacity:.6;text-transform:uppercase}
+.river .slots{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+.river .water{background:repeating-linear-gradient(170deg,#3f6a9e 0 14px,#4a77ab 14px 28px);position:relative}
+.river .boat{position:absolute;bottom:22px;left:10px;display:flex;align-items:center;gap:6px;background:#8a5636;border-radius:10px 10px 40px 40px;padding:6px 12px 10px;transition:left .8s cubic-bezier(.5,0,.3,1),transform .8s;min-width:120px;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+.river .boat.right{left:calc(100% - 10px);transform:translateX(-100%)}
+.river .farmer{font-size:34px}
+.tok{display:flex;align-items:center;gap:6px;padding:4px 10px 4px 6px;border-radius:12px;background:#fff;border:2px solid rgba(27,39,71,.18);font:inherit;font-weight:700;font-size:15px;cursor:pointer;color:#1b2747}
+.tok span{font-size:30px;line-height:1}.tok:hover:not(:disabled){border-color:#c9762b}
+.rctl{display:flex;gap:10px;align-items:center}.rctl .trips{margin-left:auto;font-weight:700;opacity:.7}
 /* inställningar */
 .set{width:1260px;height:820px;display:grid;grid-template-columns:290px minmax(0,1fr);overflow:hidden}
 .snav{background:#efe6d4;padding:40px 18px;display:flex;flex-direction:column;gap:6px}
@@ -398,6 +439,7 @@ select{font:inherit;font-size:20px;padding:10px 14px;border-radius:14px;border:2
   <div class="toast" id="toast" role="status"></div>
 </div>
 <script src="art.js"></script>
+<script src="luckor.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
