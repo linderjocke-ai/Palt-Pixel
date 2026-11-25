@@ -255,7 +255,7 @@ function previewLucka(l,back){
 /* ===================== ljud ===================== */
 const AU=new Audio();AU.preload="none";
 let auSegs=null,auI=-1,auCb=null,auRAF=null,auSrc="";
-const AUV="20261125c";
+const AUV="20261125e";
 function fmtT(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 function bindListen(g,cur){const b=$("lyssna");if(!b)return;const src="audio/ola/"+g+"-"+String(cur+1).padStart(2,"0")+".mp3?v="+AUV;
   const ui=()=>{const on=!AU.paused&&AU.src.indexOf(src.split("?")[0])>=0;b.classList.toggle("playing",on);b.innerHTML=(on?ICO.pause:ICO.play)+"<span>"+(on?"Pausa":(AU.currentTime>0&&AU.src.indexOf(src.split("?")[0])>=0?"Fortsätt":"Lyssna"))+"</span>";
