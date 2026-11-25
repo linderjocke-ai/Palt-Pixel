@@ -255,7 +255,8 @@ function previewLucka(l,back){
 /* ===================== ljud ===================== */
 const AU=new Audio();AU.preload="none";
 let auSegs=null,auI=-1,auCb=null,auRAF=null,auSrc="";
-const AUV="20261125e";
+const NOPIC=new Set(["4","5","6"]);
+const AUV="20261125f";
 function fmtT(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 let TIDER=null;const tiderP=()=>TIDER?Promise.resolve(TIDER):fetch("audio/ola/tider.json?v="+AUV).then(r=>r.json()).then(j=>TIDER=j).catch(()=>null);
 let hlRAF=0;
@@ -329,7 +330,7 @@ function openReader(i,preview){
   overlay(`<div class="panel reader">${X}
    <div class="rhead"><div class="rt"><b>${esc(STORY.titel)}</b><span>${gName(g)}${preview?" · förhandsgranskning":""}</span></div>
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
-   <div class="rbody"><div class="rleft"><div class="pic${A.isPhoto(g)?" wide":""}">${A.chapterSVG(g,cur)}</div>
+   <div class="rbody"><div class="rleft">${NOPIC.has(String(g))?`<div class="pic nopic"><div><svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0 0 18c1.1 0 1.6-.8 1.6-1.6 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-.9.7-1.6 1.6-1.6H16a5 5 0 0 0 5-5C21 6.4 17 3 12 3z"/><circle cx="7.5" cy="10.5" r="1.2"/><circle cx="10.5" cy="7" r="1.2"/><circle cx="15" cy="7.5" r="1.2"/></svg><b>Bilder till sagan kommer snart</b><span>De målas just nu och finns på plats senast den 30 november.</span></div></div>`:`<div class="pic${A.isPhoto(g)?" wide":""}">${A.chapterSVG(g,cur)}</div>`}
      <div class="rk">Kapitel ${cur+1} av 14 · ${dLabel(cur)}</div><h2 data-p="-1" id="rh">${esc(k.rubrik)}</h2>
      <div class="rbar"><div class="lplay"><button id="lyssna" class="lbtn" aria-label="Lyssna på kapitlet">${ICO.play}<span>Lyssna</span></button><div class="lbar"><i id="lfill"></i></div><span id="ltime" class="ltime"></span><span class="aitag" title="Uppläsningen är en AI-röst, inte en människa">AI-röst</span></div><div class="size"><button id="fm" aria-label="Mindre text">A−</button><button id="fp" aria-label="Större text">A+</button></div></div>
      <button class="btn light" id="toKop">${ICO.print}Arbetsblad till kapitlet</button></div>
