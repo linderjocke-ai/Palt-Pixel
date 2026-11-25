@@ -5,19 +5,19 @@
   {
    "rubrik": "Vid älven",
    "text": [
-    "Thea gick alltid hem längs älven. Det var en omväg, men hon tyckte om att se isen breda ut sig från stränderna och höra hur den knakade i kylan. Den första december var det tjugo minusgrader, och snön gnistrade som strösocker under gatlyktorna.",
+    "Lisa gick alltid hem längs älven. Det var en omväg, men hon tyckte om att se isen breda ut sig från stränderna och höra hur den knakade i kylan. Den första december var det tjugo minusgrader, och snön gnistrade som strösocker under gatlyktorna.",
     "Hon stannade till vid den gamla bron. Under en buske låg något grått och lurvigt. Först trodde hon att det var en övergiven mössa. Sedan rörde det sig.",
     "Det var en hund. En mellanstor, gråspräcklig hund med ena örat uppåt och det andra neråt. Den hade inget halsband och den darrade så att tänderna skallrade.",
-    "Thea satte sig på huk. – Hej, sa hon mjukt. Var är din människa?",
+    "Lisa satte sig på huk. – Hej, sa hon mjukt. Var är din människa?",
     "Hunden tittade på henne med bruna, sorgsna ögon. Sedan reste den sig långsamt och lade nosen i hennes vante.",
-    "Thea såg sig omkring. Gångvägen var tom åt båda hållen. Det började bli mörkt, och kylan bet i kinderna.",
+    "Lisa såg sig omkring. Gångvägen var tom åt båda hållen. Det började bli mörkt, och kylan bet i kinderna.",
     "– Okej, sa hon och reste sig. Du får följa med mig. Bara tills vi hittar ditt hem.",
     "Hunden följde efter henne hela vägen, så nära att den nästan gick på hennes hälar."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Varför går Thea hem längs älven?",
+     "text": "Varför går Lisa hem längs älven?",
      "alt": [
       "Det är den kortaste vägen",
       "Hennes pappa har sagt det",
@@ -49,7 +49,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför säger Thea \"Bara tills vi hittar ditt hem\"?",
+     "text": "Varför säger Lisa \"Bara tills vi hittar ditt hem\"?",
      "rader": 2,
      "facit": "Hon vet att hunden kanske har en ägare och att hon inte kan behålla den."
     },
@@ -64,19 +64,19 @@
   {
    "rubrik": "Kompis",
    "text": [
-    "Theas pappa jobbade som sjuksköterska och hade nattpass den veckan. När han kom hem på morgonen satt Thea i hallen med hunden i famnen.",
+    "Lisas pappa jobbade som sjuksköterska och hade nattpass den veckan. När han kom hem på morgonen satt Lisa i hallen med hunden i famnen.",
     "– Nämen, sa pappa och ställde ner väskan. Vem är det här?",
-    "Thea berättade allt. Pappa lyssnade och kliade hunden bakom det hängande örat. Hunden blundade av njutning.",
+    "Lisa berättade allt. Pappa lyssnade och kliade hunden bakom det hängande örat. Hunden blundade av njutning.",
     "– Den är jättegullig, sa pappa. Men det är säkert någon som saknar den. Vi måste försöka hitta ägaren.",
-    "– Jag vet, sa Thea. Men tills dess, kan den få bo här?",
+    "– Jag vet, sa Lisa. Men tills dess, kan den få bo här?",
     "Pappa suckade och log på samma gång. – Tills dess.",
-    "Thea döpte hunden till Kompis. Det kändes som det enda rätta namnet. Kompis åt två skålar mat, drack en hel skål vatten och somnade sedan i Theas säng med huvudet på hennes kudde.",
-    "Thea låg vaken bredvid och lyssnade på hans lugna andetag. Hon hade önskat sig en hund i hela sitt liv. Och nu låg det en här. Hon försökte låta bli att tänka på att någon annan kanske också låg vaken och väntade på honom."
+    "Lisa döpte hunden till Kompis. Det kändes som det enda rätta namnet. Kompis åt två skålar mat, drack en hel skål vatten och somnade sedan i Lisas säng med huvudet på hennes kudde.",
+    "Lisa låg vaken bredvid och lyssnade på hans lugna andetag. Hon hade önskat sig en hund i hela sitt liv. Och nu låg det en här. Hon försökte låta bli att tänka på att någon annan kanske också låg vaken och väntade på honom."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad arbetar Theas pappa med?",
+     "text": "Vad arbetar Lisas pappa med?",
      "alt": [
       "Han är veterinär",
       "Han är sjuksköterska",
@@ -86,7 +86,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad döper Thea hunden till?",
+     "text": "Vad döper Lisa hunden till?",
      "alt": [
       "Vän",
       "Grålle",
@@ -102,19 +102,19 @@
     },
     {
      "typ": "skriv",
-     "text": "Vad betyder det att Thea försöker \"låta bli att tänka på\" något?",
+     "text": "Vad betyder det att Lisa försöker \"låta bli att tänka på\" något?",
      "rader": 2,
      "facit": "Hon försöker att inte tänka på det, för det känns jobbigt."
     },
     {
      "typ": "skriv",
-     "text": "Vilka två känslor kämpar inom Thea i slutet av kapitlet?",
+     "text": "Vilka två känslor kämpar inom Lisa i slutet av kapitlet?",
      "rader": 2,
      "facit": "Glädje över att ha en hund, och dåligt samvete/oro för att någon annan saknar den."
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Thea väljer namnet Kompis?",
+     "text": "Varför tror du att Lisa väljer namnet Kompis?",
      "rader": 2,
      "facit": "Eget svar, till exempel att hunden redan känns som hennes vän."
     }
@@ -123,15 +123,15 @@
   {
    "rubrik": "Chipet",
    "text": [
-    "På lördagen tog pappa och Thea med Kompis till en veterinär. Veterinären var en kort kvinna med glasögon på pannan och hundhår på hela tröjan.",
+    "På lördagen tog pappa och Lisa med Kompis till en veterinär. Veterinären var en kort kvinna med glasögon på pannan och hundhår på hela tröjan.",
     "– Låt oss se om han är chipmärkt, sa hon och förde en liten läsare över hundens nacke. Det pep.",
-    "Thea höll andan.",
+    "Lisa höll andan.",
     "– Mm, sa veterinären och tittade på skärmen. Det är en tik, inte en hane. Hon heter Doris och är nio år. Ägaren heter A. Holm.",
-    "– Doris, viskade Thea. Hunden viftade på svansen när hon hörde namnet.",
+    "– Doris, viskade Lisa. Hunden viftade på svansen när hon hörde namnet.",
     "Veterinären ringde numret som stod i registret. Det var avstängt. Adressen var en gata på andra sidan stan.",
     "– Ni kan åka dit och fråga, sa veterinären.",
     "De åkte dit direkt. Adressen var Sjögatan 14, ett trevåningshus i grått tegel. På tredje våningen stod det HOLM på en dörr. Pappa ringde på flera gånger, men ingen öppnade. – Vi sätter upp lappar här i kvarteret, sa pappa. Då kan någon som känner Holm höra av sig.",
-    "På vägen hem satt Thea tyst i bilen med Doris, eller Kompis, i knät. Hon visste att hon borde vara glad över att de hade hittat ett spår. Men en liten del av henne hade hoppats att chipet skulle vara tomt. Den delen skämdes hon över."
+    "På vägen hem satt Lisa tyst i bilen med Doris, eller Kompis, i knät. Hon visste att hon borde vara glad över att de hade hittat ett spår. Men en liten del av henne hade hoppats att chipet skulle vara tomt. Den delen skämdes hon över."
    ],
    "fragor": [
     {
@@ -162,13 +162,13 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför skäms Thea?",
+     "text": "Varför skäms Lisa?",
      "rader": 2,
      "facit": "Hon hade hoppats att det inte skulle finnas någon ägare, så att hon fick behålla hunden."
     },
     {
      "typ": "skriv",
-     "text": "Författaren skriver \"Doris, eller Kompis\". Vad säger det om Theas känslor?",
+     "text": "Författaren skriver \"Doris, eller Kompis\". Vad säger det om Lisas känslor?",
      "rader": 2,
      "facit": "Hunden har två namn för henne, hon vet att den heter Doris men vill att den ska vara hennes Kompis."
     },
@@ -183,11 +183,11 @@
   {
    "rubrik": "Lappen i väskan",
    "text": [
-    "Thea och hennes bästa kompis Victor gjorde lappar på datorn. HITTAD HUND! stod det högst upp, och under en bild på Doris som satt i snön med sitt ena öra uppåt. Längst ner stod pappas telefonnummer.",
-    "De skrev ut tio lappar och gick runt runt Sjögatan, där A. Holm bodde. Victor tejpade upp lappar på busskurer och lyktstolpar och anslagstavlan vid mataffären.",
+    "Lisa och hennes bästa kompis Hugo gjorde lappar på datorn. HITTAD HUND! stod det högst upp, och under en bild på Doris som satt i snön med sitt ena öra uppåt. Längst ner stod pappas telefonnummer.",
+    "De skrev ut tio lappar och gick runt runt Sjögatan, där A. Holm bodde. Hugo tejpade upp lappar på busskurer och lyktstolpar och anslagstavlan vid mataffären.",
     "– En kvar, sa han och höll fram den sista. Vi sätter den på kiosken.",
-    "– Jag gör det, sa Thea och tog lappen.",
-    "Men när Victor hade gått åt andra hållet för att köpa varm choklad, vek Thea ihop lappen och stoppade ner den i väskan.",
+    "– Jag gör det, sa Lisa och tog lappen.",
+    "Men när Hugo hade gått åt andra hållet för att köpa varm choklad, vek Lisa ihop lappen och stoppade ner den i väskan.",
     "Det var bara en lapp, tänkte hon. Nio lappar räckte väl.",
     "Men kiosken låg mitt emot huset där Holm bodde. Om någon kände Doris, var det precis där de skulle se lappen.",
     "Den kvällen kändes lappen i väskan tung, fast den bara var ett papper."
@@ -205,9 +205,9 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad gör Thea med den sista lappen?",
+     "text": "Vad gör Lisa med den sista lappen?",
      "alt": [
-      "Hon ger den till Victor",
+      "Hon ger den till Hugo",
       "Hon stoppar den i väskan",
       "Hon sätter upp den på kiosken"
      ],
@@ -223,17 +223,17 @@
      "typ": "skriv",
      "text": "\"Lappen i väskan kändes tung, fast den bara var ett papper.\" Vad menar författaren?",
      "rader": 2,
-     "facit": "Thea har dåligt samvete. Det är hennes känsla som är tung, inte pappret."
+     "facit": "Lisa har dåligt samvete. Det är hennes känsla som är tung, inte pappret."
     },
     {
      "typ": "skriv",
-     "text": "Hur försöker Thea övertyga sig själv om att det är okej? Citera texten.",
+     "text": "Hur försöker Lisa övertyga sig själv om att det är okej? Citera texten.",
      "rader": 2,
      "facit": "\"Det var bara en lapp ... Nio lappar räckte väl.\""
     },
     {
      "typ": "skriv",
-     "text": "Vad tycker du att Thea borde göra nu? Motivera.",
+     "text": "Vad tycker du att Lisa borde göra nu? Motivera.",
      "rader": 3,
      "facit": "Eget svar."
     }
@@ -242,20 +242,20 @@
   {
    "rubrik": "Ett samtal vid köksbordet",
    "text": [
-    "Hela helgen gick Thea runt med en klump i magen. Hon lekte med Doris i snön och tog med henne på långa promenader längs älven. Men klumpen försvann inte.",
+    "Hela helgen gick Lisa runt med en klump i magen. Hon lekte med Doris i snön och tog med henne på långa promenader längs älven. Men klumpen försvann inte.",
     "På söndagskvällen kom pappa hem från ett pass. Han hällde upp te åt dem båda och satte sig vid köksbordet.",
     "– Du har varit konstig hela helgen, sa han. Vad är det?",
-    "Thea tittade ner i koppen. Sedan tog hon fram den hopvikta lappen ur väskan och lade den på bordet.",
+    "Lisa tittade ner i koppen. Sedan tog hon fram den hopvikta lappen ur väskan och lade den på bordet.",
     "– Jag satte inte upp alla, sa hon tyst. Jag ville inte att någon skulle hitta henne.",
-    "Pappa vecklade upp lappen och tittade länge på den. Thea väntade på att han skulle bli arg. Men det blev han inte.",
+    "Pappa vecklade upp lappen och tittade länge på den. Lisa väntade på att han skulle bli arg. Men det blev han inte.",
     "– Det är mänskligt att vilja behålla något man älskar, sa han till slut. Men tänk om det var du som hade tappat bort Doris. Hur hade du känt då?",
-    "Thea svarade inte. Hon behövde inte. Hon visste svaret.",
+    "Lisa svarade inte. Hon behövde inte. Hon visste svaret.",
     "– I morgon åker vi till Sjögatan igen, sa hon. Och den här gången knackar vi på hos grannarna. Jag sätter upp lappen på vägen."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad visar Thea för pappa?",
+     "text": "Vad visar Lisa för pappa?",
      "alt": [
       "En teckning av Doris",
       "Den hopvikta lappen",
@@ -281,19 +281,19 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur hjälper pappas fråga Thea att förstå vad hon ska göra?",
+     "text": "Hur hjälper pappas fråga Lisa att förstå vad hon ska göra?",
      "rader": 2,
      "facit": "Han får henne att sätta sig in i ägarens situation, att känna empati."
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Thea berättar sanningen fast hon tror att pappa ska bli arg?",
+     "text": "Varför tror du att Lisa berättar sanningen fast hon tror att pappa ska bli arg?",
      "rader": 2,
      "facit": "Hon har dåligt samvete och vill göra rätt."
     },
     {
      "typ": "skriv",
-     "text": "Vad kan vi lära oss av hur pappa bemöter Thea?",
+     "text": "Vad kan vi lära oss av hur pappa bemöter Lisa?",
      "rader": 3,
      "facit": "Eget svar, till exempel att man kan prata om misstag utan att skälla, och hjälpa någon att tänka själv."
     }
@@ -302,13 +302,13 @@
   {
    "rubrik": "Grannen på Sjögatan",
    "text": [
-    "Nästa dag åkte de tillbaka till Sjögatan. På vägen dit stannade Thea vid kiosken och tejpade upp lappen. Hon tejpade den extra noga i alla fyra hörn.",
-    "På tredje våningen ringde Thea på hos HOLM igen. Ingen öppnade nu heller. Då gick dörren bredvid upp, och en kvinna med en bebis på armen tittade ut.",
+    "Nästa dag åkte de tillbaka till Sjögatan. På vägen dit stannade Lisa vid kiosken och tejpade upp lappen. Hon tejpade den extra noga i alla fyra hörn.",
+    "På tredje våningen ringde Lisa på hos HOLM igen. Ingen öppnade nu heller. Då gick dörren bredvid upp, och en kvinna med en bebis på armen tittade ut.",
     "– Söker ni Arne? frågade hon. Sedan fick hon syn på Doris. – Doris! Gud, vad skönt! Vi trodde att hon hade frusit ihjäl!",
     "Kvinnan, som hette Mira, berättade att Arne Holm hade halkat på isen för tre veckor sedan och brutit höften. Han låg på sjukhuset. Mira hade lovat att ta hand om Doris, men en dag när hon skulle gå ut med bebisvagnen slank Doris ut genom porten och sprang iväg.",
     "– Jag har letat överallt, sa Mira med tårar i ögonen. Arne frågar efter henne varje gång jag hälsar på. Jag har inte vågat berätta att hon var borta.",
-    "Thea tittade på Doris, som satt och viftade på svansen åt Mira. Doris hade ett hem. Och någon som saknade henne väldigt mycket.",
-    "– Kan vi få hälsa på Arne? frågade Thea."
+    "Lisa tittade på Doris, som satt och viftade på svansen åt Mira. Doris hade ett hem. Och någon som saknade henne väldigt mycket.",
+    "– Kan vi få hälsa på Arne? frågade Lisa."
    ],
    "fragor": [
     {
@@ -333,7 +333,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför tejpar Thea upp lappen \"extra noga i alla fyra hörn\"?",
+     "text": "Varför tejpar Lisa upp lappen \"extra noga i alla fyra hörn\"?",
      "rader": 2,
      "facit": "Hon vill gottgöra att hon inte satte upp den förut och visa att hon nu verkligen vill hitta ägaren."
     },
@@ -345,13 +345,13 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur förändras Theas syn på Doris i det här kapitlet?",
+     "text": "Hur förändras Lisas syn på Doris i det här kapitlet?",
      "rader": 2,
      "facit": "Hon förstår att Doris har ett riktigt hem och en ägare som saknar henne."
     },
     {
      "typ": "skriv",
-     "text": "Vad tror du händer när Thea träffar Arne?",
+     "text": "Vad tror du händer när Lisa träffar Arne?",
      "rader": 3,
      "facit": "Eget svar."
     }
@@ -360,15 +360,15 @@
   {
    "rubrik": "Sal 12",
    "text": [
-    "Theas pappa jobbade på samma sjukhus som Arne låg på. Han ordnade så att de fick besöka honom på eftermiddagen. Hundar fick inte följa med in på avdelningen, men Thea hade filmat Doris med pappas telefon.",
+    "Lisas pappa jobbade på samma sjukhus som Arne låg på. Han ordnade så att de fick besöka honom på eftermiddagen. Hundar fick inte följa med in på avdelningen, men Lisa hade filmat Doris med pappas telefon.",
     "Arne låg i sal 12, i sängen närmast fönstret. Han var smal och blek med vitt, burrigt hår, och på nattduksbordet stod ett inramat foto av en kvinna och en grå valp.",
-    "– Det här är Thea, sa pappa. Hon har något att visa dig.",
-    "Thea satte sig på stolen bredvid sängen och höll fram telefonen. På skärmen sprang Doris i snön vid älven och skällde glatt åt en kråka.",
+    "– Det här är Lisa, sa pappa. Hon har något att visa dig.",
+    "Lisa satte sig på stolen bredvid sängen och höll fram telefonen. På skärmen sprang Doris i snön vid älven och skällde glatt åt en kråka.",
     "Arne blev alldeles stilla. Sedan började hans händer skaka.",
     "– Doris, viskade han. Hon lever.",
-    "Han tittade på filmen flera gånger. Sedan tittade han på Thea, och hans ögon var fulla av tårar.",
+    "Han tittade på filmen flera gånger. Sedan tittade han på Lisa, och hans ögon var fulla av tårar.",
     "– Jag har inte sovit en hel natt sedan jag hamnade här, sa han. Jag har ingen annan än henne. Sedan min Elsie dog är det bara Doris och jag.",
-    "Thea kände en klump i halsen. Hon var så glad att hon hade satt upp den sista lappen. Och ännu gladare att hon var här."
+    "Lisa kände en klump i halsen. Hon var så glad att hon hade satt upp den sista lappen. Och ännu gladare att hon var här."
    ],
    "fragor": [
     {
@@ -411,7 +411,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Thea är \"ännu gladare att hon var här\". Varför tror du att hon känner så?",
+     "text": "Lisa är \"ännu gladare att hon var här\". Varför tror du att hon känner så?",
      "rader": 3,
      "facit": "Hon ser hur mycket glädje hon har gett Arne, och att göra rätt känns bättre än att behålla hunden."
     }
@@ -420,21 +420,21 @@
   {
    "rubrik": "En fråga från sängen",
    "text": [
-    "Innan de gick tog Arne Theas hand.",
+    "Innan de gick tog Arne Lisas hand.",
     "– Jag får inte komma hem förrän om ett par veckor, sa han. Mira har en liten bebis och orkar inte ha en hund också. Skulle du kunna ta hand om Doris tills jag kommer hem?",
-    "Thea tittade på pappa. Pappa nickade.",
-    "– Ja, sa Thea. Det vill jag jättegärna.",
+    "Lisa tittade på pappa. Pappa nickade.",
+    "– Ja, sa Lisa. Det vill jag jättegärna.",
     "På vägen hem i bilen var hon tyst. Pappa sneglade på henne.",
     "– Du ser inte så glad ut som jag trodde, sa han.",
-    "– Jag är glad, sa Thea. Men det känns konstigt. Förut ville jag att Doris skulle bli min. Nu får jag ha henne, men bara på låtsas. Hon ska ju hem till Arne.",
+    "– Jag är glad, sa Lisa. Men det känns konstigt. Förut ville jag att Doris skulle bli min. Nu får jag ha henne, men bara på låtsas. Hon ska ju hem till Arne.",
     "– Hon är inte din på låtsas, sa pappa. Hon är din på riktigt. Bara inte för alltid. Det är skillnad.",
-    "Thea tänkte på det. Hon tänkte att det kanske var som med en bok man lånar på biblioteket. Den är ens egen så länge man läser den, även om man vet att man ska lämna tillbaka den.",
-    "Hemma låg Doris i hallen och väntade. När hon såg Thea viftade hon så mycket på svansen att hela bakdelen svängde."
+    "Lisa tänkte på det. Hon tänkte att det kanske var som med en bok man lånar på biblioteket. Den är ens egen så länge man läser den, även om man vet att man ska lämna tillbaka den.",
+    "Hemma låg Doris i hallen och väntade. När hon såg Lisa viftade hon så mycket på svansen att hela bakdelen svängde."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad ber Arne Thea om?",
+     "text": "Vad ber Arne Lisa om?",
      "alt": [
       "Att köpa en ny hund",
       "Att ta hand om Doris tills han kommer hem",
@@ -456,17 +456,17 @@
      "typ": "skriv",
      "text": "Förklara skillnaden som pappa menar mellan \"på låtsas\" och \"inte för alltid\".",
      "rader": 2,
-     "facit": "Thea tar hand om Doris på riktigt och kan älska henne, även om det bara är för en tid."
+     "facit": "Lisa tar hand om Doris på riktigt och kan älska henne, även om det bara är för en tid."
     },
     {
      "typ": "skriv",
-     "text": "Thea jämför med en lånad bok. Förklara jämförelsen med egna ord.",
+     "text": "Lisa jämför med en lånad bok. Förklara jämförelsen med egna ord.",
      "rader": 2,
      "facit": "En lånad bok är din medan du läser den fast du vet att du ska lämna tillbaka den, på samma sätt är Doris hennes en tid."
     },
     {
      "typ": "skriv",
-     "text": "Varför känner sig Thea både glad och konstig?",
+     "text": "Varför känner sig Lisa både glad och konstig?",
      "rader": 2,
      "facit": "Hon får ha Doris, men vet att hon ska lämna henne tillbaka."
     },
@@ -481,13 +481,13 @@
   {
    "rubrik": "Berättelser om Elsie",
    "text": [
-    "Nu besökte Thea Arne varje dag efter skolan. Hon visade nya filmer på Doris: Doris som rullade sig i snön, Doris som stal en vante, Doris som sov med tassarna i vädret.",
+    "Nu besökte Lisa Arne varje dag efter skolan. Hon visade nya filmer på Doris: Doris som rullade sig i snön, Doris som stal en vante, Doris som sov med tassarna i vädret.",
     "Arne skrattade så att han fick hålla sig om höften.",
     "– Hon gör så där när hon är riktigt trygg, sa han om filmen där Doris sov på rygg. Då vet du att hon tycker om dig.",
     "Arne berättade om Elsie. Hon hade varit lärare i fyrtio år och älskat att baka. Hon hade hittat Doris i en kartong utanför affären, en liten blöt valp som ingen ville ha.",
     "– Precis som du hittade henne, sa Arne. Doris har tur med människorna som hittar henne.",
-    "Thea berättade om sin mamma, som bodde i en annan stad och som hon bara träffade på loven. Det var inte så ofta hon pratade om det. Men med Arne var det lätt.",
-    "Sjuksköterskorna började kalla Thea för \"Arnes barnbarn\". Varken Thea eller Arne rättade dem."
+    "Lisa berättade om sin mamma, som bodde i en annan stad och som hon bara träffade på loven. Det var inte så ofta hon pratade om det. Men med Arne var det lätt.",
+    "Sjuksköterskorna började kalla Lisa för \"Arnes barnbarn\". Varken Lisa eller Arne rättade dem."
    ],
    "fragor": [
     {
@@ -512,19 +512,19 @@
     },
     {
      "typ": "skriv",
-     "text": "Hitta en likhet mellan hur Elsie och Thea träffade Doris.",
+     "text": "Hitta en likhet mellan hur Elsie och Lisa träffade Doris.",
      "rader": 2,
      "facit": "Båda hittade henne ensam och övergiven och tog hand om henne."
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att det är lätt för Thea att prata med Arne om sin mamma?",
+     "text": "Varför tror du att det är lätt för Lisa att prata med Arne om sin mamma?",
      "rader": 2,
      "facit": "De har kommit varandra nära, han lyssnar och delar själv svåra saker."
     },
     {
      "typ": "skriv",
-     "text": "\"Varken Thea eller Arne rättade dem.\" Vad säger det om deras relation?",
+     "text": "\"Varken Lisa eller Arne rättade dem.\" Vad säger det om deras relation?",
      "rader": 2,
      "facit": "De tycker om att vara som familj för varandra, deras vänskap är stark."
     },
@@ -539,16 +539,16 @@
   {
    "rubrik": "Dåliga nyheter",
    "text": [
-    "En onsdag när Thea kom till sal 12 satt Arne vänd mot fönstret. Han tittade inte på filmen hon höll fram.",
-    "– Vad är det? frågade Thea.",
+    "En onsdag när Lisa kom till sal 12 satt Arne vänd mot fönstret. Han tittade inte på filmen hon höll fram.",
+    "– Vad är det? frågade Lisa.",
     "Arne svarade inte på en lång stund. Sedan sa han:",
     "– Läkaren säger att jag inte kan bo kvar i min lägenhet. Trapporna är för branta för min nya höft, och huset har ingen hiss. De vill att jag ska flytta till ett boende.",
-    "– Men det är väl bra? sa Thea osäkert. Där får du hjälp.",
+    "– Men det är väl bra? sa Lisa osäkert. Där får du hjälp.",
     "– På det boendet får man inte ha hund, sa Arne tyst.",
     "Det kändes som om golvet gungade. – Men Doris då?",
     "– Hon får väl bo hos någon annan, sa Arne. Kanske hos dig, om din pappa tillåter. Du är bra för henne.",
-    "En gång hade Thea önskat just det. Nu kändes det helt fel. Hon såg på Arne, som försökte se modig ut men vars mun darrade.",
-    "– Nej, sa Thea. Det är inte rättvist. Doris ska bo med dig. Vi måste hitta en annan lösning."
+    "En gång hade Lisa önskat just det. Nu kändes det helt fel. Hon såg på Arne, som försökte se modig ut men vars mun darrade.",
+    "– Nej, sa Lisa. Det är inte rättvist. Doris ska bo med dig. Vi måste hitta en annan lösning."
    ],
    "fragor": [
     {
@@ -575,11 +575,11 @@
      "typ": "skriv",
      "text": "\"Det kändes som om golvet gungade.\" Vad betyder det?",
      "rader": 2,
-     "facit": "Thea blir chockad och omskakad av nyheten."
+     "facit": "Lisa blir chockad och omskakad av nyheten."
     },
     {
      "typ": "skriv",
-     "text": "Thea har önskat sig att få behålla Doris. Varför vill hon inte det nu?",
+     "text": "Lisa har önskat sig att få behålla Doris. Varför vill hon inte det nu?",
      "rader": 2,
      "facit": "Hon tycker om Arne och förstår hur mycket Doris betyder för honom. Det vore orättvist mot honom."
     },
@@ -600,19 +600,19 @@
   {
    "rubrik": "Ett brev till fastighetsbolaget",
    "text": [
-    "Thea och Victor satt hela kvällen vid Victors dator.",
-    "– Problemet är trapporna, sa Victor. Inte Arne och inte Doris. Om han hade bott på bottenvåningen hade han klarat sig hemma, med lite hjälp.",
-    "– Och hjälp kan han få, sa Thea. Hemtjänsten kan komma. Och jag kan gå ut med Doris varje dag.",
+    "Lisa och Hugo satt hela kvällen vid Hugos dator.",
+    "– Problemet är trapporna, sa Hugo. Inte Arne och inte Doris. Om han hade bott på bottenvåningen hade han klarat sig hemma, med lite hjälp.",
+    "– Och hjälp kan han få, sa Lisa. Hemtjänsten kan komma. Och jag kan gå ut med Doris varje dag.",
     "De tog reda på vilket fastighetsbolag som ägde Arnes hus. Sedan skrev de ett brev. Det tog tre timmar och femton försök.",
-    "Hej! Vi heter Thea och Victor och går i femman. Vi skriver om Arne Holm som bor på Sjögatan 14. Han har bott där i 42 år. Nu har han brutit höften och kan inte gå i trappor. Om han inte får flytta till en lägenhet utan trappor måste han lämna bort sin hund Doris, som är det enda han har kvar. Finns det någon lägenhet på bottenvåningen som han kan få? Vi lovar att gå ut med Doris varje dag. Med vänliga hälsningar, Thea och Victor.",
-    "Theas pappa läste brevet och skrev under själv längst ner. Sedan skickade de iväg det.",
+    "Hej! Vi heter Lisa och Hugo och går i femman. Vi skriver om Arne Holm som bor på Sjögatan 14. Han har bott där i 42 år. Nu har han brutit höften och kan inte gå i trappor. Om han inte får flytta till en lägenhet utan trappor måste han lämna bort sin hund Doris, som är det enda han har kvar. Finns det någon lägenhet på bottenvåningen som han kan få? Vi lovar att gå ut med Doris varje dag. Med vänliga hälsningar, Lisa och Hugo.",
+    "Lisas pappa läste brevet och skrev under själv längst ner. Sedan skickade de iväg det.",
     "– Nu får vi vänta, sa pappa.",
-    "Thea hade aldrig tyckt om att vänta. Men den här gången var det värre än någonsin."
+    "Lisa hade aldrig tyckt om att vänta. Men den här gången var det värre än någonsin."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad menar Victor är det verkliga problemet?",
+     "text": "Vad menar Hugo är det verkliga problemet?",
      "alt": [
       "Trapporna",
       "Doris",
@@ -632,7 +632,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför skriver Victor och Thea brevet så många gånger?",
+     "text": "Varför skriver Hugo och Lisa brevet så många gånger?",
      "rader": 2,
      "facit": "De vill att det ska bli så tydligt och övertygande som möjligt."
     },
@@ -650,7 +650,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur visar Thea och Victor att de kan lösa problem? Ge exempel.",
+     "text": "Hur visar Lisa och Hugo att de kan lösa problem? Ge exempel.",
      "rader": 3,
      "facit": "De tänker ut vad som är det verkliga problemet, tar reda på fakta, skriver ett genomtänkt brev."
     }
@@ -659,13 +659,13 @@
   {
    "rubrik": "Svaret",
    "text": [
-    "Det gick fyra dagar. Varje dag sprang Thea till brevlådan efter skolan. Varje dag var den tom, förutom reklam.",
-    "På den femte dagen ringde pappas telefon. Han lyssnade länge och sa bara \"jaha\" och \"jaså\" och \"mm\". Thea trodde att hon skulle spricka.",
+    "Det gick fyra dagar. Varje dag sprang Lisa till brevlådan efter skolan. Varje dag var den tom, förutom reklam.",
+    "På den femte dagen ringde pappas telefon. Han lyssnade länge och sa bara \"jaha\" och \"jaså\" och \"mm\". Lisa trodde att hon skulle spricka.",
     "När han lade på log han så brett att det såg ut att göra ont.",
     "– Det var fastighetsbolaget, sa han. De blev väldigt berörda av brevet. Det finns en ledig lägenhet på bottenvåningen. Utan trappor. Med en liten uteplats.",
-    "– Var då? skrek Thea.",
+    "– Var då? skrek Lisa.",
     "Pappa skrattade. – Det är det bästa av allt. Den ligger i huset bredvid vårt.",
-    "Thea skrek så högt att Doris började skälla och grannen ovanför bankade i golvet. Sedan kramade hon pappa, och sedan Doris, och sedan pappa igen.",
+    "Lisa skrek så högt att Doris började skälla och grannen ovanför bankade i golvet. Sedan kramade hon pappa, och sedan Doris, och sedan pappa igen.",
     "Samma kväll sprang hon till sjukhuset och berättade för Arne. Han sa ingenting alls. Han bara tog hennes hand och höll den länge, länge."
    ],
    "fragor": [
@@ -683,7 +683,7 @@
      "typ": "kryss",
      "text": "Var ligger den nya lägenheten?",
      "alt": [
-      "I huset bredvid Theas",
+      "I huset bredvid Lisas",
       "På andra sidan stan",
       "På Sjögatan 14"
      ],
@@ -697,21 +697,21 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur bygger författaren upp spänningen innan Thea får veta svaret?",
+     "text": "Hur bygger författaren upp spänningen innan Lisa får veta svaret?",
      "rader": 2,
-     "facit": "Det går dagar, brevlådan är tom, pappa säger bara korta ord i telefonen, Thea tror att hon ska spricka."
+     "facit": "Det går dagar, brevlådan är tom, pappa säger bara korta ord i telefonen, Lisa tror att hon ska spricka."
     },
     {
      "typ": "skriv",
-     "text": "Arne säger ingenting men håller Theas hand länge. Vad tror du att han känner?",
+     "text": "Arne säger ingenting men håller Lisas hand länge. Vad tror du att han känner?",
      "rader": 2,
      "facit": "Stor tacksamhet och glädje, så stark att han inte hittar ord."
     },
     {
      "typ": "skriv",
-     "text": "Varför är det extra bra att lägenheten ligger i huset bredvid Theas?",
+     "text": "Varför är det extra bra att lägenheten ligger i huset bredvid Lisas?",
      "rader": 3,
-     "facit": "Thea kan lätt gå ut med Doris och besöka Arne. De kan fortsätta vara vänner."
+     "facit": "Lisa kan lätt gå ut med Doris och besöka Arne. De kan fortsätta vara vänner."
     }
    ]
   },
@@ -719,12 +719,12 @@
    "rubrik": "Flyttdagen",
    "text": [
     "Flytten var den sjuttonde december. Arne skulle få komma hem från sjukhuset dagen efter, så allt måste vara klart.",
-    "Thea hade berättat om Arne i klassen. När hon och pappa kom till Sjögatan på morgonen stod halva klassen där, med mössor och vantar och ivriga miner. Victor hade med sig sin storebror som hade körkort, och han hade lånat en släpvagn.",
+    "Lisa hade berättat om Arne i klassen. När hon och pappa kom till Sjögatan på morgonen stod halva klassen där, med mössor och vantar och ivriga miner. Hugo hade med sig sin storebror som hade körkort, och han hade lånat en släpvagn.",
     "Mira kom ut med bebisen i en sele på magen och delade ut bullar. Grannen på andra våningen bar ner en hel bokhylla alldeles själv.",
-    "Fåtöljen, sängen, köksbordet och tjugo kartonger med böcker bar de ner för de branta trapporna. Thea bar ett inramat foto av Elsie och en grå valp. Hon höll det som om det var gjort av glas.",
-    "I den nya lägenheten ställde de allt på plats. Thea ställde Doris matskål i köket och lade hennes gamla filt i hörnet vid fönstret, där solen skulle lysa in.",
-    "– Det ser ut som ett hem nu, sa Victor när de var klara.",
-    "– Det blir ett hem i morgon, sa Thea. När de båda är här."
+    "Fåtöljen, sängen, köksbordet och tjugo kartonger med böcker bar de ner för de branta trapporna. Lisa bar ett inramat foto av Elsie och en grå valp. Hon höll det som om det var gjort av glas.",
+    "I den nya lägenheten ställde de allt på plats. Lisa ställde Doris matskål i köket och lade hennes gamla filt i hörnet vid fönstret, där solen skulle lysa in.",
+    "– Det ser ut som ett hem nu, sa Hugo när de var klara.",
+    "– Det blir ett hem i morgon, sa Lisa. När de båda är här."
    ],
    "fragor": [
     {
@@ -741,29 +741,29 @@
      "typ": "kryss",
      "text": "Vilka kommer och hjälper till?",
      "alt": [
-      "Bara Thea och pappa",
+      "Bara Lisa och pappa",
       "En flyttfirma",
-      "Halva klassen, grannar och Victors bror"
+      "Halva klassen, grannar och Hugos bror"
      ],
      "ratt": 2
     },
     {
      "typ": "skriv",
-     "text": "Varför bär Thea fotot \"som om det var gjort av glas\"?",
+     "text": "Varför bär Lisa fotot \"som om det var gjort av glas\"?",
      "rader": 2,
      "facit": "Det är det viktigaste föremålet för Arne och hon vill vara extra försiktig."
     },
     {
      "typ": "skriv",
-     "text": "Varför lägger Thea Doris filt just vid fönstret?",
+     "text": "Varför lägger Lisa Doris filt just vid fönstret?",
      "rader": 2,
      "facit": "Där lyser solen in, så Doris får en varm och trygg plats."
     },
     {
      "typ": "skriv",
-     "text": "Förklara skillnaden mellan Victors och Theas meningar i slutet.",
+     "text": "Förklara skillnaden mellan Hugos och Lisas meningar i slutet.",
      "rader": 2,
-     "facit": "Victor menar att det ser ut som ett hem med möblerna. Thea menar att det blir ett hem först när Arne och Doris är där."
+     "facit": "Hugo menar att det ser ut som ett hem med möblerna. Lisa menar att det blir ett hem först när Arne och Doris är där."
     },
     {
      "typ": "skriv",
@@ -777,12 +777,12 @@
    "rubrik": "Två namn",
    "text": [
     "Den artonde december, sista dagen före jullovet, körde pappa hem Arne från sjukhuset. Han gick långsamt med en rullator, men han log hela vägen från bilen till dörren.",
-    "Thea öppnade dörren. Doris stod i hallen. Först var hon alldeles stilla, som om hon inte trodde på det hon såg. Sedan gav hon ifrån sig ett ljud som Thea aldrig hade hört förut, ett ljud som var både skall och gnäll och sång på samma gång. Hon sprang fram och lade huvudet i Arnes knä och viftade så att hela kroppen skakade.",
+    "Lisa öppnade dörren. Doris stod i hallen. Först var hon alldeles stilla, som om hon inte trodde på det hon såg. Sedan gav hon ifrån sig ett ljud som Lisa aldrig hade hört förut, ett ljud som var både skall och gnäll och sång på samma gång. Hon sprang fram och lade huvudet i Arnes knä och viftade så att hela kroppen skakade.",
     "Arne satte sig i fåtöljen och grät och skrattade samtidigt.",
-    "Senare, när de hade druckit kaffe och ätit Miras bullar, gav Arne Thea ett litet paket. I paketet låg ett rött hundkoppel. På den lilla metallbrickan stod det inristat: KOMPIS.",
+    "Senare, när de hade druckit kaffe och ätit Miras bullar, gav Arne Lisa ett litet paket. I paketet låg ett rött hundkoppel. På den lilla metallbrickan stod det inristat: KOMPIS.",
     "– Hon heter Doris hos mig, sa Arne. Och Kompis hos dig. En hund med två namn behöver två människor. Vill du fortfarande gå ut med henne varje dag?",
-    "Thea kunde inte svara. Hon nickade bara, så hårt att mössan åkte ner över ögonen.",
-    "Den kvällen gick hon och Doris längs älven, under gatlyktorna, precis där allt hade börjat. Thea hade velat ha en hund som var helt hennes. I stället hade hon fått något mycket större. Slut."
+    "Lisa kunde inte svara. Hon nickade bara, så hårt att mössan åkte ner över ögonen.",
+    "Den kvällen gick hon och Doris längs älven, under gatlyktorna, precis där allt hade börjat. Lisa hade velat ha en hund som var helt hennes. I stället hade hon fått något mycket större. Slut."
    ],
    "fragor": [
     {
@@ -797,7 +797,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Var går Thea och Doris på kvällen?",
+     "text": "Var går Lisa och Doris på kvällen?",
      "alt": [
       "Längs älven",
       "I parken",
@@ -815,17 +815,17 @@
      "typ": "skriv",
      "text": "Vad menar Arne med \"En hund med två namn behöver två människor\"?",
      "rader": 2,
-     "facit": "Doris tillhör både honom och Thea, de delar på henne och båda behövs."
+     "facit": "Doris tillhör både honom och Lisa, de delar på henne och båda behövs."
     },
     {
      "typ": "skriv",
-     "text": "\"I stället hade hon fått något mycket större.\" Vad har Thea fått?",
+     "text": "\"I stället hade hon fått något mycket större.\" Vad har Lisa fått?",
      "rader": 2,
      "facit": "En vänskap med Arne, en hund att dela, och känslan av att ha gjort rätt."
     },
     {
      "typ": "skriv",
-     "text": "Thea fick välja mellan att göra det som var bäst för henne själv och det som var rätt. Skriv om ett tillfälle då någon behöver göra ett sådant val.",
+     "text": "Lisa fick välja mellan att göra det som var bäst för henne själv och det som var rätt. Skriv om ett tillfälle då någon behöver göra ett sådant val.",
      "rader": 3,
      "facit": "Eget svar."
     }
