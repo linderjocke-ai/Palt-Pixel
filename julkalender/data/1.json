@@ -1,15 +1,15 @@
 {
  "arskurs": "1",
- "titel": "Lo och den röda vanten",
+ "titel": "Thea och den röda vanten",
  "kapitel": [
   {
    "rubrik": "Mormors vantar",
    "text": [
-    "Lo är sju år och bor i ett gult hus vid skogen.",
+    "Thea är sju år och bor i ett gult hus vid skogen.",
     "Hennes mormor kan sticka. Hon stickar snabbare än någon annan.",
     "En kväll satt mormor i gungstolen. Klick, klick, lät stickorna.",
     "– Varsågod, sa mormor till slut. Nu har du vantar till vintern.",
-    "Vantarna var röda med små vita stjärnor. Lo tog på sig dem direkt.",
+    "Vantarna var röda med små vita stjärnor. Thea tog på sig dem direkt.",
     "– De är de finaste vantarna i hela världen, sa hon."
    ],
    "fragor": [
@@ -17,7 +17,7 @@
      "typ": "kryss",
      "text": "Vem stickar vantarna?",
      "alt": [
-      "Lo",
+      "Thea",
       "Mormor",
       "Mamma"
      ],
@@ -45,7 +45,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Hur gammal är Lo?",
+     "text": "Hur gammal är Thea?",
      "rader": 1,
      "facit": "Sju år."
     }
@@ -54,17 +54,17 @@
   {
    "rubrik": "En vante är borta",
    "text": [
-    "På morgonen gick Lo till skolan. Snön knarrade under stövlarna.",
+    "På morgonen gick Thea till skolan. Snön knarrade under stövlarna.",
     "Hon hade vantarna på sig hela vägen.",
     "På rasten byggde hon en snölykta med sin kompis Love.",
-    "Men när skolan var slut, hittade Lo bara en vante.",
+    "Men när skolan var slut, hittade Thea bara en vante.",
     "Hon letade i fickan. Hon letade i skolväskan. Hon letade i snön.",
-    "Den andra vanten var borta. Lo kände en klump i magen."
+    "Den andra vanten var borta. Thea kände en klump i magen."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad bygger Lo på rasten?",
+     "text": "Vad bygger Thea på rasten?",
      "alt": [
       "En snögubbe",
       "En snölykta",
@@ -74,7 +74,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad heter Los kompis?",
+     "text": "Vad heter Theas kompis?",
      "alt": [
       "Love",
       "Måns",
@@ -84,7 +84,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Hur många vantar hittar Lo efter skolan?",
+     "text": "Hur många vantar hittar Thea efter skolan?",
      "alt": [
       "Ingen",
       "En",
@@ -94,7 +94,7 @@
     },
     {
      "typ": "rita",
-     "text": "Rita Lo när hon letar efter vanten."
+     "text": "Rita Thea när hon letar efter vanten."
     }
    ]
   },
@@ -102,16 +102,16 @@
    "rubrik": "Spår i snön",
    "text": [
     "– Jag hjälper dig att leta, sa Love.",
-    "De gick runt skolgården. Där, vid staketet, såg Lo något rött.",
+    "De gick runt skolgården. Där, vid staketet, såg Thea något rött.",
     "Det var en lång röd tråd från vanten!",
     "Bredvid tråden fanns små spår i snön. De gick mot skogen.",
     "– Någon har tagit vanten, viskade Love.",
-    "– Vem då? sa Lo. Och varför?"
+    "– Vem då? sa Thea. Och varför?"
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad hittar Lo vid staketet?",
+     "text": "Vad hittar Thea vid staketet?",
      "alt": [
       "En mössa",
       "En röd tråd",
@@ -131,7 +131,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vem hjälper Lo att leta?",
+     "text": "Vem hjälper Thea att leta?",
      "alt": [
       "Love",
       "Läraren",
@@ -150,12 +150,12 @@
   {
    "rubrik": "Mörkt i skogen",
    "text": [
-    "Lo och Love följde spåren till skogskanten.",
+    "Thea och Love följde spåren till skogskanten.",
     "Men det blev mörkt så tidigt. Träden såg stora och svarta ut.",
-    "Lo blev rädd. Hon tog Loves hand.",
+    "Thea blev rädd. Hon tog Loves hand.",
     "– Vi kan inte gå in i skogen nu, sa Love. Det är för mörkt.",
-    "– Vi kommer tillbaka, sa Lo. Jag ska be mormor att följa med.",
-    "På natten drömde Lo om sin röda vante."
+    "– Vi kommer tillbaka, sa Thea. Jag ska be mormor att följa med.",
+    "På natten drömde Thea om sin röda vante."
    ],
    "fragor": [
     {
@@ -170,7 +170,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Hur känner sig Lo vid skogen?",
+     "text": "Hur känner sig Thea vid skogen?",
      "alt": [
       "Rädd",
       "Arg",
@@ -180,7 +180,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vem ska Lo be att följa med?",
+     "text": "Vem ska Thea be att följa med?",
      "alt": [
       "Mormor",
       "Love",
@@ -197,11 +197,11 @@
   {
    "rubrik": "Under granen",
    "text": [
-    "På måndagen gick Lo, Love och mormor till skogen.",
+    "På måndagen gick Thea, Love och mormor till skogen.",
     "Det var ljust nu. Solen glittrade på snön.",
     "De följde spåren förbi en stor sten och en gammal stubbe.",
     "Spåren slutade under en tät gran. Där låg vanten!",
-    "Lo skulle just ta upp den. Men då rörde sig vanten.",
+    "Thea skulle just ta upp den. Men då rörde sig vanten.",
     "I vanten satt en liten fågel med röd mage. Den darrade."
    ],
    "fragor": [
@@ -239,7 +239,7 @@
      "typ": "skriv",
      "text": "Vem går till skogen?",
      "rader": 1,
-     "facit": "Lo, Love och mormor."
+     "facit": "Thea, Love och mormor."
     }
    ]
   },
@@ -249,9 +249,9 @@
     "– Det är en domherre, sa mormor tyst.",
     "Fågeln hade en vinge som hängde ner. Den kunde inte flyga.",
     "– Den har använt vanten som ett bo, sa Love. För att hålla sig varm.",
-    "Lo tittade på fågeln. Hon tittade på vanten.",
+    "Thea tittade på fågeln. Hon tittade på vanten.",
     "Hon ville ha tillbaka sin fina vante. Men fågeln behövde den mer.",
-    "– Den får ha vanten, sa Lo. Men hur ska vi hjälpa den?"
+    "– Den får ha vanten, sa Thea. Men hur ska vi hjälpa den?"
    ],
    "fragor": [
     {
@@ -276,7 +276,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad bestämmer Lo?",
+     "text": "Vad bestämmer Thea?",
      "alt": [
       "Hon tar vanten",
       "Fågeln får ha vanten",
@@ -286,7 +286,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför tror du att Lo låter fågeln ha vanten?",
+     "text": "Varför tror du att Thea låter fågeln ha vanten?",
      "rader": 1,
      "facit": "Till exempel: Fågeln behöver den mer för att hålla sig varm."
     }
@@ -296,12 +296,12 @@
    "rubrik": "Gunnel vet",
    "text": [
     "Mormor bar försiktigt vanten med fågeln hem.",
-    "Granne med Lo bor Gunnel. Hon vet allt om fåglar.",
+    "Granne med Thea bor Gunnel. Hon vet allt om fåglar.",
     "– Fågeln behöver lugn och ro, sa Gunnel. Och mat.",
     "De ställde vanten i en låda med halm på Gunnels farstu.",
-    "Lo strödde solrosfrön bredvid.",
+    "Thea strödde solrosfrön bredvid.",
     "– Nu får vi vänta, sa Gunnel. Vingen behöver tid att läka.",
-    "Lo tyckte att det var svårt att vänta."
+    "Thea tyckte att det var svårt att vänta."
    ],
    "fragor": [
     {
@@ -316,7 +316,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad ger Lo fågeln att äta?",
+     "text": "Vad ger Thea fågeln att äta?",
      "alt": [
       "Ost",
       "Bröd",
@@ -345,8 +345,8 @@
    "text": [
     "I skolan berättade Love om fågeln för hela klassen.",
     "– Kan vi få se den? ropade alla.",
-    "Lo blev orolig. Tänk om fågeln blev rädd av så många barn.",
-    "– Fågeln behöver lugn, sa Lo. Vi får inte skrämma den.",
+    "Thea blev orolig. Tänk om fågeln blev rädd av så många barn.",
+    "– Fågeln behöver lugn, sa Thea. Vi får inte skrämma den.",
     "Då kom läraren på en idé. Klassen fick göra fågelmat i stället.",
     "De blandade frön och fett och formade bollar. Snart skulle fåglarna i skogen få ett riktigt julbord."
    ],
@@ -356,14 +356,14 @@
      "text": "Vem berättar om fågeln i skolan?",
      "alt": [
       "Love",
-      "Lo",
+      "Thea",
       "Läraren"
      ],
      "ratt": 0
     },
     {
      "typ": "kryss",
-     "text": "Varför blir Lo orolig?",
+     "text": "Varför blir Thea orolig?",
      "alt": [
       "Fågeln kan bli rädd",
       "Hon har glömt boken",
@@ -393,7 +393,7 @@
    "rubrik": "Den kalla natten",
    "text": [
     "En kväll sa radion att det skulle bli tjugo grader kallt.",
-    "Lo kunde inte sova. Hon tänkte på den lilla fågeln.",
+    "Thea kunde inte sova. Hon tänkte på den lilla fågeln.",
     "Hon väckte mormor. – Fryser fågeln nu? frågade hon.",
     "Mormor tog på sig sin tjocka rock. Tillsammans gick de till Gunnel.",
     "De lade en yllefilt över lådan och ställde den närmare väggen.",
@@ -412,7 +412,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Varför kan Lo inte sova?",
+     "text": "Varför kan Thea inte sova?",
      "alt": [
       "Hon tänker på fågeln",
       "Hon är hungrig",
@@ -432,7 +432,7 @@
     },
     {
      "typ": "rita",
-     "text": "Rita Lo och mormor som går ut i den kalla natten."
+     "text": "Rita Thea och mormor som går ut i den kalla natten."
     }
    ]
   },
@@ -440,16 +440,16 @@
    "rubrik": "En röd och en grön",
    "text": [
     "Fågeln åt och åt. Varje dag såg den lite piggare ut.",
-    "Men nu frös Lo om ena handen. Hon hade bara en vante kvar.",
+    "Men nu frös Thea om ena handen. Hon hade bara en vante kvar.",
     "– Här, sa Love och gav henne en av sina gröna vantar.",
-    "– Men då fryser ju du, sa Lo.",
+    "– Men då fryser ju du, sa Thea.",
     "– Vi kan turas om, sa Love. Du har den på vägen till skolan. Jag har den på vägen hem.",
-    "Nu hade Lo en röd och en grön vante. Love hade bara en. Han stoppade den kalla handen i fickan och log. De skrattade så att de fick hicka."
+    "Nu hade Thea en röd och en grön vante. Love hade bara en. Han stoppade den kalla handen i fickan och log. De skrattade så att de fick hicka."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Varför fryser Lo?",
+     "text": "Varför fryser Thea?",
      "alt": [
       "Hon har bara en vante",
       "Hon har ingen mössa",
@@ -462,8 +462,8 @@
      "text": "Vad gör Love?",
      "alt": [
       "Han går hem",
-      "Han ger Lo en vante",
-      "Han skrattar åt Lo"
+      "Han ger Thea en vante",
+      "Han skrattar åt Thea"
      ],
      "ratt": 1
     },
@@ -488,17 +488,17 @@
   {
    "rubrik": "Mormors hemlighet",
    "text": [
-    "Mormor såg Los kalla hand. Hon sa ingenting.",
-    "Men på kvällen hörde Lo ett ljud från mormors rum. Klick, klick.",
-    "– Vad gör du, mormor? frågade Lo.",
+    "Mormor såg Theas kalla hand. Hon sa ingenting.",
+    "Men på kvällen hörde Thea ett ljud från mormors rum. Klick, klick.",
+    "– Vad gör du, mormor? frågade Thea.",
     "– Det är en hemlighet, sa mormor och gömde något bakom ryggen.",
-    "Lo försökte kika. Hon såg bara lite rött garn.",
+    "Thea försökte kika. Hon såg bara lite rött garn.",
     "– Vänta och se, sa mormor och blinkade."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad hör Lo från mormors rum?",
+     "text": "Vad hör Thea från mormors rum?",
      "alt": [
       "Knack, knack",
       "Klick, klick",
@@ -508,7 +508,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad säger mormor när Lo frågar?",
+     "text": "Vad säger mormor när Thea frågar?",
      "alt": [
       "Det är en hemlighet",
       "Gå och lägg dig",
@@ -540,9 +540,9 @@
     "En morgon hoppade domherren upp på kanten av lådan.",
     "Den bredde ut vingarna. Vingen hängde inte längre!",
     "Fågeln flaxade. Men den ramlade ner i snön.",
-    "– Försök igen, viskade Lo. Du klarar det.",
+    "– Försök igen, viskade Thea. Du klarar det.",
     "Fågeln flaxade en gång till. Nu lyfte den! Den flög en liten bit och landade på staketet.",
-    "Lo klappade försiktigt händerna."
+    "Thea klappade försiktigt händerna."
    ],
    "fragor": [
     {
@@ -557,7 +557,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad säger Lo till fågeln?",
+     "text": "Vad säger Thea till fågeln?",
      "alt": [
       "Skynda dig",
       "Gå hem",
@@ -570,7 +570,7 @@
      "text": "Var landar fågeln?",
      "alt": [
       "På taket",
-      "På Los huvud",
+      "På Theas huvud",
       "På staketet"
      ],
      "ratt": 2
@@ -587,9 +587,9 @@
     "Dagen efter satt fågeln i björken utanför skolan.",
     "Plötsligt kom fler domherrar flygande. Fem, sex, sju stycken!",
     "Den lilla fågeln flög upp till dem. Nu var den inte ensam längre.",
-    "Lo blev glad. Men också lite ledsen.",
+    "Thea blev glad. Men också lite ledsen.",
     "– Det är okej att känna båda sakerna, sa läraren.",
-    "Lo nickade. Hon var mest glad, ändå."
+    "Thea nickade. Hon var mest glad, ändå."
    ],
    "fragor": [
     {
@@ -614,7 +614,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Hur känner sig Lo?",
+     "text": "Hur känner sig Thea?",
      "alt": [
       "Bara arg",
       "Bara rädd",
@@ -624,7 +624,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför blir Lo lite ledsen?",
+     "text": "Varför blir Thea lite ledsen?",
      "rader": 1,
      "facit": "Till exempel: Fågeln flyger iväg och hon kommer att sakna den."
     }
@@ -634,16 +634,16 @@
    "rubrik": "Den bästa julklappen",
    "text": [
     "Sista dagen före jullovet hade klassen julavslutning.",
-    "Mormor kom till skolan med ett paket. – Till dig, Lo, sa hon.",
+    "Mormor kom till skolan med ett paket. – Till dig, Thea, sa hon.",
     "I paketet låg två nya röda vantar med vita stjärnor. Och en liten röd stickad påse.",
     "– Den kan du fylla med frön, sa mormor. Till fåglarna.",
-    "Lo hängde upp påsen i björken. Snart satt domherrarna där och åt.",
-    "Lo hade varma händer. Men allra varmast kände hon sig inuti. Slut."
+    "Thea hängde upp påsen i björken. Snart satt domherrarna där och åt.",
+    "Thea hade varma händer. Men allra varmast kände hon sig inuti. Slut."
    ],
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Vad får Lo i paketet?",
+     "text": "Vad får Thea i paketet?",
      "alt": [
       "En mössa",
       "Nya vantar och en påse",
@@ -663,7 +663,7 @@
     },
     {
      "typ": "kryss",
-     "text": "Var hänger Lo upp påsen?",
+     "text": "Var hänger Thea upp påsen?",
      "alt": [
       "I björken",
       "Hemma",
