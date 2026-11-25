@@ -30,7 +30,7 @@ li{background:#fff;border:1px solid #E8E1D3;border-radius:14px;padding:12px 16px
 const lista = document.getElementById("lista");
 const rad = (klass, text) => { const li = document.createElement("li"); li.className = klass; li.textContent = text; lista.appendChild(li); return li; };
 const FEL = { 1: "avbröts", 2: "nätverksfel", 3: "kunde inte avkodas", 4: "filen hittades inte eller formatet stöds inte" };
-const fil = "audio/ola/2-01.mp3?v=test";
+const fil = "/julkalender/audio/ola/2-01.mp3?v=test";
 const a = new Audio(); a.preload = "metadata";
 a.addEventListener("loadedmetadata", () => rad("ok", `Ljudfilen hittades (${Math.round(a.duration)} sekunder lång).`));
 a.addEventListener("error", () => rad("fel", `Ljudfilen kunde inte laddas: ${FEL[a.error && a.error.code] || "okänt fel"}.`));
