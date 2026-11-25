@@ -130,6 +130,47 @@ A.bynSVG=function(L,preview){
   o.sort((p,q)=>p[0]-q[0]);o.forEach(x=>g+=x[1]);
   return{svg:svg+g,cent,sc:SC}};
 
+
+/* ---------- Byn i snön, målad (byn2) ---------- */
+A.HUS2=[{"w":587,"h":560,"win":[[156,240,73,63],[357,240,78,63],[156,380,74,96],[355,380,80,96]],"ch":[430,15]},{"w":606,"h":560,"win":[[112,225,80,97],[415,225,80,97],[112,388,80,100],[415,388,80,102]],"ch":[419,13]},{"w":636,"h":560,"win":[[115,216,59,78],[466,216,59,79],[115,380,59,79],[466,379,59,80]],"ch":[449,15]},{"w":566,"h":560,"win":[[183,199,60,94],[325,199,60,94],[116,380,63,99],[237,378,70,101]],"ch":[395,16]},{"w":497,"h":560,"win":[[88,275,110,87],[304,275,104,87],[90,418,100,74],[322,418,86,74]],"ch":[387,92]},{"w":597,"h":560,"win":[[152,224,66,86],[376,224,65,85],[160,395,50,52],[376,384,65,89]],"ch":[418,13]}];
+A.DEK2={gran:[355,520],tall:[251,520],lykta:[172,520],pulka:[745,401],snogubbe:[452,520]};
+A.byn2SVG=function(L,preview){
+  const N=Math.max(1,L.length),H=Math.max(1,Math.ceil(N/4)),R="img/byn2/";
+  const nR=H<=4?1:H<=10?2:3;
+  const RP=nR===1?[[862,.62]]:nR===2?[[590,.40],[892,.53]]:[[520,.30],[705,.33],[892,.34]];
+  const cnt=[];{let left=H;for(let r=0;r<nR;r++){const c=Math.ceil(left/(nR-r));cnt.push(c);left-=c}}
+  const ORD=[0,3,1,4,2,5];let hi=0;const rows=[];
+  RP.forEach(([by,s0],r)=>{const n=cnt[r],last=r===nR-1,av=last?1250:1500,cx=last?950:800;const s=Math.min(s0,av/(n*610+(n-1)*50));const sp=Math.min((av+60)/n,610*s+(nR===1?140:90));
+    const hs=[];for(let i=0;i<n;i++){const t=A.HUS2[ORD[(hi+r)%6]];const x=cx+(i-(n-1)/2)*sp;hs.push({t,k:ORD[(hi+r)%6]+1,x,by,s,w:t.w*s,h:t.h*s});hi++}
+    rows.push({by,s,sp,hs})});
+  const img=(f,x,y,w,h,ex="")=>`<image href="${R}${f}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" ${ex}/>`;
+  const dek=(nm,cx,by,ht,flip)=>{const d=A.DEK2[nm],w=d[0]*ht/d[1];return img(nm+".webp",cx-w/2,by-ht,w,ht,flip?`transform="translate(${(2*cx).toFixed(1)},0) scale(-1,1)"`:"")};
+  let svg=img("bakgrund.jpg",0,0,1600,900,'preserveAspectRatio="xMidYMid slice"');
+  const cent=[];let li=0,bsz=40;let smoke="";
+  rows.forEach((row,r)=>{
+    let back="",front="";
+    /* träd bakom husen: i mellanrummen och vid kanterna */
+    const xs=[row.hs[0].x-row.sp/2,...row.hs.slice(1).map((h,i)=>(h.x+row.hs[i].x)/2),row.hs[row.hs.length-1].x+row.sp/2];
+    const pr=r>0?rows[r-1].hs:null,pl=pr?pr[0].x-pr[0].w/2-30:0,pR=pr?pr[pr.length-1].x+pr[pr.length-1].w/2+30:0;
+    xs.forEach((x,i)=>{if(x<40||x>1560)return;if(pr&&x>pl&&x<pR)return;const th=(row.hs[0].h)*(1.02+((i*37)%5)*.06);back+=dek(i%2?"tall":"gran",x,row.by-row.hs[0].h*.18,th,i%3===1)});
+    let houses="";
+    row.hs.forEach(h=>{const x0=h.x-h.w/2,y0=h.by-h.h;houses+=img("hus"+h.k+".webp",x0,y0,h.w,h.h);
+      const [cx,cy]=h.t.ch;smoke+=`<g class="smk" transform="translate(${(x0+cx*h.s).toFixed(1)},${(y0+cy*h.s).toFixed(1)}) scale(${(h.s*1.6).toFixed(2)})"><circle r="9"/><circle r="12"/><circle r="15"/></g>`;
+      h.t.win.forEach(([wx,wy,ww,wh])=>{const l=L[li];const X=x0+wx*h.s,Y=y0+wy*h.s,W=ww*h.s,Hh=wh*h.s;
+        if(l){li++;const st=l.st;if(st!=="open")houses+=`<rect class="w2 ${st}" x="${X.toFixed(1)}" y="${Y.toFixed(1)}" width="${W.toFixed(1)}" height="${Hh.toFixed(1)}" rx="2"/>`;
+          cent.push({l,x:X+W/2,y:Y+Hh/2});bsz=Math.min(bsz,Math.min(W,Hh)*1.05)}})});
+    /* lyktstolpar i mellanrummen framför bakre raden */
+    if(r===nR-1&&row.hs.length>1)row.hs.slice(1).forEach((h,i)=>{const x=(h.x+row.hs[i].x)/2,gap=row.sp-h.w/2-row.hs[i].w/2;if(gap>40)front+=dek("lykta",x,row.by-4,row.hs[0].h*.95)});
+    svg+=back+houses+front});
+  /* snögubbe och pulka längst fram om det finns plats */
+  const fr=rows[rows.length-1],fx0=fr.hs[0].x-fr.hs[0].w/2,fx1=fr.hs[fr.hs.length-1].x+fr.hs[fr.hs.length-1].w/2;
+  const room=1600-fx1;
+  if(room>230){svg+=dek("snogubbe",fx1+room*.36,896,Math.min(165,room*.75));svg+=dek("pulka",fx1+room*.76,892,Math.min(85,room*.32))}
+  else if(room>120)svg+=dek("pulka",(fx1+1600)/2,892,Math.min(100,room*.5));
+  svg+=smoke;
+  return{svg,cent,bsz:Math.max(22,Math.min(46,bsz))}};
+A.miniByn2=function(){const L=[];for(let i=0;i<22;i++)L.push({st:i<8?"open":i<10?"today":"locked"});const r=A.byn2SVG(L,true);return`<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">${r.svg}</svg>`};
+
 /* =================== SAGOBOK =================== */
 function defsB(){return`<defs>
 <filter id="wc" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="9"/><feGaussianBlur stdDeviation=".7"/></filter>
