@@ -26,7 +26,7 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* ===================== skalning ===================== */
 function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k);
   const b=document.getElementById("bdrop");if(b){const t=64*k,isF=b.classList.contains("filt");b.style.backgroundImage=isF?`url("data:image/svg+xml,${encodeURIComponent(A.wallTile)}")`:"";b.style.backgroundSize=isF?`${t}px ${t}px`:"";b.style.backgroundPosition=isF?`${(innerWidth-1600*k)/2}px ${(innerHeight-900*k)/2}px`:"";const c=$("bsnow");if(c){c.width=innerWidth;c.height=innerHeight}}}
-function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn"?"byn":"filt";fit()}
+function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn"?"byn":"filt";document.body.classList.toggle("th-filt",th!=="byn");fit()}
 addEventListener("resize",fit);fit();
 
 /* ===================== datum ===================== */

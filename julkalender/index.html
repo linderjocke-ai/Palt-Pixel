@@ -282,8 +282,9 @@ h1,h2,h3{font-family:Fredoka,system-ui,sans-serif;margin:0;line-height:1.08;text
 
 @keyframes bdtw{from{opacity:.55}to{opacity:1}}
 #bdrop.filt{background-color:#f1e5d1}
-#bdrop.filt:after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 42%,rgba(120,70,30,.12),rgba(70,40,20,.34))}
-#stage{z-index:1}
+#vig{position:fixed;inset:0;z-index:2;pointer-events:none;display:none;background:radial-gradient(120% 95% at 50% 42%,rgba(120,70,30,0) 45%,rgba(70,40,20,.26))}body.th-filt #vig{display:block}
+#stage{z-index:1;background:transparent}
+#world,#snow{-webkit-mask:linear-gradient(to right,transparent 0,#000 80px,#000 calc(100% - 80px),transparent 100%),linear-gradient(to bottom,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%);-webkit-mask-composite:source-in;mask:linear-gradient(to right,transparent 0,#000 80px,#000 calc(100% - 80px),transparent 100%),linear-gradient(to bottom,transparent 0,#000 50px,#000 calc(100% - 50px),transparent 100%);mask-composite:intersect}
 /* ----- luckkort med bild och interaktivitet ----- */
 .card.byncard.rich{left:560px;top:40px;width:1000px;height:820px}
 .card.static.rich{left:auto;top:auto;width:1000px;height:820px}
@@ -427,7 +428,7 @@ select{font:inherit;font-size:20px;padding:10px 14px;border-radius:14px;border:2
 </style>
 </head>
 <body>
-<div id="bdrop"><canvas id="bsnow"></canvas></div>
+<div id="bdrop"><canvas id="bsnow"></canvas></div><div id="vig"></div>
 <div id="stage">
   <div id="world"></div>
   <canvas id="snow" width="1600" height="900"></canvas>

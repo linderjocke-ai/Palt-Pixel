@@ -341,7 +341,7 @@
    ]
   },
   {
-   "rubrik": "Viska, viska",
+   "rubrik": "Julbord för fåglarna",
    "text": [
     "I skolan berättade Love om fågeln för hela klassen.",
     "– Kan vi få se den? ropade alla.",
@@ -440,7 +440,6 @@
    "rubrik": "En röd och en grön",
    "text": [
     "Fågeln åt och åt. Varje dag såg den lite piggare ut.",
-    "Den röda vanten fick fågeln behålla. Där inne kände den sig trygg och varm. Och vanten var ju trasig ändå. En lång bit av tråden hade repats upp.",
     "Men nu frös Lo om ena handen. Hon hade bara en vante kvar.",
     "– Här, sa Love och gav henne en av sina gröna vantar.",
     "– Men då fryser ju du, sa Lo.",
@@ -492,7 +491,7 @@
     "Mormor såg Los kalla hand. Hon sa ingenting.",
     "Men på kvällen hörde Lo ett ljud från mormors rum. Klick, klick.",
     "– Vad gör du, mormor? frågade Lo.",
-    "– Det är en hemlighet, sa mormor och gömde stickningen bakom ryggen.",
+    "– Det är en hemlighet, sa mormor och gömde något bakom ryggen.",
     "Lo försökte kika. Hon såg bara lite rött garn.",
     "– Vänta och se, sa mormor och blinkade."
    ],
@@ -509,13 +508,13 @@
     },
     {
      "typ": "kryss",
-     "text": "Vad gömmer mormor?",
+     "text": "Vad säger mormor när Lo frågar?",
      "alt": [
-      "En bok",
-      "En present",
-      "En stickning"
+      "Det är en hemlighet",
+      "Gå och lägg dig",
+      "Titta här"
      ],
-     "ratt": 2
+     "ratt": 0
     },
     {
      "typ": "kryss",
