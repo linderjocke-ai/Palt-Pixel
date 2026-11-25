@@ -144,9 +144,19 @@ A.byn2SVG=function(L,preview){
     const hs=[];for(let i=0;i<n;i++){const t=A.HUS2[ORD[(hi+r)%6]];const x=cx+(i-(n-1)/2)*sp;hs.push({t,k:ORD[(hi+r)%6]+1,x,by,s,w:t.w*s,h:t.h*s});hi++}
     rows.push({by,s,sp,hs})});
   const img=(f,x,y,w,h,ex="")=>`<image href="${R}${f}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" ${ex}/>`;
-  const dek=(nm,cx,by,ht,flip)=>{const d=A.DEK2[nm],w=d[0]*ht/d[1];return img(nm+".webp",cx-w/2,by-ht,w,ht,flip?`transform="translate(${(2*cx).toFixed(1)},0) scale(-1,1)"`:"")};
-  let svg=img("bakgrund.jpg",0,0,1600,900,'preserveAspectRatio="xMidYMid slice"');
-  const cent=[];let li=0,bsz=40;let smoke="";
+  const dek=(nm,cx,by,ht,flip)=>{const d=A.DEK2[nm],w=d[0]*ht/d[1];let s=img(nm+".webp",cx-w/2,by-ht,w,ht,flip?`transform="translate(${(2*cx).toFixed(1)},0) scale(-1,1)"`:"");
+    if(nm==="lykta"){const gx=cx-w/2+w*.48,gy=by-ht+ht*.203;s+=`<circle class="lglow" cx="${gx.toFixed(1)}" cy="${gy.toFixed(1)}" r="${(ht*.26).toFixed(1)}" fill="url(#b2lg)" style="animation-delay:-${(gx%3.2).toFixed(2)}s"/>`}
+    return s};
+  const pa='preserveAspectRatio="xMidYMid slice"';
+  let svg="";[-1,0,1].forEach(gy=>[-1,0,1].forEach(gx=>{const fx=gx?-1:1,fy=gy?-1:1,X=gx*1600,Y=gy*900;
+    svg+=`<g transform="translate(${X+(fx<0?1600:0)},${Y+(fy<0?900:0)}) scale(${fx},${fy})">${img("bakgrund.jpg",-1,-1,1602,902,pa)}</g>`}));
+  svg+=`<defs><radialGradient id="b2a1"><stop offset="0" stop-color="#9dffcf" stop-opacity=".55"/><stop offset=".55" stop-color="#5fe0b0" stop-opacity=".22"/><stop offset="1" stop-color="#5fe0b0" stop-opacity="0"/></radialGradient>
+<radialGradient id="b2a2"><stop offset="0" stop-color="#8fe8ff" stop-opacity=".4"/><stop offset="1" stop-color="#8fe8ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="b2a3"><stop offset="0" stop-color="#c9a4ff" stop-opacity=".28"/><stop offset="1" stop-color="#c9a4ff" stop-opacity="0"/></radialGradient>
+<radialGradient id="b2lg"><stop offset="0" stop-color="#fff1c4" stop-opacity=".9"/><stop offset=".35" stop-color="#ffcf7a" stop-opacity=".45"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+<radialGradient id="b2wg"><stop offset="0" stop-color="#ffe7a8" stop-opacity=".55"/><stop offset=".6" stop-color="#ffc56b" stop-opacity=".2"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient></defs>`;
+  svg+=`<g class="aur">`+[[455,240,-22,190,46,"b2a1",0],[600,195,-28,200,58,"b2a1",-3],[750,140,-33,210,62,"b2a1",-6],[890,80,-42,200,56,"b2a1",-2],[1010,25,-52,170,50,"b2a1",-8],[690,150,-30,260,30,"b2a2",-5],[930,60,-45,230,26,"b2a2",-9],[820,95,-38,240,70,"b2a3",-4]].map(([x,y,r,rx,ry,g,d],i)=>`<g transform="translate(${x},${y}) rotate(${r})"><ellipse class="au au${i%3}" rx="${rx}" ry="${ry}" fill="url(#${g})" style="animation-delay:${d}s"/></g>`).join("")+`</g>`;
+  const cent=[];let li=0,bsz=40;let smoke="",glow="";
   rows.forEach((row,r)=>{
     let back="",front="";
     /* träd bakom husen: i mellanrummen och vid kanterna */
@@ -157,11 +167,12 @@ A.byn2SVG=function(L,preview){
     row.hs.forEach(h=>{const x0=h.x-h.w/2,y0=h.by-h.h;houses+=img("hus"+h.k+".webp",x0,y0,h.w,h.h);
       const [cx,cy]=h.t.ch;smoke+=`<g class="smk" transform="translate(${(x0+cx*h.s).toFixed(1)},${(y0+cy*h.s).toFixed(1)}) scale(${(h.s*1.6).toFixed(2)})"><circle r="9"/><circle r="12"/><circle r="15"/></g>`;
       h.t.win.forEach(([wx,wy,ww,wh])=>{const l=L[li];const X=x0+wx*h.s,Y=y0+wy*h.s,W=ww*h.s,Hh=wh*h.s;
+        const lit=!l||l.st==="open";if(lit)glow+=`<ellipse class="wglow" cx="${(X+W/2).toFixed(1)}" cy="${(Y+Hh/2).toFixed(1)}" rx="${(W*1.05).toFixed(1)}" ry="${(Hh*.95).toFixed(1)}" fill="url(#b2wg)" style="animation-delay:-${((X*7+Y)%5).toFixed(2)}s"/>`;
         if(l){li++;const st=l.st;if(st!=="open")houses+=`<rect class="w2 ${st}" x="${X.toFixed(1)}" y="${Y.toFixed(1)}" width="${W.toFixed(1)}" height="${Hh.toFixed(1)}" rx="2"/>`;
           cent.push({l,x:X+W/2,y:Y+Hh/2});bsz=Math.min(bsz,Math.min(W,Hh)*1.05)}})});
     /* lyktstolpar i mellanrummen framför bakre raden */
     if(r===nR-1&&row.hs.length>1)row.hs.slice(1).forEach((h,i)=>{const x=(h.x+row.hs[i].x)/2,gap=row.sp-h.w/2-row.hs[i].w/2;if(gap>40)front+=dek("lykta",x,row.by-4,row.hs[0].h*.95)});
-    svg+=back+houses+front});
+    svg+=back+houses+glow+front;glow=""});
   /* snögubbe och pulka längst fram om det finns plats */
   const fr=rows[rows.length-1],fx0=fr.hs[0].x-fr.hs[0].w/2,fx1=fr.hs[fr.hs.length-1].x+fr.hs[fr.hs.length-1].w/2;
   const room=1600-fx1;
