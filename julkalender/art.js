@@ -52,7 +52,7 @@ function defsA(){return`<defs><linearGradient id="skyA" x1="0" y1="0" x2="0" y2=
 <linearGradient id="aurA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(120,255,200,0)"/><stop offset=".5" stop-color="rgba(120,255,200,.55)"/><stop offset="1" stop-color="rgba(90,170,255,0)"/></linearGradient></defs>`}
 function skyA(){rs(3);let s=`<rect width="1600" height="900" fill="url(#skyA)"/>`;
   for(let i=0;i<110;i++)s+=`<circle class="tw" cx="${(R()*1600).toFixed(0)}" cy="${(R()*520).toFixed(0)}" r="${(R()*1.6+.6).toFixed(1)}" fill="#fff" style="animation-delay:${(R()*4).toFixed(1)}s"/>`;
-  s+=`<defs><linearGradient id="aurMg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000"/><stop offset=".2" stop-color="#fff"/><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="aurM" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900"><rect width="1600" height="900" fill="url(#aurMg)"/></mask></defs><g mask="url(#aurM)"><g class="aur" filter="url(#blurA)"><path d="M-100 260 C200 120 420 300 700 170 S1200 60 1700 200 L1700 330 C1300 220 1000 380 700 300 S200 260 -100 390Z" fill="url(#aurA)"/><path d="M200 140 C500 40 800 200 1100 100 S1500 60 1700 120 L1700 190 C1400 140 1100 260 800 210 S400 160 200 230Z" fill="rgba(170,120,255,.25)"/></g></g>`;
+  s+=`<defs><linearGradient id="aurMg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000"/><stop offset=".05" stop-color="#000"/><stop offset=".25" stop-color="#fff"/><stop offset=".75" stop-color="#fff"/><stop offset=".95" stop-color="#000"/><stop offset="1" stop-color="#000"/></linearGradient><mask id="aurM" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="900"><rect width="1600" height="900" fill="url(#aurMg)"/></mask></defs><g mask="url(#aurM)"><g class="aur" filter="url(#blurA)"><path d="M-100 260 C200 120 420 300 700 170 S1200 60 1700 200 L1700 330 C1300 220 1000 380 700 300 S200 260 -100 390Z" fill="url(#aurA)"/><path d="M200 140 C500 40 800 200 1100 100 S1500 60 1700 120 L1700 190 C1400 140 1100 260 800 210 S400 160 200 230Z" fill="rgba(170,120,255,.25)"/></g></g>`;
   return s}
 
 /* onboarding-ö */
@@ -497,14 +497,14 @@ A.hasOwnImages=g=>true;
 /* ---------- Filtfickornas vägg ---------- */
 const WALL_TILE=`<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect width="64" height="64" fill="#f1e5d1"/><rect x="0" width="2" height="64" fill="#e9dbc3"/><rect x="32" width="1" height="64" fill="#ece0ca"/><g fill="#d6a08f" opacity=".55"><path d="M16 9 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6z"/><path d="M48 41 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6z"/></g><g fill="#9fb39a" opacity=".5"><circle cx="48" cy="14" r="1.6"/><circle cx="16" cy="46" r="1.6"/></g></svg>`;
 A.wallTile=WALL_TILE;
-A.filtBgSVG=function(rows){
+A.filtBgSVG=function(rows,bare){
   const WX=520,WY=22,WW=560,WH=262;
   let s=defsB()+`<defs><pattern id="wallP" width="64" height="64" patternUnits="userSpaceOnUse">${WALL_TILE.replace(/^<svg[^>]*>|<\/svg>$/g,"")}</pattern>
 <linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1533"/><stop offset=".7" stop-color="#22386c"/><stop offset="1" stop-color="#3f5f96"/></linearGradient>
 <linearGradient id="aurW" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="rgba(120,255,190,0)"/><stop offset=".3" stop-color="rgba(120,255,190,.55)"/><stop offset=".6" stop-color="rgba(150,170,255,.45)"/><stop offset="1" stop-color="rgba(150,170,255,0)"/></linearGradient>
 <clipPath id="winClip"><rect x="${WX}" y="${WY}" width="${WW}" height="${WH}" rx="6"/></clipPath>
 <radialGradient id="moonG"><stop offset="0" stop-color="rgba(255,244,210,.55)"/><stop offset="1" stop-color="rgba(255,244,210,0)"/></radialGradient></defs>
-<rect width="1600" height="900" fill="url(#wallP)"/>`;
+`+(bare?"":`<rect width="1600" height="900" fill="url(#wallP)"/>`);
   // fönstret – utsikt
   rs(6);let out=`<rect x="${WX}" y="${WY}" width="${WW}" height="${WH}" fill="url(#nsky)"/>`;
   for(let i=0;i<46;i++)out+=`<circle class="tw" cx="${(WX+R()*WW).toFixed(0)}" cy="${(WY+R()*WH*.6).toFixed(0)}" r="${(R()*1.3+.5).toFixed(1)}" fill="#fff" style="animation-delay:${(R()*4).toFixed(1)}s"/>`;
@@ -531,8 +531,8 @@ A.filtBgSVG=function(rows){
   const sy=WY+WH+16;
   [[WX+40,0],[WX+WW-56,1]].forEach(([x,k])=>s+=`<circle cx="${x+8}" cy="${sy-60}" r="60" fill="url(#winB)" class="flk"/><rect x="${x}" y="${sy-46}" width="16" height="46" rx="2" fill="#f7efe1"/><rect x="${x}" y="${sy-46}" width="16" height="6" fill="#ece0cc"/><path class="flame2" style="animation-delay:-${k*.4}s" d="M${x+8} ${sy-74} C${x+15} ${sy-62} ${x+14} ${sy-52} ${x+8} ${sy-49} C${x+2} ${sy-52} ${x+1} ${sy-62} ${x+8} ${sy-74}Z" fill="#ffd27a"/><path class="flame2" style="animation-delay:-${k*.4+.2}s" d="M${x+8} ${sy-64} C${x+11} ${sy-58} ${x+11} ${sy-53} ${x+8} ${sy-51} C${x+5} ${sy-53} ${x+5} ${sy-58} ${x+8} ${sy-64}Z" fill="#fff3c4"/>`);
   s+=`<g transform="translate(${WX+WW/2-34} ${sy-30})"><ellipse cx="34" cy="28" rx="40" ry="8" fill="#6a8a5a"/><path d="M4 26 q30 -40 60 0" fill="#3f6a4a"/><circle cx="20" cy="14" r="5" fill="#c23a2b"/><circle cx="40" cy="10" r="5" fill="#c23a2b"/><circle cx="52" cy="18" r="4" fill="#c23a2b"/></g>`;
-  let lights="";rows.forEach(r=>{lights+=`<path d="M0 ${r} Q800 ${r+100} 1600 ${r}" fill="none" stroke="#6b4a32" stroke-width="3"/>`;for(let i=0;i<24;i++){const t=(i+.5)/24,x=t*1600,y=r+100*2*t*(1-t);lights+=`<circle cx="${x}" cy="${y+5}" r="14" fill="url(#winB)" class="tw" style="animation-delay:${(i*.37%4).toFixed(1)}s"/><circle cx="${x}" cy="${y+5}" r="3.5" fill="#fff2c0"/>`}});
-  s+=lights+`<radialGradient id="warmB" cx=".5" cy=".42" r=".75"><stop offset="0" stop-color="rgba(255,214,150,.18)"/><stop offset=".75" stop-color="rgba(255,214,150,0)"/></radialGradient><rect width="1600" height="900" fill="url(#warmB)" pointer-events="none"/>`+grain(1600,900);
+  let lights="";rows.forEach(r=>{lights+=`<path d="M24 ${r} Q800 ${r+100} 1576 ${r}" fill="none" stroke="#6b4a32" stroke-width="3"/>`+[24,1576].map(x=>`<circle cx="${x}" cy="${r}" r="7" fill="#8a5a3a"/><circle cx="${x-2}" cy="${r-2}" r="2.5" fill="#c9a27a"/>`).join("");for(let i=0;i<24;i++){const t=(i+.5)/24,x=t*1600,y=r+100*2*t*(1-t);lights+=`<circle cx="${x}" cy="${y+5}" r="14" fill="url(#winB)" class="tw" style="animation-delay:${(i*.37%4).toFixed(1)}s"/><circle cx="${x}" cy="${y+5}" r="3.5" fill="#fff2c0"/>`}});
+  s+=lights+`<radialGradient id="warmB" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="rgba(255,214,150,.18)"/><stop offset=".9" stop-color="rgba(255,214,150,0)"/></radialGradient><rect width="1600" height="900" fill="url(#warmB)" pointer-events="none"/>`+(bare?"":grain(1600,900));
   return s};
 A.sag=(r,y)=>y+100*2*(r)*(1-r);
 

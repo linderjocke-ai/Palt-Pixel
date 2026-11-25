@@ -159,7 +159,7 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
     rows.forEach((ry,r)=>{for(let k=0;k<counts[r]&&i<L.length;k++,i++){const l=L[i],st=state(l,D),t=(k+.5)/counts[r],x=t*1600,y=ry+100*2*t*(1-t);
       const fs=Math.round(pw*.4);
       pk+=`<button class="pk ${st}" data-id="${l.id}" style="left:${(x-pw/2).toFixed(1)}px;top:${(y-2).toFixed(1)}px;width:${pw.toFixed(1)}px;height:${ph.toFixed(1)}px;--d:${(4.5+(i%5)*.6).toFixed(1)}s;--dl:-${(i*.7%5).toFixed(1)}s" aria-label="${esc(l.name)}, ${dLabel(l.day)}"><span class="in"><span class="pin"></span><span class="body" style="background-color:${cols[i%6]}"><span class="st"></span><b style="font-size:${fs}px">${dNum(l.day)}</b><span class="tag" style="font-size:${Math.max(13,Math.min(17,pw*.14)).toFixed(0)}px;max-width:${(pw-16).toFixed(0)}px">${esc(l.name)}</span></span>${st==="today"?'<span class="oppna">Öppna!</span>':""}</span></button>`}});
-    w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${A.filtBgSVG(rows)}</svg><div class="hs">${pk}</div>`;
+    w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${A.filtBgSVG(rows,true)}</svg><div class="hs">${pk}</div>`;
     ui.innerHTML=topUI(L,D)+`<button class="feltbtn" id="chBtn">${ICO.book("#fff")}<span><b>Dagens kapitel</b><span>${esc(chapLabel(D))}</span></span></button>`;
     snowOn(false);
   }
