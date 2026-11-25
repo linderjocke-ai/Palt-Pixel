@@ -9,111 +9,165 @@
 <link rel="stylesheet" href="/assets/css/typsnitt.css">
 <style>
 :root{
-  --gradde:#FFF8EC; --kort:#FFFFFF; --text:#2A2234; --dampad:#6E6478; --linje:#EADFCB;
-  --lingon:#C8203A; --lingon-ljus:#FBE3E6; --smor:#F6C64E; --smor-ljus:#FFF3CF; --palt:#EADFC6; --tall:#1F4D3A; --natt:#1A2238;
-  --radie:18px;
+  --bg:#FBF8F2; --yta:#FFFFFF; --mjuk:#F3EEE3; --kant:#E8E1D3;
+  --text:#1F2A24; --dampad:#55625B;
+  --gron:#2F6B4F; --gron-mork:#24563F; --gron-ljus:#E6F0EA;
+  --smor:#F6C64E; --smor-ljus:#FFF3CF; --smor-text:#6B4A00;
+  --lingon:#B8283A; --lingon-ljus:#FBE6E8;
+  --rubrik:"Bricolage Grotesque",Inter,system-ui,sans-serif;
+  --radie:20px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--gradde);color:var(--text);font:17px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--lingon)}
-h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.15;margin:0}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--gron);text-underline-offset:3px}
+h1,h2,h3{font-family:var(--rubrik);font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:0}
 button{font:inherit;color:inherit}
-:focus-visible{outline:3px solid var(--smor);outline-offset:2px;border-radius:8px}
-.wrap{max-width:860px;margin:0 auto;padding:0 18px}
+:focus-visible{outline:3px solid #F2B705;outline-offset:2px;border-radius:8px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
 
-header.topp{background:var(--natt);color:#F4F6FB;padding:18px 0 26px;position:relative;overflow:hidden}
-header.topp .wrap{position:relative;z-index:1}
-.hem{display:inline-flex;align-items:center;gap:8px;color:#F4F6FB;text-decoration:none;font-weight:600;font-size:15px;background:rgba(255,255,255,.08);padding:6px 14px 6px 10px;border-radius:999px}
-.kicker{font-family:Silkscreen,monospace;font-size:13px;letter-spacing:.06em;color:var(--smor);margin:22px 0 6px}
-header h1{font-size:clamp(34px,7vw,52px)}
-header p{color:#C9D0E2;margin:8px 0 0;max-width:560px}
-.pixelpalt{position:absolute;right:16px;top:12px;width:86px;opacity:.95;image-rendering:pixelated}
-@media(min-width:700px){.pixelpalt{top:auto;bottom:-12px;right:4%;width:150px}}
+/* Huvud */
+.sidhuvud{background:rgba(255,255,255,.94);border-bottom:1px solid var(--kant)}
+.sidhuvud .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
+.hem{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:12px;border:1px solid var(--kant);background:var(--yta);color:var(--text);text-decoration:none;font-weight:600;font-size:15px}
+.hem:hover{border-color:var(--gron)}
+.hem svg{width:18px;height:18px}
+.marke{margin-left:auto;font-family:var(--rubrik);font-weight:700;font-size:20px;display:flex;align-items:center;gap:8px}
+.marke img{width:30px;height:24px}
 
-nav.flikar{position:sticky;top:0;z-index:5;background:rgba(255,248,236,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--linje)}
-nav.flikar .wrap{display:flex;gap:6px;overflow-x:auto;padding:10px 18px;scrollbar-width:none}
-nav.flikar button{flex:none;border:0;background:transparent;padding:9px 14px;border-radius:999px;font-weight:600;cursor:pointer;color:var(--dampad)}
-nav.flikar button[aria-selected="true"]{background:var(--text);color:#fff}
+.valkommen{background:linear-gradient(var(--mjuk),var(--bg))}
+.valkommen .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding-top:34px;padding-bottom:22px}
+.liten{display:inline-block;margin:0 0 12px;padding:5px 12px;border-radius:999px;background:var(--smor-ljus);color:var(--smor-text);font-weight:700;font-size:14px}
+.valkommen h1{font-size:clamp(36px,6vw,56px)}
+.valkommen h1 span{color:var(--gron)}
+.valkommen p.in{color:var(--dampad);font-size:18.5px;margin:12px 0 0;max-width:46ch}
+.valkommen img{width:100%;height:auto;filter:drop-shadow(0 18px 18px rgba(60,50,30,.18))}
 
-main{padding:22px 0 60px}
-.lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
-.receptkort{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid var(--linje);background:var(--kort);border-radius:var(--radie);padding:16px;cursor:pointer;transition:transform .12s,box-shadow .12s}
-.receptkort:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(60,40,20,.08)}
-.receptkort .emoji{font-size:30px;line-height:1}
-.receptkort b{font-family:"Space Grotesk",sans-serif;font-size:19px}
-.receptkort span{color:var(--dampad);font-size:15px}
+/* Flikar */
+nav.flikar{position:sticky;top:0;z-index:5;background:rgba(251,248,242,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--kant)}
+nav.flikar .wrap{padding-top:10px;padding-bottom:10px}
+.segment{display:flex;gap:4px;padding:4px;border-radius:16px;background:var(--mjuk);width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.segment button{flex:none;border:0;background:transparent;padding:10px 18px;border-radius:12px;font-weight:600;font-size:15.5px;cursor:pointer;color:var(--dampad);min-height:44px}
+.segment button[aria-selected="true"]{background:var(--yta);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+main{padding:26px 0 70px}
+.grupp{margin:30px 0 14px;font-size:24px}
+.grupp:first-child{margin-top:4px}
+.lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.receptkort{display:flex;gap:14px;align-items:flex-start;text-align:left;border:1px solid var(--kant);background:var(--yta);border-radius:var(--radie);padding:18px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.receptkort:hover{transform:translateY(-2px);box-shadow:0 14px 28px -20px rgba(40,35,20,.35)}
+.ikon{flex:none;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:28px;background:var(--smor-ljus)}
+.receptkort .ikon.gron{background:var(--gron-ljus)}.receptkort .ikon.rod{background:var(--lingon-ljus)}
+.receptkort .t{display:flex;flex-direction:column;gap:5px}
+.receptkort b{font-family:var(--rubrik);font-size:20px;font-weight:700}
+.receptkort .k{color:var(--dampad);font-size:15px;line-height:1.45}
 .etiketter{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.etikett{font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--smor-ljus);color:#7A5A00}
-.etikett.gron{background:#E2F1E8;color:var(--tall)}
+.etikett{font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--mjuk);color:var(--dampad)}
+.etikett.gron{background:var(--gron-ljus);color:var(--gron-mork)}
 .etikett.rod{background:var(--lingon-ljus);color:var(--lingon)}
-.grupp{margin:26px 0 10px;font-size:15px;font-family:Silkscreen,monospace;color:var(--dampad);letter-spacing:.04em}
 
-.recept{display:flex;flex-direction:column;gap:18px}
-.tillbaka{align-self:flex-start;border:1px solid var(--linje);background:var(--kort);border-radius:999px;padding:8px 16px;font-weight:600;cursor:pointer}
-.recept h2{font-size:clamp(28px,5vw,38px)}
-.ingress{color:var(--dampad);margin:6px 0 0}
-.fakta{display:flex;flex-wrap:wrap;gap:8px}
-.fakta div{background:var(--kort);border:1px solid var(--linje);border-radius:12px;padding:8px 12px;font-size:14.5px}
+.borja{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;background:var(--yta);border:1px solid var(--kant);border-radius:24px;padding:22px 24px;margin-bottom:8px;cursor:pointer;text-align:left;width:100%;transition:transform .15s,box-shadow .15s}
+.borja:hover{transform:translateY(-2px);box-shadow:0 14px 28px -20px rgba(40,35,20,.35)}
+.borja h2{font-size:clamp(24px,3.4vw,32px);margin:6px 0 6px}
+.borja p{margin:0;color:var(--dampad)}
+.borja .ga{display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:var(--gron);color:#fff;border-radius:14px;padding:11px 18px;font-weight:600}
+
+/* Receptet */
+.knapp-tillbaka{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--kant);background:var(--yta);border-radius:12px;padding:9px 14px;font-weight:600;cursor:pointer;font-size:15px;min-height:44px}
+.knapp-tillbaka:hover{border-color:var(--gron)}
+.recept-topp{display:flex;gap:18px;align-items:center;margin:18px 0 4px}
+.recept-topp .ikon{width:72px;height:72px;font-size:36px;border-radius:20px}
+.recept h2.namn{font-size:clamp(30px,5vw,44px)}
+.ingress{color:var(--dampad);margin:12px 0 0;max-width:64ch;font-size:18px}
+.fakta{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.fakta div{background:var(--yta);border:1px solid var(--kant);border-radius:14px;padding:9px 14px;font-size:15px;font-weight:600}
 .fakta b{display:block;font-size:12px;color:var(--dampad);font-weight:600}
-.del{background:var(--kort);border:1px solid var(--linje);border-radius:var(--radie);padding:18px}
-.del h3{font-size:21px;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.portioner{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-family:Inter,sans-serif;font-size:15px;font-weight:600}
-.portioner button{width:34px;height:34px;border-radius:50%;border:1px solid var(--linje);background:var(--gradde);cursor:pointer;font-size:18px;line-height:1}
-ul.bock{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:2px}
-ul.bock li label{display:flex;gap:12px;align-items:flex-start;padding:8px 6px;border-radius:10px;cursor:pointer}
-ul.bock li label:hover{background:var(--gradde)}
-ul.bock input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--lingon)}
+.laga{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:20px;align-items:start;margin-top:22px}
+.del{background:var(--yta);border:1px solid var(--kant);border-radius:var(--radie);padding:20px}
+.laga > div{display:flex;flex-direction:column;gap:20px}
+.sticky{position:sticky;top:80px}
+.del h3{font-size:22px;margin-bottom:12px}
+.portioner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--mjuk);border-radius:14px;padding:8px 10px;margin-bottom:12px;font-weight:600}
+.portioner button{width:44px;height:44px;border-radius:12px;border:1px solid var(--kant);background:var(--yta);cursor:pointer;font-size:22px;line-height:1;font-weight:600}
+.portioner button:hover{border-color:var(--gron)}
+ul.bock{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+ul.bock li label{display:flex;gap:12px;align-items:flex-start;padding:9px 6px;border-radius:12px;cursor:pointer;border-bottom:1px solid var(--mjuk)}
+ul.bock li:last-child label{border-bottom:0}
+ul.bock li label:hover{background:var(--bg)}
+ul.bock input{width:22px;height:22px;flex:none;margin:2px 0 0;accent-color:var(--gron)}
 ul.bock input:checked + span{color:var(--dampad);text-decoration:line-through}
-.mangd{font-weight:700;min-width:84px;display:inline-block}
-ol.steg{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:6px}
-ol.steg li label{display:flex;gap:12px;align-items:flex-start;padding:10px 8px;border-radius:12px;cursor:pointer}
-ol.steg li label::before{counter-increment:s;content:counter(s);flex:none;width:30px;height:30px;border-radius:50%;background:var(--smor);display:grid;place-items:center;font-weight:700;font-size:15px}
+.mangd{font-weight:700;display:block}
+.redskap{display:flex;flex-wrap:wrap;gap:8px}
+.redskap span{background:var(--bg);border:1px solid var(--kant);border-radius:999px;padding:6px 12px;font-size:15px}
+.framsteg{display:flex;align-items:center;gap:12px;margin:-2px 0 12px;font-size:14.5px;color:var(--dampad);font-weight:600}
+.framsteg .bar{flex:1;height:8px;border-radius:99px;background:var(--mjuk);overflow:hidden}
+.framsteg .bar i{display:block;height:100%;background:var(--gron);border-radius:99px;transition:width .3s}
+ol.steg{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px}
+ol.steg li label{display:flex;gap:14px;align-items:flex-start;padding:12px;border-radius:14px;cursor:pointer;border:1px solid var(--mjuk);transition:background .15s}
+ol.steg li label:hover{background:var(--bg)}
+ol.steg li label::before{counter-increment:s;content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--smor-ljus);color:var(--smor-text);display:grid;place-items:center;font-weight:700;font-size:16px}
 ol.steg input{position:absolute;opacity:0;pointer-events:none}
 ol.steg input:checked + span{color:var(--dampad);text-decoration:line-through}
-ol.steg li label:has(input:checked)::before{background:var(--tall);color:#fff;content:"✓"}
-.tips{background:var(--smor-ljus);border-radius:var(--radie);padding:14px 18px}
-.tips b{display:block;margin-bottom:4px}
-.redskap{display:flex;flex-wrap:wrap;gap:8px}
-.redskap span{background:var(--gradde);border:1px solid var(--linje);border-radius:999px;padding:6px 12px;font-size:15px}
+ol.steg li label:has(input:checked){background:var(--gron-ljus);border-color:var(--gron-ljus)}
+ol.steg li label:has(input:checked)::before{background:var(--gron);color:#fff;content:"✓"}
+ol.steg li label:has(input:focus-visible){outline:3px solid #F2B705;outline-offset:2px}
+.tips{background:var(--smor-ljus);border-radius:var(--radie);padding:16px 20px;color:#3E3220}
+.tips b{display:block;margin-bottom:4px;color:var(--smor-text)}
+.vaken{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:15px;color:var(--dampad)}
+.vaken input{width:20px;height:20px;accent-color:var(--gron)}
 
-.text h2{font-size:30px;margin:0 0 6px}
-.text h3{font-size:21px;margin:26px 0 6px}
+/* Text */
+.text{max-width:720px}
+.text h2{font-size:34px;margin:0 0 8px}
+.text h3{font-size:22px;margin:30px 0 6px}
 .text p{margin:8px 0}
 .tidslinje{list-style:none;padding:0;margin:14px 0;display:flex;flex-direction:column;gap:12px;border-left:3px solid var(--smor);padding-left:16px}
-.tidslinje b{font-family:"Space Grotesk",sans-serif}
+.tidslinje b{font-family:var(--rubrik)}
 .kallor{font-size:14px;color:var(--dampad)}
-table.rr{width:100%;border-collapse:collapse;background:var(--kort);border-radius:var(--radie);overflow:hidden;border:1px solid var(--linje)}
-table.rr th,table.rr td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--linje);vertical-align:top;font-size:15.5px}
-table.rr th{background:var(--gradde);font-size:13px;color:var(--dampad)}
+table.rr{width:100%;border-collapse:collapse;background:var(--yta);border-radius:var(--radie);overflow:hidden;border:1px solid var(--kant)}
+table.rr th,table.rr td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--kant);vertical-align:top;font-size:15.5px}
+table.rr th{background:var(--mjuk);font-size:13px;color:var(--dampad)}
 table.rr td:not(:first-child){text-align:center}
-.ja{color:var(--tall);font-weight:700}
-footer{color:var(--dampad);font-size:14px;text-align:center;padding:30px 18px}
-@media print{nav.flikar,header.topp,.tillbaka,.portioner button{display:none}body{background:#fff}.del{border:0;padding:0}}
+.ja{color:var(--gron);font-weight:700}
+.redskapskort{display:flex;flex-direction:column;gap:12px}
+.redskapskort .del h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.redskapskort .del h3 .ikon{width:44px;height:44px;font-size:22px;border-radius:12px}
+.redskapskort .oppna{margin-left:auto;border:1px solid var(--kant);background:var(--yta);border-radius:12px;padding:8px 14px;font-size:14.5px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif}
+footer{color:var(--dampad);font-size:14.5px;text-align:center;padding:30px 18px 40px;border-top:1px solid var(--kant);background:var(--mjuk)}
+@media(max-width:780px){
+  .valkommen .wrap{grid-template-columns:1fr;padding-top:24px}
+  .valkommen img{max-width:420px;margin:0 auto}
+  .laga{grid-template-columns:1fr}
+  .sticky{position:static}
+  .borja{grid-template-columns:1fr}
+  .marke span{display:none}
+}
+@media print{nav.flikar,.sidhuvud,.valkommen,.knapp-tillbaka,.portioner button,.vaken,footer{display:none}body{background:#fff}.del{border:0;padding:0}.laga{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header class="topp">
+<header class="sidhuvud">
   <div class="wrap">
-    <a class="hem" href="/projekt/paltboken/">← Palt &amp; pixel</a>
-    <p class="kicker">Paltboken</p>
-    <h1>Palt, från grunden</h1>
-    <p>Recept på pitepalt, flatpalt och stekt palt, tillbehören, redskapen du behöver och paltens historia.</p>
+    <a class="hem" href="/projekt/paltboken/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Palt &amp; pixel</a>
+    <span class="marke"><img src="/assets/logo.svg" alt="" width="30" height="24"><span>Paltboken</span></span>
   </div>
-  <svg class="pixelpalt" viewBox="0 0 30 22" aria-hidden="true" shape-rendering="crispEdges">
-    <rect x="3" y="18" width="24" height="2" fill="#2F3A5C"/>
-    <path fill="#EADFC6" d="M8 8h14v1h2v2h1v3h1v3H4v-3h1v-3h1V9h2z"/>
-    <path fill="#CDBB98" d="M18 14h7v3H14v-1h4z"/>
-    <rect x="13" y="9" width="5" height="3" fill="#F6C64E"/>
-    <rect x="12" y="5" width="2" height="2" fill="#C8203A"/><rect x="15" y="4" width="2" height="2" fill="#C8203A"/><rect x="16" y="6" width="2" height="2" fill="#C8203A"/>
-  </svg>
 </header>
+<section class="valkommen">
+  <div class="wrap">
+    <div>
+      <p class="liten">Paltboken</p>
+      <h1>Palt, <span>från grunden.</span></h1>
+      <p class="in">Recept på pitepalt, flatpalt och stekt palt, tillbehören, redskapen du behöver – och paltens historia.</p>
+    </div>
+    <img src="/assets/img/palt-mjolk.webp" alt="En pitepalt med smör och lingon och ett glas mjölk" width="1362" height="557">
+  </div>
+</section>
 <nav class="flikar" aria-label="Paltboken">
-  <div class="wrap" role="tablist">
+  <div class="wrap"><div class="segment" role="tablist">
     <button role="tab" data-flik="recept" aria-selected="true">Recept</button>
     <button role="tab" data-flik="redskap" aria-selected="false">Redskap</button>
     <button role="tab" data-flik="historia" aria-selected="false">Paltens historia</button>
-  </div>
+  </div></div>
 </nav>
 <main class="wrap" id="sida" tabindex="-1"></main>
 <footer>Paltboken på <a href="/">paltpixel.se</a>. Smaklig måltid – och glöm inte mjölken.</footer>
@@ -335,11 +389,14 @@ function format(tal) {
   return (hel ? String(hel) : "") + (br ? (hel ? " " : "") + br : (hel ? "" : "0"));
 }
 
+function ikonKlass(r) { return r.grupp === "Tillbehör" ? "rod" : (r.etiketter.some(([, k]) => k === "gron") ? "gron" : ""); }
 function visaLista() {
   const grupper = [...new Set(RECEPT.map((r) => r.grupp))];
-  sida.innerHTML = grupper.map((g) => `<h2 class="grupp">${e(g)}</h2><div class="lista">${RECEPT.filter((r) => r.grupp === g).map((r) => `
-    <button class="receptkort" data-recept="${r.id}"><span class="emoji" aria-hidden="true">${r.emoji}</span><b>${e(r.namn)}</b><span>${e(r.kort)}</span>
-      <span class="etiketter">${r.etiketter.map(([t, k]) => `<span class="etikett ${k}">${e(t)}</span>`).join("")}</span></button>`).join("")}</div>`).join("");
+  const forst = RECEPT[0];
+  sida.innerHTML = `<button class="borja" data-recept="${forst.id}"><div><span class="liten">Börja här</span><h2>${e(forst.namn)}</h2><p>${e(forst.kort)}</p><span class="ga">Öppna receptet →</span></div><span class="ikon" style="width:96px;height:96px;font-size:48px;border-radius:26px" aria-hidden="true">${forst.emoji}</span></button>` +
+    grupper.map((g) => `<h2 class="grupp">${e(g)}</h2><div class="lista">${RECEPT.filter((r) => r.grupp === g && r !== forst).map((r) => `
+    <button class="receptkort" data-recept="${r.id}"><span class="ikon ${ikonKlass(r)}" aria-hidden="true">${r.emoji}</span><span class="t"><b>${e(r.namn)}</b><span class="k">${e(r.kort)}</span>
+      <span class="etiketter">${r.etiketter.map(([t, k]) => `<span class="etikett ${k}">${e(t)}</span>`).join("")}</span></span></button>`).join("")}</div>`).join("");
 }
 
 function visaRecept(id) {
@@ -347,18 +404,27 @@ function visaRecept(id) {
   const n = portionerFor[id] || r.portioner, k = n / r.portioner;
   const steg1 = r.enhet === "liter" ? 0.5 : 1;
   sida.innerHTML = `<article class="recept">
-    <button class="tillbaka" data-tillbaka>← Alla recept</button>
-    <div><h2>${r.emoji} ${e(r.namn)}</h2><p class="ingress">${e(r.ingress)}</p></div>
+    <button class="knapp-tillbaka" data-tillbaka>← Alla recept</button>
+    <div class="recept-topp"><span class="ikon ${ikonKlass(r)}" aria-hidden="true">${r.emoji}</span><h2 class="namn">${e(r.namn)}</h2></div>
+    <p class="ingress">${e(r.ingress)}</p>
     <div class="fakta">${r.tid ? `<div><b>Tid</b>${e(r.tid)}</div>` : ""}${r.ger && n === r.portioner ? `<div><b>Ger</b>${e(r.ger)}</div>` : ""}<div><b>Redskap</b>${r.redskap.length} st</div></div>
-    <section class="del"><h3>Ingredienser
-      <span class="portioner"><button data-port="-${steg1}" aria-label="Färre">−</button><span>${format(n)} ${e(r.enhet)}</span><button data-port="${steg1}" aria-label="Fler">+</button></span></h3>
-      <ul class="bock">${r.ingredienser.map(([m, enh, namn], i) => `<li><label><input type="checkbox" data-bock="i${i}"><span><span class="mangd">${format(m * k)} ${e(enh)}</span> ${e(namn)}</span></label></li>`).join("")}</ul>
-    </section>
-    <section class="del"><h3>Redskap</h3><div class="redskap">${r.redskap.map((x) => `<span>${e(x)}</span>`).join("")}</div></section>
-    <section class="del"><h3>Gör så här</h3>
-      <ol class="steg">${r.steg.map((s, i) => `<li><label><input type="checkbox" data-bock="s${i}"><span>${e(s)}</span></label></li>`).join("")}</ol>
-    </section>
-    ${r.tips.map(([t, s]) => `<div class="tips"><b>${e(t)}</b>${e(s)}</div>`).join("")}
+    <div class="laga">
+      <div class="sticky">
+        <section class="del"><h3>Ingredienser</h3>
+          <div class="portioner"><button data-port="-${steg1}" aria-label="Färre ${e(r.enhet)}">−</button><span aria-live="polite">${format(n)} ${e(r.enhet)}</span><button data-port="${steg1}" aria-label="Fler ${e(r.enhet)}">+</button></div>
+          <ul class="bock">${r.ingredienser.map(([m, enh, namn], i) => `<li><label><input type="checkbox" data-bock="i${i}"><span><span class="mangd">${format(m * k)} ${e(enh)}</span>${e(namn)}</span></label></li>`).join("")}</ul>
+        </section>
+        <section class="del"><h3>Redskap</h3><div class="redskap">${r.redskap.map((x) => `<span>${e(x)}</span>`).join("")}</div></section>
+      </div>
+      <div>
+        <section class="del"><h3>Gör så här</h3>
+          <div class="framsteg"><span class="bar"><i style="width:0%"></i></span><span class="antal">0 av ${r.steg.length} klara</span></div>
+          <ol class="steg">${r.steg.map((s, i) => `<li><label><input type="checkbox" data-bock="s${i}"><span>${e(s)}</span></label></li>`).join("")}</ol>
+          ${"wakeLock" in navigator ? `<label class="vaken"><input type="checkbox" data-vaken> Håll skärmen tänd medan jag lagar</label>` : ""}
+        </section>
+        ${r.tips.map(([t, s]) => `<div class="tips"><b>${e(t)}</b>${e(s)}</div>`).join("")}
+      </div>
+    </div>
   </article>`;
   // Bockar sparas medan man lagar
   const nyckel = "paltboken_" + id;
@@ -366,19 +432,34 @@ function visaRecept(id) {
   try { sparat = JSON.parse(sessionStorage.getItem(nyckel) || "{}"); } catch (_) {}
   sida.querySelectorAll("[data-bock]").forEach((b) => {
     b.checked = !!sparat[b.dataset.bock];
-    b.addEventListener("change", () => { sparat[b.dataset.bock] = b.checked; try { sessionStorage.setItem(nyckel, JSON.stringify(sparat)); } catch (_) {} });
+    b.addEventListener("change", () => { sparat[b.dataset.bock] = b.checked; try { sessionStorage.setItem(nyckel, JSON.stringify(sparat)); } catch (_) {} framsteg(); });
   });
+  function framsteg() {
+    const steg = [...sida.querySelectorAll('[data-bock^="s"]')], klara = steg.filter((x) => x.checked).length;
+    const bar = sida.querySelector(".framsteg i"), txt = sida.querySelector(".framsteg .antal");
+    if (bar) bar.style.width = (steg.length ? (klara / steg.length) * 100 : 0) + "%";
+    if (txt) txt.textContent = klara === steg.length && klara ? "Klart – smaklig måltid!" : `${klara} av ${steg.length} klara`;
+  }
+  framsteg();
+  const vaken = sida.querySelector("[data-vaken]");
+  if (vaken) {
+    vaken.checked = !!skarmLas;
+    vaken.addEventListener("change", async () => {
+      try { if (vaken.checked) { skarmLas = await navigator.wakeLock.request("screen"); } else if (skarmLas) { await skarmLas.release(); skarmLas = null; } }
+      catch (_) { vaken.checked = false; }
+    });
+  }
 }
+let skarmLas = null;
 
 function visaRedskap() {
-  const alla = {};
-  for (const r of RECEPT) for (const x of r.redskap) (alla[x] = alla[x] || []).push(r);
-  sida.innerHTML = `<div class="text"><h2>Redskap</h2><p class="ingress">Vad du behöver till respektive recept. Tryck på ett recept för att öppna det.</p></div>
-    ${RECEPT.map((r) => `<section class="del" style="margin-top:12px"><h3>${r.emoji} ${e(r.namn)} <button class="tillbaka" style="margin-left:auto;padding:5px 12px;font-size:14px" data-recept="${r.id}">Öppna</button></h3>
-      <div class="redskap">${r.redskap.map((x) => `<span>${e(x)}</span>`).join("")}</div></section>`).join("")}`;
+  sida.innerHTML = `<div class="text"><h2>Redskap</h2><p class="ingress">Det här behöver du till respektive recept. Tryck på Öppna för att gå till receptet.</p></div>
+    <div class="redskapskort" style="margin-top:18px">${RECEPT.map((r) => `<section class="del"><h3><span class="ikon ${ikonKlass(r)}" aria-hidden="true">${r.emoji}</span>${e(r.namn)} <button class="oppna" data-recept="${r.id}">Öppna</button></h3>
+      <div class="redskap">${r.redskap.map((x) => `<span>${e(x)}</span>`).join("")}</div></section>`).join("")}</div>`;
 }
 
 function visa(flik, recept) {
+  document.querySelector(".valkommen").hidden = !!recept;
   document.querySelectorAll("[data-flik]").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.flik === flik)));
   if (flik === "historia") sida.innerHTML = `<div class="text">${HISTORIA}</div>`;
   else if (flik === "redskap") visaRedskap();

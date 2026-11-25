@@ -192,7 +192,7 @@ function projektsida(p) {
 function startsida() {
   const utvald = projekt.find((p) => p.utvald);
   const html = huvud("Palt & pixel – små spel och verktyg för skolan", "Små spel och verktyg för lärare och klasser, och lite för dig själv. Gratis, utan annonser och utan installation – allt körs direkt i webbläsaren.", utvald?.poster || "/assets/video/vaggen-poster.jpg",
-    `\n  <link rel="preload" as="image" href="/assets/img/palt-hero.webp">`)
+    `\n  <link rel="preload" as="image" href="/assets/img/palt-mjolk.webp">`)
     + sidhuvud("start") + `
   <main id="innehall">
     <section class="valkommen">
@@ -208,7 +208,7 @@ function startsida() {
         </div>
         <div class="valkommen-bild" aria-hidden="true">
           <span class="cirkel"></span>
-          <img src="/assets/img/palt-hero.webp" alt="" width="1191" height="532">
+          <img src="/assets/img/palt-mjolk.webp" alt="" width="1362" height="557">
         </div>
       </div>
     </section>
