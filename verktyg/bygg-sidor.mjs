@@ -9,7 +9,7 @@ const projekt = alla.filter((p) => !p.dold);
 const V = "6";
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const TYP = { spel: "Spel", app: "App" };
-const PLATTFORM = { frontlinjen: "Webbläsare – bäst på dator eller surfplatta" };
+const PLATTFORM = { frontlinjen: "Webbläsare – bäst på dator eller surfplatta", julkalender: "Dator, Chromebook och storskärm (inte mobil)" };
 
 const IKON = {
   tillbaka: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
