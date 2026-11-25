@@ -3,7 +3,7 @@
 const A={};window.ART=A;
 let seed=7;const R=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};const rs=s=>{seed=s};A.rs=rs;A.R=R;
 const pts=a=>a.map(p=>p[0].toFixed(1)+","+p[1].toFixed(1)).join(" ");
-const poly=(a,f,x="")=>`<polygon points="${pts(a)}" fill="${f}" ${x}/>`;
+let COL=null;const poly=(a,f,x="")=>{if(COL)COL.push(...a);return`<polygon points="${pts(a)}" fill="${f}" ${x}/>`};
 function shade(hex,f){const n=parseInt(hex.slice(1),16);let r=n>>16,g=n>>8&255,b=n&255;const m=f<1?v=>v*f:v=>v+(255-v)*(f-1);return"#"+[r,g,b].map(v=>Math.max(0,Math.min(255,Math.round(m(v)))).toString(16).padStart(2,"0")).join("")}
 
 /* =================== ISOMETRISKT =================== */
@@ -25,6 +25,23 @@ function isoBigTree(x,y,s){let o=isoTree(x,y,s);const b=P(x,y,0),k=SC/36*s;rs(41
   o+=`<path transform="translate(${b[0]} ${b[1]-82*k})" d="${starPath(7*k)}" fill="#ffd27a" class="flk"/>`;return o}
 const HC=[["#e2564a","#a8332a"],["#f0bd55","#c48a24"],["#6d93c9","#47689c"],["#4f9c79","#2f6e53"],["#e07a4f","#a9502c"],["#9a6bb0","#6d4683"]];
 const WINF={today:"#ffe08a",open:"#ffc85c",missed:"#8fa8e0",locked:"#24335e",none:"#24335e"};
+function winPolys(x,y,w,d,h){const W=[],ww=1.05,wh=1.0;
+  [x+w*.1,x+w*.9-ww].forEach(a=>W.push([P(a,y+d,h*.5),P(a+ww,y+d,h*.5),P(a+ww,y+d,h*.5+wh),P(a,y+d,h*.5+wh)]));
+  [y+d*.12,y+d*.88-ww].forEach(a=>W.push([P(x+w,a,h*.3),P(x+w,a+ww,h*.3),P(x+w,a+ww,h*.3+wh),P(x+w,a,h*.3+wh)]));
+  return W}
+/* skärmsilhuetter för att se vilka fönster som skyms */
+function hull(p){p=p.map(q=>[+q[0],+q[1]]).sort((a,b)=>a[0]-b[0]||a[1]-b[1]);if(p.length<3)return p;
+  const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]);const lo=[],up=[];
+  for(const q of p){while(lo.length>1&&cr(lo[lo.length-2],lo[lo.length-1],q)<=0)lo.pop();lo.push(q)}
+  for(let i=p.length-1;i>=0;i--){const q=p[i];while(up.length>1&&cr(up[up.length-2],up[up.length-1],q)<=0)up.pop();up.push(q)}
+  return lo.slice(0,-1).concat(up.slice(0,-1))}
+function overlap(A,B){for(const P0 of [A,B])for(let i=0;i<P0.length;i++){const a=P0[i],b=P0[(i+1)%P0.length],nx=b[1]-a[1],ny=a[0]-b[0];
+  let a0=1e9,a1=-1e9,b0=1e9,b1=-1e9;for(const q of A){const v=q[0]*nx+q[1]*ny;a0=Math.min(a0,v);a1=Math.max(a1,v)}for(const q of B){const v=q[0]*nx+q[1]*ny;b0=Math.min(b0,v);b1=Math.max(b1,v)}
+  if(a1<b0||b1<a0)return false}return true}
+function treePts(x,y,s){const b=P(x,y,0),k=SC/36*s,o=[[b[0]-3*k,b[1]+2*k],[b[0]+3*k,b[1]+2*k]];
+  for(let i=0;i<3;i++){const w=(30-i*7)*k,h=(30-i*3)*k,y0=b[1]-12*k-i*20*k;o.push([b[0],y0-h],[b[0]-w,y0],[b[0]+w,y0])}return hull(o)}
+function lampPts(x,y){const b=P(x,y,0),k=SC/36;return hull([[b[0]-3*k,b[1]],[b[0]+3*k,b[1]],[b[0]-7*k,b[1]-57*k],[b[0]+7*k,b[1]-57*k]])}
+function grow(p,f){const c=p.reduce((a,q)=>[a[0]+q[0]/p.length,a[1]+q[1]/p.length],[0,0]);return p.map(q=>[c[0]+(q[0]-c[0])*f,c[1]+(q[1]-c[1])*f])}
 function isoHouse(x,y,w,d,h,ci,win){
   const c=HC[ci%HC.length],r=h*.75,ov=.25;let s="";
   s+=`<ellipse cx="${P(x+w/2,y+d/2,0)[0]}" cy="${P(x+w/2,y+d/2,0)[1]+6}" rx="${(w+d)*SC*.55}" ry="${(w+d)*SC*.22}" fill="rgba(40,60,110,.16)"/>`;
@@ -35,11 +52,9 @@ function isoHouse(x,y,w,d,h,ci,win){
   const ch=P(cxx+.22,cyy+.22,h+r*1.15);for(let k=0;k<3;k++)s+=`<circle class="smk" cx="${ch[0]}" cy="${ch[1]}" r="${9*SC/36}" fill="rgba(235,240,250,.6)" style="animation-delay:${((x*1.7+y*.9+k*2.7)%8).toFixed(1)}s;transform-box:fill-box"/>`;
   s+=poly([P(x-ov,y+d+ov,h-.12),P(x+w+ov,y+d+ov,h-.12),P(x+w+ov,y+d/2,h+r),P(x-ov,y+d/2,h+r)],"#f5f8fd")+poly([P(x-ov,y+d+ov,h-.12),P(x+w+ov,y+d+ov,h-.12),P(x+w+ov,y+d+ov,h-.32),P(x-ov,y+d+ov,h-.32)],"#c9d5ea");
   s+=poly([P(x+w+ov,y+d+ov,h-.12),P(x+w+ov,y+d/2,h+r),P(x+w+ov,y+d/2,h+r-.2),P(x+w+ov,y+d+ov,h-.32)],"#aebfdc");
-  const W=[],ww=1.05,wh=1.0;
-  [x+w*.1,x+w*.9-ww].forEach(a=>W.push([P(a,y+d,h*.5),P(a+ww,y+d,h*.5),P(a+ww,y+d,h*.5+wh),P(a,y+d,h*.5+wh)]));
-  [y+d*.12,y+d*.88-ww].forEach(a=>W.push([P(x+w,a,h*.3),P(x+w,a+ww,h*.3),P(x+w,a+ww,h*.3+wh),P(x+w,a,h*.3+wh)]));
+  const W=winPolys(x,y,w,d,h);
   const centers=[];
-  W.forEach((p,k)=>{const st=(win&&win[k])||"none";const lit=st==="open"||st==="today"||st==="missed";
+  W.forEach((p,k)=>{const st=(win&&win[k])||"none";if(st==="hide"){centers.push(null);return}const lit=st==="open"||st==="today"||st==="missed";
     if(lit)s+=`<polygon points="${pts(p)}" fill="${st==="missed"?"#9fb6ff":"#ffd27a"}" filter="url(#glowA)" opacity="${st==="today"?.95:.5}" class="flk"/>`;
     s+=poly(p,WINF[st],`stroke="#fff" stroke-width="${Math.max(2,3*SC/36)}" stroke-linejoin="round"`);
     if(st==="open")s+=poly([p[0],[p[0][0]+(p[1][0]-p[0][0])*.22,p[0][1]+(p[1][1]-p[0][1])*.22],[p[3][0]+(p[2][0]-p[3][0])*.22,p[3][1]+(p[2][1]-p[3][1])*.22],p[3]],"#c23a2b",'opacity=".85"')+poly([[p[1][0]-(p[1][0]-p[0][0])*.22,p[1][1]-(p[1][1]-p[0][1])*.22],p[1],p[2],[p[2][0]-(p[2][0]-p[3][0])*.22,p[2][1]-(p[2][1]-p[3][1])*.22]],"#c23a2b",'opacity=".85"');
@@ -72,27 +87,46 @@ A.onbSVG=function(){
 
 /* Byn – anpassas efter antal luckor. L=[{state}] i ordning */
 A.bynSVG=function(L,preview){
-  const H=Math.max(1,Math.ceil(L.length/4)),slots=H+1;
-  const [r,c]=slots<=4?[2,2]:slots<=6?[2,3]:slots<=9?[3,3]:[3,4];
-  const cell=4.9,W=c*cell,D=r*cell;
-  SC=Math.min(44,1440/((W+D)*C30),820/((W+D)*.5+7.4));
-  OX=800+(D-W)*C30*SC/2;
-  const top=-4.8*SC,bot=(W+D)*.5*SC+2.6*SC;OY=470-(top+bot)/2;
+  const N=Math.max(1,L.length),cell=6.4,GR=[[2,2],[2,3],[3,3],[3,4],[4,4],[4,5],[5,5],[5,6],[6,6]];
+  let lay=null;
+  for(const [r,c] of GR){
+    const W=c*cell,D=r*cell;
+    SC=Math.min(44,1440/((W+D)*C30),820/((W+D)*.5+7.4));OX=800+(D-W)*C30*SC/2;
+    const top=-4.8*SC,bot=(W+D)*.5*SC+2.6*SC;OY=470-(top+bot)/2;
+    const ci=Math.floor(r/2),cj=Math.floor(c/2),slots=[];
+    for(let i=0;i<r;i++)for(let j=0;j<c;j++)if(!(i===ci&&j===cj))slots.push([i,j]);
+    const front=slots.slice().sort((p,q)=>(q[0]+q[1])-(p[0]+p[1])||p[1]-q[1]);
+    for(let nh=Math.min(slots.length,Math.ceil(N/4));nh<=slots.length;nh++){
+      const isH=new Set(front.slice(0,nh).map(s=>s[0]+","+s[1]));
+      const items=[];let hi=0;
+      slots.forEach(([i,j])=>{const x0=j*cell+(cell-3.5)/2,y0=i*cell+(cell-3.2)/2;
+        if(isH.has(i+","+j)){const h=2.5+((hi*7)%3)*.22,k=hi++;COL=[];isoHouse(x0,y0,3.5,3.2,h,k,["hide","hide","hide","hide"]);const sh=hull(COL);COL=null;
+          items.push({t:"h",i,j,x0,y0,h,k,key:x0+y0+3.3,sh,wins:winPolys(x0,y0,3.5,3.2,h)})}
+        else[[1.3,1.5],[3.6,1.2],[2.4,3.6],[.6,3.4]].forEach(([p,q],m)=>{const s=.9+m*.12;items.push({t:"t",x:x0+p-.4,y:y0+q-.4,s,key:x0+p+y0+q,sh:treePts(x0+p-.4,y0+q-.4,s)})})});
+      const mx=cj*cell+cell/2,my=ci*cell+cell/2;
+      items.push({t:"big",x:mx,y:my,key:mx+my,sh:hull(treePts(mx,my,2.2).concat([[P(mx,my,0)[0],P(mx,my,0)[1]-89*SC/36*2.2]]))});
+      const pc=P(mx+1.6,my+1.6,0);items.push({t:"pond",x:mx+1.6,y:my+1.6,key:mx+my+1.6,sh:hull([0,1,2,3,4,5,6,7].map(k=>[pc[0]+Math.cos(k*.785)*1.2*SC,pc[1]+Math.sin(k*.785)*.6*SC]))});
+      for(let j=1;j<c;j++)for(let i=0;i<r;i++){const lx=j*cell,ly=i*cell+cell*.5;items.push({t:"lamp",x:lx,y:ly,key:lx+ly,sh:lampPts(lx,ly)})}
+      let V=0;items.filter(o=>o.t==="h").forEach(h=>{h.vis=h.wins.map(wp=>{const g=grow(wp,1.25);return!items.some(o=>o!==h&&o.key>h.key&&overlap(g,o.sh))});V+=h.vis.filter(Boolean).length});
+      if(V>=N){lay={r,c,W,D,items,mx,my,sc:SC,ox:OX,oy:OY};break}
+    }
+    if(lay)break;
+  }
+  SC=lay.sc;OX=lay.ox;OY=lay.oy;const {r,c,W,D,items}=lay;
   let svg=defsA()+skyA()+`<ellipse cx="${P(W/2,D/2,0)[0]}" cy="${P(W,D,-2.6)[1]+30}" rx="${(W+D)*SC*.5}" ry="40" fill="rgba(0,0,20,.35)" filter="url(#glowA)"/>`;
   let g=isoIsland(W,D,2.4);
   for(let j=1;j<c;j++)g+=poly([P(j*cell-.55,0,0),P(j*cell+.55,0,0),P(j*cell+.55,D,0),P(j*cell-.55,D,0)],"#d5e0f0");
   for(let i=1;i<r;i++)g+=poly([P(0,i*cell-.55,0),P(W,i*cell-.55,0),P(W,i*cell+.55,0),P(0,i*cell+.55,0)],"#d5e0f0");
-  const center=Math.floor(r/2)*c+Math.floor(c/2);
-  const order=[];for(let i=0;i<r;i++)for(let j=0;j<c;j++)if(i*c+j!==center)order.push([i,j]);
-  const o=[],cent=[];let li=0;
-  order.forEach(([i,j],hi)=>{const x0=j*cell+.7,y0=i*cell+.7;
-    if(hi<H){const win=[0,1,2,3].map(k=>L[li+k]?L[li+k].st:"none");const hh=isoHouse(x0,y0,3.5,3.2,2.5+((hi*7)%3)*.22,hi,win);
-      o.push([x0+y0+3.3,hh.s]);hh.centers.forEach((p,k)=>{if(L[li+k])cent.push({l:L[li+k],x:p[0],y:p[1]})});li+=4}
-    else{[[1.2,1.4],[3.2,1.1],[2.2,3.2]].forEach(([a,b],k)=>o.push([x0+a+y0+b,isoTree(x0+a-.4,y0+b-.4,.9+k*.12)]))}});
-  const ci=Math.floor(r/2),cj=Math.floor(c/2),mx=cj*cell+cell/2,my=ci*cell+cell/2;
-  o.push([mx+my,isoBigTree(mx,my,2.2)]);
-  o.push([mx+my+1.6,`<ellipse cx="${P(mx+1.6,my+1.6,0)[0]}" cy="${P(mx+1.6,my+1.6,0)[1]}" rx="${1.2*SC}" ry="${.6*SC}" fill="#bfe0f5" stroke="#fff" stroke-width="3"/>`]);
-  for(let j=1;j<c;j++)for(let i=0;i<r;i++)o.push([j*cell+i*cell+2.7,isoLamp(j*cell,i*cell+2.7)]);
+  const houses=items.filter(o=>o.t==="h").sort((p,q)=>p.i-q.i||p.j-q.j);let li=0;const cent=[];
+  houses.forEach(h=>{h.win=h.vis.map(v=>{if(!v)return"hide";const l=L[li];if(l){li++;return l}return null})});
+  const o=[];
+  items.forEach(it=>{
+    if(it.t==="h"){const hh=isoHouse(it.x0,it.y0,3.5,3.2,it.h,it.k,it.win.map(w=>w==="hide"?"hide":w?w.st:"none"));o.push([it.key,hh.s]);
+      hh.centers.forEach((p,k)=>{const w=it.win[k];if(p&&w&&w!=="hide")cent.push({l:w,x:p[0],y:p[1]})})}
+    else if(it.t==="t")o.push([it.key,isoTree(it.x,it.y,it.s)]);
+    else if(it.t==="big")o.push([it.key,isoBigTree(it.x,it.y,2.2)]);
+    else if(it.t==="pond"){const p=P(it.x,it.y,0);o.push([it.key,`<ellipse cx="${p[0]}" cy="${p[1]}" rx="${1.2*SC}" ry="${.6*SC}" fill="#bfe0f5" stroke="#fff" stroke-width="3"/>`])}
+    else o.push([it.key,isoLamp(it.x,it.y)])});
   o.sort((p,q)=>p[0]-q[0]);o.forEach(x=>g+=x[1]);
   return{svg:svg+g,cent,sc:SC}};
 

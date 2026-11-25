@@ -28,6 +28,20 @@ function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.docume
   const b=document.getElementById("bdrop");if(b){const t=64*k,isF=b.classList.contains("filt");b.style.backgroundImage=isF?`url("data:image/svg+xml,${encodeURIComponent(A.wallTile)}")`:"";b.style.backgroundSize=isF?`${t}px ${t}px`:"";b.style.backgroundPosition=isF?`${(innerWidth-1600*k)/2}px ${(innerHeight-900*k)/2}px`:"";const c=$("bsnow");if(c){c.width=innerWidth;c.height=innerHeight}}}
 function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn"?"byn":"filt";document.body.classList.toggle("th-filt",th!=="byn");fit()}
 addEventListener("resize",fit);fit();
+/* filtfickorna dinglar när muspekaren drar förbi */
+(function(){let lx=null,lt=0;const RM=matchMedia("(prefers-reduced-motion: reduce)");
+  function kick(el,amp){if(!el||RM.matches)return;const cur=el._sw;if(cur&&cur.playState==="running"&&Math.abs(el._amp||0)>Math.abs(amp)*.8)return;
+    el._amp=amp;const k=[1,-.72,.5,-.34,.22,-.13,.06,0];
+    el._sw=el.animate([{transform:"rotate(0deg)"}].concat(k.map(f=>({transform:`rotate(${(amp*f).toFixed(2)}deg)`}))),{duration:2200,easing:"ease-in-out"});
+    el._sw.onfinish=()=>{el._amp=0}}
+  addEventListener("pointermove",e=>{const now=performance.now(),dx=lx==null?0:e.clientX-lx,dt=Math.max(16,now-lt);lx=e.clientX;lt=now;
+    if(e.pointerType==="touch")return;const pk=e.target.closest&&e.target.closest("#world .pk");if(!pk)return;
+    const v=dx/dt;if(Math.abs(v)<.05&&pk._amp)return;
+    const dir=v===0?(Math.random()<.5?-1:1):-Math.sign(v),amp=dir*Math.min(24,10+Math.abs(v)*14);
+    kick(pk,amp);kick(pk.previousElementSibling&&pk.previousElementSibling.classList.contains("pk")?pk.previousElementSibling:null,amp*.35);
+    kick(pk.nextElementSibling&&pk.nextElementSibling.classList.contains("pk")?pk.nextElementSibling:null,amp*.35)},{passive:true});
+})();
+
 
 /* ===================== datum ===================== */
 function nowISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
@@ -145,7 +159,7 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
   setBackdrop(S.theme);
   if(S.theme==="byn"){
     const r=A.bynSVG(L.map(l=>({...l,st:state(l,D)})));
-    const bsz=Math.round(Math.max(28,Math.min(40,r.sc*1.05)));
+    const bsz=Math.round(Math.max(22,Math.min(38,r.sc*.82)));
     w.innerHTML=`<svg class="bg" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">${r.svg}</svg><div class="hs">${r.cent.map(c=>{const st=c.l.st;return`<button class="bd ${st}" data-id="${c.l.id}" data-x="${c.x.toFixed(1)}" data-y="${c.y.toFixed(1)}" style="left:${c.x.toFixed(1)}px;top:${c.y.toFixed(1)}px;--b:${bsz}px" aria-label="${esc(c.l.name)}, ${dLabel(c.l.day)}"><span class="no">${dNum(c.l.day)}</span><span class="nm">${esc(c.l.name)}</span></button>`}).join("")}</div>`;
     ui.innerHTML=topUI(L,D)+`<button class="moonbtn" id="chBtn">${ICO.book("#1e2f5c")}<b>Dagens kapitel</b><span>${esc(chapLabel(D))}</span></button>`;
     snowOn(true);
