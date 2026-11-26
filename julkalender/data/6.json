@@ -12,7 +12,7 @@
     "– Vi behöver en kassör, sa Mattias. Någon som håller koll på pengarna och kassaskrinet. Det är ett stort ansvar.",
     "Jonnas hand åkte upp innan hon ens hade bestämt sig. Mattias log. – Jonna. Bra.",
     "Hon kände sig stolt resten av lektionen.",
-    "På rasten stod hon vid fönstret med sin bästa kompis Amir… och Fanny från parallellklassen. Ute på skolgården gick den nya killen, Kim, ensam längs staketet med huvan uppdragen. Han hade börjat i klassen efter höstlovet och knappt sagt tio ord sedan dess.",
+    "På rasten stod hon vid fönstret med sin bästa kompis Amir. Fanny från parallellklassen stod där också. Ute på skolgården gick den nya killen, Kim, ensam längs staketet med huvan uppdragen. Han hade börjat i klassen efter höstlovet och knappt sagt tio ord sedan dess.",
     "– Vet ni varför han flyttade hit från Göteborg? sa Fanny och sänkte rösten. Min kusin säger att han blev tvungen. Att han hade gjort något.",
     "– Vad då? frågade Amir.",
     "Fanny ryckte på axlarna, som om hon visste mer än hon tänkte säga.",
@@ -173,9 +173,9 @@
     },
     {
      "typ": "skriv",
-     "text": "Hitta ledtrådar i kapitlet som kan tyda på att Kims familj har det ont om pengar. Varför skriver författaren inte det rakt ut?",
+     "text": "Hitta ledtrådar i kapitlet som kan tyda på att Kims familj har ont om pengar. Varför skriver författaren inte det rakt ut?",
      "rader": 3,
-     "facit": "Han tar inte med någon ingrediens, tar hem de trasiga knäckbitarna, har alltid samma tröja. Författaren vill att läsaren ska dra egna slutsatser."
+     "facit": "Han tar inte med någon ingrediens och tar hem de trasiga knäckbitarna. Författaren vill att läsaren ska dra egna slutsatser."
     },
     {
      "typ": "skriv",
@@ -203,7 +203,7 @@
     "Jonna satte sig på en arbetsbänk och dinglade med benen. Hon visste inte varför, men hon ville inte gå än.",
     "– Hur många syskon har du?",
     "– Två systrar. De är fyra och sex. Jag hämtar dem varje dag.",
-    "Han berättade att de hade flyttat i somras. Att mamma hade fått ett jobb på sjukhuset. Att lägenheten var liten och att systrarna delade säng. Han sa det inte som om han klagade. Han sa det som det var.",
+    "Han berättade att de hade flyttat hit under höstlovet. Att mamma hade fått ett jobb på sjukhuset. Att lägenheten var liten och att systrarna delade säng. Han sa det inte som om han klagade. Han sa det som det var.",
     "Jonna tänkte på det som Fanny hade sagt om Kim. Att han hade gjort något i Göteborg som tvingade honom att flytta hit. Det passade inte ihop med killen som stod här och svarvade ljusstakar till en klassresa han kanske inte ens hade råd att följa med på.",
     "När hon gick hem den kvällen bestämde hon sig för att aldrig mer lyssna på Fannys skvaller.",
     "Det skulle visa sig vara svårare än hon trodde."
@@ -233,7 +233,7 @@
      "typ": "skriv",
      "text": "Vad får Jonna veta om Kims liv? Nämn minst tre saker.",
      "rader": 3,
-     "facit": "Mamma jobbar på sjukhuset till sju, han har två småsystrar som han hämtar, de flyttade i somras, lägenheten är liten, systrarna delar säng."
+     "facit": "Mamma jobbar på sjukhuset till sju, han har två småsystrar som han hämtar, de flyttade under höstlovet, lägenheten är liten, systrarna delar säng."
     },
     {
      "typ": "skriv",
@@ -374,9 +374,9 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför känns nyckeln tyngre än förut? Koppla till ett tidigare kapitel.",
+     "text": "Varför känns nyckeln tyngre än förut? Tänk på vad det betydde när Jonna fick nyckeln i kapitel 5.",
      "rader": 2,
-     "facit": "Hon har dåligt samvete. Det är samma bild som när något känns tungt fast det är lätt: det är känslan som är tung."
+     "facit": "I kapitel 5 fick hon nyckeln för att Mattias litade på henne. Nu har hon svikit Kim och har dåligt samvete. Det är känslan som är tung, inte nyckeln."
     }
    ]
   },
@@ -483,7 +483,7 @@
      "typ": "skriv",
      "text": "Hur visar författaren Jonnas panik? Hitta minst två exempel i texten.",
      "rader": 3,
-     "facit": "Hon vaknar med ett ryck, cyklar så fort att hon nästan voltar, hjärtat i halsen, springer förbi Mattias, letar överallt."
+     "facit": "Hon vaknar med ett ryck, cyklar så fort att hon nästan ramlar i en snödriva, har hjärtat i halsen, springer förbi Mattias och letar överallt."
     },
     {
      "typ": "skriv",
@@ -635,7 +635,7 @@
    "rubrik": "Sanningen",
    "text": [
     "På tisdagsmorgonen knackade Jonna på dörren till Mattias arbetsrum innan första lektionen. Hennes händer var kalla och svettiga på samma gång.",
-    "Hon berättade allt. Om bråttommet. Om pappa i bilen. Om skrinet på bänken. Om att hon hade tigit i fem dagar.",
+    "Hon berättade allt. Om pappa som väntade i bilen och hade bråttom. Om skrinet på bänken. Om att hon hade tigit i fem dagar.",
     "Mattias lyssnade utan att avbryta. När hon var klar satt han tyst en lång stund.",
     "– Du gjorde fel två gånger, sa han till slut. Men du gör rätt nu. Och det är det svåraste av allt.",
     "– Jag vill säga det till klassen också, sa Jonna. Alla måste veta att det inte var Kim.",
@@ -767,7 +767,7 @@
     "När de bar in skrinet i klassrummet ställde sig hela klassen upp och jublade. Mattias räknade pengarna två gånger, precis som Jonna hade gjort. 4 312 kronor.",
     "– Kim löste det, sa Jonna högt. Inte jag. Kim.",
     "På eftermiddagen kom Fanny fram till Kims bänk. Hon stod där en stund och vred på armbandet.",
-    "– Jag sa saker om dig, sa hon till slut. Om Göteborg. Jag hade inte ens hört det från min kusin. Jag hittade på halva. Förlåt.",
+    "– Jag sa saker om dig, sa hon till slut. Om Göteborg. Min kusin hade bara sagt att du var ny. Resten hittade jag på. Förlåt.",
     "Kim tittade upp på henne. – Vill du veta varför vi flyttade? frågade han lugnt.",
     "Fanny nickade osäkert. Flera andra i klassen lyssnade också, även om de låtsades att de inte gjorde det.",
     "– Mina föräldrar skilde sig, sa Kim. Pappa flyttade utomlands. Mamma fick ett jobb här, och vi hade inte råd att bo kvar. Det är allt. Inget mer.",
@@ -785,7 +785,7 @@
      "text": "Vad erkänner Fanny?",
      "alt": [
       "Att hon tycker om Kim",
-      "Att hon hittade på en del av ryktet",
+      "Att hon hittade på ryktet",
       "Att hon tog skrinet"
      ],
      "ratt": 1
@@ -866,7 +866,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Varför säger Mattias \"Alla. Alla.\" och upprepar ordet? Vem tror du att han tänker särskilt på?",
+     "text": "Mattias säger \"Alla i klassen åker. Alla.\" Varför upprepar han ordet alla? Vem tror du att han tänker särskilt på?",
      "rader": 2,
      "facit": "Han betonar att ingen ska lämnas utanför på grund av pengar. Han tänker särskilt på Kim."
     },
