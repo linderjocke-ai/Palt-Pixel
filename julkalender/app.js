@@ -20,7 +20,7 @@ let S=JSON.parse(JSON.stringify(DEF));
 let STORY=null,LIB=null,TID=null,db=null,uid=null,tts=null,dl=null;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={...DEF,...c,edits:c.edits||{}}}catch(e){}
+try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={...DEF,...c,edits:c.edits||{},testDay:null}}catch(e){}
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ===================== skalning ===================== */
@@ -50,6 +50,7 @@ addEventListener("resize",fit);fit();
 
 /* ===================== datum ===================== */
 function nowISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+let _day=nowISO();setInterval(()=>{if(nowISO()!==_day){_day=nowISO();if(S.onboarded&&!$("ovl").innerHTML)render()}},60000);
 function dayInfo(){
   if(S.testDay!=null&&S.testDay!=="")return{idx:+S.testDay,isSchool:true,test:true};
   const t=nowISO();let idx=-1;DAYS.forEach((d,i)=>{if(d<=t)idx=i});
@@ -148,8 +149,7 @@ function topUI(L,D){
   else{const nm=todays.map(l=>"<b>"+esc(l.name)+"</b>");line=cap(dLabel(D.idx))+" · I dag öppnar "+(nm.length>1?nm.slice(0,-1).join(", ")+" och "+nm.slice(-1):nm[0]||"")}
   const left=D.before&&!D.test?14:DAYS.filter((d,i)=>i>D.idx).length;
   let ban="";
-  if(D.test)ban=`<div class="banner">Förhandsvisar ${esc(dLabel(D.idx))}<button id="endTest">Tillbaka till dagens datum</button></div>`;
-  else if(D.before)ban=`<div class="banner">Kalendern börjar den 1 december.<button id="tryTest">Förhandsgranska dag 1</button></div>`;
+  if(nowISO()<DAYS[0])ban=`<button class="peek" id="peekBtn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Tjuvkika i luckorna och alla kapitel i förväg</button>`;
   return`<div class="top"><div class="ttl"><h1>Julkalendern</h1><div class="d">${line}</div></div>
   <div class="tools"><div class="count"><b>${D.after&&!D.test?"0":left===0?"Sista":left}</b><span>${left===0?"dagen!":"skoldagar kvar"}</span></div><button class="tbtn" id="kopBtn">${ICO.print}Kopieringsmaterial</button><button class="tbtn sq" id="gearBtn" aria-label="Inställningar">${ICO.gear}</button></div></div>${ban}`;
 }
@@ -186,8 +186,7 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
   $("chBtn").onclick=()=>openReader();
   $("kopBtn").onclick=()=>openKop();
   $("gearBtn").onclick=()=>openSettings();
-  if($("endTest"))$("endTest").onclick=()=>{S.testDay=null;save();render()};
-  if($("tryTest"))$("tryTest").onclick=()=>{S.testDay=0;save();render()};
+  if($("peekBtn"))$("peekBtn").onclick=()=>openSettings("forhand");
   w.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>{
     if(busy)return;const l=L.find(x=>x.id===b.dataset.id),D2=dayInfo(),st=state(l,D2);
     if(st==="locked"){b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");toast("Den här luckan öppnas "+dLabel(l.day));return}
