@@ -20,7 +20,7 @@ let S=JSON.parse(JSON.stringify(DEF));
 let STORY=null,LIB=null,TID=null,db=null,uid=null,tts=null,dl=null;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={...DEF,...c,edits:c.edits||{}}}catch(e){}
+try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={...DEF,...c,edits:c.edits||{},testDay:null}}catch(e){}
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ===================== skalning ===================== */
@@ -50,6 +50,7 @@ addEventListener("resize",fit);fit();
 
 /* ===================== datum ===================== */
 function nowISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+let _day=nowISO();setInterval(()=>{if(nowISO()!==_day){_day=nowISO();if(S.onboarded&&!$("ovl").innerHTML)render()}},60000);
 function dayInfo(){
   if(S.testDay!=null&&S.testDay!=="")return{idx:+S.testDay,isSchool:true,test:true};
   const t=nowISO();let idx=-1;DAYS.forEach((d,i)=>{if(d<=t)idx=i});
@@ -148,8 +149,7 @@ function topUI(L,D){
   else{const nm=todays.map(l=>"<b>"+esc(l.name)+"</b>");line=cap(dLabel(D.idx))+" · I dag öppnar "+(nm.length>1?nm.slice(0,-1).join(", ")+" och "+nm.slice(-1):nm[0]||"")}
   const left=D.before&&!D.test?14:DAYS.filter((d,i)=>i>D.idx).length;
   let ban="";
-  if(D.test)ban=`<div class="banner">Förhandsvisar ${esc(dLabel(D.idx))}<button id="endTest">Tillbaka till dagens datum</button></div>`;
-  else if(D.before)ban=`<div class="banner">Kalendern börjar den 1 december.<button id="tryTest">Förhandsgranska dag 1</button></div>`;
+  if(nowISO()<DAYS[0])ban=`<button class="peek" id="peekBtn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Tjuvkika i luckorna och alla kapitel i förväg</button>`;
   return`<div class="top"><div class="ttl"><h1>Julkalendern</h1><div class="d">${line}</div></div>
   <div class="tools"><div class="count"><b>${D.after&&!D.test?"0":left===0?"Sista":left}</b><span>${left===0?"dagen!":"skoldagar kvar"}</span></div><button class="tbtn" id="kopBtn">${ICO.print}Kopieringsmaterial</button><button class="tbtn sq" id="gearBtn" aria-label="Inställningar">${ICO.gear}</button></div></div>${ban}`;
 }
@@ -186,8 +186,7 @@ function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
   $("chBtn").onclick=()=>openReader();
   $("kopBtn").onclick=()=>openKop();
   $("gearBtn").onclick=()=>openSettings();
-  if($("endTest"))$("endTest").onclick=()=>{S.testDay=null;save();render()};
-  if($("tryTest"))$("tryTest").onclick=()=>{S.testDay=0;save();render()};
+  if($("peekBtn"))$("peekBtn").onclick=()=>openSettings("forhand");
   w.querySelectorAll("[data-id]").forEach(b=>b.onclick=()=>{
     if(busy)return;const l=L.find(x=>x.id===b.dataset.id),D2=dayInfo(),st=state(l,D2);
     if(st==="locked"){b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");toast("Den här luckan öppnas "+dLabel(l.day));return}
@@ -476,13 +475,17 @@ function openSettings(tab){
     sb.querySelectorAll("[data-lid]").forEach(b=>b.onclick=()=>{const l=L.find(x=>x.id===b.dataset.lid);const top=sb.scrollTop;previewLucka(l,()=>{openSettings("forhand");$("sbody").scrollTop=top})});
   }
   if(setTab==="borja"){
-    sb.innerHTML=`<h2>Börja om</h2><p>Stäng alla luckor igen, till exempel efter att du har provat kalendern.</p><div><button class="btn light" id="rs">Stäng alla luckor</button></div>
-    <h2 class="h2s">Egna lucktexter</h2><p>Ta bort alla texter du har ändrat och gå tillbaka till originalen.</p><div><button class="btn light" id="re">Återställ alla lucktexter</button></div>
-    <h2 class="h2s">Gör om startguiden</h2><p>Välj årskurs, elever, utseende och innehåll från början. Namnen du skrivit finns kvar.</p><div><button class="btn red" id="ro">Starta guiden igen</button></div>`;
-    $("rs").onclick=()=>{S.opened={};save();toast("Alla luckor är stängda")};
-    $("re").onclick=()=>{S.edits={};save();toast("Alla lucktexter är återställda")};
+    const nOpen=Object.keys(S.opened||{}).length,nEd=Object.keys(S.edits||{}).length;
+    const row=(id,t,d,bt,dis)=>`<div class="ritem"><div class="rtxt"><b>${t}</b><span>${d}</span></div><button class="rbtn" id="${id}" ${dis?"disabled":""}>${bt}</button></div>`;
+    sb.innerHTML=`<h2>Börja om</h2><div class="rlist">
+    ${row("rs","Stäng alla luckor","Bra efter att du har provat kalendern.","Stäng",!nOpen)}
+    ${row("re","Återställ lucktexter","Texter du har ändrat byts tillbaka till originalen.","Återställ",!nEd)}
+    ${row("ro","Gör om startguiden","Välj årskurs, utseende och innehåll igen. Namnen finns kvar.","Starta")}</div>`;
+    $("rs").onclick=()=>{S.opened={};save();toast("Alla luckor är stängda");openSettings()};
+    $("re").onclick=()=>{S.edits={};save();toast("Alla lucktexter är återställda");openSettings()};
     $("ro").onclick=()=>{S.onboarded=false;save();$("ovl").innerHTML="";onbStep=0;render();showOnb()};
   }
+
   if(setTab==="om"){
     sb.innerHTML=`<h2>Om julkalendern</h2>
     <div class="about"><div class="pp"><span class="ppmark"><svg width="54" height="54" viewBox="0 0 3 3" aria-hidden="true"><rect width="1" height="1" fill="#ffd27a"/><rect x="1" width="1" height="1" fill="#c23a2b"/><rect x="2" width="1" height="1" fill="#ffd27a"/><rect y="1" width="1" height="1" fill="#c23a2b"/><rect x="1" y="1" width="1" height="1" fill="#f7f1e6"/><rect x="2" y="1" width="1" height="1" fill="#2d5e48"/><rect y="2" width="1" height="1" fill="#ffd27a"/><rect x="1" y="2" width="1" height="1" fill="#2d5e48"/><rect x="2" y="2" width="1" height="1" fill="#c23a2b"/></svg></span><div><b>Utvecklad av Palt &amp; pixel</b><span>Digitala verktyg för klassrummet.</span><a href="https://paltpixel.se" target="_blank" rel="noopener">paltpixel.se</a></div></div>
