@@ -475,13 +475,17 @@ function openSettings(tab){
     sb.querySelectorAll("[data-lid]").forEach(b=>b.onclick=()=>{const l=L.find(x=>x.id===b.dataset.lid);const top=sb.scrollTop;previewLucka(l,()=>{openSettings("forhand");$("sbody").scrollTop=top})});
   }
   if(setTab==="borja"){
-    sb.innerHTML=`<h2>Börja om</h2><p>Stäng alla luckor igen, till exempel efter att du har provat kalendern.</p><div><button class="btn light" id="rs">Stäng alla luckor</button></div>
-    <h2 class="h2s">Egna lucktexter</h2><p>Ta bort alla texter du har ändrat och gå tillbaka till originalen.</p><div><button class="btn light" id="re">Återställ alla lucktexter</button></div>
-    <h2 class="h2s">Gör om startguiden</h2><p>Välj årskurs, elever, utseende och innehåll från början. Namnen du skrivit finns kvar.</p><div><button class="btn red" id="ro">Starta guiden igen</button></div>`;
-    $("rs").onclick=()=>{S.opened={};save();toast("Alla luckor är stängda")};
-    $("re").onclick=()=>{S.edits={};save();toast("Alla lucktexter är återställda")};
+    const nOpen=Object.keys(S.opened||{}).length,nEd=Object.keys(S.edits||{}).length;
+    const row=(id,t,d,bt,dis)=>`<div class="ritem"><div class="rtxt"><b>${t}</b><span>${d}</span></div><button class="rbtn" id="${id}" ${dis?"disabled":""}>${bt}</button></div>`;
+    sb.innerHTML=`<h2>Börja om</h2><div class="rlist">
+    ${row("rs","Stäng alla luckor","Bra efter att du har provat kalendern.","Stäng",!nOpen)}
+    ${row("re","Återställ lucktexter","Texter du har ändrat byts tillbaka till originalen.","Återställ",!nEd)}
+    ${row("ro","Gör om startguiden","Välj årskurs, utseende och innehåll igen. Namnen finns kvar.","Starta")}</div>`;
+    $("rs").onclick=()=>{S.opened={};save();toast("Alla luckor är stängda");openSettings()};
+    $("re").onclick=()=>{S.edits={};save();toast("Alla lucktexter är återställda");openSettings()};
     $("ro").onclick=()=>{S.onboarded=false;save();$("ovl").innerHTML="";onbStep=0;render();showOnb()};
   }
+
   if(setTab==="om"){
     sb.innerHTML=`<h2>Om julkalendern</h2>
     <div class="about"><div class="pp"><span class="ppmark"><svg width="54" height="54" viewBox="0 0 3 3" aria-hidden="true"><rect width="1" height="1" fill="#ffd27a"/><rect x="1" width="1" height="1" fill="#c23a2b"/><rect x="2" width="1" height="1" fill="#ffd27a"/><rect y="1" width="1" height="1" fill="#c23a2b"/><rect x="1" y="1" width="1" height="1" fill="#f7f1e6"/><rect x="2" y="1" width="1" height="1" fill="#2d5e48"/><rect y="2" width="1" height="1" fill="#ffd27a"/><rect x="1" y="2" width="1" height="1" fill="#2d5e48"/><rect x="2" y="2" width="1" height="1" fill="#c23a2b"/></svg></span><div><b>Utvecklad av Palt &amp; pixel</b><span>Digitala verktyg för klassrummet.</span><a href="https://paltpixel.se" target="_blank" rel="noopener">paltpixel.se</a></div></div>
