@@ -29,7 +29,7 @@ function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.docume
 /* anonym statistik: bara på paltpixel.se, inga namn eller texter skickas */
 const TRK=/(^|\.)paltpixel\.se$/.test(location.hostname);
 const SID=(()=>{try{const b=new Uint8Array(8);crypto.getRandomValues(b);return[...b].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return Math.random().toString(16).slice(2,14).padEnd(12,"0")}})();
-function trk(ev,o={}){if(!TRK)return;try{fetch("https://yxvecdddlgbrguywhqkk.supabase.co/rest/v1/rpc/jk_track",{method:"POST",keepalive:true,headers:{apikey:"sb_publishable_G8KrodzJwfO2lWvkoz0kug_ik-cLthj","Content-Type":"application/json"},body:JSON.stringify({p_ev:ev,p_g:o.g!==undefined?o.g:(S.grade||null),p_th:o.th!==undefined?o.th:(S.theme||null),p_ch:o.ch!=null?o.ch:null,p_x:o.x!=null?String(o.x):null,p_pv:!!(o.pv||S.testDay!=null),p_s:SID})}).catch(()=>{})}catch(e){}}
+function trk(ev,o={}){if(!TRK)return;try{fetch("https://yxvecdddlgbrguywhqkk.supabase.co/rest/v1/rpc/jk_track",{method:"POST",headers:{apikey:"sb_publishable_G8KrodzJwfO2lWvkoz0kug_ik-cLthj","Content-Type":"application/json"},body:JSON.stringify({p_ev:ev,p_g:o.g!==undefined?o.g:(S.grade||null),p_th:o.th!==undefined?o.th:(S.theme||null),p_ch:o.ch!=null?o.ch:null,p_x:o.x!=null?String(o.x):null,p_pv:!!(o.pv||S.testDay!=null),p_s:SID})}).catch(()=>{})}catch(e){}}
 const isByn=th=>th==="byn"||th==="byn2";
 function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn2"?"byn byn2":isByn(th)?"byn":"filt";document.body.classList.toggle("th-filt",!isByn(th));fit()}
 addEventListener("resize",fit);fit();
@@ -261,7 +261,7 @@ function previewLucka(l,back){
 const AU=new Audio();AU.preload="none";
 let auSegs=null,auI=-1,auCb=null,auRAF=null,auSrc="";
 const NOPIC=new Set(["4","5","6"]);
-const AUV="20261125j";
+const AUV="20261126a";
 function fmtT(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 let TIDER=null;const tiderP=()=>TIDER?Promise.resolve(TIDER):fetch("audio/ola/tider.json?v="+AUV).then(r=>r.json()).then(j=>TIDER=j).catch(()=>null);
 let hlRAF=0;
