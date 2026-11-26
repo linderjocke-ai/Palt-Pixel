@@ -26,6 +26,10 @@ const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* ===================== skalning ===================== */
 function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);document.documentElement.style.setProperty("--k",k);
   const b=document.getElementById("bdrop");if(b){const t=64*k,isF=b.classList.contains("filt");b.style.backgroundImage=isF?`url("data:image/svg+xml,${encodeURIComponent(A.wallTile)}")`:"";b.style.backgroundSize=isF?`${t}px ${t}px`:"";b.style.backgroundPosition=isF?`${(innerWidth-1600*k)/2}px ${(innerHeight-900*k)/2}px`:"";const c=$("bsnow");if(c){c.width=innerWidth;c.height=innerHeight}}}
+/* anonym statistik: bara på paltpixel.se, inga namn eller texter skickas */
+const TRK=/(^|\.)paltpixel\.se$/.test(location.hostname);
+const SID=(()=>{try{const b=new Uint8Array(8);crypto.getRandomValues(b);return[...b].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return Math.random().toString(16).slice(2,14).padEnd(12,"0")}})();
+function trk(ev,o={}){if(!TRK)return;try{fetch("https://yxvecdddlgbrguywhqkk.supabase.co/rest/v1/rpc/jk_track",{method:"POST",keepalive:true,headers:{apikey:"sb_publishable_G8KrodzJwfO2lWvkoz0kug_ik-cLthj","Content-Type":"application/json"},body:JSON.stringify({p_ev:ev,p_g:o.g!==undefined?o.g:(S.grade||null),p_th:o.th!==undefined?o.th:(S.theme||null),p_ch:o.ch!=null?o.ch:null,p_x:o.x!=null?String(o.x):null,p_pv:!!(o.pv||S.testDay!=null),p_s:SID})}).catch(()=>{})}catch(e){}}
 const isByn=th=>th==="byn"||th==="byn2";
 function setBackdrop(th){const b=document.getElementById("bdrop");if(!b)return;b.className=th==="byn2"?"byn byn2":isByn(th)?"byn":"filt";document.body.classList.toggle("th-filt",!isByn(th));fit()}
 addEventListener("resize",fit);fit();
@@ -231,7 +235,7 @@ function zoomTo(el,l){
   $("ui").style.opacity="0";w.style.transform=`translate(${400-x*k}px,${480-y*k}px) scale(${k})`;
   setTimeout(()=>{const f=$("fly");f.innerHTML=`<div class="dim soft"></div><div class="burst"></div><div class="card byncard${isRich(content(l))?" rich":""}" id="lcard">${cardHTML(l)}</div>`;
     const card=$("lcard");requestAnimationFrame(()=>card.classList.add("on"));
-    S.opened[l.id]=true;save();
+    if(!S.opened[l.id])trk("lucka",{ch:l.day+1,x:(content(l)||{}).chip});S.opened[l.id]=true;save();
     bindCard(card,l,()=>{card.classList.remove("on");f.querySelector(".dim").style.opacity="0";setTimeout(()=>{f.innerHTML="";w.style.transform="";setTimeout(()=>{render()},1050)},320)});
   },reduce?50:1050);
 }
@@ -243,7 +247,7 @@ function pullOut(el,l){
   f.innerHTML=`<div class="dim" style="opacity:0"></div><div class="flip" id="flip" style="left:${x0}px;top:${y0}px;width:${w0}px;height:${h0}px"><div class="fx"><div class="ff">${body.outerHTML}</div><div class="fb"><div class="card feltcard" id="lcard">${cardHTML(l)}</div></div></div></div>`;
   el.style.visibility="hidden";
   const fl=$("flip"),ffb=fl.querySelector(".ff .body");ffb.style.inset="0";ffb.style.position="absolute";
-  S.opened[l.id]=true;save();
+  if(!S.opened[l.id])trk("lucka",{ch:l.day+1,x:(content(l)||{}).chip});S.opened[l.id]=true;save();
   requestAnimationFrame(()=>requestAnimationFrame(()=>{fl.classList.add("go");const RB=isRich(content(l))?[300,40,1000,820]:[400,170,800,560];fl.style.left=RB[0]+"px";fl.style.top=RB[1]+"px";fl.style.width=RB[2]+"px";fl.style.height=RB[3]+"px";f.querySelector(".dim").style.opacity="1";setTimeout(()=>fl.classList.add("turn"),reduce?0:560)}));
   bindCard($("lcard"),l,()=>{fl.classList.remove("turn");f.querySelector(".dim").style.opacity="0";setTimeout(()=>{fl.style.left=x0+"px";fl.style.top=y0+"px";fl.style.width=w0+"px";fl.style.height=h0+"px";setTimeout(()=>render(),820)},reduce?0:650)});
 }
@@ -278,8 +282,9 @@ function bindListen(g,cur){const b=$("lyssna");if(!b)return;const key=g+"-"+Stri
   AU.onseeked=mark;const src="audio/ola/"+g+"-"+String(cur+1).padStart(2,"0")+".mp3?v="+AUV;
   const ui=()=>{const on=!AU.paused&&AU.src.indexOf(src.split("?")[0])>=0;b.classList.toggle("playing",on);b.innerHTML=(on?ICO.pause:ICO.play)+"<span>"+(on?"Pausa":(AU.currentTime>0&&AU.src.indexOf(src.split("?")[0])>=0?"Fortsätt":"Lyssna"))+"</span>";
     const f=$("lfill"),t=$("ltime");if(f&&AU.duration)f.style.width=(100*AU.currentTime/AU.duration)+"%";if(t)t.textContent=AU.duration?fmtT(AU.currentTime)+" / "+fmtT(AU.duration):""};
-  AU.ontimeupdate=ui;AU.onplay=()=>{ui();cancelAnimationFrame(hlRAF);loop()};AU.onpause=()=>{ui();mark()};AU.onended=()=>{AU.currentTime=0;ui();if(lastK>=0&&W&&W.els[lastK])W.els[lastK].classList.remove("hl");lastK=-1};AU.onloadedmetadata=ui;
+  AU.ontimeupdate=ui;AU.onplay=()=>{ui();cancelAnimationFrame(hlRAF);loop()};AU.onpause=()=>{ui();mark()};AU.onended=()=>{trk("lyssna_klar",{g,ch:cur+1});AU.currentTime=0;ui();if(lastK>=0&&W&&W.els[lastK])W.els[lastK].classList.remove("hl");lastK=-1};AU.onloadedmetadata=ui;
   b.onclick=()=>{if(AU.src.indexOf(src.split("?")[0])<0){AU.src=src;AU.preload="auto"}
+    if(AU.paused&&!(AU.currentTime>0&&AU.src.indexOf(src.split("?")[0])>=0))trk("lyssna",{g,ch:cur+1});
     if(AU.paused)AU.play().catch(()=>toast("Ljudet kunde inte spelas"));else AU.pause()};
   const bar=b.parentNode.querySelector(".lbar");bar.onclick=e=>{if(AU.src.indexOf(src.split("?")[0])<0||!AU.duration)return;const r=bar.getBoundingClientRect();AU.currentTime=AU.duration*(e.clientX-r.left)/r.width};
   ui()}
@@ -327,7 +332,7 @@ function openReader(i,preview){
   const D=dayInfo();const max=preview?13:(D.before&&!D.test?-1:D.idx);
   if(!STORY){toast("Berättelsen laddas…");return}
   if(max<0){toast("Första kapitlet öppnas tisdag 1 december");return}
-  const cur=i!=null?i:max,k=STORY.kapitel[cur],g=S.grade;
+  const cur=i!=null?i:max,k=STORY.kapitel[cur],g=S.grade;trk("saga",{ch:cur+1,pv:!!preview});
   overlay(`<div class="panel reader">${X}
    <div class="rhead"><div class="rt"><b>${esc(STORY.titel)}</b><span>${gName(g)}${preview?" · förhandsgranskning":""}</span></div>
    <div class="chs">${STORY.kapitel.map((c,j)=>`<button class="chb ${j===cur?"on":""} ${j>max?"lock":""}" data-ch="${j}" aria-label="Kapitel ${j+1}${j>max?", låst":""}">${j>max?ICO.lock:j+1}</button>`).join("")}</div></div>
@@ -388,7 +393,7 @@ function openBok(){
 }
 let PDFLIBP=null;
 function loadPdfLib(){if(PDFLIBP)return PDFLIBP;const ld=src=>new Promise((r,j)=>{const s=document.createElement("script");s.src=src;s.onload=r;s.onerror=j;document.head.appendChild(s)});PDFLIBP=ld("bok/pdf-lib.min.js").then(()=>ld("bok/fontkit.umd.min.js"));PDFLIBP.catch(()=>{PDFLIBP=null});return PDFLIBP}
-async function makeBook(kind,btn){
+async function makeBook(kind,btn){trk("bok",{x:kind});
   const st=$("bokSt");document.querySelectorAll(".bokbtn").forEach(b=>b.disabled=true);st.textContent="Boken skapas …";
   try{
     await loadPdfLib();const {PDFDocument}=window.PDFLib;const g=S.grade,text=greetText();
@@ -413,7 +418,7 @@ async function makeBook(kind,btn){
 }
 function saveLink(href,name){const a=document.createElement("a");a.href=href;a.download=name;document.body.appendChild(a);a.click();a.remove()}
 async function getPdf(f,name){
-  const url=`kopiering/${S.grade}/${f}.pdf`;
+  const url=`kopiering/${S.grade}/${f}.pdf`;trk("ladda",{x:f});
   if(dl){try{const blob=await (await fetch(url)).blob();await dl.save({filename:`${STORY?STORY.titel:"Julberättelse"} – ${name}.pdf`,data:blob});toast("PDF:en är nedladdad")}catch(e){if(e&&e.code==="declined")return;window.open(url,"_blank")}}
   else{saveLink(url,`${STORY?STORY.titel:"Julberättelse"} – ${name}.pdf`);toast("PDF:en laddas ner")}
 }
@@ -452,7 +457,7 @@ function openSettings(tab){
   }
   if(setTab==="utseende"){
     sb.innerHTML=`<h2>Utseende</h2><p>Välj hur kalendern ska se ut. Du kan byta när du vill.</p><div class="tcards in">${themeCards()}</div>`;
-    sb.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;save();openSettings()});
+    sb.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{if(S.theme!==b.dataset.th)trk("tema",{th:b.dataset.th});S.theme=b.dataset.th;save();openSettings()});
   }
   if(setTab==="innehall"){
     sb.innerHTML=`<h2>Luckornas innehåll</h2><p>Välj vad luckorna ska innehålla. Texterna anpassas efter stadiet (${LK.stadie(S.grade||"1").replace("-","–")}). Egna ändringar sparas för varje innehållstyp.</p><div class="ccards in">${ctypeCards("lite")}</div>`;
@@ -534,13 +539,13 @@ function showOnb(){
   }
   if(onbStep===2){o.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;save();showOnb()});nx.onclick=()=>{onbStep=3;showOnb()}}
   if(onbStep===3){o.querySelectorAll("[data-ct]").forEach(b=>b.onclick=()=>{S.ctype=b.dataset.ct;save();showOnb()});nx.onclick=async()=>{if(!STORY)await loadStory();onbStep=4;showOnb()}}
-  if(onbStep===4)nx.onclick=()=>{S.onboarded=true;save();o.innerHTML="";render();if(!S.tourSeen)setTimeout(startTour,900)};
+  if(onbStep===4)nx.onclick=()=>{trk("ny",{x:S.ctype});S.onboarded=true;save();o.innerHTML="";render();if(!S.tourSeen)setTimeout(startTour,900)};
 }
 
 /* ===================== start ===================== */
 window.__JK={get S(){return S},render,openReader,openSettings,openKop,previewLucka,buildLuckor,showOnb,set onbStep(v){onbStep=v},set nameMode(v){nameMode=v}};
 (async()=>{
-  await Promise.all([loadLib(),loadStory(),loadTid()]);render();showOnb();
+  await Promise.all([loadLib(),loadStory(),loadTid()]);render();showOnb();trk("besok",{x:S.onboarded?"klar":"ny"});
   const webTts=()=>{if(!("speechSynthesis" in window))return null;let lineCb=null;const pick=()=>{const v=speechSynthesis.getVoices();return v.find(x=>/^sv/i.test(x.lang))||null};
     return{onLine(f){lineCb=f},stop(){speechSynthesis.cancel()},speak(items,o={}){return new Promise(res=>{speechSynthesis.cancel();let i=0;const next=()=>{if(i>=items.length)return res();const it=items[i++];const u=new SpeechSynthesisUtterance(it.text);u.lang="sv-SE";const v=pick();if(v)u.voice=v;u.rate=o.rate||1;u.onstart=()=>{if(lineCb)lineCb({id:it.id})};u.onend=next;u.onerror=()=>res();speechSynthesis.speak(u)};next()})}}};
   C.use("tts").then(t=>{tts=t||webTts()}).catch(()=>{tts=webTts()});
