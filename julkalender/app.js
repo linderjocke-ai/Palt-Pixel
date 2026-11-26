@@ -434,9 +434,11 @@ function ctypeCards(cls=""){return CTYPES.map(t=>`<button class="ccard ${cls} ${
 function openSettings(tab){
   if(tab)setTab=tab;
   const tabs=[["klass","Klassen"],["namn","Elevernas namn"],["utseende","Utseende"],["innehall","Luckornas innehåll"],["forhand","Förhandsgranska"],["borja","Börja om"],["om","Om kalendern"]];
-  overlay(`<div class="panel set">${X}<div class="snav"><h3>Inställningar</h3>${tabs.map(t=>`<button data-t="${t[0]}" class="${t[0]===setTab?"on":""}">${t[1]}</button>`).join("")}</div><div class="sbody" id="sbody"></div></div>`);
-  document.querySelectorAll(".snav button").forEach(b=>b.onclick=()=>{setTab=b.dataset.t;openSettings()});
-  const sb=$("sbody");
+  const keep=$("ovl").querySelector(".panel.set")&&$("sbody");
+  if(keep){document.querySelectorAll(".snav button").forEach(b=>b.classList.toggle("on",b.dataset.t===setTab))}
+  else{overlay(`<div class="panel set">${X}<div class="snav"><h3>Inställningar</h3>${tabs.map(t=>`<button data-t="${t[0]}" class="${t[0]===setTab?"on":""}">${t[1]}</button>`).join("")}</div><div class="sbody" id="sbody"></div></div>`);
+  document.querySelectorAll(".snav button").forEach(b=>b.onclick=()=>{if(setTab!==b.dataset.t){setTab=b.dataset.t;$("sbody").scrollTop=0;openSettings()}})}
+  const sb=$("sbody");sb.innerHTML="";
   if(setTab==="klass"){
     sb.innerHTML=`<h2>Klassen</h2><p>Årskursen styr vilken julberättelse, vilka luckor och vilket kopieringsmaterial ni får.</p>
     <div class="gmini">${GRADES.map(g=>`<button class="${S.grade===g[0]?"on":""}" data-g="${g[0]}"><b>${g[0]}</b><span>${g[1]}</span></button>`).join("")}</div>
