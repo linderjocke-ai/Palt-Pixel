@@ -37,9 +37,9 @@
     },
     {
      "typ": "skriv",
-     "text": "Författaren skriver att snön gnistrade \"som strösocker\". Vad kallas det när man jämför så? Hitta en annan jämförelse i texten.",
+     "text": "Författaren skriver att snön gnistrade \"som strösocker\". Vad kallas det när man jämför så? Hitta på en egen jämförelse om kylan eller snön.",
      "rader": 2,
-     "facit": "En liknelse. Till exempel: \"trodde att det var en övergiven mössa\" (eller annan jämförande beskrivning)."
+     "facit": "En liknelse. Egen liknelse, till exempel: Isen var blank som en spegel."
     },
     {
      "typ": "skriv",
@@ -156,9 +156,9 @@
     },
     {
      "typ": "skriv",
-     "text": "Vad betyder det att en hund är chipmärkt? Använd texten.",
+     "text": "Vad betyder det att en hund är chipmärkt? Hur går det till hos veterinären?",
      "rader": 2,
-     "facit": "Hunden har ett litet chip under huden som kan läsas av och visar uppgifter om hunden och ägaren."
+     "facit": "Hunden har ett chip med uppgifter om hunden och ägaren. Veterinären för en läsare över nacken, det piper och uppgifterna syns på en skärm."
     },
     {
      "typ": "skriv",
@@ -184,7 +184,7 @@
    "rubrik": "Lappen i väskan",
    "text": [
     "Lisa och hennes bästa kompis Hugo gjorde lappar på datorn. HITTAD HUND! stod det högst upp, och under en bild på Doris som satt i snön med sitt ena öra uppåt. Längst ner stod pappas telefonnummer.",
-    "De skrev ut tio lappar och gick runt runt Sjögatan, där A. Holm bodde. Hugo tejpade upp lappar på busskurer och lyktstolpar och anslagstavlan vid mataffären.",
+    "De skrev ut tio lappar och gick runt i kvarteret kring Sjögatan, där A. Holm bodde. Hugo tejpade upp lappar på busskurer och lyktstolpar och anslagstavlan vid mataffären.",
     "– En kvar, sa han och höll fram den sista. Vi sätter den på kiosken.",
     "– Jag gör det, sa Lisa och tog lappen.",
     "Men när Hugo hade gått åt andra hållet för att köpa varm choklad, vek Lisa ihop lappen och stoppade ner den i väskan.",
@@ -271,7 +271,7 @@
       "Han skrattar",
       "Han blir arg"
      ],
-     "ratt": 2
+     "ratt": 0
     },
     {
      "typ": "skriv",
@@ -721,7 +721,7 @@
     "Flytten var den sjuttonde december. Arne skulle få komma hem från sjukhuset dagen efter, så allt måste vara klart.",
     "Lisa hade berättat om Arne i klassen. När hon och pappa kom till Sjögatan på morgonen stod halva klassen där, med mössor och vantar och ivriga miner. Hugo hade med sig sin storebror som hade körkort, och han hade lånat en släpvagn.",
     "Mira kom ut med bebisen i en sele på magen och delade ut bullar. Grannen på andra våningen bar ner en hel bokhylla alldeles själv.",
-    "Fåtöljen, sängen, köksbordet och tjugo kartonger med böcker bar de ner för de branta trapporna. Lisa bar ett inramat foto av Elsie och en grå valp. Hon höll det som om det var gjort av glas.",
+    "Fåtöljen, sängen, köksbordet och tjugo kartonger med böcker bar de ner för de branta trapporna. Lisa bar Arnes och Elsies bröllopsfoto i en gammal guldram. Hon höll det som om det var gjort av glas.",
     "I den nya lägenheten ställde de allt på plats. Lisa ställde Doris matskål i köket och lade hennes gamla filt i hörnet vid fönstret, där solen skulle lysa in.",
     "– Det ser ut som ett hem nu, sa Hugo när de var klara.",
     "– Det blir ett hem i morgon, sa Lisa. När de båda är här."
@@ -751,7 +751,7 @@
      "typ": "skriv",
      "text": "Varför bär Lisa fotot \"som om det var gjort av glas\"?",
      "rader": 2,
-     "facit": "Det är det viktigaste föremålet för Arne och hon vill vara extra försiktig."
+     "facit": "Fotot är ett av Arnes finaste minnen av Elsie, och hon vill inte att det ska gå sönder."
     },
     {
      "typ": "skriv",
@@ -769,7 +769,7 @@
      "typ": "skriv",
      "text": "Hur visar berättelsen att många människor kan hjälpa till med något stort?",
      "rader": 3,
-     "facit": "Alla bidrar med något olika: bära, köra, baka, städa. Tillsammans klarar de flytten."
+     "facit": "Alla bidrar med något olika: bära, köra, köra släpvagnen, bjuda på bullar. Tillsammans klarar de flytten."
     }
    ]
   },

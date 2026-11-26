@@ -269,7 +269,7 @@
      "text": "Vad är det för fel på fågeln?",
      "alt": [
       "Den är ledsen",
-      "Den har ont i vingen",
+      "Den kan inte flyga",
       "Den är hungrig"
      ],
      "ratt": 1
@@ -673,7 +673,7 @@
     },
     {
      "typ": "skriv",
-     "text": "Vad tror du betyder att det var varmast inuti?",
+     "text": "Vad betyder det att Thea kände sig allra varmast inuti?",
      "rader": 1,
      "facit": "Till exempel: Hon var glad och kände sig lycklig."
     }

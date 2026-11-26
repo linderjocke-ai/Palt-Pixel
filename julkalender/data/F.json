@@ -277,8 +277,8 @@
     },
     {
      "typ": "janej",
-     "text": "Bara Pim behöver vara glad för att Glimt ska komma hem.",
-     "svar": false
+     "text": "Hela skogen måste vara glad tillsammans för att Glimt ska komma hem.",
+     "svar": true
     },
     {
      "typ": "rita",
@@ -304,8 +304,8 @@
     },
     {
      "typ": "janej",
-     "text": "Pim är inte alls rädd för Bruno.",
-     "svar": false
+     "text": "Pim är lite rädd för Bruno.",
+     "svar": true
     },
     {
      "typ": "janej",
@@ -431,8 +431,8 @@
     },
     {
      "typ": "janej",
-     "text": "Glimt säger aldrig tack.",
-     "svar": false
+     "text": "Glimt säger tack till Pim.",
+     "svar": true
     },
     {
      "typ": "janej",

@@ -61,7 +61,7 @@
   {
    "rubrik": "Fler överraskningar",
    "text": [
-    "Nästa morgon hängde ett litet papphjärta på varje dörrhandtag i hela huset. Dagen efter låg en pepparkaka inslagen i bakplåtspapper vid varje dörr.",
+    "Nästa morgon hängde ett litet pappershjärta på varje dörrhandtag i hela huset. Dagen efter låg en pepparkaka inslagen i bakplåtspapper vid varje dörr.",
     "– Det är någon som bor här i huset, sa Omar. Någon som går upp väldigt tidigt.",
     "– Eller väldigt sent, sa Elsa.",
     "De bestämde sig för att bli detektiver. Elsa tog fram ett tomt anteckningsblock och skrev på första sidan med stora bokstäver: DEN HEMLIGA HJÄLPAREN.",
@@ -73,7 +73,7 @@
      "typ": "kryss",
      "text": "Vad hänger på dörrhandtagen andra morgonen?",
      "alt": [
-      "Små papphjärtan",
+      "Små pappershjärtan",
       "Lappar",
       "Julgranskulor"
      ],
@@ -285,7 +285,7 @@
   {
    "rubrik": "Bland soptunnorna",
    "text": [
-    "Soprummet låg på gården. Det luktade lite av gamla äppelskal, men Elsa och Omar brydde sig inte.",
+    "Soptunnorna stod i en lång rad på gården. Det luktade lite av gamla äppelskal, men Elsa och Omar brydde sig inte.",
     "I tunnan för tidningar låg massor av reklam. Men längst ner hittade de en hel bunt riktiga tidningar.",
     "Varje tidning hade ett hål. Någon hade klippt ut korsordet.",
     "På den översta tidningen satt en adresslapp. Elsa läste högt:",
@@ -297,7 +297,7 @@
    "fragor": [
     {
      "typ": "kryss",
-     "text": "Var ligger soprummet?",
+     "text": "Var står soptunnorna?",
      "alt": [
       "På vinden",
       "I källaren",
