@@ -37,9 +37,23 @@ function item(grade,ctype,i){
   const list=((DATA.perStadie||{})[stadie(grade)]||{})[kat]||[];
   if(!list.length)return null;
   if(i>=100)pos=list.length-1-((i-100)%list.length);   // hela klassen: tas bakifrån
-  const L=list[pos%list.length];
+  return norm(list[pos%list.length],kat);
+}
+function norm(L,kat){
   const b=L.bild&&AVAIL.has(L.bild.filnamn)?{src:"img/luckor/"+L.bild.filnamn.replace(/\.png$/i,".jpg"),alt:L.bild.beskrivning||""}:null;
   return{id:L.id,kategori:kat,chip:CHIP[kat],text:L.lucktext,facit:L.facit||null,bild:b,inter:L.interaktivitet||null};
+}
+/* alla texter i en kategori för årskursens stadium: [{id,text}] */
+function list(grade,kat){
+  if(!DATA)return[];
+  return(((DATA.perStadie||{})[stadie(grade)]||{})[kat]||[]).map(L=>({id:L.id,text:L.lucktext}));
+}
+/* en bestämd text (id) inom årskursens stadium, eller null */
+function byId(grade,id){
+  if(!DATA)return null;
+  const P=(DATA.perStadie||{})[stadie(grade)]||{};
+  for(const kat in P){const L=P[kat].find(x=>x.id===id);if(L)return norm(L,kat)}
+  return null;
 }
 
 /* ---------- tolkning av specifikationer ---------- */
@@ -157,5 +171,5 @@ function mount(el,inter){
   try{const c=fn(el,inter.specifikation);if(!c){el.remove();return()=>{}}return c}
   catch(e){console.error("Interaktiv del",inter,e);el.remove();return()=>{}}
 }
-window.LK={load,stadie,item,mount,_parse:{parseChoice,parseNumber,parseTimer}};
+window.LK={load,stadie,item,list,byId,mount,_parse:{parseChoice,parseNumber,parseTimer}};
 })();
