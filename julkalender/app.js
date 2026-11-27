@@ -15,12 +15,12 @@ const CTYPES=[
  {id:"kluring",name:"Kluringar",sub:"Gåtor, logik och matte – med svar att visa",ex:"Vad blir blötare och blötare ju mer den torkar?",col:"#5f4b8b",icon:'<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/>'},
  {id:"blandat",name:"Blandat",sub:"Lite av allt – snällhet, rörelse och kluringar",ex:"Varje dag blir en överraskning.",col:"#c9762b",icon:'<path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.4 6.8 19.2l1-5.9L3.5 9.2l5.9-.8z"/>'}];
 const CHIP={"Snällhet":"#c23a2b","Rastutmaning":"#2d5e48","Kluring":"#5f4b8b","Matte":"#8a4a6a","Svenska":"#a8452f","SO":"#34506e","NO":"#3f6f5a"};
-const DEF={v:2,onboarded:false,grade:null,n:22,names:[],theme:"byn",ctype:"blandat",opened:{},testDay:null,edits:{}};
+const DEF={v:2,onboarded:false,grade:null,n:22,names:[],theme:"byn",ctype:"blandat",opened:{},testDay:null,edits:{},picks:{}};
 let S=JSON.parse(JSON.stringify(DEF));
 let STORY=null,LIB=null,TID=null,db=null,uid=null,tts=null,dl=null;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={...DEF,...c,edits:c.edits||{},testDay:null}}catch(e){}
+try{const c=JSON.parse(localStorage.getItem("julkalender-v1")||"null");if(c)S={...DEF,...c,edits:c.edits||{},picks:c.picks||{},testDay:null}}catch(e){}
 const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ===================== skalning ===================== */
@@ -70,9 +70,10 @@ function buildLuckor(){
 const young=()=>["F","1","2","3"].includes(S.grade||"1");
 function content(l){
   const i=l.idx!=null?l.idx:(100+l.day);
-  const it=LK.item(S.grade||"1",S.ctype,i)||{chip:"Snällhet",text:"…",facit:null,bild:null,inter:null,id:"x"};
-  const key=S.ctype+":"+l.id,ed=S.edits[key];
-  return{typ:it.chip,text:ed!=null?ed:it.text,orig:it.text,svar:ed!=null?null:it.facit,bild:it.bild,inter:ed!=null?null:it.inter,lib:it.id,key,edited:ed!=null};
+  const key=S.ctype+":"+l.id,ed=S.edits[key],pk=(S.picks||{})[key];
+  const base=LK.item(S.grade||"1",S.ctype,i);
+  const it=(pk&&LK.byId(S.grade||"1",pk))||base||{chip:"Snällhet",text:"…",facit:null,bild:null,inter:null,id:"x",kategori:"snallkalendern"};
+  return{kat:it.kategori,picked:!!pk&&it!==base,typ:it.chip,text:ed!=null?ed:it.text,orig:it.text,svar:ed!=null?null:it.facit,bild:it.bild,inter:ed!=null?null:it.inter,lib:it.id,key,edited:ed!=null};
 }
 const isRich=c=>!!(c.bild||c.inter);
 function state(l,D){if(S.opened[l.id])return"open";if(l.day===D.idx)return"today";if(l.day<D.idx)return"missed";return"locked"}
@@ -251,6 +252,20 @@ function pullOut(el,l){
   bindCard($("lcard"),l,()=>{fl.classList.remove("turn");f.querySelector(".dim").style.opacity="0";setTimeout(()=>{fl.style.left=x0+"px";fl.style.top=y0+"px";fl.style.width=w0+"px";fl.style.height=h0+"px";setTimeout(()=>render(),820)},reduce?0:650)});
 }
 /* ----- förhandsvisa en lucka (lärare) ----- */
+const PSEL=new Set();
+const DICE='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.3" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.3" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.3" fill="currentColor"/></svg>';
+const EYE='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const short=t=>{t=String(t||"").replace(/\s+/g," ").trim();return t.length>90?t.slice(0,88)+"…":t};
+function setPick(l,id){const key=S.ctype+":"+l.id;S.picks=S.picks||{};S.picks[key]=id;delete S.edits[key]}
+/* ger luckorna i T nya texter ur samma kategori, helst sådana som ingen annan lucka har */
+function reroll(L,T){
+  for(const l of T){
+    const c=content(l),pool=LK.list(S.grade||"1",c.kat).map(o=>o.id).filter(id=>id!==c.lib);if(!pool.length)continue;
+    const used=new Set(L.filter(x=>x.id!==l.id).map(x=>content(x).lib));
+    const free=pool.filter(id=>!used.has(id)),from=free.length?free:pool;
+    setPick(l,from[Math.floor(Math.random()*from.length)]);
+  }
+}
 function previewLucka(l,back){
   const o=$("ovl2");o.innerHTML=`<div class="ov"><div class="card ${isByn(S.theme)?"byncard":"feltcard"} on static${isRich(content(l))?" rich":""}" id="lcard">${cardHTML(l,{preview:true})}</div></div>`;
   bindCard($("lcard"),l,()=>{o.innerHTML="";if(back)back()});
@@ -468,21 +483,30 @@ function openSettings(tab){
     const L=buildLuckor();const t=CTYPES.find(x=>x.id===S.ctype);
     sb.innerHTML=`<h2>Förhandsgranska</h2><p>Titta på allt i förväg. Det du tittar på här räknas inte som öppnat.</p>
     <div class="pvrow"><button class="btn main" id="pvStory">${ICO.book("#fff")}Läs hela berättelsen</button><label class="sel">Visa kalendern som<select id="td"><option value="">dagens datum</option>${DAYS.map((d,i)=>`<option value="${i}" ${String(S.testDay)===String(i)?"selected":""}>${cap(dLabel(i))}</option>`).join("")}</select></label></div>
-    <h2 class="h2s">Alla luckor · ${t?t.name:""}</h2><p>Klicka på en lucka för att se den. I luckan kan du trycka på <b>Ändra texten</b> och skriva en egen.</p>
-    <div class="llist">${L.map(l=>{const c=content(l);return`<button class="li" data-lid="${l.id}"><span class="ld">${dNum(l.day)}/12</span><span class="ln">${esc(l.name)}</span><span class="chip sm" style="background:${CHIP[c.typ]||"#1b2747"}">${esc(c.typ)}</span><span class="lt">${esc(c.text)}</span>${c.edited?'<span class="led">Ändrad</span>':""}</button>`}).join("")}</div>`;
+    <h2 class="h2s">Alla luckor · ${t?t.name:""}</h2><p>Byt text i rullgardinsmenyn, eller slumpa fram nya texter. Klicka på ögat för att se hur luckan ser ut.</p>
+    <div class="ltools"><button class="pbtn" id="rndAll">${DICE}Slumpa nya texter till alla luckor</button><button class="pbtn" id="rndSel" ${PSEL.size?"":"disabled"}>${DICE}Slumpa valda${PSEL.size?" ("+PSEL.size+")":""}</button>${Object.keys(S.picks||{}).some(k=>k.startsWith(S.ctype+":"))?'<button class="pbtn lite" id="rndBack">Tillbaka till originalen</button>':""}</div>
+    <div class="llist">${L.map(l=>{const c=content(l);const used=new Set(L.filter(x=>x.id!==l.id).map(x=>content(x).lib));
+      const opts=LK.list(S.grade||"1",c.kat).map((o,n)=>`<option value="${o.id}" ${!c.edited&&o.id===c.lib?"selected":""}>${n+1}. ${esc(short(o.text))}${used.has(o.id)?" · finns i en annan lucka":""}</option>`).join("");
+      return`<div class="lrow${PSEL.has(l.id)?" on":""}"><label class="lchk" title="Välj luckan"><input type="checkbox" data-chk="${l.id}" ${PSEL.has(l.id)?"checked":""}></label><span class="ld">${dNum(l.day)}/12</span><span class="ln">${esc(l.name)}</span><span class="chip sm" style="background:${CHIP[c.typ]||"#1b2747"}">${esc(c.typ)}</span><select class="lsel" data-pick="${l.id}" aria-label="Text för ${esc(l.name)}">${c.edited?`<option value="" selected>Egen text: ${esc(short(c.text))}</option>`:""}${opts}</select><button class="leye" data-lid="${l.id}" title="Visa luckan" aria-label="Visa luckan">${EYE}</button></div>`}).join("")}</div>`;
     $("pvStory").onclick=()=>{if(!STORY){toast("Välj årskurs först");return}openReader(0,true)};
     $("td").onchange=e=>{S.testDay=e.target.value===""?null:+e.target.value;save();toast(S.testDay==null?"Kalendern följer dagens datum":"Förhandsvisar "+dLabel(S.testDay))};
+    const redraw=()=>{const top=sb.scrollTop;openSettings();$("sbody").scrollTop=top};
     sb.querySelectorAll("[data-lid]").forEach(b=>b.onclick=()=>{const l=L.find(x=>x.id===b.dataset.lid);const top=sb.scrollTop;previewLucka(l,()=>{openSettings("forhand");$("sbody").scrollTop=top})});
+    sb.querySelectorAll("[data-chk]").forEach(b=>b.onchange=()=>{b.checked?PSEL.add(b.dataset.chk):PSEL.delete(b.dataset.chk);redraw()});
+    sb.querySelectorAll("[data-pick]").forEach(b=>b.onchange=()=>{if(!b.value)return;setPick(L.find(x=>x.id===b.dataset.pick),b.value);save();toast("Ny text vald");redraw()});
+    $("rndAll").onclick=()=>{const T=L.filter(l=>!content(l).edited);reroll(L,T);save();toast(T.length<L.length?"Nya texter! Luckor med egen text fick vara kvar":"Alla luckor har fått nya texter");redraw()};
+    $("rndSel").onclick=()=>{const T=L.filter(l=>PSEL.has(l.id));if(!T.length)return;reroll(L,T);save();toast(T.length===1?"Luckan har fått en ny text":T.length+" luckor har fått nya texter");redraw()};
+    if($("rndBack"))$("rndBack").onclick=()=>{for(const k of Object.keys(S.picks))if(k.startsWith(S.ctype+":"))delete S.picks[k];save();toast("Luckorna har sina ursprungliga texter igen");redraw()};
   }
   if(setTab==="borja"){
-    const nOpen=Object.keys(S.opened||{}).length,nEd=Object.keys(S.edits||{}).length;
+    const nOpen=Object.keys(S.opened||{}).length,nEd=Object.keys(S.edits||{}).length+Object.keys(S.picks||{}).length;
     const row=(id,t,d,bt,dis)=>`<div class="ritem"><div class="rtxt"><b>${t}</b><span>${d}</span></div><button class="rbtn" id="${id}" ${dis?"disabled":""}>${bt}</button></div>`;
     sb.innerHTML=`<h2>Börja om</h2><div class="rlist">
     ${row("rs","Stäng alla luckor","Bra efter att du har provat kalendern.","Stäng",!nOpen)}
-    ${row("re","Återställ lucktexter","Texter du har ändrat byts tillbaka till originalen.","Återställ",!nEd)}
+    ${row("re","Återställ lucktexter","Texter du har ändrat eller bytt ut går tillbaka till originalen.","Återställ",!nEd)}
     ${row("ro","Gör om startguiden","Välj årskurs, utseende och innehåll igen. Namnen finns kvar.","Starta")}</div>`;
     $("rs").onclick=()=>{S.opened={};save();toast("Alla luckor är stängda");openSettings()};
-    $("re").onclick=()=>{S.edits={};save();toast("Alla lucktexter är återställda");openSettings()};
+    $("re").onclick=()=>{S.edits={};S.picks={};save();toast("Alla lucktexter är återställda");openSettings()};
     $("ro").onclick=()=>{S.onboarded=false;save();$("ovl").innerHTML="";onbStep=0;render();showOnb()};
   }
 
