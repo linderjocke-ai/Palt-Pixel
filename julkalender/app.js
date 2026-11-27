@@ -148,11 +148,11 @@ function topUI(L,D){
   else if(D.after&&!D.test)line="<b>God jul och trevligt lov!</b>";
   else if(!D.isSchool&&!D.test)line=`Ingen skoldag i dag · nästa lucka öppnas <b>${D.idx<13?dLabel(D.idx+1):""}</b>`;
   else{const nm=todays.map(l=>"<b>"+esc(l.name)+"</b>");line=cap(dLabel(D.idx))+" · I dag öppnar "+(nm.length>1?nm.slice(0,-1).join(", ")+" och "+nm.slice(-1):nm[0]||"")}
-  const left=D.before&&!D.test?14:DAYS.filter((d,i)=>i>D.idx).length;
+  const left=(()=>{let n=0;const d=new Date(nowISO()+"T12:00"),end=new Date(DAYS[13]+"T12:00");for(;d<=end;d.setDate(d.getDate()+1)){const w=d.getDay();if(w>0&&w<6)n++}return n})();
   let ban="";
   if(nowISO()<DAYS[0])ban=`<button class="peek" id="peekBtn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Tjuvkika i luckorna och alla kapitel i förväg</button>`;
   return`<div class="top"><div class="ttl"><h1>Julkalendern</h1><div class="d">${line}</div></div>
-  <div class="tools"><div class="count"><b>${D.after&&!D.test?"0":left===0?"Sista":left}</b><span>${left===0?"dagen!":"skoldagar kvar"}</span></div><button class="tbtn" id="kopBtn">${ICO.print}Kopieringsmaterial</button><button class="tbtn sq" id="gearBtn" aria-label="Inställningar">${ICO.gear}</button></div></div>${ban}`;
+  <div class="tools"><div class="count"><b>${left===1&&D.isSchool?"Sista":left}</b><span>${left===1&&D.isSchool?"dagen!":left===1?"skoldag kvar":"skoldagar kvar"}</span></div><button class="tbtn" id="kopBtn">${ICO.print}Kopieringsmaterial</button><button class="tbtn sq" id="gearBtn" aria-label="Inställningar">${ICO.gear}</button></div></div>${ban}`;
 }
 function chapLabel(D){const i=Math.max(0,D.idx),ch=STORY&&STORY.kapitel[i];return D.idx<0?"Kapitel 1 öppnas 1 december":ch?`Kapitel ${i+1}: ${ch.rubrik}`:""}
 function render(){try{cardCleanup();cardCleanup=()=>{}}catch(e){}
@@ -482,14 +482,13 @@ function openSettings(tab){
   if(setTab==="forhand"){
     const L=buildLuckor();const t=CTYPES.find(x=>x.id===S.ctype);
     sb.innerHTML=`<h2>Förhandsgranska</h2><p>Titta på allt i förväg. Det du tittar på här räknas inte som öppnat.</p>
-    <div class="pvrow"><button class="btn main" id="pvStory">${ICO.book("#fff")}Läs hela berättelsen</button><label class="sel">Visa kalendern som<select id="td"><option value="">dagens datum</option>${DAYS.map((d,i)=>`<option value="${i}" ${String(S.testDay)===String(i)?"selected":""}>${cap(dLabel(i))}</option>`).join("")}</select></label></div>
+    <div class="pvrow"><button class="btn main" id="pvStory">${ICO.book("#fff")}Läs hela berättelsen</button></div>
     <h2 class="h2s">Alla luckor · ${t?t.name:""}</h2><p>Byt text i rullgardinsmenyn, eller slumpa fram nya texter. Klicka på ögat för att se hur luckan ser ut.</p>
     <div class="ltools"><button class="pbtn" id="rndAll">${DICE}Slumpa nya texter till alla luckor</button><button class="pbtn" id="rndSel" ${PSEL.size?"":"disabled"}>${DICE}Slumpa valda${PSEL.size?" ("+PSEL.size+")":""}</button>${Object.keys(S.picks||{}).some(k=>k.startsWith(S.ctype+":"))?'<button class="pbtn lite" id="rndBack">Tillbaka till originalen</button>':""}</div>
     <div class="llist">${L.map(l=>{const c=content(l);const used=new Set(L.filter(x=>x.id!==l.id).map(x=>content(x).lib));
       const opts=LK.list(S.grade||"1",c.kat).map((o,n)=>`<option value="${o.id}" ${!c.edited&&o.id===c.lib?"selected":""}>${n+1}. ${esc(short(o.text))}${used.has(o.id)?" · finns i en annan lucka":""}</option>`).join("");
       return`<div class="lrow${PSEL.has(l.id)?" on":""}"><label class="lchk" title="Välj luckan"><input type="checkbox" data-chk="${l.id}" ${PSEL.has(l.id)?"checked":""}></label><span class="ld">${dNum(l.day)}/12</span><span class="ln">${esc(l.name)}</span><span class="chip sm" style="background:${CHIP[c.typ]||"#1b2747"}">${esc(c.typ)}</span><select class="lsel" data-pick="${l.id}" aria-label="Text för ${esc(l.name)}">${c.edited?`<option value="" selected>Egen text: ${esc(short(c.text))}</option>`:""}${opts}</select><button class="leye" data-lid="${l.id}" title="Visa luckan" aria-label="Visa luckan">${EYE}</button></div>`}).join("")}</div>`;
     $("pvStory").onclick=()=>{if(!STORY){toast("Välj årskurs först");return}openReader(0,true)};
-    $("td").onchange=e=>{S.testDay=e.target.value===""?null:+e.target.value;save();toast(S.testDay==null?"Kalendern följer dagens datum":"Förhandsvisar "+dLabel(S.testDay))};
     const redraw=()=>{const top=sb.scrollTop;openSettings();$("sbody").scrollTop=top};
     sb.querySelectorAll("[data-lid]").forEach(b=>b.onclick=()=>{const l=L.find(x=>x.id===b.dataset.lid);const top=sb.scrollTop;previewLucka(l,()=>{openSettings("forhand");$("sbody").scrollTop=top})});
     sb.querySelectorAll("[data-chk]").forEach(b=>b.onchange=()=>{b.checked?PSEL.add(b.dataset.chk):PSEL.delete(b.dataset.chk);redraw()});
